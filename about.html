@@ -244,7 +244,7 @@
             font-weight: 500;
         }
 
-        /* Images */
+        /* Full Width Images */
         .full-width-image {
             width: 100vw;
             margin-left: calc(-50vw + 50%);
@@ -260,11 +260,12 @@
             filter: grayscale(100%);
         }
 
+        /* Centered Image (Luna size) */
         .centered-image {
             width: 100%;
             max-width: 800px;
             margin: 3rem auto;
-            display: block;
+            padding: 0 2.5rem;
         }
 
         .centered-image img {
@@ -273,10 +274,10 @@
             display: block;
         }
 
-        /* Golden Section */
+        /* Golden Section - same size as Luna */
         .golden-section {
             background: #0a0a0a;
-            padding: 5rem 2.5rem;
+            padding: 4rem 2.5rem;
             width: 100vw;
             margin-left: calc(-50vw + 50%);
             margin-top: 3rem;
@@ -295,7 +296,6 @@
             padding: 4rem 2.5rem;
             max-width: 1100px;
             margin: 0 auto;
-            border-top: 1px solid var(--border);
         }
 
         .explore-intro {
@@ -338,92 +338,46 @@
             font-weight: 500;
         }
 
-        /* Footer */
-        .footer-banner {
-            width: 100%;
+        /* Final Image - Future Astro Man */
+        .final-image {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-top: 4rem;
             overflow: hidden;
         }
 
-        .footer-banner img {
+        .final-image img {
             width: 100%;
-            height: 180px;
-            object-fit: cover;
-            object-position: center;
+            height: auto;
+            display: block;
             filter: grayscale(100%);
         }
 
-        footer {
+        /* Simple Footer */
+        .simple-footer {
             padding: 4rem 2.5rem;
-            background: var(--bg);
+            text-align: center;
+            border-top: 1px solid var(--border);
         }
 
-        .footer-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr auto;
-            gap: 3rem;
-            align-items: start;
-        }
-
-        .footer-brand {
+        .back-link {
             font-family: 'IBM Plex Mono', monospace;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 600;
-            letter-spacing: -0.02em;
-        }
-
-        .footer-contact h4,
-        .footer-column h4 {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 500;
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-contact a,
-        .footer-column a {
             color: var(--text);
             text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 300;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.2s;
         }
 
-        .footer-contact a:hover,
-        .footer-column a:hover {
+        .back-link:hover {
             opacity: 0.6;
         }
 
-        .footer-column {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .footer-column span {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            font-weight: 300;
-        }
-
-        .footer-icon svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        @media (max-width: 900px) {
-            .footer-inner {
-                grid-template-columns: 1fr 1fr;
-                gap: 2rem;
-            }
-            .footer-brand {
-                grid-column: 1 / -1;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .footer-inner {
-                grid-template-columns: 1fr;
-            }
+        .back-link::before {
+            content: '←';
         }
 
         /* Responsive */
@@ -443,12 +397,16 @@
                 padding-right: 1.5rem;
             }
 
+            .centered-image {
+                padding: 0 1.5rem;
+            }
+
             .side-menu {
                 width: 100%;
                 right: -100%;
             }
 
-            footer {
+            .simple-footer {
                 padding: 3rem 1.5rem;
             }
         }
@@ -509,12 +467,12 @@
     </aside>
 
     <main id="main-content">
-        <!-- Hero -->
+        <!-- Hero Title -->
         <div class="about-hero reveal">
             <h1>Beyond the Noise: Decoding the Human Mind Through Generative AI</h1>
         </div>
 
-        <!-- Introduction -->
+        <!-- 1. Introduction -->
         <section class="about-section reveal">
             <h2 class="section-title">Introduction</h2>
             <p>
@@ -529,12 +487,12 @@
             </p>
         </section>
 
-        <!-- Astronaut Image -->
+        <!-- 2. Astronaut Eyes Open Image -->
         <div class="full-width-image reveal">
             <img src="astro-eyes-open.png" alt="Close-up portrait of woman astronaut with open eyes gazing upward">
         </div>
 
-        <!-- Origin Story -->
+        <!-- 3. Origin Story -->
         <section class="about-section reveal">
             <h2 class="section-title">The Origin Story: Finding Silence in the Chaos of 2025</h2>
             <p>
@@ -551,12 +509,17 @@
             </p>
         </section>
 
-        <!-- Luna Image -->
+        <!-- 4. Luna Image -->
         <div class="centered-image reveal">
             <img src="luna.png" alt="Luna the astronaut in transparent helmet looking into the distance">
         </div>
 
-        <!-- Shattering the Myths -->
+        <!-- 5. Architecture Image -->
+        <div class="full-width-image reveal">
+            <img src="architecture.png" alt="Minimalist brutalist architecture with curved concrete forms">
+        </div>
+
+        <!-- 6. Shattering the Myths -->
         <section class="about-section reveal">
             <h2 class="section-title">Shattering the Myths: AI is for Everyone</h2>
             <p>
@@ -570,17 +533,12 @@
             </p>
         </section>
 
-        <!-- Architecture Image -->
-        <div class="full-width-image reveal">
-            <img src="architecture.png" alt="Minimalist brutalist architecture with curved concrete forms">
-        </div>
-
-        <!-- Golden Figure -->
+        <!-- 7. Golden Figure -->
         <div class="golden-section reveal">
             <img src="golden-figure.png" alt="Golden illuminated figure looking upward with light particles">
         </div>
 
-        <!-- What I Explore -->
+        <!-- 8. What I Explore Here -->
         <section class="explore-section reveal">
             <h2 class="section-title">What I Explore Here</h2>
             <p class="explore-intro">
@@ -596,43 +554,16 @@
             
             <p class="explore-closing">Stay tuned. It's going to be quiet—in a whole new way.</p>
         </section>
+
+        <!-- 9. Future Astro Man Image -->
+        <div class="final-image reveal">
+            <img src="future-astro-man.png" alt="Futuristic astronaut figure in ethereal white atmosphere">
+        </div>
     </main>
 
-    <!-- Footer -->
-    <div class="footer-banner">
-        <img src="astro-eyes-closed.png" alt="Astronaut helmet closeup">
-    </div>
-
-    <footer>
-        <div class="footer-inner">
-            <div class="footer-brand">ECHO.11</div>
-            
-            <div class="footer-contact">
-                <h4>Let's connect in the noise</h4>
-                <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
-            </div>
-            
-            <div class="footer-column">
-                <h4>Subtitle</h4>
-                <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
-                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
-                <a href="https://pinterest.com/shirasarid" target="_blank" rel="noopener noreferrer">Pinterest</a>
-                <a href="https://podcasts.apple.com" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
-            </div>
-            
-            <div class="footer-column">
-                <h4>Signals</h4>
-                <span>Strategy</span>
-                <span>Psychology</span>
-                <span>AI Tools</span>
-            </div>
-            
-            <div class="footer-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
-                </svg>
-            </div>
-        </div>
+    <!-- Simple Footer -->
+    <footer class="simple-footer">
+        <a href="index.html" class="back-link">Back to ECHO.11</a>
     </footer>
 
     <script>
