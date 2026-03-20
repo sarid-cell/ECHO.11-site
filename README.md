@@ -1,85 +1,64 @@
-# ECHO.11 Website
+# ECHO.11
 
-אתר פורטפוליו אישי של שירה שריד - AI Creative Strategist & Product Builder
+<div align="center">
 
-## מבנה התיקייה
+![ECHO.11](hero.png)
 
-```
-echo11-site/
-├── index.html          # הקובץ הראשי
-├── content/
-│   └── site-content.md # כל התוכן המקורי (גיבוי)
-└── images/             # תיקייה לתמונות (להוסיף)
-```
+### Decoding the Algorithm of Human Resilience
 
-## Deploy ב-Vercel
+*Bridging Consumer Psychology and Generative AI to build future-proof brands.*
 
-### שלב 1: יצירת Repo ב-GitHub
-```bash
-cd echo11-site
-git init
-git add .
-git commit -m "Initial commit - ECHO.11 site"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/echo11-site.git
-git push -u origin main
-```
+[![Live Site](https://img.shields.io/badge/Live%20Site-Visit-black?style=for-the-badge)](https://echo11-site.vercel.app)
+[![Substack](https://img.shields.io/badge/Substack-Subscribe-orange?style=for-the-badge&logo=substack)](https://shira.substack.com)
 
-### שלב 2: Deploy ב-Vercel
-1. היכנסי ל-[vercel.com](https://vercel.com)
-2. לחצי "Add New Project"
-3. בחרי את ה-repo `echo11-site`
-4. לחצי Deploy
-5. זהו! 🚀
-
-## הוספת תמונות
-
-החליפי את ה-placeholders בקוד עם תמונות אמיתיות:
-
-1. **Hero Image**: `hero-image.jpg` - הדמות בלבוש לבן
-2. **Vision Image**: `vision-eyes.jpg` - עיניים עם השתקפות אסטרונאוט
-3. **Article 1**: `ghost-machine.jpg` - פנים דיגיטליות עם גליץ'
-4. **Article 2**: `unlimited-tools.jpg` - דמות עם קווי אור גיאומטריים
-5. **About Image**: `luna-astronaut.jpg` - Luna האסטרונאוטית
-
-### איך להחליף placeholder בתמונה:
-
-בקובץ `index.html`, מצאי את:
-```html
-<div class="hero-placeholder">...</div>
-```
-
-והחליפי ב:
-```html
-<div class="hero-image">
-    <img src="images/hero-image.jpg" alt="Decoding Human Resilience">
 </div>
-```
-
-## פיצ'רים
-
-- ✅ שעון דיגיטלי חי (header)
-- ✅ תפריט המבורגר למובייל
-- ✅ ניווט desktop
-- ✅ אנימציות scroll
-- ✅ רספונסיבי מלא
-- ✅ Typography מקצועי (Outfit + Space Mono)
-- ✅ כל התוכן מועתק מ-Framer
-
-## התאמות עתידיות
-
-- [ ] הוספת תמונות
-- [ ] עמודי מאמרים נפרדים
-- [ ] עמוד "Behind the Scenes"
-- [ ] Google Analytics (להוסיף GA4 ID)
-- [ ] חיבור ל-Substack RSS
-
-## Stack
-
-- HTML5
-- CSS3 (Vanilla - no frameworks)
-- Vanilla JavaScript
-- Google Fonts (Outfit, Space Mono)
 
 ---
-Built with 💙 by Shira & Claude
+
+## About
+
+**ECHO.11** is a digital laboratory exploring the intersection of consumer psychology and generative AI. Created by [Shira Sarid](https://linkedin.com/in/shirasarid), it's a curated space for "Quiet Branding" and strategic foresight.
+
+> *"In an age of artificial intelligence, our most powerful tool remains the human mind."*
+
+## What You'll Find Here
+
+- **Neuro-Aesthetics** — How visual design impacts cognitive load
+- **2026 Design Forecast** — Where generative art is heading
+- **Future-Proof Skills** — Capabilities for the changing job market
+- **Calm AI** — Creating digital spaces that feel human
+
+## Tech Stack
+
+- HTML5 / CSS3 / Vanilla JavaScript
+- Hosted on [Vercel](https://vercel.com)
+- Typography: [Outfit](https://fonts.google.com/specimen/Outfit) + [Space Mono](https://fonts.google.com/specimen/Space+Mono)
+
+## Features
+
+- ⏰ Live digital clock
+- 📱 Fully responsive
+- ♿ Accessibility-first (WCAG compliant)
+- 🎭 Scroll reveal animations
+- 🍔 Side navigation menu
+
+## Connect
+
+<div align="center">
+
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=flat-square&logo=instagram&logoColor=white)](https://instagram.com/shira.sarid)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/shirasarid)
+[![Pinterest](https://img.shields.io/badge/Pinterest-E60023?style=flat-square&logo=pinterest&logoColor=white)](https://pinterest.com/shirasarid)
+[![Substack](https://img.shields.io/badge/Substack-FF6719?style=flat-square&logo=substack&logoColor=white)](https://shira.substack.com)
+
+</div>
+
+---
+
+<div align="center">
+
+**Psychology First, Pixels Second.**
+
+*Built with 🖤 by Shira Sarid × Claude*
+
+</div>
