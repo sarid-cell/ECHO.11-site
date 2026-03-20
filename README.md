@@ -33,6 +33,7 @@
 - HTML5 / CSS3 / Vanilla JavaScript
 - Hosted on [Vercel](https://vercel.com)
 - Typography: [Outfit](https://fonts.google.com/specimen/Outfit) + [Space Mono](https://fonts.google.com/specimen/Space+Mono)
+- Google Analytics 4 (GA4)
 
 ## Features
 
@@ -41,6 +42,7 @@
 - ♿ Accessibility-first (WCAG compliant)
 - 🎭 Scroll reveal animations
 - 🍔 Side navigation menu
+- 📊 Real-time User Tracking with GA4
 
 ## Connect
 
