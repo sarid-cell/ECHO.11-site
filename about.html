@@ -39,6 +39,39 @@
             line-height: 1.7;
             font-weight: 300;
             overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor Dot */
+        .cursor-dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(120, 120, 120, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+        }
+
+        .cursor-dot.hover {
+            width: 20px;
+            height: 20px;
+            background: rgba(100, 100, 100, 0.4);
+        }
+
+        a, button, input, textarea, select {
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+            .cursor-dot {
+                display: none;
+            }
         }
 
         /* Skip Link */
@@ -438,6 +471,9 @@
     </style>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Header -->
@@ -617,6 +653,22 @@
                 if (rect.top < window.innerHeight) el.classList.add('visible');
             });
         });
+
+        // Custom Cursor Dot
+        const cursorDot = document.querySelector('.cursor-dot');
+        
+        if (cursorDot && window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top = e.clientY + 'px';
+            });
+
+            const interactiveElements = document.querySelectorAll('a, button');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursorDot.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursorDot.classList.remove('hover'));
+            });
+        }
     </script>
 </body>
 </html>

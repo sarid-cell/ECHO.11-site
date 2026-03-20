@@ -45,6 +45,40 @@
             line-height: 1.7;
             font-weight: 300;
             overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor Dot */
+        .cursor-dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(120, 120, 120, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+        }
+
+        .cursor-dot.hover {
+            width: 20px;
+            height: 20px;
+            background: rgba(100, 100, 100, 0.4);
+        }
+
+        /* Restore cursor on interactive elements for accessibility */
+        a, button, input, textarea, select {
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+            .cursor-dot {
+                display: none;
+            }
         }
 
         /* Skip Link */
@@ -244,6 +278,7 @@
             z-index: 10;
             padding: 0 2.5rem 4rem;
             max-width: 1200px;
+            will-change: transform, opacity;
         }
 
         .hero h1 {
@@ -644,6 +679,9 @@
     </style>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Header -->
@@ -849,6 +887,41 @@
                 if (rect.top < window.innerHeight) el.classList.add('visible');
             });
         });
+
+        // Custom Cursor Dot
+        const cursorDot = document.querySelector('.cursor-dot');
+        
+        if (cursorDot && window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top = e.clientY + 'px';
+            });
+
+            // Add hover effect on links and buttons
+            const interactiveElements = document.querySelectorAll('a, button');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursorDot.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursorDot.classList.remove('hover'));
+            });
+        }
+
+        // Hero Parallax Effect
+        const heroContent = document.querySelector('.hero-content');
+        const hero = document.querySelector('.hero');
+
+        if (heroContent && hero) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const heroHeight = hero.offsetHeight;
+                
+                if (scrolled < heroHeight) {
+                    // Move text up as user scrolls, creating parallax
+                    const parallaxSpeed = 0.4;
+                    heroContent.style.transform = `translateY(${-scrolled * parallaxSpeed}px)`;
+                    heroContent.style.opacity = 1 - (scrolled / heroHeight) * 0.5;
+                }
+            });
+        }
     </script>
 </body>
 </html>
