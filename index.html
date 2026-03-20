@@ -13,7 +13,7 @@
     <meta property="og:description" content="Bridging Consumer Psychology and Generative AI to build future-proof brands.">
     <meta property="og:type" content="website">
     
-    <!-- Fonts - Preload for performance -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -22,11 +22,11 @@
         :root {
             --bg: #fafafa;
             --text: #1a1a1a;
-            --text-light: #666;
-            --text-lighter: #999;
+            --text-secondary: #4a4a4a; /* Darker gray for better accessibility */
+            --text-light: #555555; /* Darker than before for accessibility */
             --accent: #000;
             --white: #fff;
-            --border: #e5e5e5;
+            --border: #e0e0e0;
         }
 
         * {
@@ -37,27 +37,29 @@
 
         html {
             scroll-behavior: smooth;
+            font-size: 18px; /* Base font size increased for accessibility */
         }
 
         body {
             font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
         /* Skip Link for Accessibility */
         .skip-link {
             position: absolute;
-            top: -40px;
+            top: -50px;
             left: 0;
             background: var(--text);
             color: var(--white);
-            padding: 8px 16px;
+            padding: 12px 20px;
             z-index: 9999;
             transition: top 0.3s;
             text-decoration: none;
+            font-size: 1rem;
         }
 
         .skip-link:focus {
@@ -71,14 +73,15 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: var(--bg);
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
         }
 
         .header-inner {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -101,15 +104,15 @@
 
         .clock {
             font-family: 'Space Mono', monospace;
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: var(--text);
             letter-spacing: 0.02em;
         }
 
-        /* Hamburger Menu - Always visible on all screens */
+        /* Hamburger Menu */
         .hamburger {
-            width: 24px;
-            height: 18px;
+            width: 26px;
+            height: 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -121,7 +124,7 @@
         }
 
         .hamburger:focus {
-            outline: 2px solid var(--text);
+            outline: 3px solid var(--text);
             outline-offset: 4px;
         }
 
@@ -134,7 +137,7 @@
         }
 
         .hamburger.active span:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
+            transform: translateY(9px) rotate(45deg);
         }
 
         .hamburger.active span:nth-child(2) {
@@ -142,24 +145,24 @@
         }
 
         .hamburger.active span:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
+            transform: translateY(-9px) rotate(-45deg);
         }
 
-        /* Side Menu - Works for all screen sizes */
+        /* Side Menu */
         .side-menu {
             position: fixed;
             top: 0;
-            right: -320px;
-            width: 320px;
+            right: -350px;
+            width: 350px;
             height: 100vh;
             background: var(--bg);
             z-index: 999;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 2rem;
+            padding: 3rem;
             transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            box-shadow: -10px 0 40px rgba(0,0,0,0.15);
         }
 
         .side-menu.active {
@@ -169,12 +172,12 @@
         .side-menu nav {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .side-menu a {
-            font-size: 1.5rem;
-            font-weight: 300;
+            font-size: 1.6rem;
+            font-weight: 400;
             color: var(--text);
             text-decoration: none;
             transition: opacity 0.2s, transform 0.2s;
@@ -183,7 +186,7 @@
 
         .side-menu a:hover,
         .side-menu a:focus {
-            opacity: 0.5;
+            opacity: 0.6;
             transform: translateX(10px);
         }
 
@@ -193,7 +196,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.4);
             z-index: 998;
             opacity: 0;
             visibility: hidden;
@@ -205,60 +208,71 @@
             visibility: visible;
         }
 
-        /* ============ HERO ============ */
+        /* ============ HERO - FULL WIDTH ============ */
         .hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 6rem 2rem 4rem;
             position: relative;
             overflow: hidden;
         }
 
-        .hero-image {
+        .hero-background {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -55%);
-            width: 350px;
-            height: auto;
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
         }
 
-        .hero-image img {
+        .hero-background img {
             width: 100%;
-            height: auto;
-            filter: grayscale(10%);
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(250,250,250,1) 0%, rgba(250,250,250,0.8) 50%, rgba(250,250,250,0) 100%);
+            z-index: 2;
         }
 
         .hero-content {
             position: relative;
             z-index: 10;
+            padding: 0 2.5rem 4rem;
             max-width: 1200px;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
             font-weight: 400;
-            line-height: 1.1;
+            line-height: 1.08;
             margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
+            color: var(--text);
         }
 
         .hero p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: var(--text-light);
-            max-width: 700px;
-            line-height: 1.7;
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: var(--text-secondary);
+            max-width: 750px;
+            line-height: 1.8;
         }
 
-        /* ============ SCROLL REVEAL ANIMATION ============ */
+        /* ============ SCROLL REVEAL ANIMATIONS ============ */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(50px);
+            transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .reveal.visible {
@@ -266,26 +280,39 @@
             transform: translateY(0);
         }
 
-        /* Staggered delays for children */
-        .reveal-stagger > *:nth-child(1) { transition-delay: 0s; }
-        .reveal-stagger > *:nth-child(2) { transition-delay: 0.1s; }
-        .reveal-stagger > *:nth-child(3) { transition-delay: 0.2s; }
-        .reveal-stagger > *:nth-child(4) { transition-delay: 0.3s; }
-        .reveal-stagger > *:nth-child(5) { transition-delay: 0.4s; }
+        /* Line by line reveal */
+        .reveal-lines .reveal-line {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal-lines.visible .reveal-line:nth-child(1) { transition-delay: 0s; }
+        .reveal-lines.visible .reveal-line:nth-child(2) { transition-delay: 0.1s; }
+        .reveal-lines.visible .reveal-line:nth-child(3) { transition-delay: 0.2s; }
+        .reveal-lines.visible .reveal-line:nth-child(4) { transition-delay: 0.3s; }
+        .reveal-lines.visible .reveal-line:nth-child(5) { transition-delay: 0.4s; }
+        .reveal-lines.visible .reveal-line:nth-child(6) { transition-delay: 0.5s; }
+
+        .reveal-lines.visible .reveal-line {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         /* ============ SECTIONS ============ */
         section {
-            padding: 6rem 2rem;
-            max-width: 1400px;
+            padding: 6rem 2.5rem;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
         .section-label {
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            color: var(--text-lighter);
-            margin-bottom: 2rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            font-weight: 500;
         }
 
         /* ============ VISION ============ */
@@ -294,12 +321,12 @@
         }
 
         .vision-content {
-            max-width: 900px;
+            max-width: 950px;
         }
 
         .vision-content p {
-            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-            line-height: 1.8;
+            font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+            line-height: 1.85;
             color: var(--text);
         }
 
@@ -308,15 +335,16 @@
         }
 
         .vision-image {
-            width: 100%;
-            margin-top: 4rem;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-top: 5rem;
             position: relative;
             overflow: hidden;
         }
 
         .vision-image img {
             width: 100%;
-            height: 450px;
+            height: 550px;
             object-fit: cover;
             filter: grayscale(100%);
         }
@@ -328,19 +356,21 @@
 
         .pillars-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3.5rem;
         }
 
         .pillar h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            color: var(--text);
         }
 
         .pillar p {
-            color: var(--text-light);
-            line-height: 1.7;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.05rem;
         }
 
         /* ============ INSIGHTS ============ */
@@ -348,11 +378,11 @@
             border-top: 1px solid var(--border);
             background: var(--white);
             max-width: 100%;
-            padding: 6rem 2rem;
+            padding: 6rem 2.5rem;
         }
 
         .insights-inner {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
@@ -361,29 +391,30 @@
         }
 
         .insights-header h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: -0.02em;
+            color: var(--text);
         }
 
         .insights-header p {
-            font-size: 1.5rem;
-            color: var(--text-lighter);
+            font-size: 1.6rem;
+            color: var(--text-light);
             font-weight: 300;
             margin-top: 0.5rem;
         }
 
         .articles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 4rem;
         }
 
         .article-card {
             display: flex;
             flex-direction: row;
-            gap: 2rem;
+            gap: 2.5rem;
             align-items: flex-start;
         }
 
@@ -391,7 +422,7 @@
             flex-direction: row-reverse;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .article-card,
             .article-card.reverse {
                 flex-direction: column;
@@ -400,15 +431,15 @@
 
         .article-image {
             flex: 1;
-            min-width: 250px;
+            min-width: 280px;
             overflow: hidden;
         }
 
         .article-image img {
             width: 100%;
-            height: 350px;
+            height: 400px;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            transition: transform 0.5s ease;
         }
 
         .article-card:hover .article-image img {
@@ -423,43 +454,47 @@
         }
 
         .article-content h3 {
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 1rem;
+            line-height: 1.25;
+            margin-bottom: 1.2rem;
+            color: var(--text);
         }
 
         .article-content .subtitle {
-            color: var(--text-light);
-            font-size: 1.1rem;
-            line-height: 1.6;
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            line-height: 1.7;
             margin-bottom: 1.5rem;
         }
 
         .read-more {
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: var(--text);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            font-weight: 500;
             transition: gap 0.2s;
         }
 
         .read-more:hover,
         .read-more:focus {
-            gap: 0.8rem;
+            gap: 1rem;
         }
 
         .read-more::after {
             content: '→';
+            font-size: 1.2rem;
         }
 
-        /* ============ ASTRO BANNER (below articles) ============ */
+        /* ============ ASTRO BANNER (full width) ============ */
         .astro-banner {
-            padding: 0;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
             background: var(--white);
-            max-width: 100%;
+            overflow: hidden;
         }
 
         .astro-banner img {
@@ -479,29 +514,31 @@
         }
 
         .about-header h2 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2rem, 5vw, 3.8rem);
             font-weight: 700;
-            line-height: 1.15;
+            line-height: 1.12;
             text-transform: uppercase;
             letter-spacing: -0.02em;
-            max-width: 900px;
+            max-width: 950px;
+            color: var(--text);
         }
 
         .about-intro {
-            max-width: 900px;
+            max-width: 950px;
             margin-bottom: 4rem;
         }
 
         .about-intro h3 {
-            font-size: 1rem;
-            color: var(--text-lighter);
-            font-weight: 400;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-weight: 500;
             margin-bottom: 1.5rem;
         }
 
         .about-intro p {
-            font-size: 1.3rem;
-            line-height: 1.8;
+            font-size: 1.35rem;
+            line-height: 1.85;
+            color: var(--text);
         }
 
         .about-intro strong {
@@ -515,56 +552,59 @@
 
         .about-image img {
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             display: block;
         }
 
         .about-section {
             margin-bottom: 4rem;
-            max-width: 900px;
+            max-width: 950px;
         }
 
         .about-section h3 {
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             font-weight: 300;
-            color: var(--text-lighter);
-            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 1.8rem;
         }
 
         .about-section p {
-            font-size: 1.15rem;
-            line-height: 1.8;
+            font-size: 1.2rem;
+            line-height: 1.85;
             margin-bottom: 1.5rem;
+            color: var(--text);
         }
 
         .about-section strong {
             font-weight: 600;
         }
 
-        /* Architecture image */
+        /* Architecture image - full width */
         .architecture-image {
-            width: 100%;
-            margin: 3rem 0;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-top: 3rem;
+            margin-bottom: 3rem;
         }
 
         .architecture-image img {
             width: 100%;
-            height: 400px;
+            height: 450px;
             object-fit: cover;
         }
 
         /* Golden figure section */
         .golden-section {
             background: #0a0a0a;
-            padding: 4rem 2rem;
-            margin: 4rem -2rem;
-            width: calc(100% + 4rem);
+            padding: 5rem 2.5rem;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
         }
 
         .golden-section img {
             width: 100%;
-            max-width: 500px;
+            max-width: 550px;
             margin: 0 auto;
             display: block;
         }
@@ -573,26 +613,27 @@
         .explore {
             background: var(--white);
             max-width: 100%;
-            padding: 6rem 2rem;
+            padding: 6rem 2.5rem;
             border-top: 1px solid var(--border);
         }
 
         .explore-inner {
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
         }
 
         .explore h3 {
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             font-weight: 300;
-            color: var(--text-lighter);
-            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 1.8rem;
         }
 
         .explore-intro {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
+            font-size: 1.25rem;
+            line-height: 1.85;
+            margin-bottom: 2.5rem;
+            color: var(--text);
         }
 
         .explore-list {
@@ -601,9 +642,10 @@
         }
 
         .explore-list li {
-            padding: 0.8rem 0;
-            font-size: 1.1rem;
+            padding: 1rem 0;
+            font-size: 1.15rem;
             border-bottom: 1px solid var(--border);
+            color: var(--text);
         }
 
         .explore-list li:first-child {
@@ -615,52 +657,57 @@
         }
 
         .explore-closing {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 500;
+            color: var(--text);
         }
 
         /* ============ FOOTER ============ */
         footer {
-            padding: 4rem 2rem;
+            padding: 5rem 2.5rem;
             border-top: 1px solid var(--border);
             text-align: center;
         }
 
         .footer-logo {
             font-family: 'Space Mono', monospace;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
             letter-spacing: 0.05em;
             margin-bottom: 1rem;
         }
 
         .footer-tagline {
-            color: var(--text-lighter);
-            font-size: 0.9rem;
+            color: var(--text-light);
+            font-size: 1rem;
             margin-bottom: 2rem;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 2.5rem;
             flex-wrap: wrap;
         }
 
         .footer-links a {
             color: var(--text);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 1rem;
             transition: opacity 0.2s;
         }
 
         .footer-links a:hover,
         .footer-links a:focus {
-            opacity: 0.5;
+            opacity: 0.6;
         }
 
         /* ============ RESPONSIVE ============ */
         @media (max-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+
             .header-inner {
                 padding: 1rem 1.5rem;
             }
@@ -669,16 +716,12 @@
                 padding: 4rem 1.5rem;
             }
 
-            .hero {
-                padding: 5rem 1.5rem 3rem;
-            }
-
-            .hero-image {
-                width: 250px;
+            .hero-content {
+                padding: 0 1.5rem 3rem;
             }
 
             .pillars-grid {
-                gap: 2rem;
+                gap: 2.5rem;
             }
 
             .articles-grid {
@@ -694,26 +737,24 @@
                 right: -100%;
             }
 
-            .golden-section {
-                margin: 4rem -1.5rem;
-                padding: 3rem 1.5rem;
-                width: calc(100% + 3rem);
-            }
-
             .vision-image img {
-                height: 300px;
+                height: 350px;
             }
 
             .architecture-image img {
-                height: 250px;
+                height: 280px;
+            }
+
+            .article-image img {
+                height: 300px;
             }
         }
 
         /* ============ FOCUS STYLES FOR ACCESSIBILITY ============ */
         a:focus,
         button:focus {
-            outline: 2px solid var(--text);
-            outline-offset: 2px;
+            outline: 3px solid var(--text);
+            outline-offset: 3px;
         }
 
         /* Reduce motion for users who prefer it */
@@ -728,7 +769,8 @@
                 scroll-behavior: auto;
             }
 
-            .reveal {
+            .reveal,
+            .reveal-lines .reveal-line {
                 opacity: 1;
                 transform: none;
             }
@@ -768,15 +810,14 @@
     </aside>
 
     <main id="main-content">
-        <!-- Hero -->
+        <!-- Hero - Full Width Background -->
         <section class="hero" id="home">
-            <div class="hero-image">
+            <div class="hero-background">
                 <img src="hero.png" 
                      alt="Futuristic figure in flowing white garments walking forward, representing the journey into AI and human resilience" 
-                     width="350"
-                     height="525"
                      fetchpriority="high">
             </div>
+            <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1 class="reveal">Decoding the Algorithm of Human Resilience</h1>
                 <p class="reveal">Bridging the gap between Consumer Psychology and Generative AI to build future-proof brands. Exploring the 2026 digital landscape.</p>
@@ -786,23 +827,25 @@
         <!-- Vision -->
         <section class="vision" id="vision">
             <div class="section-label reveal">THE VISION</div>
-            <div class="vision-content">
-                <p class="reveal">
-                    <strong>Psychology First, Pixels Second.</strong> In an economy of attention, visuals are not enough. My approach decodes the neural pathways of your audience. With a background in consumer psychology, I leverage Generative AI to craft experiences that cut through the noise. We strip away the excess to reach the signal—creating digital spaces that feel human, intuitive, and profound. This is not just marketing. This is evolution.
+            <div class="vision-content reveal-lines">
+                <p>
+                    <span class="reveal-line"><strong>Psychology First, Pixels Second.</strong> In an economy of attention, visuals are not enough.</span>
+                    <span class="reveal-line">My approach decodes the neural pathways of your audience.</span>
+                    <span class="reveal-line">With a background in consumer psychology, I leverage Generative AI to craft experiences that cut through the noise.</span>
+                    <span class="reveal-line">We strip away the excess to reach the signal—creating digital spaces that feel human, intuitive, and profound.</span>
+                    <span class="reveal-line">This is not just marketing. This is evolution.</span>
                 </p>
             </div>
             <div class="vision-image reveal">
-                <img src="astro.png" 
-                     alt="Close-up portrait of woman with closed eyes inside astronaut helmet, symbolizing inner focus and exploration" 
-                     loading="lazy"
-                     width="900"
-                     height="450">
+                <img src="astro-eyes-open.png" 
+                     alt="Close-up portrait of woman astronaut with open eyes gazing upward, symbolizing vision and exploration" 
+                     loading="lazy">
             </div>
         </section>
 
         <!-- Pillars -->
         <section class="pillars">
-            <div class="pillars-grid reveal-stagger">
+            <div class="pillars-grid">
                 <div class="pillar reveal">
                     <h3>The Human Edge</h3>
                     <p>Technology is code; Intuition is the spark. We empower women to lead the revolution, turning "complex" tech into a creative playground.</p>
@@ -836,9 +879,7 @@
                         <div class="article-image">
                             <img src="ghost-machine.png" 
                                  alt="Digital portrait with fragmented glass and data overlay, representing the fusion of human and artificial intelligence" 
-                                 loading="lazy"
-                                 width="400"
-                                 height="350">
+                                 loading="lazy">
                         </div>
                     </article>
                     
@@ -851,22 +892,18 @@
                         <div class="article-image">
                             <img src="unlimited-tools.png" 
                                  alt="White figure with geometric neural network lines emanating from the head, symbolizing unlimited potential" 
-                                 loading="lazy"
-                                 width="400"
-                                 height="350">
+                                 loading="lazy">
                         </div>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- Astro Banner (below articles) -->
+        <!-- Astro Banner - Eyes Closed (full width) -->
         <div class="astro-banner reveal">
-            <img src="astro.png" 
+            <img src="astro-eyes-closed.png" 
                  alt="Close-up portrait of woman astronaut with closed eyes, representing quiet introspection in the digital age" 
-                 loading="lazy"
-                 width="1400"
-                 height="600">
+                 loading="lazy">
         </div>
 
         <!-- About -->
@@ -875,56 +912,64 @@
                 <h2>Beyond the Noise: Decoding the Human Mind Through Generative AI</h2>
             </div>
             
-            <div class="about-intro reveal">
-                <h3>Introduction</h3>
+            <div class="about-intro reveal-lines">
+                <h3 class="reveal-line">Introduction</h3>
                 <p>
-                    <strong>I'm Shira Sarid, an AI explorer, creative strategist, and a believer in the power of focus.</strong> I am not a neuroscientist, nor a coder. I am a researcher of <strong>human resilience</strong>. ECHO.11 is my digital laboratory, built on a simple premise: In an age of artificial intelligence, our most powerful tool remains the human mind. My mission is to explore how we can use smart tools to regain control, bridge the gender gap in tech, and design a "quieter," more intentional digital future.
+                    <span class="reveal-line"><strong>I'm Shira Sarid, an AI explorer, creative strategist, and a believer in the power of focus.</strong></span>
+                    <span class="reveal-line">I am not a neuroscientist, nor a coder. I am a researcher of <strong>human resilience</strong>.</span>
+                    <span class="reveal-line">ECHO.11 is my digital laboratory, built on a simple premise: In an age of artificial intelligence, our most powerful tool remains the human mind.</span>
+                    <span class="reveal-line">My mission is to explore how we can use smart tools to regain control, bridge the gender gap in tech, and design a "quieter," more intentional digital future.</span>
                 </p>
             </div>
 
             <div class="about-image reveal">
                 <img src="luna.png" 
                      alt="Luna the astronaut in transparent helmet looking into the distance, representing exploration and vision" 
-                     loading="lazy"
-                     width="800"
-                     height="500">
+                     loading="lazy">
             </div>
 
-            <div class="about-section reveal">
-                <h3>The Origin Story: Finding Silence in the Chaos of 2025</h3>
+            <div class="about-section reveal-lines">
+                <h3 class="reveal-line">The Origin Story: Finding Silence in the Chaos of 2025</h3>
                 <p>
-                    <strong>It started with a refusal to sleep.</strong> During the conflict with Iran in mid-2025, the nights became a source of terror. Waiting for the siren to wail meant subjecting my body to repeated shocks, throwing my nervous system off balance. I realized that if I couldn't control the situation outside, I had to control my internal state.
+                    <span class="reveal-line"><strong>It started with a refusal to sleep.</strong> During the conflict with Iran in mid-2025, the nights became a source of terror.</span>
+                    <span class="reveal-line">Waiting for the siren to wail meant subjecting my body to repeated shocks, throwing my nervous system off balance.</span>
+                    <span class="reveal-line">I realized that if I couldn't control the situation outside, I had to control my internal state.</span>
                 </p>
                 <p>
-                    Instead of waiting for the alarm, I stayed awake. I turned to my computer and started creating. Using <strong>Midjourney</strong> for visuals and <strong>Runway</strong> for motion, I combined AI-generated art with specific sound frequencies—a technique I had used for years to battle insomnia.
+                    <span class="reveal-line">Instead of waiting for the alarm, I stayed awake. I turned to my computer and started creating.</span>
+                    <span class="reveal-line">Using <strong>Midjourney</strong> for visuals and <strong>Runway</strong> for motion, I combined AI-generated art with specific sound frequencies—a technique I had used for years to battle insomnia.</span>
                 </p>
                 <p>
-                    <strong>The discovery was profound:</strong> Designing with AI forced my brain to hyper-focus. It shifted my attention from negative loops of fear to positive loops of imagination. When I shared these videos on Instagram and TikTok, the response was overwhelming. Strangers wrote to me that these "digital signals" helped them regulate their own nervous systems and fall asleep after nights of panic.
+                    <span class="reveal-line"><strong>The discovery was profound:</strong> Designing with AI forced my brain to hyper-focus.</span>
+                    <span class="reveal-line">It shifted my attention from negative loops of fear to positive loops of imagination.</span>
+                    <span class="reveal-line">When I shared these videos on Instagram and TikTok, the response was overwhelming.</span>
+                    <span class="reveal-line">Strangers wrote to me that these "digital signals" helped them regulate their own nervous systems and fall asleep after nights of panic.</span>
                 </p>
                 <p>
-                    That was the moment I understood: <strong>AI isn't just a productivity tool; it's a mechanism for mental regulation.</strong>
+                    <span class="reveal-line">That was the moment I understood: <strong>AI isn't just a productivity tool; it's a mechanism for mental regulation.</strong></span>
                 </p>
             </div>
 
-            <!-- Architecture Image -->
+            <!-- Architecture Image - Full Width -->
             <div class="architecture-image reveal">
                 <img src="architecture.png" 
                      alt="Minimalist brutalist architecture with curved concrete forms in misty atmosphere, representing quiet strength" 
-                     loading="lazy"
-                     width="1200"
-                     height="400">
+                     loading="lazy">
             </div>
 
-            <div class="about-section reveal">
-                <h3>Shattering the Myths: AI is for Everyone</h3>
+            <div class="about-section reveal-lines">
+                <h3 class="reveal-line">Shattering the Myths: AI is for Everyone</h3>
                 <p>
-                    <strong>My personal journey of mental and physical transformation taught me one thing: The brain is plastic. It can change.</strong> Today, we are surrounded by myths that keep us small. The biggest one? That AI is "too technical" or "too complex."
+                    <span class="reveal-line"><strong>My personal journey of mental and physical transformation taught me one thing: The brain is plastic. It can change.</strong></span>
+                    <span class="reveal-line">Today, we are surrounded by myths that keep us small. The biggest one? That AI is "too technical" or "too complex."</span>
                 </p>
                 <p>
-                    I see too many women stepping back from this revolution, intimidated by the terminology. The gap between men and women in the generative AI space is widening, and I am here to close it.
+                    <span class="reveal-line">I see too many women stepping back from this revolution, intimidated by the terminology.</span>
+                    <span class="reveal-line">The gap between men and women in the generative AI space is widening, and I am here to close it.</span>
                 </p>
                 <p>
-                    <strong>Here is the truth:</strong> If you can imagine it, you can build it. Learning to prompt a machine is just like learning a new language—it requires focus, not a degree in computer science.
+                    <span class="reveal-line"><strong>Here is the truth:</strong> If you can imagine it, you can build it.</span>
+                    <span class="reveal-line">Learning to prompt a machine is just like learning a new language—it requires focus, not a degree in computer science.</span>
                 </p>
             </div>
 
@@ -932,9 +977,7 @@
             <div class="golden-section reveal">
                 <img src="golden-figure.png" 
                      alt="Golden illuminated figure looking upward with light particles, representing transcendence and hope" 
-                     loading="lazy"
-                     width="500"
-                     height="600">
+                     loading="lazy">
             </div>
         </section>
 
@@ -946,11 +989,11 @@
                     ECHO.11 is a curated space for "<strong>Quiet Branding</strong>" and strategic foresight. In a noisy world filled with endless content, we need to know which tool to pick for which mission. Inside, you will find insights on:
                 </p>
                 
-                <ul class="explore-list reveal-stagger">
-                    <li class="reveal"><strong>Neuro-Aesthetics:</strong> How visual design impacts our cognitive load.</li>
-                    <li class="reveal"><strong>The 2026 Design Forecast:</strong> Where generative art is heading next.</li>
-                    <li class="reveal"><strong>Future-Proof Skills:</strong> The top 10 capabilities we all need to survive and thrive in the changing job market.</li>
-                    <li class="reveal"><strong>Calm AI:</strong> Strategies for creating digital spaces that feel human, intuitive, and profound.</li>
+                <ul class="explore-list reveal-lines">
+                    <li class="reveal-line"><strong>Neuro-Aesthetics:</strong> How visual design impacts our cognitive load.</li>
+                    <li class="reveal-line"><strong>The 2026 Design Forecast:</strong> Where generative art is heading next.</li>
+                    <li class="reveal-line"><strong>Future-Proof Skills:</strong> The top 10 capabilities we all need to survive and thrive in the changing job market.</li>
+                    <li class="reveal-line"><strong>Calm AI:</strong> Strategies for creating digital spaces that feel human, intuitive, and profound.</li>
                 </ul>
                 
                 <p class="explore-closing reveal">Stay tuned. It's going to be quiet—in a whole new way.</p>
@@ -1030,7 +1073,7 @@
         });
 
         // ============ SCROLL REVEAL ANIMATION ============
-        const revealElements = document.querySelectorAll('.reveal');
+        const revealElements = document.querySelectorAll('.reveal, .reveal-lines');
 
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1039,8 +1082,8 @@
                 }
             });
         }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.15,
+            rootMargin: '0px 0px -80px 0px'
         });
 
         revealElements.forEach(el => {
