@@ -50,21 +50,22 @@
 
         /* Custom Cursor Dot */
         .cursor-dot {
-            width: 12px;
-            height: 12px;
-            background: rgba(120, 120, 120, 0.5);
+            width: 20px;
+            height: 20px;
+            background: rgba(100, 100, 100, 0.6);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+            transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+            mix-blend-mode: difference;
         }
 
         .cursor-dot.hover {
-            width: 20px;
-            height: 20px;
-            background: rgba(100, 100, 100, 0.4);
+            width: 35px;
+            height: 35px;
+            background: rgba(80, 80, 80, 0.5);
         }
 
         /* Restore cursor on interactive elements for accessibility */
@@ -237,48 +238,41 @@
             visibility: visible;
         }
 
-        /* Hero */
+        /* Hero - New Layout: Image top, Text bottom */
         .hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
             position: relative;
             overflow: hidden;
+            background: var(--bg);
         }
 
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 1;
-        }
-
-        .hero-background img {
+        .hero-image-wrapper {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
+            height: 70vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-top: 80px;
+            position: relative;
+            will-change: transform, opacity;
         }
 
-        .hero-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 50%;
-            background: linear-gradient(to top, rgba(250,250,250,1) 0%, rgba(250,250,250,0.8) 50%, rgba(250,250,250,0) 100%);
-            z-index: 2;
+        .hero-image-wrapper img {
+            max-height: 100%;
+            width: auto;
+            max-width: 90%;
+            object-fit: contain;
         }
 
         .hero-content {
             position: relative;
             z-index: 10;
-            padding: 0 2.5rem 4rem;
+            padding: 3rem 2.5rem 5rem;
             max-width: 1200px;
             will-change: transform, opacity;
+            background: var(--bg);
         }
 
         .hero h1 {
@@ -295,6 +289,17 @@
             max-width: 750px;
             line-height: 1.8;
             font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            .hero-image-wrapper {
+                height: 50vh;
+                padding-top: 70px;
+            }
+
+            .hero-content {
+                padding: 2rem 1.5rem 4rem;
+            }
         }
 
         /* Animations */
@@ -537,8 +542,10 @@
         .footer-banner img {
             width: 100%;
             height: auto;
+            max-width: 100%;
             display: block;
             filter: grayscale(100%);
+            object-fit: contain;
         }
 
         footer {
@@ -713,10 +720,9 @@
     <main id="main-content">
         <!-- Hero -->
         <section class="hero" id="home">
-            <div class="hero-background">
+            <div class="hero-image-wrapper">
                 <img src="hero.png" alt="Futuristic figure in flowing white garments" fetchpriority="high">
             </div>
-            <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1 class="reveal">Decoding the Algorithm of Human Resilience</h1>
                 <p class="reveal">Bridging the gap between Consumer Psychology and Generative AI to build future-proof brands. Exploring the 2026 digital landscape.</p>
@@ -907,18 +913,21 @@
 
         // Hero Parallax Effect
         const heroContent = document.querySelector('.hero-content');
+        const heroImage = document.querySelector('.hero-image-wrapper');
         const hero = document.querySelector('.hero');
 
-        if (heroContent && hero) {
+        if (heroContent && heroImage && hero) {
             window.addEventListener('scroll', () => {
                 const scrolled = window.pageYOffset;
                 const heroHeight = hero.offsetHeight;
                 
                 if (scrolled < heroHeight) {
-                    // Move text up as user scrolls, creating parallax
-                    const parallaxSpeed = 0.4;
-                    heroContent.style.transform = `translateY(${-scrolled * parallaxSpeed}px)`;
-                    heroContent.style.opacity = 1 - (scrolled / heroHeight) * 0.5;
+                    // Image fades and moves up slightly as user scrolls
+                    heroImage.style.opacity = 1 - (scrolled / heroHeight) * 1.2;
+                    heroImage.style.transform = `translateY(${-scrolled * 0.3}px)`;
+                    
+                    // Text moves up faster, creating parallax effect
+                    heroContent.style.transform = `translateY(${-scrolled * 0.5}px)`;
                 }
             });
         }

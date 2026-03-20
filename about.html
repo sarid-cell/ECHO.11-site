@@ -44,21 +44,22 @@
 
         /* Custom Cursor Dot */
         .cursor-dot {
-            width: 12px;
-            height: 12px;
-            background: rgba(120, 120, 120, 0.5);
+            width: 20px;
+            height: 20px;
+            background: rgba(100, 100, 100, 0.6);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+            transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+            mix-blend-mode: difference;
         }
 
         .cursor-dot.hover {
-            width: 20px;
-            height: 20px;
-            background: rgba(100, 100, 100, 0.4);
+            width: 35px;
+            height: 35px;
+            background: rgba(80, 80, 80, 0.5);
         }
 
         a, button, input, textarea, select {
