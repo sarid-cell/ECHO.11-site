@@ -6,7 +6,6 @@
     <title>ECHO.11 | Decoding the Algorithm of Human Resilience</title>
     <meta name="description" content="Bridging Consumer Psychology and Generative AI to build future-proof brands. By Shira Sarid.">
     <meta name="author" content="Shira Sarid">
-    <meta name="keywords" content="AI, Generative AI, Consumer Psychology, Digital Strategy, Shira Sarid">
     
     <!-- Open Graph -->
     <meta property="og:title" content="ECHO.11 | Decoding Human Resilience">
@@ -16,14 +15,14 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg: #fafafa;
             --text: #1a1a1a;
-            --text-secondary: #4a4a4a; /* Darker gray for better accessibility */
-            --text-light: #555555; /* Darker than before for accessibility */
+            --text-secondary: #4a4a4a;
+            --text-light: #555555;
             --accent: #000;
             --white: #fff;
             --border: #e0e0e0;
@@ -37,7 +36,7 @@
 
         html {
             scroll-behavior: smooth;
-            font-size: 18px; /* Base font size increased for accessibility */
+            font-size: 18px;
         }
 
         body {
@@ -48,7 +47,7 @@
             overflow-x: hidden;
         }
 
-        /* Skip Link for Accessibility */
+        /* Skip Link */
         .skip-link {
             position: absolute;
             top: -50px;
@@ -59,11 +58,28 @@
             z-index: 9999;
             transition: top 0.3s;
             text-decoration: none;
-            font-size: 1rem;
         }
 
         .skip-link:focus {
             top: 0;
+        }
+
+        /* ============ LOGO STYLE ============ */
+        .logo {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.15rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .logo-large {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text);
         }
 
         /* ============ HEADER ============ */
@@ -87,15 +103,6 @@
             align-items: center;
         }
 
-        .logo {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            color: var(--text);
-            text-decoration: none;
-        }
-
         .header-right {
             display: flex;
             align-items: center;
@@ -103,13 +110,14 @@
         }
 
         .clock {
-            font-family: 'Space Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 1rem;
+            font-weight: 500;
             color: var(--text);
             letter-spacing: 0.02em;
         }
 
-        /* Hamburger Menu */
+        /* Hamburger */
         .hamburger {
             width: 26px;
             height: 20px;
@@ -181,11 +189,9 @@
             color: var(--text);
             text-decoration: none;
             transition: opacity 0.2s, transform 0.2s;
-            display: block;
         }
 
-        .side-menu a:hover,
-        .side-menu a:focus {
+        .side-menu a:hover {
             opacity: 0.6;
             transform: translateX(10px);
         }
@@ -208,7 +214,7 @@
             visibility: visible;
         }
 
-        /* ============ HERO - FULL WIDTH ============ */
+        /* ============ HERO ============ */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -257,7 +263,6 @@
             line-height: 1.08;
             margin-bottom: 1.5rem;
             letter-spacing: -0.03em;
-            color: var(--text);
         }
 
         .hero p {
@@ -267,7 +272,7 @@
             line-height: 1.8;
         }
 
-        /* ============ SCROLL REVEAL ANIMATIONS ============ */
+        /* ============ ANIMATIONS ============ */
         .reveal {
             opacity: 0;
             transform: translateY(50px);
@@ -280,7 +285,6 @@
             transform: translateY(0);
         }
 
-        /* Line by line reveal */
         .reveal-lines .reveal-line {
             opacity: 0;
             transform: translateY(30px);
@@ -327,7 +331,6 @@
         .vision-content p {
             font-size: clamp(1.3rem, 2.5vw, 1.7rem);
             line-height: 1.85;
-            color: var(--text);
         }
 
         .vision-content strong {
@@ -338,7 +341,6 @@
             width: 100vw;
             margin-left: calc(-50vw + 50%);
             margin-top: 5rem;
-            position: relative;
             overflow: hidden;
         }
 
@@ -364,7 +366,6 @@
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 1.2rem;
-            color: var(--text);
         }
 
         .pillar p {
@@ -395,7 +396,6 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: -0.02em;
-            color: var(--text);
         }
 
         .insights-header p {
@@ -458,7 +458,6 @@
             font-weight: 700;
             line-height: 1.25;
             margin-bottom: 1.2rem;
-            color: var(--text);
         }
 
         .article-content .subtitle {
@@ -479,8 +478,7 @@
             transition: gap 0.2s;
         }
 
-        .read-more:hover,
-        .read-more:focus {
+        .read-more:hover {
             gap: 1rem;
         }
 
@@ -489,7 +487,7 @@
             font-size: 1.2rem;
         }
 
-        /* ============ ASTRO BANNER (full width) ============ */
+        /* ============ ASTRO BANNER ============ */
         .astro-banner {
             width: 100vw;
             margin-left: calc(-50vw + 50%);
@@ -520,7 +518,6 @@
             text-transform: uppercase;
             letter-spacing: -0.02em;
             max-width: 950px;
-            color: var(--text);
         }
 
         .about-intro {
@@ -538,7 +535,6 @@
         .about-intro p {
             font-size: 1.35rem;
             line-height: 1.85;
-            color: var(--text);
         }
 
         .about-intro strong {
@@ -573,14 +569,13 @@
             font-size: 1.2rem;
             line-height: 1.85;
             margin-bottom: 1.5rem;
-            color: var(--text);
         }
 
         .about-section strong {
             font-weight: 600;
         }
 
-        /* Architecture image - full width */
+        /* Architecture */
         .architecture-image {
             width: 100vw;
             margin-left: calc(-50vw + 50%);
@@ -594,7 +589,7 @@
             object-fit: cover;
         }
 
-        /* Golden figure section */
+        /* Golden figure */
         .golden-section {
             background: #0a0a0a;
             padding: 5rem 2.5rem;
@@ -633,7 +628,6 @@
             font-size: 1.25rem;
             line-height: 1.85;
             margin-bottom: 2.5rem;
-            color: var(--text);
         }
 
         .explore-list {
@@ -645,7 +639,6 @@
             padding: 1rem 0;
             font-size: 1.15rem;
             border-bottom: 1px solid var(--border);
-            color: var(--text);
         }
 
         .explore-list li:first-child {
@@ -659,47 +652,119 @@
         .explore-closing {
             font-size: 1.3rem;
             font-weight: 500;
-            color: var(--text);
         }
 
-        /* ============ FOOTER ============ */
+        /* ============ FOOTER - NEW DESIGN ============ */
+        .footer-banner {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .footer-banner img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            object-position: center;
+            filter: grayscale(100%);
+        }
+
         footer {
             padding: 5rem 2.5rem;
-            border-top: 1px solid var(--border);
-            text-align: center;
+            background: var(--bg);
         }
 
-        .footer-logo {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            margin-bottom: 1rem;
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr auto;
+            gap: 3rem;
+            align-items: start;
         }
 
-        .footer-tagline {
-            color: var(--text-light);
+        .footer-brand {
+            grid-column: 1;
+        }
+
+        .footer-contact {
+            grid-column: 2;
+        }
+
+        .footer-contact h4 {
             font-size: 1rem;
-            margin-bottom: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
         }
 
-        .footer-links {
+        .footer-contact a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .footer-contact a:hover {
+            color: var(--text);
+        }
+
+        .footer-column {
             display: flex;
-            justify-content: center;
-            gap: 2.5rem;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 0.6rem;
         }
 
-        .footer-links a {
+        .footer-column h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
             color: var(--text);
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: opacity 0.2s;
         }
 
-        .footer-links a:hover,
-        .footer-links a:focus {
+        .footer-column a:hover {
             opacity: 0.6;
+        }
+
+        .footer-column span {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .footer-icon {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-end;
+        }
+
+        .footer-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        @media (max-width: 900px) {
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+
+            .footer-icon {
+                grid-column: 1 / -1;
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* ============ RESPONSIVE ============ */
@@ -748,20 +813,26 @@
             .article-image img {
                 height: 300px;
             }
+
+            .footer-banner img {
+                height: 120px;
+            }
+
+            footer {
+                padding: 3rem 1.5rem;
+            }
         }
 
-        /* ============ FOCUS STYLES FOR ACCESSIBILITY ============ */
+        /* Focus Styles */
         a:focus,
         button:focus {
             outline: 3px solid var(--text);
             outline-offset: 3px;
         }
 
-        /* Reduce motion for users who prefer it */
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
             
@@ -778,7 +849,6 @@
     </style>
 </head>
 <body>
-    <!-- Skip Link for Accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Header -->
@@ -787,8 +857,8 @@
             <a href="#" class="logo" aria-label="ECHO.11 Home">ECHO.11</a>
             
             <div class="header-right">
-                <div class="clock" id="clock" aria-live="polite" aria-label="Current time">00:00:00</div>
-                <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="sideMenu">
+                <div class="clock" id="clock">00:00:00</div>
+                <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -797,12 +867,10 @@
         </div>
     </header>
 
-    <!-- Menu Overlay -->
-    <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
+    <div class="menu-overlay" id="menuOverlay"></div>
 
-    <!-- Side Menu -->
     <aside class="side-menu" id="sideMenu" aria-hidden="true">
-        <nav aria-label="Main navigation">
+        <nav>
             <a href="#vision" class="menu-link">The Vision</a>
             <a href="#insights" class="menu-link">Insights</a>
             <a href="#about" class="menu-link">About Echo.11</a>
@@ -810,12 +878,10 @@
     </aside>
 
     <main id="main-content">
-        <!-- Hero - Full Width Background -->
+        <!-- Hero -->
         <section class="hero" id="home">
             <div class="hero-background">
-                <img src="hero.png" 
-                     alt="Futuristic figure in flowing white garments walking forward, representing the journey into AI and human resilience" 
-                     fetchpriority="high">
+                <img src="hero.png" alt="Futuristic figure in flowing white garments" fetchpriority="high">
             </div>
             <div class="hero-overlay"></div>
             <div class="hero-content">
@@ -837,9 +903,7 @@
                 </p>
             </div>
             <div class="vision-image reveal">
-                <img src="astro-eyes-open.png" 
-                     alt="Close-up portrait of woman astronaut with open eyes gazing upward, symbolizing vision and exploration" 
-                     loading="lazy">
+                <img src="astro-eyes-open.png" alt="Close-up portrait of woman astronaut with open eyes" loading="lazy">
             </div>
         </section>
 
@@ -874,12 +938,10 @@
                         <div class="article-content">
                             <h3>The Ghost in the Machine: Botox, AI, and the Augmented Authenticity Paradox</h3>
                             <p class="subtitle">Why Using AI Feels Like Cheating—even When It Isn't</p>
-                            <a href="#" class="read-more" aria-label="Read more about The Ghost in the Machine article">Read More</a>
+                            <a href="https://substack.com/home/post/p-186104472" target="_blank" rel="noopener noreferrer" class="read-more">Read More</a>
                         </div>
                         <div class="article-image">
-                            <img src="ghost-machine.png" 
-                                 alt="Digital portrait with fragmented glass and data overlay, representing the fusion of human and artificial intelligence" 
-                                 loading="lazy">
+                            <img src="ghost-machine.png" alt="Digital portrait with fragmented glass and data overlay" loading="lazy">
                         </div>
                     </article>
                     
@@ -887,23 +949,19 @@
                         <div class="article-content">
                             <h3>AI Gave Us Unlimited Tools. So Why Are We Still Stuck?</h3>
                             <p class="subtitle">Because belief, not technology, has become the real bottleneck in decision-making, growth, and identity.</p>
-                            <a href="#" class="read-more" aria-label="Read more about AI Unlimited Tools article">Read More</a>
+                            <a href="https://substack.com/home/post/p-186866209" target="_blank" rel="noopener noreferrer" class="read-more">Read More</a>
                         </div>
                         <div class="article-image">
-                            <img src="unlimited-tools.png" 
-                                 alt="White figure with geometric neural network lines emanating from the head, symbolizing unlimited potential" 
-                                 loading="lazy">
+                            <img src="unlimited-tools.png" alt="White figure with geometric neural network lines" loading="lazy">
                         </div>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- Astro Banner - Eyes Closed (full width) -->
+        <!-- Astro Banner -->
         <div class="astro-banner reveal">
-            <img src="astro-eyes-closed.png" 
-                 alt="Close-up portrait of woman astronaut with closed eyes, representing quiet introspection in the digital age" 
-                 loading="lazy">
+            <img src="astro-eyes-closed.png" alt="Close-up portrait of woman astronaut with closed eyes" loading="lazy">
         </div>
 
         <!-- About -->
@@ -923,9 +981,7 @@
             </div>
 
             <div class="about-image reveal">
-                <img src="luna.png" 
-                     alt="Luna the astronaut in transparent helmet looking into the distance, representing exploration and vision" 
-                     loading="lazy">
+                <img src="luna.png" alt="Luna the astronaut in transparent helmet" loading="lazy">
             </div>
 
             <div class="about-section reveal-lines">
@@ -937,30 +993,26 @@
                 </p>
                 <p>
                     <span class="reveal-line">Instead of waiting for the alarm, I stayed awake. I turned to my computer and started creating.</span>
-                    <span class="reveal-line">Using <strong>Midjourney</strong> for visuals and <strong>Runway</strong> for motion, I combined AI-generated art with specific sound frequencies—a technique I had used for years to battle insomnia.</span>
+                    <span class="reveal-line">Using <strong>Midjourney</strong> for visuals and <strong>Runway</strong> for motion, I combined AI-generated art with specific sound frequencies.</span>
                 </p>
                 <p>
                     <span class="reveal-line"><strong>The discovery was profound:</strong> Designing with AI forced my brain to hyper-focus.</span>
                     <span class="reveal-line">It shifted my attention from negative loops of fear to positive loops of imagination.</span>
                     <span class="reveal-line">When I shared these videos on Instagram and TikTok, the response was overwhelming.</span>
-                    <span class="reveal-line">Strangers wrote to me that these "digital signals" helped them regulate their own nervous systems and fall asleep after nights of panic.</span>
                 </p>
                 <p>
                     <span class="reveal-line">That was the moment I understood: <strong>AI isn't just a productivity tool; it's a mechanism for mental regulation.</strong></span>
                 </p>
             </div>
 
-            <!-- Architecture Image - Full Width -->
             <div class="architecture-image reveal">
-                <img src="architecture.png" 
-                     alt="Minimalist brutalist architecture with curved concrete forms in misty atmosphere, representing quiet strength" 
-                     loading="lazy">
+                <img src="architecture.png" alt="Minimalist brutalist architecture" loading="lazy">
             </div>
 
             <div class="about-section reveal-lines">
                 <h3 class="reveal-line">Shattering the Myths: AI is for Everyone</h3>
                 <p>
-                    <span class="reveal-line"><strong>My personal journey of mental and physical transformation taught me one thing: The brain is plastic. It can change.</strong></span>
+                    <span class="reveal-line"><strong>My personal journey taught me one thing: The brain is plastic. It can change.</strong></span>
                     <span class="reveal-line">Today, we are surrounded by myths that keep us small. The biggest one? That AI is "too technical" or "too complex."</span>
                 </p>
                 <p>
@@ -973,11 +1025,8 @@
                 </p>
             </div>
 
-            <!-- Golden Figure Section -->
             <div class="golden-section reveal">
-                <img src="golden-figure.png" 
-                     alt="Golden illuminated figure looking upward with light particles, representing transcendence and hope" 
-                     loading="lazy">
+                <img src="golden-figure.png" alt="Golden illuminated figure looking upward" loading="lazy">
             </div>
         </section>
 
@@ -986,14 +1035,14 @@
             <div class="explore-inner">
                 <h3 class="reveal">What I Explore Here</h3>
                 <p class="explore-intro reveal">
-                    ECHO.11 is a curated space for "<strong>Quiet Branding</strong>" and strategic foresight. In a noisy world filled with endless content, we need to know which tool to pick for which mission. Inside, you will find insights on:
+                    ECHO.11 is a curated space for "<strong>Quiet Branding</strong>" and strategic foresight. In a noisy world filled with endless content, we need to know which tool to pick for which mission.
                 </p>
                 
                 <ul class="explore-list reveal-lines">
                     <li class="reveal-line"><strong>Neuro-Aesthetics:</strong> How visual design impacts our cognitive load.</li>
                     <li class="reveal-line"><strong>The 2026 Design Forecast:</strong> Where generative art is heading next.</li>
-                    <li class="reveal-line"><strong>Future-Proof Skills:</strong> The top 10 capabilities we all need to survive and thrive in the changing job market.</li>
-                    <li class="reveal-line"><strong>Calm AI:</strong> Strategies for creating digital spaces that feel human, intuitive, and profound.</li>
+                    <li class="reveal-line"><strong>Future-Proof Skills:</strong> The top 10 capabilities we all need to survive and thrive.</li>
+                    <li class="reveal-line"><strong>Calm AI:</strong> Strategies for creating digital spaces that feel human and profound.</li>
                 </ul>
                 
                 <p class="explore-closing reveal">Stay tuned. It's going to be quiet—in a whole new way.</p>
@@ -1001,96 +1050,96 @@
         </section>
     </main>
 
+    <!-- Footer Banner Image -->
+    <div class="footer-banner">
+        <img src="astro-eyes-closed.png" alt="Astronaut helmet closeup" loading="lazy">
+    </div>
+
     <!-- Footer -->
     <footer>
-        <div class="footer-logo">ECHO.11</div>
-        <p class="footer-tagline">Decoding the Algorithm of Human Resilience</p>
-        <nav class="footer-links" aria-label="Social media links">
-            <a href="https://shira.substack.com" target="_blank" rel="noopener noreferrer">Substack</a>
-            <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
-            <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://pinterest.com/shirasarid" target="_blank" rel="noopener noreferrer">Pinterest</a>
-        </nav>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="logo-large">ECHO.11</div>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Let's connect in the noise</h4>
+                <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Subtitle</h4>
+                <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
+                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://pinterest.com/shirasarid" target="_blank" rel="noopener noreferrer">Pinterest</a>
+                <a href="https://podcasts.apple.com" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Signals</h4>
+                <span>Strategy</span>
+                <span>Psychology</span>
+                <span>AI Tools</span>
+            </div>
+            
+            <div class="footer-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+                </svg>
+            </div>
+        </div>
     </footer>
 
     <script>
-        // ============ LIVE CLOCK ============
+        // Clock
         function updateClock() {
             const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${h}:${m}:${s}`;
         }
-        
         setInterval(updateClock, 1000);
         updateClock();
 
-        // ============ HAMBURGER MENU ============
+        // Menu
         const hamburger = document.getElementById('hamburger');
         const sideMenu = document.getElementById('sideMenu');
         const menuOverlay = document.getElementById('menuOverlay');
         const menuLinks = document.querySelectorAll('.menu-link');
 
-        function openMenu() {
-            hamburger.classList.add('active');
-            sideMenu.classList.add('active');
-            menuOverlay.classList.add('active');
-            hamburger.setAttribute('aria-expanded', 'true');
-            sideMenu.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
+        function toggleMenu() {
+            const isOpen = sideMenu.classList.contains('active');
+            hamburger.classList.toggle('active');
+            sideMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', !isOpen);
+            sideMenu.setAttribute('aria-hidden', isOpen);
+            document.body.style.overflow = isOpen ? '' : 'hidden';
         }
 
-        function closeMenu() {
-            hamburger.classList.remove('active');
-            sideMenu.classList.remove('active');
-            menuOverlay.classList.remove('active');
-            hamburger.setAttribute('aria-expanded', 'false');
-            sideMenu.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
-        }
+        hamburger.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+        menuLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
-        hamburger.addEventListener('click', () => {
-            if (sideMenu.classList.contains('active')) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
-        });
-
-        menuOverlay.addEventListener('click', closeMenu);
-
-        menuLinks.forEach(link => {
-            link.addEventListener('click', closeMenu);
-        });
-
-        // Close menu on Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && sideMenu.classList.contains('active')) {
-                closeMenu();
-                hamburger.focus();
+                toggleMenu();
             }
         });
 
-        // ============ SCROLL REVEAL ANIMATION ============
+        // Reveal animations
         const revealElements = document.querySelectorAll('.reveal, .reveal-lines');
-
-        const revealObserver = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, {
-            threshold: 0.15,
-            rootMargin: '0px 0px -80px 0px'
-        });
+        }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
 
-        revealElements.forEach(el => {
-            revealObserver.observe(el);
-        });
+        revealElements.forEach(el => observer.observe(el));
 
-        // Initial reveal for elements in viewport on load
         window.addEventListener('load', () => {
             revealElements.forEach(el => {
                 const rect = el.getBoundingClientRect();
