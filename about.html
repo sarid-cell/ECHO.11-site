@@ -4,7 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About ECHO.11 | Shira Sarid</title>
-    <meta name="description" content="About Shira Sarid - AI explorer, creative strategist, and researcher of human resilience.">
+    <meta name="description" content="About Shira Sarid - AI explorer, creative strategist, and researcher bridging consumer psychology with generative AI.">
+    <meta name="author" content="Shira Sarid">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://echo11.vercel.app/about.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="About ECHO.11 | Shira Sarid">
+    <meta property="og:description" content="Bridging Consumer Psychology and Generative AI to build future-proof brands.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://echo11.vercel.app/about.html">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -414,6 +423,30 @@
             content: '←';
         }
 
+        .footer-legal {
+            max-width: 800px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-legal a {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.2s;
+        }
+
+        .footer-legal a:hover {
+            color: var(--text);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             html {
@@ -596,6 +629,10 @@
     <!-- Simple Footer -->
     <footer class="simple-footer">
         <a href="index.html" class="back-link">Back to ECHO.11</a>
+        <div class="footer-legal">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="accessibility.html">Accessibility</a>
+        </div>
     </footer>
 
     <script>
