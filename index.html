@@ -5,8 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ECHO.11 | Decoding the Algorithm of Human Resilience</title>
     <meta name="description" content="Bridging Consumer Psychology and Generative AI to build future-proof brands. By Shira Sarid.">
+    <meta name="author" content="Shira Sarid">
+    <meta name="keywords" content="AI, Generative AI, Consumer Psychology, Digital Strategy, Shira Sarid">
     
-    <!-- Fonts -->
+    <!-- Open Graph -->
+    <meta property="og:title" content="ECHO.11 | Decoding Human Resilience">
+    <meta property="og:description" content="Bridging Consumer Psychology and Generative AI to build future-proof brands.">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts - Preload for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -38,6 +45,23 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+        }
+
+        /* Skip Link for Accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--text);
+            color: var(--white);
+            padding: 8px 16px;
+            z-index: 9999;
+            transition: top 0.3s;
+            text-decoration: none;
+        }
+
+        .skip-link:focus {
+            top: 0;
         }
 
         /* ============ HEADER ============ */
@@ -82,7 +106,7 @@
             letter-spacing: 0.02em;
         }
 
-        /* Hamburger Menu */
+        /* Hamburger Menu - Always visible on all screens */
         .hamburger {
             width: 24px;
             height: 18px;
@@ -91,6 +115,14 @@
             justify-content: space-between;
             cursor: pointer;
             z-index: 1001;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .hamburger:focus {
+            outline: 2px solid var(--text);
+            outline-offset: 4px;
         }
 
         .hamburger span {
@@ -113,67 +145,64 @@
             transform: translateY(-8px) rotate(-45deg);
         }
 
-        /* Mobile Menu */
-        .mobile-menu {
+        /* Side Menu - Works for all screen sizes */
+        .side-menu {
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            right: -320px;
+            width: 320px;
+            height: 100vh;
             background: var(--bg);
             z-index: 999;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
+            padding: 2rem;
+            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
         }
 
-        .mobile-menu.active {
-            opacity: 1;
-            visibility: visible;
+        .side-menu.active {
+            right: 0;
         }
 
-        .mobile-menu a {
-            font-size: 2rem;
+        .side-menu nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .side-menu a {
+            font-size: 1.5rem;
             font-weight: 300;
             color: var(--text);
             text-decoration: none;
-            transition: opacity 0.2s;
+            transition: opacity 0.2s, transform 0.2s;
+            display: block;
         }
 
-        .mobile-menu a:hover {
+        .side-menu a:hover,
+        .side-menu a:focus {
             opacity: 0.5;
+            transform: translateX(10px);
         }
 
-        /* Desktop Nav */
-        .desktop-nav {
-            display: none;
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
         }
 
-        @media (min-width: 768px) {
-            .desktop-nav {
-                display: flex;
-                gap: 2rem;
-            }
-
-            .desktop-nav a {
-                font-size: 0.9rem;
-                color: var(--text);
-                text-decoration: none;
-                transition: opacity 0.2s;
-            }
-
-            .desktop-nav a:hover {
-                opacity: 0.5;
-            }
-
-            .hamburger {
-                display: none;
-            }
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
 
         /* ============ HERO ============ */
@@ -192,34 +221,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -55%);
-            width: 400px;
+            width: 350px;
             height: auto;
-            opacity: 0.9;
             pointer-events: none;
         }
 
         .hero-image img {
             width: 100%;
-            filter: grayscale(20%);
-        }
-
-        /* Placeholder for hero image */
-        .hero-placeholder {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -55%);
-            width: 300px;
-            height: 450px;
-            background: linear-gradient(180deg, #e8e8e8 0%, #d0d0d0 100%);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-lighter);
-            font-size: 0.8rem;
-            text-align: center;
-            padding: 1rem;
+            height: auto;
+            filter: grayscale(10%);
         }
 
         .hero-content {
@@ -242,6 +252,26 @@
             max-width: 700px;
             line-height: 1.7;
         }
+
+        /* ============ SCROLL REVEAL ANIMATION ============ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered delays for children */
+        .reveal-stagger > *:nth-child(1) { transition-delay: 0s; }
+        .reveal-stagger > *:nth-child(2) { transition-delay: 0.1s; }
+        .reveal-stagger > *:nth-child(3) { transition-delay: 0.2s; }
+        .reveal-stagger > *:nth-child(4) { transition-delay: 0.3s; }
+        .reveal-stagger > *:nth-child(5) { transition-delay: 0.4s; }
 
         /* ============ SECTIONS ============ */
         section {
@@ -286,20 +316,9 @@
 
         .vision-image img {
             width: 100%;
-            height: 400px;
+            height: 450px;
             object-fit: cover;
             filter: grayscale(100%);
-        }
-
-        .vision-placeholder {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-size: 0.9rem;
         }
 
         /* ============ PILLARS ============ */
@@ -382,25 +401,18 @@
         .article-image {
             flex: 1;
             min-width: 250px;
+            overflow: hidden;
         }
 
         .article-image img {
             width: 100%;
             height: 350px;
             object-fit: cover;
+            transition: transform 0.4s ease;
         }
 
-        .article-placeholder {
-            width: 100%;
-            height: 350px;
-            background: linear-gradient(145deg, #333 0%, #1a1a1a 50%, #333 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #555;
-            font-size: 0.8rem;
-            text-align: center;
-            padding: 1rem;
+        .article-card:hover .article-image img {
+            transform: scale(1.03);
         }
 
         .article-content {
@@ -434,12 +446,27 @@
             transition: gap 0.2s;
         }
 
-        .read-more:hover {
+        .read-more:hover,
+        .read-more:focus {
             gap: 0.8rem;
         }
 
         .read-more::after {
             content: '→';
+        }
+
+        /* ============ ASTRO BANNER (below articles) ============ */
+        .astro-banner {
+            padding: 0;
+            background: var(--white);
+            max-width: 100%;
+        }
+
+        .astro-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%);
         }
 
         /* ============ ABOUT ============ */
@@ -493,19 +520,6 @@
             display: block;
         }
 
-        .about-image-placeholder {
-            width: 100%;
-            max-width: 800px;
-            height: 500px;
-            margin: 0 auto;
-            background: #e5e5e5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-lighter);
-            font-size: 0.9rem;
-        }
-
         .about-section {
             margin-bottom: 4rem;
             max-width: 900px;
@@ -526,6 +540,33 @@
 
         .about-section strong {
             font-weight: 600;
+        }
+
+        /* Architecture image */
+        .architecture-image {
+            width: 100%;
+            margin: 3rem 0;
+        }
+
+        .architecture-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* Golden figure section */
+        .golden-section {
+            background: #0a0a0a;
+            padding: 4rem 2rem;
+            margin: 4rem -2rem;
+            width: calc(100% + 4rem);
+        }
+
+        .golden-section img {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            display: block;
         }
 
         /* ============ EXPLORE ============ */
@@ -613,31 +654,10 @@
             transition: opacity 0.2s;
         }
 
-        .footer-links a:hover {
+        .footer-links a:hover,
+        .footer-links a:focus {
             opacity: 0.5;
         }
-
-        /* ============ ANIMATIONS ============ */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-up {
-            animation: fadeUp 0.8s ease forwards;
-            opacity: 0;
-        }
-
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
 
         /* ============ RESPONSIVE ============ */
         @media (max-width: 768px) {
@@ -653,9 +673,8 @@
                 padding: 5rem 1.5rem 3rem;
             }
 
-            .hero-placeholder {
-                width: 200px;
-                height: 300px;
+            .hero-image {
+                width: 250px;
             }
 
             .pillars-grid {
@@ -669,195 +688,290 @@
             .article-image {
                 min-width: 100%;
             }
+
+            .side-menu {
+                width: 100%;
+                right: -100%;
+            }
+
+            .golden-section {
+                margin: 4rem -1.5rem;
+                padding: 3rem 1.5rem;
+                width: calc(100% + 3rem);
+            }
+
+            .vision-image img {
+                height: 300px;
+            }
+
+            .architecture-image img {
+                height: 250px;
+            }
+        }
+
+        /* ============ FOCUS STYLES FOR ACCESSIBILITY ============ */
+        a:focus,
+        button:focus {
+            outline: 2px solid var(--text);
+            outline-offset: 2px;
+        }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            html {
+                scroll-behavior: auto;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Header -->
     <header>
         <div class="header-inner">
-            <a href="#" class="logo">ECHO.11</a>
-            
-            <nav class="desktop-nav">
-                <a href="#vision">The Vision</a>
-                <a href="#insights">Insights</a>
-                <a href="#about">About</a>
-            </nav>
+            <a href="#" class="logo" aria-label="ECHO.11 Home">ECHO.11</a>
             
             <div class="header-right">
-                <div class="clock" id="clock">00:00:00</div>
-                <div class="hamburger" id="hamburger">
+                <div class="clock" id="clock" aria-live="polite" aria-label="Current time">00:00:00</div>
+                <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="sideMenu">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Mobile Menu -->
-    <nav class="mobile-menu" id="mobileMenu">
-        <a href="#vision" class="menu-link">The Vision</a>
-        <a href="#insights" class="menu-link">Insights</a>
-        <a href="#about" class="menu-link">About Echo.11</a>
-    </nav>
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
 
-    <!-- Hero -->
-    <section class="hero" id="home">
-        <div class="hero-placeholder">
-            [Hero Image]<br>Figure in white flowing clothes
-        </div>
-        <div class="hero-content">
-            <h1 class="fade-up">Decoding the Algorithm of Human Resilience</h1>
-            <p class="fade-up delay-2">Bridging the gap between Consumer Psychology and Generative AI to build future-proof brands. Exploring the 2026 digital landscape.</p>
-        </div>
-    </section>
+    <!-- Side Menu -->
+    <aside class="side-menu" id="sideMenu" aria-hidden="true">
+        <nav aria-label="Main navigation">
+            <a href="#vision" class="menu-link">The Vision</a>
+            <a href="#insights" class="menu-link">Insights</a>
+            <a href="#about" class="menu-link">About Echo.11</a>
+        </nav>
+    </aside>
 
-    <!-- Vision -->
-    <section class="vision" id="vision">
-        <div class="section-label">THE VISION</div>
-        <div class="vision-content">
-            <p class="fade-up">
-                <strong>Psychology First, Pixels Second.</strong> In an economy of attention, visuals are not enough. My approach decodes the neural pathways of your audience. With a background in consumer psychology, I leverage Generative AI to craft experiences that cut through the noise. We strip away the excess to reach the signal—creating digital spaces that feel human, intuitive, and profound. This is not just marketing. This is evolution.
-            </p>
-        </div>
-        <div class="vision-image">
-            <div class="vision-placeholder">[Vision Image] Close-up eyes with astronaut helmet reflection</div>
-        </div>
-    </section>
+    <main id="main-content">
+        <!-- Hero -->
+        <section class="hero" id="home">
+            <div class="hero-image">
+                <img src="images/hero.png" 
+                     alt="Futuristic figure in flowing white garments walking forward, representing the journey into AI and human resilience" 
+                     width="350"
+                     height="525"
+                     fetchpriority="high">
+            </div>
+            <div class="hero-content">
+                <h1 class="reveal">Decoding the Algorithm of Human Resilience</h1>
+                <p class="reveal">Bridging the gap between Consumer Psychology and Generative AI to build future-proof brands. Exploring the 2026 digital landscape.</p>
+            </div>
+        </section>
 
-    <!-- Pillars -->
-    <section class="pillars">
-        <div class="pillars-grid">
-            <div class="pillar fade-up">
-                <h3>The Human Edge</h3>
-                <p>Technology is code; Intuition is the spark. We empower women to lead the revolution, turning "complex" tech into a creative playground.</p>
+        <!-- Vision -->
+        <section class="vision" id="vision">
+            <div class="section-label reveal">THE VISION</div>
+            <div class="vision-content">
+                <p class="reveal">
+                    <strong>Psychology First, Pixels Second.</strong> In an economy of attention, visuals are not enough. My approach decodes the neural pathways of your audience. With a background in consumer psychology, I leverage Generative AI to craft experiences that cut through the noise. We strip away the excess to reach the signal—creating digital spaces that feel human, intuitive, and profound. This is not just marketing. This is evolution.
+                </p>
             </div>
-            <div class="pillar fade-up delay-1">
-                <h3>Generative AI</h3>
-                <p>We leverage algorithms to decode the noise. Using AI not just to create content, but to curate precision and focus for the neurodivergent mind.</p>
+            <div class="vision-image reveal">
+                <img src="images/astro.png" 
+                     alt="Close-up portrait of woman with closed eyes inside astronaut helmet, symbolizing inner focus and exploration" 
+                     loading="lazy"
+                     width="900"
+                     height="450">
             </div>
-            <div class="pillar fade-up delay-2">
-                <h3>Future-Proof Strategy</h3>
-                <p>Algorithms change daily, but human nature remains. We fuse consumer psychology with GenAI to build resilient narratives for 2026.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Insights -->
-    <section class="insights" id="insights">
-        <div class="insights-inner">
-            <div class="insights-header">
-                <h2>Fresh Insights</h2>
-                <p>Simple, Read the Future.</p>
+        <!-- Pillars -->
+        <section class="pillars">
+            <div class="pillars-grid reveal-stagger">
+                <div class="pillar reveal">
+                    <h3>The Human Edge</h3>
+                    <p>Technology is code; Intuition is the spark. We empower women to lead the revolution, turning "complex" tech into a creative playground.</p>
+                </div>
+                <div class="pillar reveal">
+                    <h3>Generative AI</h3>
+                    <p>We leverage algorithms to decode the noise. Using AI not just to create content, but to curate precision and focus for the neurodivergent mind.</p>
+                </div>
+                <div class="pillar reveal">
+                    <h3>Future-Proof Strategy</h3>
+                    <p>Algorithms change daily, but human nature remains. We fuse consumer psychology with GenAI to build resilient narratives for 2026.</p>
+                </div>
             </div>
-            
-            <div class="articles-grid">
-                <article class="article-card">
-                    <div class="article-content">
-                        <h3>The Ghost in the Machine: Botox, AI, and the Augmented Authenticity Paradox</h3>
-                        <p class="subtitle">Why Using AI Feels Like Cheating—even When It Isn't</p>
-                        <a href="#" class="read-more">Read More</a>
-                    </div>
-                    <div class="article-image">
-                        <div class="article-placeholder">[Article Image]<br>Digital face with data overlay</div>
-                    </div>
-                </article>
+        </section>
+
+        <!-- Insights -->
+        <section class="insights" id="insights">
+            <div class="insights-inner">
+                <div class="insights-header reveal">
+                    <h2>Fresh Insights</h2>
+                    <p>Simple, Read the Future.</p>
+                </div>
                 
-                <article class="article-card reverse">
-                    <div class="article-content">
-                        <h3>AI Gave Us Unlimited Tools. So Why Are We Still Stuck?</h3>
-                        <p class="subtitle">Because belief, not technology, has become the real bottleneck in decision-making, growth, and identity.</p>
-                        <a href="#" class="read-more">Read More</a>
-                    </div>
-                    <div class="article-image">
-                        <div class="article-placeholder">[Article Image]<br>White figure with geometric light lines</div>
-                    </div>
-                </article>
+                <div class="articles-grid">
+                    <article class="article-card reveal">
+                        <div class="article-content">
+                            <h3>The Ghost in the Machine: Botox, AI, and the Augmented Authenticity Paradox</h3>
+                            <p class="subtitle">Why Using AI Feels Like Cheating—even When It Isn't</p>
+                            <a href="#" class="read-more" aria-label="Read more about The Ghost in the Machine article">Read More</a>
+                        </div>
+                        <div class="article-image">
+                            <img src="images/ghost-machine.png" 
+                                 alt="Digital portrait with fragmented glass and data overlay, representing the fusion of human and artificial intelligence" 
+                                 loading="lazy"
+                                 width="400"
+                                 height="350">
+                        </div>
+                    </article>
+                    
+                    <article class="article-card reverse reveal">
+                        <div class="article-content">
+                            <h3>AI Gave Us Unlimited Tools. So Why Are We Still Stuck?</h3>
+                            <p class="subtitle">Because belief, not technology, has become the real bottleneck in decision-making, growth, and identity.</p>
+                            <a href="#" class="read-more" aria-label="Read more about AI Unlimited Tools article">Read More</a>
+                        </div>
+                        <div class="article-image">
+                            <img src="images/unlimited-tools.png" 
+                                 alt="White figure with geometric neural network lines emanating from the head, symbolizing unlimited potential" 
+                                 loading="lazy"
+                                 width="400"
+                                 height="350">
+                        </div>
+                    </article>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About -->
-    <section class="about" id="about">
-        <div class="about-header">
-            <h2>Beyond the Noise: Decoding the Human Mind Through Generative AI</h2>
-        </div>
-        
-        <div class="about-intro">
-            <h3>Introduction</h3>
-            <p>
-                <strong>I'm Shira Sarid, an AI explorer, creative strategist, and a believer in the power of focus.</strong> I am not a neuroscientist, nor a coder. I am a researcher of <strong>human resilience</strong>. ECHO.11 is my digital laboratory, built on a simple premise: In an age of artificial intelligence, our most powerful tool remains the human mind. My mission is to explore how we can use smart tools to regain control, bridge the gender gap in tech, and design a "quieter," more intentional digital future.
-            </p>
+        <!-- Astro Banner (below articles) -->
+        <div class="astro-banner reveal">
+            <img src="images/astro.png" 
+                 alt="Close-up portrait of woman astronaut with closed eyes, representing quiet introspection in the digital age" 
+                 loading="lazy"
+                 width="1400"
+                 height="600">
         </div>
 
-        <div class="about-image">
-            <div class="about-image-placeholder">[Luna Astronaut Image]</div>
-        </div>
-
-        <div class="about-section">
-            <h3>The Origin Story: Finding Silence in the Chaos of 2025</h3>
-            <p>
-                <strong>It started with a refusal to sleep.</strong> During the conflict with Iran in mid-2025, the nights became a source of terror. Waiting for the siren to wail meant subjecting my body to repeated shocks, throwing my nervous system off balance. I realized that if I couldn't control the situation outside, I had to control my internal state.
-            </p>
-            <p>
-                Instead of waiting for the alarm, I stayed awake. I turned to my computer and started creating. Using <strong>Midjourney</strong> for visuals and <strong>Runway</strong> for motion, I combined AI-generated art with specific sound frequencies—a technique I had used for years to battle insomnia.
-            </p>
-            <p>
-                <strong>The discovery was profound:</strong> Designing with AI forced my brain to hyper-focus. It shifted my attention from negative loops of fear to positive loops of imagination. When I shared these videos on Instagram and TikTok, the response was overwhelming. Strangers wrote to me that these "digital signals" helped them regulate their own nervous systems and fall asleep after nights of panic.
-            </p>
-            <p>
-                That was the moment I understood: <strong>AI isn't just a productivity tool; it's a mechanism for mental regulation.</strong>
-            </p>
-        </div>
-
-        <div class="about-section">
-            <h3>Shattering the Myths: AI is for Everyone</h3>
-            <p>
-                <strong>My personal journey of mental and physical transformation taught me one thing: The brain is plastic. It can change.</strong> Today, we are surrounded by myths that keep us small. The biggest one? That AI is "too technical" or "too complex."
-            </p>
-            <p>
-                I see too many women stepping back from this revolution, intimidated by the terminology. The gap between men and women in the generative AI space is widening, and I am here to close it.
-            </p>
-            <p>
-                <strong>Here is the truth:</strong> If you can imagine it, you can build it. Learning to prompt a machine is just like learning a new language—it requires focus, not a degree in computer science.
-            </p>
-        </div>
-    </section>
-
-    <!-- Explore -->
-    <section class="explore">
-        <div class="explore-inner">
-            <h3>What I Explore Here</h3>
-            <p class="explore-intro">
-                ECHO.11 is a curated space for "<strong>Quiet Branding</strong>" and strategic foresight. In a noisy world filled with endless content, we need to know which tool to pick for which mission. Inside, you will find insights on:
-            </p>
+        <!-- About -->
+        <section class="about" id="about">
+            <div class="about-header reveal">
+                <h2>Beyond the Noise: Decoding the Human Mind Through Generative AI</h2>
+            </div>
             
-            <ul class="explore-list">
-                <li><strong>Neuro-Aesthetics:</strong> How visual design impacts our cognitive load.</li>
-                <li><strong>The 2026 Design Forecast:</strong> Where generative art is heading next.</li>
-                <li><strong>Future-Proof Skills:</strong> The top 10 capabilities we all need to survive and thrive in the changing job market.</li>
-                <li><strong>Calm AI:</strong> Strategies for creating digital spaces that feel human, intuitive, and profound.</li>
-            </ul>
-            
-            <p class="explore-closing">Stay tuned. It's going to be quiet—in a whole new way.</p>
-        </div>
-    </section>
+            <div class="about-intro reveal">
+                <h3>Introduction</h3>
+                <p>
+                    <strong>I'm Shira Sarid, an AI explorer, creative strategist, and a believer in the power of focus.</strong> I am not a neuroscientist, nor a coder. I am a researcher of <strong>human resilience</strong>. ECHO.11 is my digital laboratory, built on a simple premise: In an age of artificial intelligence, our most powerful tool remains the human mind. My mission is to explore how we can use smart tools to regain control, bridge the gender gap in tech, and design a "quieter," more intentional digital future.
+                </p>
+            </div>
+
+            <div class="about-image reveal">
+                <img src="images/luna.png" 
+                     alt="Luna the astronaut in transparent helmet looking into the distance, representing exploration and vision" 
+                     loading="lazy"
+                     width="800"
+                     height="500">
+            </div>
+
+            <div class="about-section reveal">
+                <h3>The Origin Story: Finding Silence in the Chaos of 2025</h3>
+                <p>
+                    <strong>It started with a refusal to sleep.</strong> During the conflict with Iran in mid-2025, the nights became a source of terror. Waiting for the siren to wail meant subjecting my body to repeated shocks, throwing my nervous system off balance. I realized that if I couldn't control the situation outside, I had to control my internal state.
+                </p>
+                <p>
+                    Instead of waiting for the alarm, I stayed awake. I turned to my computer and started creating. Using <strong>Midjourney</strong> for visuals and <strong>Runway</strong> for motion, I combined AI-generated art with specific sound frequencies—a technique I had used for years to battle insomnia.
+                </p>
+                <p>
+                    <strong>The discovery was profound:</strong> Designing with AI forced my brain to hyper-focus. It shifted my attention from negative loops of fear to positive loops of imagination. When I shared these videos on Instagram and TikTok, the response was overwhelming. Strangers wrote to me that these "digital signals" helped them regulate their own nervous systems and fall asleep after nights of panic.
+                </p>
+                <p>
+                    That was the moment I understood: <strong>AI isn't just a productivity tool; it's a mechanism for mental regulation.</strong>
+                </p>
+            </div>
+
+            <!-- Architecture Image -->
+            <div class="architecture-image reveal">
+                <img src="images/architecture.png" 
+                     alt="Minimalist brutalist architecture with curved concrete forms in misty atmosphere, representing quiet strength" 
+                     loading="lazy"
+                     width="1200"
+                     height="400">
+            </div>
+
+            <div class="about-section reveal">
+                <h3>Shattering the Myths: AI is for Everyone</h3>
+                <p>
+                    <strong>My personal journey of mental and physical transformation taught me one thing: The brain is plastic. It can change.</strong> Today, we are surrounded by myths that keep us small. The biggest one? That AI is "too technical" or "too complex."
+                </p>
+                <p>
+                    I see too many women stepping back from this revolution, intimidated by the terminology. The gap between men and women in the generative AI space is widening, and I am here to close it.
+                </p>
+                <p>
+                    <strong>Here is the truth:</strong> If you can imagine it, you can build it. Learning to prompt a machine is just like learning a new language—it requires focus, not a degree in computer science.
+                </p>
+            </div>
+
+            <!-- Golden Figure Section -->
+            <div class="golden-section reveal">
+                <img src="images/golden-figure.png" 
+                     alt="Golden illuminated figure looking upward with light particles, representing transcendence and hope" 
+                     loading="lazy"
+                     width="500"
+                     height="600">
+            </div>
+        </section>
+
+        <!-- Explore -->
+        <section class="explore">
+            <div class="explore-inner">
+                <h3 class="reveal">What I Explore Here</h3>
+                <p class="explore-intro reveal">
+                    ECHO.11 is a curated space for "<strong>Quiet Branding</strong>" and strategic foresight. In a noisy world filled with endless content, we need to know which tool to pick for which mission. Inside, you will find insights on:
+                </p>
+                
+                <ul class="explore-list reveal-stagger">
+                    <li class="reveal"><strong>Neuro-Aesthetics:</strong> How visual design impacts our cognitive load.</li>
+                    <li class="reveal"><strong>The 2026 Design Forecast:</strong> Where generative art is heading next.</li>
+                    <li class="reveal"><strong>Future-Proof Skills:</strong> The top 10 capabilities we all need to survive and thrive in the changing job market.</li>
+                    <li class="reveal"><strong>Calm AI:</strong> Strategies for creating digital spaces that feel human, intuitive, and profound.</li>
+                </ul>
+                
+                <p class="explore-closing reveal">Stay tuned. It's going to be quiet—in a whole new way.</p>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
         <div class="footer-logo">ECHO.11</div>
         <p class="footer-tagline">Decoding the Algorithm of Human Resilience</p>
-        <div class="footer-links">
-            <a href="https://shira.substack.com" target="_blank">Substack</a>
-            <a href="https://instagram.com/shira.sarid" target="_blank">Instagram</a>
-            <a href="https://linkedin.com/in/shirasarid" target="_blank">LinkedIn</a>
-            <a href="https://pinterest.com/shirasarid" target="_blank">Pinterest</a>
-        </div>
+        <nav class="footer-links" aria-label="Social media links">
+            <a href="https://shira.substack.com" target="_blank" rel="noopener noreferrer">Substack</a>
+            <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://pinterest.com/shirasarid" target="_blank" rel="noopener noreferrer">Pinterest</a>
+        </nav>
     </footer>
 
     <script>
-        // Live Clock
+        // ============ LIVE CLOCK ============
         function updateClock() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
@@ -869,43 +983,78 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Hamburger Menu
+        // ============ HAMBURGER MENU ============
         const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
+        const sideMenu = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
         const menuLinks = document.querySelectorAll('.menu-link');
 
+        function openMenu() {
+            hamburger.classList.add('active');
+            sideMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            hamburger.setAttribute('aria-expanded', 'true');
+            sideMenu.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            hamburger.classList.remove('active');
+            sideMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            sideMenu.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
         hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            if (sideMenu.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
         });
+
+        menuOverlay.addEventListener('click', closeMenu);
 
         menuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            });
+            link.addEventListener('click', closeMenu);
         });
 
-        // Scroll Animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        // Close menu on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sideMenu.classList.contains('active')) {
+                closeMenu();
+                hamburger.focus();
+            }
+        });
 
-        const observer = new IntersectionObserver((entries) => {
+        // ============ SCROLL REVEAL ANIMATION ============
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-up');
-                    observer.unobserve(entry.target);
+                    entry.target.classList.add('visible');
                 }
             });
-        }, observerOptions);
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
 
-        document.querySelectorAll('.pillar, .article-card, .about-section').forEach(el => {
-            el.style.opacity = '0';
-            observer.observe(el);
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Initial reveal for elements in viewport on load
+        window.addEventListener('load', () => {
+            revealElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    el.classList.add('visible');
+                }
+            });
         });
     </script>
 </body>
