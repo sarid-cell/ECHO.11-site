@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TP9YRD6TN8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TP9YRD6TN8');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECHO.11 | Behind the Scenes — Coming Soon</title>
+    <meta name="description" content="ECHO.11: Behind the Scenes — 111 pages, digital PDF edition. Coming soon.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #fafafa;
+            --text: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-light: #888;
+            --white: #fff;
+            --border: #e0e0e0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 18px; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .cursor-dot {
+            width: 20px; height: 20px;
+            background: rgba(100,100,100,0.6);
+            border-radius: 50%;
+            position: fixed; pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%,-50%);
+            transition: width .2s, height .2s, background .2s;
+            mix-blend-mode: difference;
+        }
+        .cursor-dot.hover { width: 35px; height: 35px; }
+        a, button { cursor: pointer; }
+        @media (max-width: 768px) { body { cursor: auto; } .cursor-dot { display: none; } }
+
+        .skip-link {
+            position: absolute; top: -50px; left: 0;
+            background: var(--text); color: var(--white);
+            padding: 12px 20px; z-index: 9999; text-decoration: none; transition: top .3s;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* Header */
+        header {
+            position: fixed; top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(250,250,250,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+        .header-inner {
+            max-width: 1600px; margin: 0 auto;
+            padding: 1.2rem 2.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.1rem; font-weight: 500;
+            color: var(--text); text-decoration: none;
+        }
+        .clock {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1rem; color: var(--text);
+        }
+
+        /* Hero — full-bleed atmosphere image */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            z-index: 1;
+        }
+        .hero-bg img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: grayscale(30%);
+        }
+        .hero-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            height: 65%;
+            background: linear-gradient(to top,
+                rgba(250,250,250,1) 0%,
+                rgba(250,250,250,0.92) 35%,
+                rgba(250,250,250,0.5) 70%,
+                rgba(250,250,250,0) 100%);
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative; z-index: 10;
+            padding: 0 2.5rem 4.5rem;
+            max-width: 1200px;
+        }
+        .hero-kicker {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
+            opacity: 0;
+            animation: fadeUp .7s ease .1s forwards;
+        }
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp .9s ease .2s forwards;
+        }
+        .hero h1 strong { font-weight: 600; }
+        .hero p {
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.85;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeUp .9s ease .35s forwards;
+        }
+
+        @media (max-width: 768px) {
+            .hero { min-height: 80vh; }
+            .hero-content { padding: 0 1.5rem 3.5rem; }
+        }
+
+        /* Content layout */
+        .content-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+        }
+        @media (max-width: 768px) { .content-wrap { padding: 0 1.5rem; } }
+
+        /* Book section — cover + text side by side */
+        .book-section {
+            border-top: 1px solid var(--border);
+            padding: 5rem 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .book-grid {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        /* Book cover mockup */
+        .book-mockup {
+            position: relative;
+        }
+        .book-cover-img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            display: block;
+            box-shadow:
+                4px 4px 0 0 var(--border),
+                8px 8px 0 0 #e8e8e8,
+                12px 12px 0 0 #f0f0f0;
+            border: 1px solid var(--border);
+        }
+        .book-badge {
+            position: absolute;
+            top: -14px; right: -14px;
+            background: var(--text);
+            color: var(--white);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.4rem 0.75rem;
+        }
+
+        /* Book text */
+        .book-info { padding-top: 0.5rem; }
+
+        .section-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .book-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 2rem;
+        }
+
+        .book-body {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.9;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+        }
+        .book-body strong { color: var(--text); font-weight: 500; }
+
+        /* Edition tags */
+        .editions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        .edition-tag {
+            border: 1px solid var(--border);
+            padding: 0.6rem 1.1rem;
+            font-size: 0.85rem;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .edition-tag .dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--text);
+        }
+        .edition-tag.limited .dot { background: #999; }
+
+        /* Social follow CTAs */
+        .follow-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.85rem 1.6rem;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            transition: all .25s;
+            border: 2px solid var(--text);
+        }
+        .social-btn.primary { background: var(--text); color: var(--white); }
+        .social-btn.primary:hover { background: transparent; color: var(--text); }
+        .social-btn.secondary { background: transparent; color: var(--text); }
+        .social-btn.secondary:hover { background: var(--text); color: var(--white); }
+        .social-btn svg { width: 18px; height: 18px; }
+
+        /* Print note */
+        .print-note {
+            margin-top: 2.5rem;
+            padding: 1.5rem 2rem;
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--text);
+            background: var(--white);
+        }
+        .print-note p {
+            font-size: 0.92rem;
+            line-height: 1.75;
+            color: var(--text-secondary);
+        }
+        .print-note strong { color: var(--text); font-weight: 500; }
+        .print-note a {
+            color: var(--text);
+            font-weight: 400;
+        }
+        .print-note a:hover { opacity: 0.6; }
+
+        /* Responsive grid */
+        @media (max-width: 900px) {
+            .book-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .book-mockup { max-width: 280px; }
+        }
+        @media (max-width: 600px) {
+            .book-section { padding: 4rem 1.5rem; }
+            .book-mockup { max-width: 220px; }
+        }
+
+        /* Footer */
+        .footer-banner { width: 100%; overflow: hidden; }
+        .footer-banner img {
+            width: 100%; height: auto;
+            display: block;
+            filter: grayscale(100%);
+            object-fit: contain;
+        }
+        footer { padding: 4rem 2.5rem; background: var(--bg); }
+        .footer-inner {
+            max-width: 1400px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr auto;
+            gap: 3rem; align-items: start;
+        }
+        .footer-brand {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600; letter-spacing: -0.02em;
+        }
+        .footer-contact h4, .footer-column h4 {
+            font-size: .95rem; font-weight: 500; margin-bottom: .8rem;
+        }
+        .footer-contact a, .footer-column a {
+            color: var(--text); text-decoration: none;
+            font-size: .95rem; font-weight: 300;
+        }
+        .footer-contact a:hover, .footer-column a:hover { opacity: .6; }
+        .footer-column { display: flex; flex-direction: column; gap: .5rem; }
+        .footer-column span { color: var(--text-secondary); font-size: .95rem; font-weight: 300; }
+        .footer-icon svg { width: 24px; height: 24px; }
+        @media (max-width: 900px) {
+            .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1/-1; }
+        }
+        @media (max-width: 600px) { .footer-inner { grid-template-columns: 1fr; } }
+        .footer-legal {
+            max-width: 1400px; margin: 0 auto;
+            padding-top: 2rem; border-top: 1px solid var(--border);
+            display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-legal p, .footer-legal a {
+            font-size: .85rem; color: var(--text-light);
+            font-weight: 300; text-decoration: none;
+        }
+        .footer-legal a:hover { color: var(--text); }
+        .footer-legal-links { display: flex; gap: 1.5rem; }
+
+        /* Animations */
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity .8s ease, transform .8s ease;
+        }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        @media (max-width: 768px) {
+            footer { padding: 3rem 1.5rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-kicker, .hero h1, .hero p { opacity: 1; animation: none; }
+            .reveal { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot"></div>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="header-inner">
+            <a href="index.html" class="logo">ECHO.11</a>
+            <div class="clock" id="clock">00:00:00</div>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-bg">
+                <img src="book-hero.jpg" alt="Figure in white robes walking across white sand dunes" fetchpriority="high">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-kicker">ECHO·11 · VOLUME ONE</div>
+                <h1><strong>Behind the Scenes.</strong><br>Coming Soon.</h1>
+                <p>111 pages. Generative AI, neuro-aesthetics, and the quiet architecture of the human mind — documented from the inside.</p>
+            </div>
+        </section>
+
+        <!-- Book section -->
+        <section class="book-section">
+            <div class="book-grid">
+
+                <!-- Cover mockup -->
+                <div class="book-mockup reveal">
+                    <img
+                        src="book-cover.jpg"
+                        alt="echo·11 — Behind the Scenes, Volume One, by Shira Sarid"
+                        class="book-cover-img"
+                        loading="lazy"
+                    >
+                    <span class="book-badge">Digital PDF</span>
+                </div>
+
+                <!-- Info -->
+                <div class="book-info reveal">
+                    <div class="section-label">THE BOOK</div>
+
+                    <h2 class="book-title">
+                        Decoding the Algorithm<br>of Human Resilience
+                    </h2>
+
+                    <div class="book-body">
+                        <p>Born from the deafening noise of 2025, this volume documents the full journey — from chaos to clarity. <strong>5 chapters. 111 pages.</strong> A behind-the-scenes record of how ECHO.11 was built: the prompts, the failures, the frequencies, and the neuro-aesthetics that shape a quieter mind.</p>
+                        <br>
+                        <p>Not a how-to. A manifesto. A document of process. <strong>Made for the people who think in layers.</strong></p>
+                    </div>
+
+                    <div class="editions">
+                        <div class="edition-tag">
+                            <span class="dot"></span>
+                            Digital Edition — PDF
+                        </div>
+                        <div class="edition-tag limited">
+                            <span class="dot"></span>
+                            Limited Print — 11 copies only
+                        </div>
+                    </div>
+
+                    <p class="follow-label">Follow for the drop</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer" class="social-btn primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <circle cx="12" cy="12" r="4"/>
+                                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+                            </svg>
+                            Instagram
+                        </a>
+                        <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer" class="social-btn secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.852 0 1.264.64 1.264 1.408 0 .858-.546 2.141-.828 3.33-.236.995.499 1.806 1.476 1.806 1.771 0 3.135-1.867 3.135-4.561 0-2.385-1.714-4.052-4.161-4.052-2.834 0-4.497 2.126-4.497 4.322 0 .856.33 1.772.741 2.273a.3.3 0 0 1 .069.284c-.075.314-.243.995-.276 1.134-.044.183-.146.222-.338.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.522 0 10-4.477 10-10S17.522 2 12 2z"/>
+                            </svg>
+                            Pinterest
+                        </a>
+                    </div>
+
+                    <!-- Print edition note -->
+                    <div class="print-note reveal">
+                        <p>
+                            <strong>Limited print edition — 11 copies.</strong>
+                            Large-format, physical. If there is demand, I will produce exactly 11 numbered copies — no more, no less. To be considered, <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">send me a DM on Instagram</a> before the digital launch. First come, first served.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <div class="footer-banner">
+        <img src="book-silence.jpg" alt="Astronaut helmet closeup, eyes closed" loading="lazy">
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">ECHO.11</div>
+            <div class="footer-contact">
+                <h4>Let's connect in the noise</h4>
+                <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
+            </div>
+            <div class="footer-column">
+                <h4>Subtitle</h4>
+                <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
+                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://pinterest.com/shirasarid" target="_blank" rel="noopener noreferrer">Pinterest</a>
+                <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
+            </div>
+            <div class="footer-column">
+                <h4>Signals</h4>
+                <span>Strategy</span>
+                <span>Psychology</span>
+                <span>AI Tools</span>
+            </div>
+            <div class="footer-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+                </svg>
+            </div>
+        </div>
+        <div class="footer-legal">
+            <p>© 2026 ECHO.11 by Shira Sarid. All rights reserved.</p>
+            <div class="footer-legal-links">
+                <a href="index.html">← Back to Echo.11</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Clock
+        function updateClock() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2,'0');
+            const m = String(now.getMinutes()).padStart(2,'0');
+            const s = String(now.getSeconds()).padStart(2,'0');
+            document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Cursor
+        const cursorDot = document.querySelector('.cursor-dot');
+        if (cursorDot && window.innerWidth > 768) {
+            document.addEventListener('mousemove', e => {
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top  = e.clientY + 'px';
+            });
+            document.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('mouseenter', () => cursorDot.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursorDot.classList.remove('hover'));
+            });
+        }
+
+        // Reveal on scroll
+        const revealEls = document.querySelectorAll('.reveal');
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+        revealEls.forEach(el => obs.observe(el));
+        window.addEventListener('load', () => {
+            revealEls.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+            });
+        });
+    </script>
+</body>
+</html>
