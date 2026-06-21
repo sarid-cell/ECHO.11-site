@@ -649,7 +649,7 @@
 
     <div class="menu-overlay" id="menuOverlay"></div>
 
-    <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
+    <aside class="side-menu" id="sideMenu" aria-hidden="true">
         <nav>
             <a href="index.html#vision" class="menu-link">The Vision</a>
             <a href="index.html#insights" class="menu-link">Insights</a>
@@ -665,7 +665,8 @@
                 <h1 class="reveal">Thank You.</h1>
                 <p class="lede reveal">Your copy of <strong>echo&middot;11 &mdash; Behind the Scenes</strong> is ready. 111 pages, yours to keep.</p>
 
-                <a href="https://echo11.app/echo11-book-a462e33f7d998336.pdf" class="buy-btn reveal" id="downloadButton" download="echo11-behind-the-scenes.pdf">
+                <!-- 🔴 REPLACE the href below with the link to your actual PDF file (see chat for instructions) -->
+                <a href="https://echo11.app/echo11pdf_book_2026.pdf" class="buy-btn reveal" id="downloadButton" download="echo11-behind-the-scenes.pdf">
                     Download Your Book
                 </a>
 
@@ -749,7 +750,6 @@
             menuOverlay.classList.toggle('active');
             hamburger.setAttribute('aria-expanded', !isOpen);
             sideMenu.setAttribute('aria-hidden', isOpen);
-            if (isOpen) { sideMenu.setAttribute('inert', ''); } else { sideMenu.removeAttribute('inert'); }
             document.body.style.overflow = isOpen ? '' : 'hidden';
         }
 
