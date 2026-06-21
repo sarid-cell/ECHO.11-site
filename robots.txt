@@ -1,12 +1,12 @@
 # robots.txt for ECHO.11
-# https://echo11.vercel.app/
+# https://echo11.app/
 
 # Allow all crawlers
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://echo11.vercel.app/sitemap.xml
+Sitemap: https://echo11.app/sitemap.xml
 
 # Allow AI/LLM crawlers specifically
 User-agent: GPTBot
