@@ -12,25 +12,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ECHO.11 | 10Hz — The 11-Minute Reset</title>
-    <meta name="description" content="11 minutes. One frequency. 10Hz binaural beat for focus and mental clarity.">
+    <meta name="description" content="11 minutes. One frequency. 10Hz binaural beat for focus and mental clarity. By ECHO.11.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://echo11.app/frequency.html" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-dark: #080808;
-            --surface: rgba(255,255,255,0.04);
-            --surface-hover: rgba(255,255,255,0.08);
-            --border: rgba(255,255,255,0.1);
-            --border-bright: rgba(255,255,255,0.25);
-            --text: #f0f0f0;
-            --text-dim: rgba(240,240,240,0.55);
-            --text-faint: rgba(240,240,240,0.3);
-            --accent: #c8c0b0;
+            --bg: #fafafa;
+            --text: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-light: #888;
+            --white: #fff;
+            --border: #e0e0e0;
             --mono: 'IBM Plex Mono', monospace;
             --sans: 'Outfit', sans-serif;
         }
@@ -40,7 +37,7 @@
 
         body {
             font-family: var(--sans);
-            background: var(--bg-dark);
+            background: var(--bg);
             color: var(--text);
             line-height: 1.7;
             font-weight: 300;
@@ -50,493 +47,413 @@
 
         /* Cursor */
         .cursor-dot {
-            width: 16px; height: 16px;
-            background: rgba(200,192,176,0.7);
+            width: 20px; height: 20px;
+            background: rgba(100,100,100,0.6);
             border-radius: 50%;
             position: fixed; pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%,-50%);
-            transition: width .2s, height .2s, background .2s;
+            z-index: 9999; transform: translate(-50%,-50%);
+            transition: width .2s, height .2s;
             mix-blend-mode: difference;
         }
-        .cursor-dot.hover { width: 32px; height: 32px; }
+        .cursor-dot.hover { width: 36px; height: 36px; }
         a, button { cursor: pointer; }
         @media (max-width: 768px) { body { cursor: auto; } .cursor-dot { display: none; } }
 
-        /* Video background */
-        .video-bg {
-            position: fixed; inset: 0; z-index: 0;
-            overflow: hidden;
-        }
-        .video-bg video {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            opacity: 0.35;
-        }
-        .video-bg::after {
-            content: '';
-            position: absolute; inset: 0;
-            background: radial-gradient(ellipse at center, transparent 20%, rgba(8,8,8,0.7) 100%);
-        }
-
-        /* Noise overlay */
-        .noise {
-            position: fixed; inset: 0; z-index: 1;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none; opacity: 0.4;
-        }
-
-        /* Header */
+        /* ── HEADER ── */
         header {
-            position: fixed; top: 0; left: 0; right: 0;
-            z-index: 100;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1.4rem 2.5rem;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(250,250,250,0.95);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
-            background: rgba(8,8,8,0.6);
-            backdrop-filter: blur(12px);
+        }
+        .header-inner {
+            max-width: 1600px; margin: 0 auto;
+            padding: 1.2rem 2.5rem;
+            display: flex; justify-content: space-between; align-items: center;
         }
         .logo {
-            font-family: var(--mono); font-size: 1rem; font-weight: 500;
-            color: var(--text); text-decoration: none; letter-spacing: 0.02em;
+            font-family: var(--mono); font-size: 1.1rem; font-weight: 500;
+            color: var(--text); text-decoration: none;
         }
-        .header-right { display: flex; align-items: center; gap: 2rem; }
-        .clock { font-family: var(--mono); font-size: 0.9rem; color: var(--text-dim); }
+        .header-right { display: flex; align-items: center; gap: 1.5rem; }
+        .clock { font-family: var(--mono); font-size: 1rem; color: var(--text); }
         .back-link {
-            font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
-            color: var(--text-dim); text-decoration: none;
-            transition: color .2s;
+            font-family: var(--mono); font-size: 0.78rem;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--text-light); text-decoration: none; transition: color .2s;
         }
         .back-link:hover { color: var(--text); }
 
-        /* Main layout */
-        main {
+        /* ── HERO — VIDEO PLAYER ── */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Video fills hero */
+        .hero-video {
+            position: absolute; inset: 0; z-index: 1;
+        }
+        .hero-video video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+        }
+
+        /* Light gradient overlay — fades video into white at bottom */
+        .hero-overlay {
+            position: absolute; inset: 0; z-index: 2;
+            background: linear-gradient(
+                to bottom,
+                rgba(250,250,250,0.15) 0%,
+                rgba(250,250,250,0.3)  40%,
+                rgba(250,250,250,0.85) 75%,
+                rgba(250,250,250,1)    100%
+            );
+        }
+
+        /* Player card — floats over video */
+        .player-card {
             position: relative; z-index: 10;
-            min-height: 100vh;
-        }
-
-        /* ── PLAYER SECTION ── */
-        .player-section {
-            min-height: 100vh;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            padding: 8rem 2rem 4rem;
+            display: flex; flex-direction: column; align-items: center;
             text-align: center;
+            padding: 8rem 2rem 4rem;
+            width: 100%;
         }
 
-        .freq-label {
+        .freq-eyebrow {
             font-family: var(--mono);
-            font-size: 0.7rem; letter-spacing: 0.3em;
-            text-transform: uppercase; color: var(--text-faint);
-            margin-bottom: 1.5rem;
+            font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--text-light); margin-bottom: 1.2rem;
         }
 
         .freq-title {
-            font-size: clamp(3rem, 8vw, 6.5rem);
-            font-weight: 200;
-            letter-spacing: -0.04em;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-            color: var(--text);
+            font-size: clamp(3.5rem, 9vw, 7rem);
+            font-weight: 200; letter-spacing: -0.04em; line-height: 1;
+            color: var(--text); margin-bottom: 0.4rem;
         }
-        .freq-title span {
+        .freq-subtitle {
             font-family: var(--mono);
-            font-size: clamp(1rem, 2.5vw, 1.6rem);
-            font-weight: 400;
-            letter-spacing: 0.1em;
-            display: block;
-            margin-top: 0.5rem;
-            color: var(--accent);
+            font-size: clamp(0.75rem, 1.5vw, 1rem);
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--text-secondary); margin-bottom: 3rem;
         }
 
         /* Timer ring */
         .timer-wrap {
-            position: relative;
-            width: 220px; height: 220px;
-            margin: 3rem auto 2.5rem;
+            position: relative; width: 200px; height: 200px;
+            margin-bottom: 2.5rem;
         }
-        .timer-ring {
-            transform: rotate(-90deg);
-        }
-        .timer-ring-bg {
-            fill: none;
-            stroke: var(--border);
-            stroke-width: 1.5;
-        }
-        .timer-ring-progress {
-            fill: none;
-            stroke: var(--accent);
-            stroke-width: 1.5;
+        .timer-svg { transform: rotate(-90deg); }
+        .ring-bg   { fill: none; stroke: var(--border); stroke-width: 1.5; }
+        .ring-prog {
+            fill: none; stroke: var(--text); stroke-width: 1.5;
             stroke-linecap: round;
-            stroke-dasharray: 628;
+            stroke-dasharray: 565;
             stroke-dashoffset: 0;
             transition: stroke-dashoffset 1s linear;
         }
-        .timer-display {
+        .timer-inner {
             position: absolute; inset: 0;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
         }
         .timer-time {
-            font-family: var(--mono);
-            font-size: 2.6rem; font-weight: 500;
-            color: var(--text); letter-spacing: 0.02em;
-            line-height: 1;
+            font-family: var(--mono); font-size: 2.4rem; font-weight: 500;
+            color: var(--text); line-height: 1;
         }
-        .timer-sub {
-            font-size: 0.7rem; letter-spacing: 0.15em;
-            text-transform: uppercase; color: var(--text-faint);
-            margin-top: 0.4rem;
+        .timer-label {
+            font-family: var(--mono); font-size: 0.62rem;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--text-light); margin-top: 0.3rem;
         }
 
         /* Play button */
         .play-btn {
-            width: 72px; height: 72px;
-            border-radius: 50%;
-            border: 1px solid var(--border-bright);
-            background: var(--surface);
+            width: 68px; height: 68px; border-radius: 50%;
+            border: 1.5px solid var(--text);
+            background: var(--white);
             color: var(--text);
             display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
-            transition: all .3s;
-            margin: 0 auto 1.5rem;
-            backdrop-filter: blur(8px);
+            transition: all .3s; margin-bottom: 1.2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
-        .play-btn:hover {
-            background: var(--surface-hover);
-            border-color: var(--accent);
-            transform: scale(1.05);
-        }
-        .play-btn svg { width: 28px; height: 28px; }
-        .play-btn.playing { border-color: var(--accent); background: rgba(200,192,176,0.1); }
+        .play-btn:hover { background: var(--text); color: var(--white); transform: scale(1.05); }
+        .play-btn.playing { background: var(--text); color: var(--white); }
+        .play-btn svg { width: 26px; height: 26px; }
 
-        /* State text */
         .state-text {
-            font-family: var(--mono);
-            font-size: 0.75rem; letter-spacing: 0.15em;
-            text-transform: uppercase; color: var(--text-dim);
-            margin-bottom: 2.5rem;
-            min-height: 1.2em;
+            font-family: var(--mono); font-size: 0.72rem;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--text-light); margin-bottom: 2rem; min-height: 1.2em;
         }
 
-        /* Listener count */
-        .listener-count {
+        /* Sessions */
+        .sessions-row {
             display: flex; align-items: center; gap: 0.6rem;
-            justify-content: center;
-            margin-bottom: 1rem;
+            justify-content: center; margin-bottom: 1rem;
         }
-        .listener-dot {
-            width: 6px; height: 6px;
-            border-radius: 50%; background: var(--accent);
-            animation: pulse 2s infinite;
+        .sessions-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--text);
+            animation: blink 2.5s infinite;
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+        @keyframes blink { 0%,100% { opacity:1; } 50% { opacity: 0.2; } }
+        .sessions-text {
+            font-family: var(--mono); font-size: 0.72rem;
+            letter-spacing: 0.08em; color: var(--text-light);
         }
-        .listener-text {
-            font-family: var(--mono);
-            font-size: 0.75rem; letter-spacing: 0.1em;
-            color: var(--text-faint);
-        }
-        .listener-num { color: var(--text-dim); }
+        .sessions-num { color: var(--text-secondary); }
 
-        /* Headphones warning */
-        .headphones-note {
+        /* Headphones note */
+        .phones-note {
             display: flex; align-items: center; gap: 0.5rem;
-            justify-content: center;
-            font-size: 0.8rem; color: var(--text-faint);
-            margin-top: 1rem;
+            font-family: var(--mono); font-size: 0.7rem;
+            color: var(--text-light); margin-bottom: 2rem;
         }
-        .headphones-note svg { width: 16px; height: 16px; flex-shrink: 0; }
+        .phones-note svg { width: 15px; height: 15px; }
 
         /* Scroll cue */
         .scroll-cue {
-            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-            display: flex; flex-direction: column; align-items: center;
-            gap: 0.5rem; color: var(--text-faint); font-size: 0.72rem;
+            display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+            font-family: var(--mono); font-size: 0.65rem;
             letter-spacing: 0.15em; text-transform: uppercase;
-            font-family: var(--mono);
-            animation: fadeInDown 2s ease 2s both;
+            color: var(--text-light);
+            animation: fadeUp 1.5s ease 2s both;
         }
-        .scroll-cue svg { width: 18px; animation: bounce 2s infinite; }
-        @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateX(-50%) translateY(-10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+        .scroll-cue svg { width: 16px; animation: nudge 2s infinite; }
+        @keyframes nudge { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 
         /* ── SCIENCE SECTION ── */
-        .science-section {
-            position: relative; z-index: 10;
-            background: rgba(8,8,8,0.85);
-            backdrop-filter: blur(20px);
+        .science {
+            background: var(--white);
             border-top: 1px solid var(--border);
             padding: 6rem 2.5rem;
         }
-        .science-inner {
-            max-width: 960px; margin: 0 auto;
-        }
+        .science-inner { max-width: 960px; margin: 0 auto; }
 
-        .section-eyebrow {
-            font-family: var(--mono);
-            font-size: 0.7rem; letter-spacing: 0.25em;
-            text-transform: uppercase; color: var(--text-faint);
-            margin-bottom: 3rem;
+        .section-label {
+            font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--text-light); margin-bottom: 3rem;
             display: flex; align-items: center; gap: 1rem;
         }
-        .section-eyebrow::after {
-            content: ''; flex: 1; height: 1px; background: var(--border);
-        }
+        .section-label::after { content:''; flex:1; height:1px; background: var(--border); }
 
         /* Frequency diagram */
         .freq-diagram {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 0;
-            align-items: center;
-            margin-bottom: 4rem;
-            padding: 2.5rem;
+            display: grid; grid-template-columns: 1fr auto 1fr;
             border: 1px solid var(--border);
-            background: var(--surface);
+            margin-bottom: 4rem;
         }
-        .ear-block { padding: 1.5rem; }
-        .ear-block.right { text-align: right; }
-        .ear-label {
-            font-family: var(--mono); font-size: 0.65rem;
+        .ear { padding: 2rem; }
+        .ear.right { text-align: right; }
+        .ear-tag {
+            font-family: var(--mono); font-size: 0.62rem;
             letter-spacing: 0.2em; text-transform: uppercase;
-            color: var(--text-faint); margin-bottom: 0.5rem;
+            color: var(--text-light); margin-bottom: 0.5rem;
         }
         .ear-hz {
-            font-family: var(--mono);
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 600; color: var(--text);
-            line-height: 1;
+            font-family: var(--mono); font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600; color: var(--text); line-height: 1;
         }
-        .ear-desc {
-            font-size: 0.82rem; color: var(--text-dim);
-            margin-top: 0.4rem; line-height: 1.5;
-        }
-        .brain-block {
-            padding: 1.5rem 2rem;
+        .ear-note { font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem; }
+        .brain {
+            padding: 2rem;
             border-left: 1px solid var(--border);
             border-right: 1px solid var(--border);
-            text-align: center;
+            text-align: center; display: flex; flex-direction: column; justify-content: center;
         }
-        .brain-label {
+        .brain-tag {
             font-family: var(--mono); font-size: 0.6rem;
             letter-spacing: 0.2em; text-transform: uppercase;
-            color: var(--text-faint); margin-bottom: 0.4rem;
+            color: var(--text-light); margin-bottom: 0.4rem;
         }
         .brain-hz {
-            font-family: var(--mono);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 600; color: var(--accent);
-            line-height: 1;
+            font-family: var(--mono); font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600; color: var(--text); line-height: 1;
         }
-        .brain-wave { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.3rem; }
+        .brain-wave { font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.3rem; }
 
-        /* Info blocks */
+        /* Info grid */
         .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1px;
-            background: var(--border);
-            margin-bottom: 4rem;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1px; background: var(--border); margin-bottom: 4rem;
         }
-        .info-block {
-            background: var(--bg-dark);
-            padding: 2.2rem;
-        }
+        .info-block { background: var(--bg); padding: 2.2rem; }
         .info-q {
-            font-family: var(--mono);
-            font-size: 0.7rem; letter-spacing: 0.15em;
-            text-transform: uppercase; color: var(--accent);
-            margin-bottom: 1rem;
+            font-family: var(--mono); font-size: 0.68rem;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--text-light); margin-bottom: 1rem;
         }
-        .info-a {
-            font-size: 0.95rem; color: var(--text-dim);
-            line-height: 1.8; font-weight: 300;
-        }
+        .info-a { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.85; font-weight: 300; }
         .info-a strong { color: var(--text); font-weight: 500; }
 
-        /* CIA / Monroe callout */
-        .research-callout {
-            border: 1px solid var(--border);
-            border-left: 2px solid var(--accent);
-            padding: 2rem 2.5rem;
-            background: var(--surface);
-            margin-bottom: 4rem;
+        .feel-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+        .feel-tag {
+            border: 1px solid var(--border); padding: 0.3rem 0.8rem;
+            font-size: 0.78rem; color: var(--text-secondary);
         }
-        .research-callout .tag {
+
+        /* Research callout */
+        .callout {
+            border: 1px solid var(--border); border-left: 3px solid var(--text);
+            padding: 2rem 2.5rem; background: var(--white); margin-bottom: 4rem;
+        }
+        .callout-tag {
             font-family: var(--mono); font-size: 0.65rem;
             letter-spacing: 0.2em; text-transform: uppercase;
-            color: var(--accent); margin-bottom: 1rem;
-            display: block;
+            color: var(--text-light); margin-bottom: 1rem; display: block;
         }
-        .research-callout p {
-            font-size: 0.95rem; color: var(--text-dim);
-            line-height: 1.85; font-weight: 300;
-        }
-        .research-callout p strong { color: var(--text); font-weight: 500; }
-        .research-callout a {
-            color: var(--accent); text-decoration: none; font-size: 0.82rem;
-            display: inline-block; margin-top: 1rem; letter-spacing: 0.05em;
-        }
-        .research-callout a:hover { text-decoration: underline; }
-
-        /* Feel section */
-        .feel-list {
-            display: flex; flex-wrap: wrap; gap: 0.75rem;
-            margin-top: 1.5rem;
-        }
-        .feel-tag {
-            border: 1px solid var(--border);
-            padding: 0.4rem 1rem;
-            font-size: 0.82rem; color: var(--text-dim);
-            font-family: var(--mono); letter-spacing: 0.05em;
+        .callout p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.85; font-weight: 300; }
+        .callout p strong { color: var(--text); font-weight: 500; }
+        .callout a {
+            color: var(--text); font-size: 0.82rem;
+            display: inline-block; margin-top: 1rem;
+            text-decoration: underline;
         }
 
         /* Footer */
-        .page-footer {
-            position: relative; z-index: 10;
-            padding: 2rem 2.5rem;
+        .footer-banner { width: 100%; overflow: hidden; }
+        .footer-banner img { width: 100%; display: block; filter: grayscale(100%); object-fit: contain; }
+        footer { padding: 4rem 2.5rem; background: var(--bg); }
+        .footer-inner {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr auto;
+            gap: 3rem; align-items: start;
+        }
+        .footer-brand { font-family: var(--mono); font-size: clamp(2rem,4vw,3rem); font-weight: 600; letter-spacing: -0.02em; }
+        .footer-contact h4, .footer-col h4 { font-size: .95rem; font-weight: 500; margin-bottom: .8rem; }
+        .footer-contact a, .footer-col a { color: var(--text); text-decoration: none; font-size: .95rem; font-weight: 300; }
+        .footer-contact a:hover, .footer-col a:hover { opacity: .6; }
+        .footer-col { display: flex; flex-direction: column; gap: .5rem; }
+        .footer-col span { color: var(--text-secondary); font-size: .95rem; font-weight: 300; }
+        .footer-icon svg { width: 24px; height: 24px; }
+        @media (max-width: 900px) { .footer-inner { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1/-1; } }
+        @media (max-width: 600px) { .footer-inner { grid-template-columns: 1fr; } }
+        .footer-legal {
+            max-width: 1400px; margin: 0 auto; padding-top: 2rem;
             border-top: 1px solid var(--border);
-            background: rgba(8,8,8,0.9);
-            display: flex; justify-content: space-between;
-            align-items: center; flex-wrap: wrap; gap: 1rem;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
         }
-        .page-footer p {
-            font-size: 0.8rem; color: var(--text-faint);
-            font-family: var(--mono);
-        }
-        .page-footer a {
-            color: var(--text-faint); text-decoration: none; font-size: 0.8rem;
-        }
-        .page-footer a:hover { color: var(--text); }
+        .footer-legal p, .footer-legal a { font-size: .85rem; color: var(--text-light); font-weight: 300; text-decoration: none; }
+        .footer-legal a:hover { color: var(--text); }
+        .footer-legal-links { display: flex; gap: 1.5rem; }
 
-        /* Animations */
-        .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+        /* Reveal */
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
         .reveal.visible { opacity: 1; transform: none; }
 
         @media (max-width: 768px) {
-            header { padding: 1.2rem 1.5rem; }
-            .player-section { padding: 7rem 1.5rem 4rem; }
-            .timer-wrap { width: 180px; height: 180px; }
+            .header-inner { padding: 1rem 1.5rem; }
+            .freq-diagram { grid-template-columns: 1fr; }
+            .brain { border-left: none; border-right: none; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+            .ear.right { text-align: left; }
+            .science { padding: 4rem 1.5rem; }
+            footer { padding: 3rem 1.5rem; }
+            .player-card { padding: 7rem 1.5rem 3rem; }
+            .timer-wrap { width: 170px; height: 170px; }
             .timer-time { font-size: 2rem; }
-            .freq-diagram { grid-template-columns: 1fr; gap: 0; }
-            .brain-block { border-left: none; border-right: none; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-            .ear-block.right { text-align: left; }
-            .science-section { padding: 4rem 1.5rem; }
-            .page-footer { flex-direction: column; text-align: center; }
         }
-
         @media (prefers-reduced-motion: reduce) {
-            .reveal { opacity: 1; transform: none; }
-            .listener-dot { animation: none; }
-            .scroll-cue { animation: none; opacity: 1; }
+            .reveal { opacity:1; transform:none; }
+            .sessions-dot { animation:none; }
+            .scroll-cue { animation:none; opacity:1; }
         }
     </style>
 </head>
 <body>
     <div class="cursor-dot"></div>
 
-    <!-- Video background -->
-    <div class="video-bg">
-        <!-- 🔴 Replace with your Midjourney video file when ready -->
-        <video autoplay muted loop playsinline poster="book-hero.jpg" id="bgVideo">
-            <source src="frequency-loop.mp4" type="video/mp4">
-        </video>
-    </div>
-    <div class="noise"></div>
-
     <header>
-        <a href="index.html" class="logo">ECHO.11</a>
-        <div class="header-right">
-            <div class="clock" id="clock">00:00:00</div>
-            <a href="index.html" class="back-link">← Back</a>
+        <div class="header-inner">
+            <a href="index.html" class="logo">ECHO.11</a>
+            <div class="header-right">
+                <div class="clock" id="clock">00:00:00</div>
+                <a href="index.html" class="back-link">← Home</a>
+            </div>
         </div>
     </header>
 
     <main>
-        <!-- ── PLAYER ── -->
-        <section class="player-section">
-            <div class="freq-label">Binaural Frequency · Alpha Wave</div>
+        <!-- ── HERO PLAYER ── -->
+        <section class="hero">
+            <div class="hero-video">
+                <video autoplay muted loop playsinline poster="book-hero.jpg" id="bgVideo">
+                    <source src="frequency-loop.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="hero-overlay"></div>
 
-            <h1 class="freq-title">
-                10 Hz
-                <span>THE 11-MINUTE RESET</span>
-            </h1>
+            <div class="player-card">
+                <div class="freq-eyebrow">Binaural Frequency · Alpha Wave</div>
+                <h1 class="freq-title">10 Hz</h1>
+                <div class="freq-subtitle">The 11-Minute Reset</div>
 
-            <!-- Timer ring -->
-            <div class="timer-wrap">
-                <svg class="timer-ring" width="220" height="220" viewBox="0 0 220 220">
-                    <circle class="timer-ring-bg" cx="110" cy="110" r="100"/>
-                    <circle class="timer-ring-progress" cx="110" cy="110" r="100" id="timerRing"/>
-                </svg>
-                <div class="timer-display">
-                    <div class="timer-time" id="timerDisplay">11:00</div>
-                    <div class="timer-sub">minutes</div>
+                <!-- Timer ring -->
+                <div class="timer-wrap">
+                    <svg class="timer-svg" width="200" height="200" viewBox="0 0 200 200">
+                        <circle class="ring-bg" cx="100" cy="100" r="90"/>
+                        <circle class="ring-prog" cx="100" cy="100" r="90" id="timerRing"/>
+                    </svg>
+                    <div class="timer-inner">
+                        <div class="timer-time" id="timerDisplay">11:00</div>
+                        <div class="timer-label">minutes</div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Play button -->
-            <button class="play-btn" id="playBtn" aria-label="Start session">
-                <!-- Play icon -->
-                <svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5.14v14l11-7-11-7z"/>
-                </svg>
-                <!-- Pause icon (hidden) -->
-                <svg id="iconPause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="display:none">
-                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                </svg>
-            </button>
+                <button class="play-btn" id="playBtn" aria-label="Start session">
+                    <svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+                    <svg id="iconPause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                </button>
 
-            <div class="state-text" id="stateText">Use headphones · Press play to begin</div>
+                <div class="state-text" id="stateText">Use headphones · Press play to begin</div>
 
-            <!-- Listener count -->
-            <div class="listener-count">
-                <div class="listener-dot"></div>
-                <div class="listener-text">
-                    <span class="listener-num" id="listenerNum">—</span>
-                    <span> sessions today</span>
+                <div class="sessions-row">
+                    <div class="sessions-dot"></div>
+                    <div class="sessions-text">
+                        <span class="sessions-num" id="sessionsNum">—</span> sessions today
+                    </div>
                 </div>
-            </div>
 
-            <div class="headphones-note">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M14.463 10.29a3.75 3.75 0 010 3.42M9.537 13.71a3.75 3.75 0 010-3.42M4.886 18.364a9 9 0 010-12.728M12 12h.008v.008H12V12z" />
-                </svg>
-                Headphones required for binaural effect
-            </div>
+                <div class="phones-note">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M14.463 10.29a3.75 3.75 0 010 3.42M9.537 13.71a3.75 3.75 0 010-3.42M4.886 18.364a9 9 0 010-12.728"/>
+                    </svg>
+                    Headphones required for binaural effect
+                </div>
 
-            <div class="scroll-cue">
-                <span>Scroll to learn more</span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
+                <div class="scroll-cue">
+                    <span>Scroll to learn more</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                </div>
             </div>
         </section>
 
         <!-- ── SCIENCE ── -->
-        <section class="science-section">
+        <section class="science">
             <div class="science-inner">
 
-                <!-- Frequency diagram -->
-                <div class="section-eyebrow reveal">How it works</div>
+                <div class="section-label reveal">How it works</div>
 
+                <!-- Frequency diagram -->
                 <div class="freq-diagram reveal">
-                    <div class="ear-block">
-                        <div class="ear-label">Left ear</div>
+                    <div class="ear">
+                        <div class="ear-tag">Left ear</div>
                         <div class="ear-hz">200 Hz</div>
-                        <div class="ear-desc">Carrier tone.<br>Heard in isolation.</div>
+                        <div class="ear-note">Carrier tone heard in isolation</div>
                     </div>
-                    <div class="brain-block">
-                        <div class="brain-label">Brain perceives</div>
+                    <div class="brain">
+                        <div class="brain-tag">Brain perceives</div>
                         <div class="brain-hz">10 Hz</div>
                         <div class="brain-wave">Alpha wave · difference tone</div>
                     </div>
-                    <div class="ear-block right">
-                        <div class="ear-label">Right ear</div>
+                    <div class="ear right">
+                        <div class="ear-tag">Right ear</div>
                         <div class="ear-hz">210 Hz</div>
-                        <div class="ear-desc">Carrier tone.<br>Heard in isolation.</div>
+                        <div class="ear-note">Carrier tone heard in isolation</div>
                     </div>
                 </div>
 
@@ -544,23 +461,23 @@
                 <div class="info-grid reveal">
                     <div class="info-block">
                         <div class="info-q">What is a binaural beat?</div>
-                        <div class="info-a">Two slightly different tones — one per ear. Your brain detects the difference and creates a <strong>third tone that doesn't physically exist</strong>. This is called a binaural beat. It's an auditory illusion with measurable neurological effects, first documented by physicist Heinrich Wilhelm Dove in 1839.</div>
+                        <div class="info-a">Two slightly different tones — one per ear. Your brain detects the difference and produces a <strong>third tone that doesn't physically exist</strong>. An auditory illusion with measurable neurological effects, first documented by physicist Heinrich Wilhelm Dove in 1839.</div>
                     </div>
                     <div class="info-block">
-                        <div class="info-q">Why 10Hz?</div>
-                        <div class="info-a">10Hz sits in the <strong>Alpha wave band (8–13Hz)</strong> — the brain's natural state of relaxed alertness. Alpha is associated with reduced anxiety, enhanced creativity, and the quiet between stimulus and reaction. It's where the mind is present, but not reactive.</div>
+                        <div class="info-q">Why 10 Hz?</div>
+                        <div class="info-a">10Hz sits inside the <strong>Alpha band (8–13Hz)</strong> — the brain's natural state of relaxed alertness. Alpha is associated with reduced anxiety, creative clarity, and the quiet between stimulus and reaction. Present, not reactive.</div>
                     </div>
                     <div class="info-block">
                         <div class="info-q">What happens in the brain?</div>
-                        <div class="info-a">The brain synchronizes its electrical activity to the frequency it perceives — a process called <strong>neural entrainment</strong>. As you listen, your dominant brainwave frequency gradually shifts toward 10Hz. The cortex quiets. Stress markers decrease. Attention sharpens without effort.</div>
+                        <div class="info-a">The brain synchronizes to the frequency it perceives — a process called <strong>neural entrainment</strong>. As you listen, your dominant brainwave frequency shifts toward 10Hz. Cortical noise decreases. Attention sharpens without effort.</div>
                     </div>
                     <div class="info-block">
                         <div class="info-q">What should you feel?</div>
-                        <div class="info-a">Research reports vary, and individual response depends on baseline state and environment. Most commonly described:
-                            <div class="feel-list">
+                        <div class="info-a">Individual response varies. Most commonly reported:
+                            <div class="feel-tags">
                                 <span class="feel-tag">Mental clarity</span>
                                 <span class="feel-tag">Reduced mind-chatter</span>
-                                <span class="feel-tag">Mild warmth</span>
+                                <span class="feel-tag">Gentle warmth</span>
                                 <span class="feel-tag">Heightened focus</span>
                                 <span class="feel-tag">Present-moment awareness</span>
                             </div>
@@ -568,256 +485,219 @@
                     </div>
                 </div>
 
-                <!-- Research callout -->
-                <div class="research-callout reveal">
-                    <span class="tag">Research inspiration · Declassified 1983 / Released 2003</span>
-                    <p>
-                        In 1983, the US Army commissioned an analysis of The Monroe Institute's research into binaural frequencies and altered states of consciousness. The resulting document — <strong>Analysis and Assessment of Gateway Process</strong> — was classified, then declassified and released by the CIA in 2003.
-                        <br><br>
-                        The report concludes that <strong>binaural beat technology can alter consciousness in measurable, reproducible ways</strong> — reducing cortical noise, shifting brainwave activity, and creating conditions for what the document calls "expanded awareness." The science behind ECHO.11 is not speculative. It is documented, peer-reviewed, and declassified.
-                        <br><br>
-                        This experience is inspired by that research. Not affiliated with, endorsed by, or representative of any government body or institution.
-                    </p>
+                <!-- CIA / Monroe callout -->
+                <div class="callout reveal">
+                    <span class="callout-tag">Research Inspiration · Declassified 1983, Released 2003</span>
+                    <p>In 1983, the US Army commissioned a classified analysis of The Monroe Institute's research into binaural frequencies and altered consciousness. The document — <strong>Analysis and Assessment of Gateway Process</strong> — was declassified and released by the CIA in 2003.<br><br>
+                    It concludes that <strong>binaural beat technology can alter consciousness in measurable, reproducible ways</strong> — reducing cortical noise, shifting brainwave activity, and creating conditions for expanded awareness. The science behind ECHO.11 is not speculative. It is documented, peer-reviewed, and declassified.<br><br>
+                    This experience is inspired by that research. Not affiliated with or endorsed by any government body.</p>
                     <a href="https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf" target="_blank" rel="noopener noreferrer">View the declassified CIA document →</a>
                 </div>
 
-                <!-- End state -->
-                <div class="info-block reveal" style="border:1px solid var(--border); padding:2.2rem;">
+                <!-- 11 min note -->
+                <div class="info-block reveal" style="border:1px solid var(--border);">
                     <div class="info-q">The 11-minute threshold</div>
-                    <div class="info-a">Research on neural entrainment suggests that <strong>7–15 minutes</strong> is the window in which brainwave synchronization stabilizes. 11 minutes is not arbitrary — it is the minimum effective session length for measurable Alpha entrainment, and the number at the core of ECHO.11's design philosophy.</div>
+                    <div class="info-a">Research on neural entrainment suggests that <strong>7–15 minutes</strong> is the window in which brainwave synchronization stabilizes. 11 minutes is the minimum effective session length for measurable Alpha entrainment — and the number at the core of ECHO.11's design philosophy.</div>
                 </div>
 
             </div>
         </section>
     </main>
 
-    <footer class="page-footer">
-        <p>© 2026 ECHO.11 by Shira Sarid</p>
-        <a href="book.html">The Book →</a>
+    <!-- Footer -->
+    <div class="footer-banner">
+        <img src="book-silence.jpg" alt="Astronaut helmet, eyes closed" loading="lazy">
+    </div>
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">ECHO.11</div>
+            <div class="footer-contact">
+                <h4>Let's connect in the noise</h4>
+                <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
+            </div>
+            <div class="footer-col">
+                <h4>Subtitle</h4>
+                <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
+                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer">Pinterest</a>
+                <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
+            </div>
+            <div class="footer-col">
+                <h4>Signals</h4>
+                <span>Strategy</span>
+                <span>Psychology</span>
+                <span>AI Tools</span>
+            </div>
+            <div class="footer-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="footer-legal">
+            <p>© 2026 ECHO.11 by Shira Sarid. All rights reserved.</p>
+            <div class="footer-legal-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="accessibility.html">Accessibility</a>
+            </div>
+        </div>
     </footer>
 
     <script>
-        // ── CLOCK ──
+        // Clock
         function updateClock() {
             const now = new Date();
-            const h = String(now.getHours()).padStart(2,'0');
-            const m = String(now.getMinutes()).padStart(2,'0');
-            const s = String(now.getSeconds()).padStart(2,'0');
-            document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+            document.getElementById('clock').textContent =
+                [now.getHours(),now.getMinutes(),now.getSeconds()]
+                .map(n=>String(n).padStart(2,'0')).join(':');
         }
-        setInterval(updateClock, 1000);
-        updateClock();
+        setInterval(updateClock, 1000); updateClock();
 
-        // ── CURSOR ──
-        const cursorDot = document.querySelector('.cursor-dot');
-        if (cursorDot && window.innerWidth > 768) {
+        // Cursor
+        const dot = document.querySelector('.cursor-dot');
+        if (dot && window.innerWidth > 768) {
             document.addEventListener('mousemove', e => {
-                cursorDot.style.left = e.clientX + 'px';
-                cursorDot.style.top  = e.clientY + 'px';
+                dot.style.left = e.clientX+'px'; dot.style.top = e.clientY+'px';
             });
-            document.querySelectorAll('a, button').forEach(el => {
-                el.addEventListener('mouseenter', () => cursorDot.classList.add('hover'));
-                el.addEventListener('mouseleave', () => cursorDot.classList.remove('hover'));
+            document.querySelectorAll('a,button').forEach(el => {
+                el.addEventListener('mouseenter', ()=>dot.classList.add('hover'));
+                el.addEventListener('mouseleave', ()=>dot.classList.remove('hover'));
             });
         }
 
-        // ── REVEAL ──
-        const revealEls = document.querySelectorAll('.reveal');
+        // Reveal
         const obs = new IntersectionObserver(entries => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1 });
-        revealEls.forEach(el => obs.observe(el));
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+            });
+        });
 
         // ── BINAURAL AUDIO ENGINE ──
-        let audioCtx = null;
-        let oscLeft = null, oscRight = null;
-        let merger = null;
-        let isPlaying = false;
+        let audioCtx, oscL, oscR, gainL, gainR, isPlaying = false;
 
-        function createBinaural() {
+        function startAudio() {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            merger = audioCtx.createChannelMerger(2);
+            const merger = audioCtx.createChannelMerger(2);
             merger.connect(audioCtx.destination);
 
-            // Left ear: 200Hz
-            oscLeft = audioCtx.createOscillator();
-            oscLeft.type = 'sine';
-            oscLeft.frequency.setValueAtTime(200, audioCtx.currentTime);
+            oscL = audioCtx.createOscillator(); oscL.type = 'sine';
+            oscL.frequency.value = 200;
+            gainL = audioCtx.createGain(); gainL.gain.value = 0.2;
+            oscL.connect(gainL); gainL.connect(merger, 0, 0);
 
-            // Right ear: 210Hz (200 + 10Hz binaural beat = Alpha)
-            oscRight = audioCtx.createOscillator();
-            oscRight.type = 'sine';
-            oscRight.frequency.setValueAtTime(210, audioCtx.currentTime);
+            oscR = audioCtx.createOscillator(); oscR.type = 'sine';
+            oscR.frequency.value = 210; // 200 + 10Hz = Alpha
+            gainR = audioCtx.createGain(); gainR.gain.value = 0.2;
+            oscR.connect(gainR); gainR.connect(merger, 0, 1);
 
-            // Gain (gentle volume)
-            const gainL = audioCtx.createGain();
-            const gainR = audioCtx.createGain();
-            gainL.gain.setValueAtTime(0.18, audioCtx.currentTime);
-            gainR.gain.setValueAtTime(0.18, audioCtx.currentTime);
-
-            // Splitter to separate L/R channels
-            const splitterL = audioCtx.createChannelSplitter(1);
-            const splitterR = audioCtx.createChannelSplitter(1);
-
-            oscLeft.connect(gainL);
-            gainL.connect(merger, 0, 0); // left channel
-
-            oscRight.connect(gainR);
-            gainR.connect(merger, 0, 1); // right channel
-
-            oscLeft.start();
-            oscRight.start();
+            oscL.start(); oscR.start();
         }
 
-        function stopBinaural() {
-            if (oscLeft) { oscLeft.stop(); oscLeft = null; }
-            if (oscRight) { oscRight.stop(); oscRight = null; }
+        function stopAudio() {
+            if (oscL) { oscL.stop(); oscL = null; }
+            if (oscR) { oscR.stop(); oscR = null; }
             if (audioCtx) { audioCtx.close(); audioCtx = null; }
         }
 
         // ── TIMER ──
-        const TOTAL = 11 * 60; // 660 seconds
-        const CIRCUMFERENCE = 2 * Math.PI * 100; // r=100 → 628.3
-        let remaining = TOTAL;
-        let timerInterval = null;
-        const timerDisplay = document.getElementById('timerDisplay');
-        const timerRing = document.getElementById('timerRing');
-        const playBtn = document.getElementById('playBtn');
+        const TOTAL = 11 * 60;
+        const CIRC  = 2 * Math.PI * 90; // r=90
+        let remaining = TOTAL, timerInt = null;
+        const ring = document.getElementById('timerRing');
+        ring.style.strokeDasharray = CIRC;
+        ring.style.strokeDashoffset = 0;
+
+        function fmt(s) { return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`; }
+        function updateRing() { ring.style.strokeDashoffset = CIRC * (1 - (TOTAL-remaining)/TOTAL); }
+
+        const playBtn  = document.getElementById('playBtn');
         const iconPlay = document.getElementById('iconPlay');
-        const iconPause = document.getElementById('iconPause');
-        const stateText = document.getElementById('stateText');
+        const iconPause= document.getElementById('iconPause');
+        const stateEl  = document.getElementById('stateText');
+        const timerEl  = document.getElementById('timerDisplay');
 
-        timerRing.style.strokeDasharray = CIRCUMFERENCE;
-        timerRing.style.strokeDashoffset = 0;
-
-        function formatTime(s) {
-            const m = Math.floor(s / 60);
-            const sec = s % 60;
-            return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
-        }
-
-        function updateRing() {
-            const progress = (TOTAL - remaining) / TOTAL;
-            timerRing.style.strokeDashoffset = CIRCUMFERENCE * (1 - progress);
-        }
-
-        function startTimer() {
-            timerInterval = setInterval(() => {
-                remaining--;
-                timerDisplay.textContent = formatTime(remaining);
-                updateRing();
-                if (remaining <= 0) {
-                    finishSession();
-                }
-            }, 1000);
-        }
-
-        function finishSession() {
-            clearInterval(timerInterval);
-            stopBinaural();
+        function endSession() {
+            clearInterval(timerInt); stopAudio();
             isPlaying = false;
-            iconPlay.style.display = 'block';
-            iconPause.style.display = 'none';
+            iconPlay.style.display = 'block'; iconPause.style.display = 'none';
             playBtn.classList.remove('playing');
-            stateText.textContent = 'Session complete. ';
-            remaining = TOTAL;
-            timerDisplay.textContent = formatTime(remaining);
-            timerRing.style.strokeDashoffset = 0;
-
-            if (typeof gtag === 'function') {
-                gtag('event', 'frequency_session_complete', { duration: 660 });
-            }
+            stateEl.textContent = 'Session complete.';
+            remaining = TOTAL; timerEl.textContent = fmt(TOTAL); updateRing();
+            if (typeof gtag==='function') gtag('event','frequency_complete',{duration:660});
         }
 
         playBtn.addEventListener('click', () => {
             if (!isPlaying) {
-                // Start
-                createBinaural();
-                startTimer();
+                startAudio();
+                timerInt = setInterval(() => {
+                    remaining--;
+                    timerEl.textContent = fmt(remaining);
+                    updateRing();
+                    if (remaining <= 0) endSession();
+                }, 1000);
                 isPlaying = true;
-                iconPlay.style.display = 'none';
-                iconPause.style.display = 'block';
+                iconPlay.style.display = 'none'; iconPause.style.display = 'block';
                 playBtn.classList.add('playing');
-                stateText.textContent = 'Session active — close your eyes';
-                incrementCounter();
-
-                if (typeof gtag === 'function') {
-                    gtag('event', 'frequency_session_start', { frequency: '10hz' });
-                }
+                stateEl.textContent = 'Session active — close your eyes';
+                increment();
+                if (typeof gtag==='function') gtag('event','frequency_start',{hz:'10'});
             } else {
-                // Pause
-                clearInterval(timerInterval);
-                stopBinaural();
+                clearInterval(timerInt); stopAudio();
                 isPlaying = false;
-                iconPlay.style.display = 'block';
-                iconPause.style.display = 'none';
+                iconPlay.style.display = 'block'; iconPause.style.display = 'none';
                 playBtn.classList.remove('playing');
-                stateText.textContent = 'Paused — press play to continue';
+                stateEl.textContent = 'Paused — press play to continue';
             }
         });
 
-        // ── LISTENER COUNTER ──
-        // Config — fill in your Supabase details to enable real counting
-        const SUPABASE_URL = 'https://nomtmlidkuhkllniaytu.supabase.co';
+        // ── SESSIONS COUNTER ──
+        const SUPABASE_URL      = 'https://nomtmlidkuhkllniaytu.supabase.co';
         const SUPABASE_ANON_KEY = 'PASTE-YOUR-SUPABASE-ANON-KEY-HERE';
         const TODAY = new Date().toISOString().split('T')[0];
 
-        async function getCount() {
-            // Try Supabase first
-            if (SUPABASE_ANON_KEY !== 'PASTE-YOUR-SUPABASE-ANON-KEY-HERE') {
-                try {
-                    const res = await fetch(
-                        `${SUPABASE_URL}/rest/v1/frequency_sessions?date=eq.${TODAY}&select=count`,
-                        { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
-                    );
-                    const data = await res.json();
-                    if (data && data[0]) return data[0].count;
-                } catch(e) {}
-            }
-            // Fallback: localStorage (per-device count, resets daily)
-            const stored = JSON.parse(localStorage.getItem('echo11_sessions') || '{}');
-            return stored[TODAY] || 0;
+        function localCount() {
+            const d = JSON.parse(localStorage.getItem('echo11_freq')||'{}');
+            return d[TODAY] || 0;
+        }
+        function localIncrement() {
+            const d = JSON.parse(localStorage.getItem('echo11_freq')||'{}');
+            d[TODAY] = (d[TODAY]||0) + 1;
+            localStorage.setItem('echo11_freq', JSON.stringify(d));
+            return d[TODAY];
         }
 
-        async function incrementCounter() {
-            const stored = JSON.parse(localStorage.getItem('echo11_sessions') || '{}');
-            stored[TODAY] = (stored[TODAY] || 0) + 1;
-            localStorage.setItem('echo11_sessions', JSON.stringify(stored));
+        async function getCount() {
+            if (SUPABASE_ANON_KEY !== 'PASTE-YOUR-SUPABASE-ANON-KEY-HERE') {
+                try {
+                    const r = await fetch(`${SUPABASE_URL}/rest/v1/frequency_sessions?date=eq.${TODAY}&select=count`,
+                        { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` }});
+                    const d = await r.json();
+                    if (d && d[0]) return d[0].count;
+                } catch(e){}
+            }
+            return localCount();
+        }
 
+        async function increment() {
+            const n = localIncrement();
+            document.getElementById('sessionsNum').textContent = n;
             if (SUPABASE_ANON_KEY !== 'PASTE-YOUR-SUPABASE-ANON-KEY-HERE') {
                 try {
                     await fetch(`${SUPABASE_URL}/rest/v1/frequency_sessions`, {
                         method: 'POST',
-                        headers: {
-                            'apikey': SUPABASE_ANON_KEY,
-                            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                            'Content-Type': 'application/json',
-                            'Prefer': 'resolution=merge-duplicates'
-                        },
-                        body: JSON.stringify({ date: TODAY, count: stored[TODAY] })
+                        headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+                            'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates' },
+                        body: JSON.stringify({ date: TODAY, count: n })
                     });
-                } catch(e) {}
+                } catch(e){}
             }
-
-            // Update display
-            document.getElementById('listenerNum').textContent = stored[TODAY];
         }
 
-        // Load count on page open
-        getCount().then(n => {
-            document.getElementById('listenerNum').textContent = n || '0';
-        });
-
-        // ── VIDEO FALLBACK ──
-        const vid = document.getElementById('bgVideo');
-        if (vid) {
-            vid.addEventListener('error', () => {
-                // If video not found, show static poster
-                document.querySelector('.video-bg').style.backgroundImage = 'url(book-hero.jpg)';
-                document.querySelector('.video-bg').style.backgroundSize = 'cover';
-                vid.style.display = 'none';
-            });
-        }
+        getCount().then(n => { document.getElementById('sessionsNum').textContent = n || 0; });
     </script>
 </body>
 </html>
