@@ -44,6 +44,8 @@
             --text-light: #888;
             --white: #fff;
             --border: #e0e0e0;
+            --accent: #2dd4f0;
+            --accent-dim: rgba(45,212,240,0.25);
             --mono: 'IBM Plex Mono', monospace;
             --sans: 'Outfit', sans-serif;
         }
@@ -99,6 +101,44 @@
             color: var(--text-light); text-decoration: none; transition: color .2s;
         }
         .back-link:hover { color: var(--text); }
+
+        /* Hamburger */
+        .hamburger {
+            width: 26px; height: 18px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            cursor: pointer; background: none; border: none; padding: 0;
+        }
+        .hamburger span {
+            width: 100%; height: 1.5px; background: var(--text); transition: all .3s ease;
+        }
+        .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        /* Side menu */
+        .side-menu {
+            position: fixed; top: 0; right: -350px; width: 350px; height: 100vh;
+            background: var(--bg); z-index: 999;
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 3rem;
+            transition: right .4s cubic-bezier(0.25,0.46,0.45,0.94);
+            box-shadow: -10px 0 40px rgba(0,0,0,0.15);
+        }
+        .side-menu.active { right: 0; }
+        .side-menu nav { display: flex; flex-direction: column; gap: 2rem; }
+        .side-menu a {
+            font-size: 1.5rem; font-weight: 300; color: var(--text);
+            text-decoration: none; transition: opacity .2s, transform .2s;
+        }
+        .side-menu a:hover { opacity: .6; transform: translateX(10px); }
+        .side-menu a.current { font-weight: 500; }
+        .menu-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.4); z-index: 998;
+            opacity: 0; visibility: hidden; transition: all .3s;
+        }
+        .menu-overlay.active { opacity: 1; visibility: visible; }
+        @media (max-width: 768px) { .side-menu { width: 100%; right: -100%; } }
 
         /* ── HERO — VIDEO PLAYER ── */
         .hero {
@@ -169,8 +209,9 @@
             stroke-linecap: round;
             stroke-dasharray: 565;
             stroke-dashoffset: 0;
-            transition: stroke-dashoffset 1s linear;
+            transition: stroke-dashoffset 1s linear, stroke .3s;
         }
+        .timer-wrap.playing .ring-prog { stroke: var(--accent); filter: drop-shadow(0 0 4px var(--accent-dim)); }
         .timer-inner {
             position: absolute; inset: 0;
             display: flex; flex-direction: column;
@@ -182,19 +223,30 @@
             color: var(--text-secondary); line-height: 1;
         }
 
-        /* Play button — sits inside the timer ring */
+        /* Play button — HUD-style engage control, sits inside the timer ring */
         .play-btn {
+            position: relative;
             width: 64px; height: 64px; border-radius: 50%;
-            border: 1.5px solid var(--text);
-            background: var(--white);
-            color: var(--text);
+            border: 1.5px solid var(--accent);
+            background: radial-gradient(circle at 50% 40%, #1c2226, #0a0d0f);
+            color: var(--accent);
             display: flex; align-items: center; justify-content: center;
-            transition: all .3s;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: box-shadow .3s, transform .3s;
+            box-shadow: 0 0 0 1px rgba(45,212,240,0.15), 0 4px 24px rgba(0,0,0,0.18), 0 0 18px var(--accent-dim);
         }
-        .play-btn:hover { background: var(--text); color: var(--white); transform: scale(1.05); }
-        .play-btn.playing { background: var(--text); color: var(--white); }
-        .play-btn svg { width: 24px; height: 24px; }
+        .play-btn::before {
+            content: ''; position: absolute; inset: -9px; border-radius: 50%;
+            border: 1px dashed rgba(45,212,240,0.4);
+            animation: hud-spin 14s linear infinite;
+        }
+        .play-btn:hover { transform: scale(1.06); box-shadow: 0 0 0 1px rgba(45,212,240,0.3), 0 4px 24px rgba(0,0,0,0.22), 0 0 28px var(--accent); }
+        .play-btn.playing {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px rgba(45,212,240,0.35), 0 4px 24px rgba(0,0,0,0.22), 0 0 26px var(--accent);
+        }
+        .play-btn svg { width: 22px; height: 22px; filter: drop-shadow(0 0 4px var(--accent-dim)); }
+        @keyframes hud-spin { to { transform: rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) { .play-btn::before { animation: none; } }
 
         .state-text {
             font-family: var(--mono); font-size: 0.72rem;
@@ -392,10 +444,23 @@
             <a href="index.html" class="logo">ECHO.11</a>
             <div class="header-right">
                 <div class="clock" id="clock">00:00:00</div>
-                <a href="index.html" class="back-link">← Home</a>
+                <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </div>
     </header>
+
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
+        <nav>
+            <a href="index.html#vision" class="menu-link">The Vision</a>
+            <a href="index.html#insights" class="menu-link">Insights</a>
+            <a href="frequency.html" class="menu-link current">The Reset</a>
+            <a href="book.html" class="menu-link">The Book</a>
+            <a href="about.html" class="menu-link">About Echo.11</a>
+        </nav>
+    </aside>
 
     <main>
         <!-- ── HERO PLAYER ── -->
@@ -569,6 +634,29 @@
     </footer>
 
     <script>
+        // Menu
+        const hamburger = document.getElementById('hamburger');
+        const sideMenu  = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        function toggleMenu() {
+            const isOpen = sideMenu.classList.contains('active');
+            hamburger.classList.toggle('active');
+            sideMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', !isOpen);
+            sideMenu.setAttribute('aria-hidden', isOpen);
+            if (isOpen) { sideMenu.setAttribute('inert', ''); } else { sideMenu.removeAttribute('inert'); }
+            document.body.style.overflow = isOpen ? '' : 'hidden';
+        }
+        hamburger.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+        document.querySelectorAll('.menu-link').forEach(l => l.addEventListener('click', () => {
+            if (sideMenu.classList.contains('active')) toggleMenu();
+        }));
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && sideMenu.classList.contains('active')) toggleMenu();
+        });
+
         // Clock
         function updateClock() {
             const now = new Date();
@@ -640,6 +728,7 @@
         function updateRing() { ring.style.strokeDashoffset = CIRC * (1 - (TOTAL-remaining)/TOTAL); }
 
         const playBtn  = document.getElementById('playBtn');
+        const timerWrap = document.querySelector('.timer-wrap');
         const iconPlay = document.getElementById('iconPlay');
         const iconPause= document.getElementById('iconPause');
         const stateEl  = document.getElementById('stateText');
@@ -649,7 +738,7 @@
             clearInterval(timerInt); stopAudio();
             isPlaying = false;
             iconPlay.style.display = 'block'; iconPause.style.display = 'none';
-            playBtn.classList.remove('playing');
+            playBtn.classList.remove('playing'); timerWrap.classList.remove('playing');
             stateEl.textContent = 'Session complete.';
             remaining = TOTAL; timerEl.textContent = fmt(TOTAL); updateRing();
             if (typeof gtag==='function') gtag('event','frequency_complete',{duration:660});
@@ -666,7 +755,7 @@
                 }, 1000);
                 isPlaying = true;
                 iconPlay.style.display = 'none'; iconPause.style.display = 'block';
-                playBtn.classList.add('playing');
+                playBtn.classList.add('playing'); timerWrap.classList.add('playing');
                 stateEl.textContent = 'Session active — close your eyes';
                 increment();
                 if (typeof gtag==='function') gtag('event','frequency_start',{hz:'10'});
@@ -674,7 +763,7 @@
                 clearInterval(timerInt); stopAudio();
                 isPlaying = false;
                 iconPlay.style.display = 'block'; iconPause.style.display = 'none';
-                playBtn.classList.remove('playing');
+                playBtn.classList.remove('playing'); timerWrap.classList.remove('playing');
                 stateEl.textContent = 'Paused — press play to continue';
             }
         });
