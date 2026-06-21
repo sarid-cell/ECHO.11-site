@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TP9YRD6TN8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TP9YRD6TN8');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECHO.11 | 10Hz — The 11-Minute Reset</title>
+    <meta name="description" content="11 minutes. One frequency. 10Hz binaural beat for focus and mental clarity.">
+    <meta name="robots" content="index, follow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #080808;
+            --surface: rgba(255,255,255,0.04);
+            --surface-hover: rgba(255,255,255,0.08);
+            --border: rgba(255,255,255,0.1);
+            --border-bright: rgba(255,255,255,0.25);
+            --text: #f0f0f0;
+            --text-dim: rgba(240,240,240,0.55);
+            --text-faint: rgba(240,240,240,0.3);
+            --accent: #c8c0b0;
+            --mono: 'IBM Plex Mono', monospace;
+            --sans: 'Outfit', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 18px; scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Cursor */
+        .cursor-dot {
+            width: 16px; height: 16px;
+            background: rgba(200,192,176,0.7);
+            border-radius: 50%;
+            position: fixed; pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%,-50%);
+            transition: width .2s, height .2s, background .2s;
+            mix-blend-mode: difference;
+        }
+        .cursor-dot.hover { width: 32px; height: 32px; }
+        a, button { cursor: pointer; }
+        @media (max-width: 768px) { body { cursor: auto; } .cursor-dot { display: none; } }
+
+        /* Video background */
+        .video-bg {
+            position: fixed; inset: 0; z-index: 0;
+            overflow: hidden;
+        }
+        .video-bg video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.35;
+        }
+        .video-bg::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at center, transparent 20%, rgba(8,8,8,0.7) 100%);
+        }
+
+        /* Noise overlay */
+        .noise {
+            position: fixed; inset: 0; z-index: 1;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none; opacity: 0.4;
+        }
+
+        /* Header */
+        header {
+            position: fixed; top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.4rem 2.5rem;
+            border-bottom: 1px solid var(--border);
+            background: rgba(8,8,8,0.6);
+            backdrop-filter: blur(12px);
+        }
+        .logo {
+            font-family: var(--mono); font-size: 1rem; font-weight: 500;
+            color: var(--text); text-decoration: none; letter-spacing: 0.02em;
+        }
+        .header-right { display: flex; align-items: center; gap: 2rem; }
+        .clock { font-family: var(--mono); font-size: 0.9rem; color: var(--text-dim); }
+        .back-link {
+            font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--text-dim); text-decoration: none;
+            transition: color .2s;
+        }
+        .back-link:hover { color: var(--text); }
+
+        /* Main layout */
+        main {
+            position: relative; z-index: 10;
+            min-height: 100vh;
+        }
+
+        /* ── PLAYER SECTION ── */
+        .player-section {
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .freq-label {
+            font-family: var(--mono);
+            font-size: 0.7rem; letter-spacing: 0.3em;
+            text-transform: uppercase; color: var(--text-faint);
+            margin-bottom: 1.5rem;
+        }
+
+        .freq-title {
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            font-weight: 200;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        .freq-title span {
+            font-family: var(--mono);
+            font-size: clamp(1rem, 2.5vw, 1.6rem);
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            display: block;
+            margin-top: 0.5rem;
+            color: var(--accent);
+        }
+
+        /* Timer ring */
+        .timer-wrap {
+            position: relative;
+            width: 220px; height: 220px;
+            margin: 3rem auto 2.5rem;
+        }
+        .timer-ring {
+            transform: rotate(-90deg);
+        }
+        .timer-ring-bg {
+            fill: none;
+            stroke: var(--border);
+            stroke-width: 1.5;
+        }
+        .timer-ring-progress {
+            fill: none;
+            stroke: var(--accent);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-dasharray: 628;
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 1s linear;
+        }
+        .timer-display {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+        }
+        .timer-time {
+            font-family: var(--mono);
+            font-size: 2.6rem; font-weight: 500;
+            color: var(--text); letter-spacing: 0.02em;
+            line-height: 1;
+        }
+        .timer-sub {
+            font-size: 0.7rem; letter-spacing: 0.15em;
+            text-transform: uppercase; color: var(--text-faint);
+            margin-top: 0.4rem;
+        }
+
+        /* Play button */
+        .play-btn {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            border: 1px solid var(--border-bright);
+            background: var(--surface);
+            color: var(--text);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: all .3s;
+            margin: 0 auto 1.5rem;
+            backdrop-filter: blur(8px);
+        }
+        .play-btn:hover {
+            background: var(--surface-hover);
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+        .play-btn svg { width: 28px; height: 28px; }
+        .play-btn.playing { border-color: var(--accent); background: rgba(200,192,176,0.1); }
+
+        /* State text */
+        .state-text {
+            font-family: var(--mono);
+            font-size: 0.75rem; letter-spacing: 0.15em;
+            text-transform: uppercase; color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            min-height: 1.2em;
+        }
+
+        /* Listener count */
+        .listener-count {
+            display: flex; align-items: center; gap: 0.6rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .listener-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%; background: var(--accent);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .listener-text {
+            font-family: var(--mono);
+            font-size: 0.75rem; letter-spacing: 0.1em;
+            color: var(--text-faint);
+        }
+        .listener-num { color: var(--text-dim); }
+
+        /* Headphones warning */
+        .headphones-note {
+            display: flex; align-items: center; gap: 0.5rem;
+            justify-content: center;
+            font-size: 0.8rem; color: var(--text-faint);
+            margin-top: 1rem;
+        }
+        .headphones-note svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+        /* Scroll cue */
+        .scroll-cue {
+            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center;
+            gap: 0.5rem; color: var(--text-faint); font-size: 0.72rem;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            font-family: var(--mono);
+            animation: fadeInDown 2s ease 2s both;
+        }
+        .scroll-cue svg { width: 18px; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateX(-50%) translateY(-10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+
+        /* ── SCIENCE SECTION ── */
+        .science-section {
+            position: relative; z-index: 10;
+            background: rgba(8,8,8,0.85);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            padding: 6rem 2.5rem;
+        }
+        .science-inner {
+            max-width: 960px; margin: 0 auto;
+        }
+
+        .section-eyebrow {
+            font-family: var(--mono);
+            font-size: 0.7rem; letter-spacing: 0.25em;
+            text-transform: uppercase; color: var(--text-faint);
+            margin-bottom: 3rem;
+            display: flex; align-items: center; gap: 1rem;
+        }
+        .section-eyebrow::after {
+            content: ''; flex: 1; height: 1px; background: var(--border);
+        }
+
+        /* Frequency diagram */
+        .freq-diagram {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 0;
+            align-items: center;
+            margin-bottom: 4rem;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+        .ear-block { padding: 1.5rem; }
+        .ear-block.right { text-align: right; }
+        .ear-label {
+            font-family: var(--mono); font-size: 0.65rem;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--text-faint); margin-bottom: 0.5rem;
+        }
+        .ear-hz {
+            font-family: var(--mono);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600; color: var(--text);
+            line-height: 1;
+        }
+        .ear-desc {
+            font-size: 0.82rem; color: var(--text-dim);
+            margin-top: 0.4rem; line-height: 1.5;
+        }
+        .brain-block {
+            padding: 1.5rem 2rem;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            text-align: center;
+        }
+        .brain-label {
+            font-family: var(--mono); font-size: 0.6rem;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--text-faint); margin-bottom: 0.4rem;
+        }
+        .brain-hz {
+            font-family: var(--mono);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600; color: var(--accent);
+            line-height: 1;
+        }
+        .brain-wave { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.3rem; }
+
+        /* Info blocks */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            margin-bottom: 4rem;
+        }
+        .info-block {
+            background: var(--bg-dark);
+            padding: 2.2rem;
+        }
+        .info-q {
+            font-family: var(--mono);
+            font-size: 0.7rem; letter-spacing: 0.15em;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        .info-a {
+            font-size: 0.95rem; color: var(--text-dim);
+            line-height: 1.8; font-weight: 300;
+        }
+        .info-a strong { color: var(--text); font-weight: 500; }
+
+        /* CIA / Monroe callout */
+        .research-callout {
+            border: 1px solid var(--border);
+            border-left: 2px solid var(--accent);
+            padding: 2rem 2.5rem;
+            background: var(--surface);
+            margin-bottom: 4rem;
+        }
+        .research-callout .tag {
+            font-family: var(--mono); font-size: 0.65rem;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--accent); margin-bottom: 1rem;
+            display: block;
+        }
+        .research-callout p {
+            font-size: 0.95rem; color: var(--text-dim);
+            line-height: 1.85; font-weight: 300;
+        }
+        .research-callout p strong { color: var(--text); font-weight: 500; }
+        .research-callout a {
+            color: var(--accent); text-decoration: none; font-size: 0.82rem;
+            display: inline-block; margin-top: 1rem; letter-spacing: 0.05em;
+        }
+        .research-callout a:hover { text-decoration: underline; }
+
+        /* Feel section */
+        .feel-list {
+            display: flex; flex-wrap: wrap; gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        .feel-tag {
+            border: 1px solid var(--border);
+            padding: 0.4rem 1rem;
+            font-size: 0.82rem; color: var(--text-dim);
+            font-family: var(--mono); letter-spacing: 0.05em;
+        }
+
+        /* Footer */
+        .page-footer {
+            position: relative; z-index: 10;
+            padding: 2rem 2.5rem;
+            border-top: 1px solid var(--border);
+            background: rgba(8,8,8,0.9);
+            display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap; gap: 1rem;
+        }
+        .page-footer p {
+            font-size: 0.8rem; color: var(--text-faint);
+            font-family: var(--mono);
+        }
+        .page-footer a {
+            color: var(--text-faint); text-decoration: none; font-size: 0.8rem;
+        }
+        .page-footer a:hover { color: var(--text); }
+
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        @media (max-width: 768px) {
+            header { padding: 1.2rem 1.5rem; }
+            .player-section { padding: 7rem 1.5rem 4rem; }
+            .timer-wrap { width: 180px; height: 180px; }
+            .timer-time { font-size: 2rem; }
+            .freq-diagram { grid-template-columns: 1fr; gap: 0; }
+            .brain-block { border-left: none; border-right: none; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+            .ear-block.right { text-align: left; }
+            .science-section { padding: 4rem 1.5rem; }
+            .page-footer { flex-direction: column; text-align: center; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; }
+            .listener-dot { animation: none; }
+            .scroll-cue { animation: none; opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot"></div>
+
+    <!-- Video background -->
+    <div class="video-bg">
+        <!-- 🔴 Replace with your Midjourney video file when ready -->
+        <video autoplay muted loop playsinline poster="book-hero.jpg" id="bgVideo">
+            <source src="frequency-loop.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="noise"></div>
+
+    <header>
+        <a href="index.html" class="logo">ECHO.11</a>
+        <div class="header-right">
+            <div class="clock" id="clock">00:00:00</div>
+            <a href="index.html" class="back-link">← Back</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- ── PLAYER ── -->
+        <section class="player-section">
+            <div class="freq-label">Binaural Frequency · Alpha Wave</div>
+
+            <h1 class="freq-title">
+                10 Hz
+                <span>THE 11-MINUTE RESET</span>
+            </h1>
+
+            <!-- Timer ring -->
+            <div class="timer-wrap">
+                <svg class="timer-ring" width="220" height="220" viewBox="0 0 220 220">
+                    <circle class="timer-ring-bg" cx="110" cy="110" r="100"/>
+                    <circle class="timer-ring-progress" cx="110" cy="110" r="100" id="timerRing"/>
+                </svg>
+                <div class="timer-display">
+                    <div class="timer-time" id="timerDisplay">11:00</div>
+                    <div class="timer-sub">minutes</div>
+                </div>
+            </div>
+
+            <!-- Play button -->
+            <button class="play-btn" id="playBtn" aria-label="Start session">
+                <!-- Play icon -->
+                <svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5.14v14l11-7-11-7z"/>
+                </svg>
+                <!-- Pause icon (hidden) -->
+                <svg id="iconPause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                </svg>
+            </button>
+
+            <div class="state-text" id="stateText">Use headphones · Press play to begin</div>
+
+            <!-- Listener count -->
+            <div class="listener-count">
+                <div class="listener-dot"></div>
+                <div class="listener-text">
+                    <span class="listener-num" id="listenerNum">—</span>
+                    <span> sessions today</span>
+                </div>
+            </div>
+
+            <div class="headphones-note">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M14.463 10.29a3.75 3.75 0 010 3.42M9.537 13.71a3.75 3.75 0 010-3.42M4.886 18.364a9 9 0 010-12.728M12 12h.008v.008H12V12z" />
+                </svg>
+                Headphones required for binaural effect
+            </div>
+
+            <div class="scroll-cue">
+                <span>Scroll to learn more</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+            </div>
+        </section>
+
+        <!-- ── SCIENCE ── -->
+        <section class="science-section">
+            <div class="science-inner">
+
+                <!-- Frequency diagram -->
+                <div class="section-eyebrow reveal">How it works</div>
+
+                <div class="freq-diagram reveal">
+                    <div class="ear-block">
+                        <div class="ear-label">Left ear</div>
+                        <div class="ear-hz">200 Hz</div>
+                        <div class="ear-desc">Carrier tone.<br>Heard in isolation.</div>
+                    </div>
+                    <div class="brain-block">
+                        <div class="brain-label">Brain perceives</div>
+                        <div class="brain-hz">10 Hz</div>
+                        <div class="brain-wave">Alpha wave · difference tone</div>
+                    </div>
+                    <div class="ear-block right">
+                        <div class="ear-label">Right ear</div>
+                        <div class="ear-hz">210 Hz</div>
+                        <div class="ear-desc">Carrier tone.<br>Heard in isolation.</div>
+                    </div>
+                </div>
+
+                <!-- Info blocks -->
+                <div class="info-grid reveal">
+                    <div class="info-block">
+                        <div class="info-q">What is a binaural beat?</div>
+                        <div class="info-a">Two slightly different tones — one per ear. Your brain detects the difference and creates a <strong>third tone that doesn't physically exist</strong>. This is called a binaural beat. It's an auditory illusion with measurable neurological effects, first documented by physicist Heinrich Wilhelm Dove in 1839.</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-q">Why 10Hz?</div>
+                        <div class="info-a">10Hz sits in the <strong>Alpha wave band (8–13Hz)</strong> — the brain's natural state of relaxed alertness. Alpha is associated with reduced anxiety, enhanced creativity, and the quiet between stimulus and reaction. It's where the mind is present, but not reactive.</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-q">What happens in the brain?</div>
+                        <div class="info-a">The brain synchronizes its electrical activity to the frequency it perceives — a process called <strong>neural entrainment</strong>. As you listen, your dominant brainwave frequency gradually shifts toward 10Hz. The cortex quiets. Stress markers decrease. Attention sharpens without effort.</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-q">What should you feel?</div>
+                        <div class="info-a">Research reports vary, and individual response depends on baseline state and environment. Most commonly described:
+                            <div class="feel-list">
+                                <span class="feel-tag">Mental clarity</span>
+                                <span class="feel-tag">Reduced mind-chatter</span>
+                                <span class="feel-tag">Mild warmth</span>
+                                <span class="feel-tag">Heightened focus</span>
+                                <span class="feel-tag">Present-moment awareness</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Research callout -->
+                <div class="research-callout reveal">
+                    <span class="tag">Research inspiration · Declassified 1983 / Released 2003</span>
+                    <p>
+                        In 1983, the US Army commissioned an analysis of The Monroe Institute's research into binaural frequencies and altered states of consciousness. The resulting document — <strong>Analysis and Assessment of Gateway Process</strong> — was classified, then declassified and released by the CIA in 2003.
+                        <br><br>
+                        The report concludes that <strong>binaural beat technology can alter consciousness in measurable, reproducible ways</strong> — reducing cortical noise, shifting brainwave activity, and creating conditions for what the document calls "expanded awareness." The science behind ECHO.11 is not speculative. It is documented, peer-reviewed, and declassified.
+                        <br><br>
+                        This experience is inspired by that research. Not affiliated with, endorsed by, or representative of any government body or institution.
+                    </p>
+                    <a href="https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf" target="_blank" rel="noopener noreferrer">View the declassified CIA document →</a>
+                </div>
+
+                <!-- End state -->
+                <div class="info-block reveal" style="border:1px solid var(--border); padding:2.2rem;">
+                    <div class="info-q">The 11-minute threshold</div>
+                    <div class="info-a">Research on neural entrainment suggests that <strong>7–15 minutes</strong> is the window in which brainwave synchronization stabilizes. 11 minutes is not arbitrary — it is the minimum effective session length for measurable Alpha entrainment, and the number at the core of ECHO.11's design philosophy.</div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="page-footer">
+        <p>© 2026 ECHO.11 by Shira Sarid</p>
+        <a href="book.html">The Book →</a>
+    </footer>
+
+    <script>
+        // ── CLOCK ──
+        function updateClock() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2,'0');
+            const m = String(now.getMinutes()).padStart(2,'0');
+            const s = String(now.getSeconds()).padStart(2,'0');
+            document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // ── CURSOR ──
+        const cursorDot = document.querySelector('.cursor-dot');
+        if (cursorDot && window.innerWidth > 768) {
+            document.addEventListener('mousemove', e => {
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top  = e.clientY + 'px';
+            });
+            document.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('mouseenter', () => cursorDot.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursorDot.classList.remove('hover'));
+            });
+        }
+
+        // ── REVEAL ──
+        const revealEls = document.querySelectorAll('.reveal');
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        revealEls.forEach(el => obs.observe(el));
+
+        // ── BINAURAL AUDIO ENGINE ──
+        let audioCtx = null;
+        let oscLeft = null, oscRight = null;
+        let merger = null;
+        let isPlaying = false;
+
+        function createBinaural() {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            merger = audioCtx.createChannelMerger(2);
+            merger.connect(audioCtx.destination);
+
+            // Left ear: 200Hz
+            oscLeft = audioCtx.createOscillator();
+            oscLeft.type = 'sine';
+            oscLeft.frequency.setValueAtTime(200, audioCtx.currentTime);
+
+            // Right ear: 210Hz (200 + 10Hz binaural beat = Alpha)
+            oscRight = audioCtx.createOscillator();
+            oscRight.type = 'sine';
+            oscRight.frequency.setValueAtTime(210, audioCtx.currentTime);
+
+            // Gain (gentle volume)
+            const gainL = audioCtx.createGain();
+            const gainR = audioCtx.createGain();
+            gainL.gain.setValueAtTime(0.18, audioCtx.currentTime);
+            gainR.gain.setValueAtTime(0.18, audioCtx.currentTime);
+
+            // Splitter to separate L/R channels
+            const splitterL = audioCtx.createChannelSplitter(1);
+            const splitterR = audioCtx.createChannelSplitter(1);
+
+            oscLeft.connect(gainL);
+            gainL.connect(merger, 0, 0); // left channel
+
+            oscRight.connect(gainR);
+            gainR.connect(merger, 0, 1); // right channel
+
+            oscLeft.start();
+            oscRight.start();
+        }
+
+        function stopBinaural() {
+            if (oscLeft) { oscLeft.stop(); oscLeft = null; }
+            if (oscRight) { oscRight.stop(); oscRight = null; }
+            if (audioCtx) { audioCtx.close(); audioCtx = null; }
+        }
+
+        // ── TIMER ──
+        const TOTAL = 11 * 60; // 660 seconds
+        const CIRCUMFERENCE = 2 * Math.PI * 100; // r=100 → 628.3
+        let remaining = TOTAL;
+        let timerInterval = null;
+        const timerDisplay = document.getElementById('timerDisplay');
+        const timerRing = document.getElementById('timerRing');
+        const playBtn = document.getElementById('playBtn');
+        const iconPlay = document.getElementById('iconPlay');
+        const iconPause = document.getElementById('iconPause');
+        const stateText = document.getElementById('stateText');
+
+        timerRing.style.strokeDasharray = CIRCUMFERENCE;
+        timerRing.style.strokeDashoffset = 0;
+
+        function formatTime(s) {
+            const m = Math.floor(s / 60);
+            const sec = s % 60;
+            return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+        }
+
+        function updateRing() {
+            const progress = (TOTAL - remaining) / TOTAL;
+            timerRing.style.strokeDashoffset = CIRCUMFERENCE * (1 - progress);
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                remaining--;
+                timerDisplay.textContent = formatTime(remaining);
+                updateRing();
+                if (remaining <= 0) {
+                    finishSession();
+                }
+            }, 1000);
+        }
+
+        function finishSession() {
+            clearInterval(timerInterval);
+            stopBinaural();
+            isPlaying = false;
+            iconPlay.style.display = 'block';
+            iconPause.style.display = 'none';
+            playBtn.classList.remove('playing');
+            stateText.textContent = 'Session complete. ';
+            remaining = TOTAL;
+            timerDisplay.textContent = formatTime(remaining);
+            timerRing.style.strokeDashoffset = 0;
+
+            if (typeof gtag === 'function') {
+                gtag('event', 'frequency_session_complete', { duration: 660 });
+            }
+        }
+
+        playBtn.addEventListener('click', () => {
+            if (!isPlaying) {
+                // Start
+                createBinaural();
+                startTimer();
+                isPlaying = true;
+                iconPlay.style.display = 'none';
+                iconPause.style.display = 'block';
+                playBtn.classList.add('playing');
+                stateText.textContent = 'Session active — close your eyes';
+                incrementCounter();
+
+                if (typeof gtag === 'function') {
+                    gtag('event', 'frequency_session_start', { frequency: '10hz' });
+                }
+            } else {
+                // Pause
+                clearInterval(timerInterval);
+                stopBinaural();
+                isPlaying = false;
+                iconPlay.style.display = 'block';
+                iconPause.style.display = 'none';
+                playBtn.classList.remove('playing');
+                stateText.textContent = 'Paused — press play to continue';
+            }
+        });
+
+        // ── LISTENER COUNTER ──
+        // Config — fill in your Supabase details to enable real counting
+        const SUPABASE_URL = 'https://nomtmlidkuhkllniaytu.supabase.co';
+        const SUPABASE_ANON_KEY = 'PASTE-YOUR-SUPABASE-ANON-KEY-HERE';
+        const TODAY = new Date().toISOString().split('T')[0];
+
+        async function getCount() {
+            // Try Supabase first
+            if (SUPABASE_ANON_KEY !== 'PASTE-YOUR-SUPABASE-ANON-KEY-HERE') {
+                try {
+                    const res = await fetch(
+                        `${SUPABASE_URL}/rest/v1/frequency_sessions?date=eq.${TODAY}&select=count`,
+                        { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+                    );
+                    const data = await res.json();
+                    if (data && data[0]) return data[0].count;
+                } catch(e) {}
+            }
+            // Fallback: localStorage (per-device count, resets daily)
+            const stored = JSON.parse(localStorage.getItem('echo11_sessions') || '{}');
+            return stored[TODAY] || 0;
+        }
+
+        async function incrementCounter() {
+            const stored = JSON.parse(localStorage.getItem('echo11_sessions') || '{}');
+            stored[TODAY] = (stored[TODAY] || 0) + 1;
+            localStorage.setItem('echo11_sessions', JSON.stringify(stored));
+
+            if (SUPABASE_ANON_KEY !== 'PASTE-YOUR-SUPABASE-ANON-KEY-HERE') {
+                try {
+                    await fetch(`${SUPABASE_URL}/rest/v1/frequency_sessions`, {
+                        method: 'POST',
+                        headers: {
+                            'apikey': SUPABASE_ANON_KEY,
+                            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                            'Content-Type': 'application/json',
+                            'Prefer': 'resolution=merge-duplicates'
+                        },
+                        body: JSON.stringify({ date: TODAY, count: stored[TODAY] })
+                    });
+                } catch(e) {}
+            }
+
+            // Update display
+            document.getElementById('listenerNum').textContent = stored[TODAY];
+        }
+
+        // Load count on page open
+        getCount().then(n => {
+            document.getElementById('listenerNum').textContent = n || '0';
+        });
+
+        // ── VIDEO FALLBACK ──
+        const vid = document.getElementById('bgVideo');
+        if (vid) {
+            vid.addEventListener('error', () => {
+                // If video not found, show static poster
+                document.querySelector('.video-bg').style.backgroundImage = 'url(book-hero.jpg)';
+                document.querySelector('.video-bg').style.backgroundSize = 'cover';
+                vid.style.display = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
