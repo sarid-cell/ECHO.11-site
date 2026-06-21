@@ -641,7 +641,7 @@
 
     <div class="menu-overlay" id="menuOverlay"></div>
 
-    <aside class="side-menu" id="sideMenu" aria-hidden="true">
+    <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
         <nav>
             <a href="index.html#vision" class="menu-link">The Vision</a>
             <a href="index.html#insights" class="menu-link">Insights</a>
@@ -802,6 +802,7 @@
             menuOverlay.classList.toggle('active');
             hamburger.setAttribute('aria-expanded', !isOpen);
             sideMenu.setAttribute('aria-hidden', isOpen);
+            if (isOpen) { sideMenu.setAttribute('inert', ''); } else { sideMenu.removeAttribute('inert'); }
             document.body.style.overflow = isOpen ? '' : 'hidden';
         }
 

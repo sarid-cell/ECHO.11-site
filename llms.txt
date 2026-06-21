@@ -27,13 +27,14 @@ ECHO.11 is a digital space created by Shira Sarid, exploring the intersection of
 
 ## Contact & Links
 
-- Website: https://echo11.app
-- 10Hz Frequency Tool: https://echo11.app/frequency.html
+- [Website](https://echo11.app)
+- [10Hz Frequency Tool](https://echo11.app/frequency.html)
+- [About](https://echo11.app/about.html)
 - Email: shirasarid@gmail.com
-- Substack: https://shirasarid.substack.com
-- Podcast: https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120
-- LinkedIn: https://linkedin.com/in/shirasarid
-- Instagram: https://instagram.com/shira.sarid
+- [Substack](https://shirasarid.substack.com)
+- [Podcast](https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120)
+- [LinkedIn](https://linkedin.com/in/shirasarid)
+- [Instagram](https://instagram.com/shira.sarid)
 
 ## Topics & Expertise
 
