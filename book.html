@@ -11,9 +11,13 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECHO.11 | Behind the Scenes — Coming Soon</title>
-    <meta name="description" content="ECHO.11: Behind the Scenes — 111 pages, digital PDF edition. Coming soon.">
-    <meta name="robots" content="noindex, nofollow">
+    <title>ECHO.11 | Behind the Scenes — The Book</title>
+    <meta name="description" content="111 pages. Generative AI, neuro-aesthetics, and the architecture of a quieter mind. Digital PDF + Limited print edition of 11 copies.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://echo11.app/book.html">
+    <meta property="og:title" content="ECHO.11 | Behind the Scenes — The Book">
+    <meta property="og:description" content="111 pages. A visual manifesto. Digital PDF edition.">
+    <meta property="og:url" content="https://echo11.app/book.html">
 
     <!-- Open Graph -->
     <meta property="og:title" content="ECHO.11 | Behind the Scenes — Coming Soon">
@@ -41,6 +45,8 @@
             --text-light: #888;
             --white: #fff;
             --border: #e0e0e0;
+            --teal: #4a9fa5;
+            --teal-light: #e8f4f5;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -59,28 +65,19 @@
         .cursor-dot {
             width: 20px; height: 20px;
             background: rgba(100,100,100,0.6);
-            border-radius: 50%;
-            position: fixed; pointer-events: none;
-            z-index: 9999;
+            border-radius: 50%; position: fixed;
+            pointer-events: none; z-index: 9999;
             transform: translate(-50%,-50%);
-            transition: width .2s, height .2s, background .2s;
+            transition: width .2s, height .2s;
             mix-blend-mode: difference;
         }
-        .cursor-dot.hover { width: 35px; height: 35px; }
+        .cursor-dot.hover { width: 36px; height: 36px; }
         a, button { cursor: pointer; }
         @media (max-width: 768px) { body { cursor: auto; } .cursor-dot { display: none; } }
 
-        .skip-link {
-            position: absolute; top: -50px; left: 0;
-            background: var(--text); color: var(--white);
-            padding: 12px 20px; z-index: 9999; text-decoration: none; transition: top .3s;
-        }
-        .skip-link:focus { top: 0; }
-
         /* Header */
         header {
-            position: fixed; top: 0; left: 0; right: 0;
-            z-index: 100;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
             background: rgba(250,250,250,0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
@@ -90,332 +87,290 @@
             padding: 1.2rem 2.5rem;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .logo {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 1.1rem; font-weight: 500;
-            color: var(--text); text-decoration: none;
-        }
-        .clock {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 1rem; color: var(--text);
-        }
+        .logo { font-family: 'IBM Plex Mono', monospace; font-size: 1.1rem; font-weight: 500; color: var(--text); text-decoration: none; }
+        .header-right { display: flex; align-items: center; gap: 1.5rem; }
+        .clock { font-family: 'IBM Plex Mono', monospace; font-size: 1rem; color: var(--text); }
 
-        /* Hero — full-bleed atmosphere image */
+        /* Hero */
         .hero {
             min-height: 90vh;
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
             justify-content: flex-end;
-            position: relative;
-            overflow: hidden;
+            position: relative; overflow: hidden;
         }
-        .hero-bg {
-            position: absolute; inset: 0;
-            z-index: 1;
-        }
-        .hero-bg img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            object-position: center;
-            filter: grayscale(30%);
-        }
+        .hero-bg { position: absolute; inset: 0; z-index: 1; }
+        .hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); }
         .hero-overlay {
-            position: absolute; bottom: 0; left: 0; right: 0;
-            height: 65%;
-            background: linear-gradient(to top,
-                rgba(250,250,250,1) 0%,
-                rgba(250,250,250,0.92) 35%,
-                rgba(250,250,250,0.5) 70%,
-                rgba(250,250,250,0) 100%);
+            position: absolute; bottom: 0; left: 0; right: 0; height: 65%;
+            background: linear-gradient(to top, rgba(250,250,250,1) 0%, rgba(250,250,250,0.92) 35%, rgba(250,250,250,0.5) 70%, transparent 100%);
             z-index: 2;
         }
         .hero-content {
             position: relative; z-index: 10;
-            padding: 0 2.5rem 4.5rem;
-            max-width: 1200px;
+            padding: 0 2.5rem 4.5rem; max-width: 1200px;
         }
         .hero-kicker {
             font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--text-light);
-            margin-bottom: 1.2rem;
-            opacity: 0;
-            animation: fadeUp .7s ease .1s forwards;
+            font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--text-light); margin-bottom: 1.2rem;
+            opacity: 0; animation: fadeUp .7s ease .1s forwards;
         }
         .hero h1 {
             font-size: clamp(2.8rem, 7vw, 5.5rem);
-            font-weight: 300;
-            line-height: 1.05;
-            letter-spacing: -0.03em;
+            font-weight: 300; line-height: 1.05; letter-spacing: -0.03em;
             margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeUp .9s ease .2s forwards;
+            opacity: 0; animation: fadeUp .9s ease .2s forwards;
         }
         .hero h1 strong { font-weight: 600; }
         .hero p {
             font-size: clamp(1rem, 1.8vw, 1.2rem);
-            color: var(--text-secondary);
-            max-width: 600px;
-            line-height: 1.85;
-            font-weight: 300;
-            opacity: 0;
-            animation: fadeUp .9s ease .35s forwards;
+            color: var(--text-secondary); max-width: 600px;
+            line-height: 1.85; font-weight: 300;
+            opacity: 0; animation: fadeUp .9s ease .35s forwards;
         }
+        @media (max-width: 768px) { .hero { min-height: 80vh; } .hero-content { padding: 0 1.5rem 3.5rem; } }
 
-        @media (max-width: 768px) {
-            .hero { min-height: 80vh; }
-            .hero-content { padding: 0 1.5rem 3.5rem; }
-        }
-
-        /* Content layout */
-        .content-wrap {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2.5rem;
-        }
-        @media (max-width: 768px) { .content-wrap { padding: 0 1.5rem; } }
-
-        /* Book section — cover + text side by side */
+        /* Book section */
         .book-section {
             border-top: 1px solid var(--border);
             padding: 5rem 2.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 1200px; margin: 0 auto;
         }
         .book-grid {
             display: grid;
-            grid-template-columns: 340px 1fr;
-            gap: 5rem;
-            align-items: start;
+            grid-template-columns: 320px 1fr;
+            gap: 5rem; align-items: start;
         }
 
-        /* Book cover mockup */
-        .book-mockup {
-            position: relative;
-        }
+        /* Cover mockup */
+        .book-mockup { position: relative; }
         .book-cover-img {
-            width: 100%;
-            aspect-ratio: 3/4;
-            object-fit: cover;
+            width: 100%; aspect-ratio: 3/4; object-fit: cover;
             display: block;
-            box-shadow:
-                4px 4px 0 0 var(--border),
-                8px 8px 0 0 #e8e8e8,
-                12px 12px 0 0 #f0f0f0;
+            box-shadow: 4px 4px 0 0 var(--border), 8px 8px 0 0 #e8e8e8, 12px 12px 0 0 #f0f0f0;
             border: 1px solid var(--border);
         }
         .book-badge {
-            position: absolute;
-            top: -14px; right: -14px;
-            background: var(--text);
-            color: var(--white);
+            position: absolute; top: -14px; right: -14px;
+            background: var(--text); color: var(--white);
             font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.65rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
+            font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
             padding: 0.4rem 0.75rem;
         }
 
-        /* Book text */
+        /* Book info */
         .book-info { padding-top: 0.5rem; }
-
         .section-label {
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            font-weight: 400;
+            font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--text-light); margin-bottom: 2rem;
         }
-
         .book-title {
             font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-            font-weight: 400;
-            letter-spacing: -0.02em;
-            line-height: 1.15;
+            font-weight: 400; letter-spacing: -0.02em; line-height: 1.15;
             margin-bottom: 2rem;
         }
-
         .book-body {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            line-height: 1.9;
-            font-weight: 300;
-            margin-bottom: 2.5rem;
+            color: var(--text-secondary); font-size: 1.05rem;
+            line-height: 1.9; font-weight: 300; margin-bottom: 2.5rem;
         }
         .book-body strong { color: var(--text); font-weight: 500; }
 
-        /* Edition tags */
-        .editions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 3rem;
-        }
-        .edition-tag {
-            border: 1px solid var(--border);
-            padding: 0.6rem 1.1rem;
-            font-size: 0.85rem;
-            font-weight: 400;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .edition-tag .dot {
-            width: 7px; height: 7px;
-            border-radius: 50%;
-            background: var(--text);
-        }
-        .edition-tag.limited .dot { background: #999; }
+        /* Edition buttons */
+        .editions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
 
-        /* Social follow CTAs */
-        .follow-label {
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .social-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
+        .edition-btn {
+            display: flex; align-items: center; gap: 0.75rem;
             padding: 0.85rem 1.6rem;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 400;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem; font-weight: 400;
             letter-spacing: 0.02em;
-            transition: all .25s;
+            text-decoration: none;
             border: 2px solid var(--text);
+            transition: all .3s ease;
+            position: relative;
+        }
+
+        /* Digital button — dark, turns teal on hover */
+        .btn-digital {
+            background: var(--text); color: var(--white);
+        }
+        .btn-digital:hover {
+            background: var(--teal);
+            border-color: var(--teal);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(74,159,165,0.25);
+        }
+        .btn-digital svg { width: 18px; height: 18px; }
+
+        /* Print button — teal outline */
+        .btn-print {
+            background: transparent;
+            color: var(--teal);
+            border-color: var(--teal);
+        }
+        .btn-print:hover {
+            background: var(--teal-light);
+            transform: translateY(-2px);
+        }
+        .btn-print .coming-soon-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+            background: var(--teal); color: var(--white);
+            padding: 0.15rem 0.45rem;
+        }
+
+        /* Price */
+        .price-row {
+            display: flex; align-items: baseline; gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        .price-amount {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 2rem; font-weight: 600; color: var(--text);
+        }
+        .price-format {
+            font-size: 0.82rem; color: var(--text-light);
+            font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.1em;
+        }
+
+        /* Print note */
+        .print-note {
+            margin-top: 2.5rem; padding: 1.5rem 2rem;
+            border: 1px solid var(--border); border-left: 3px solid var(--teal);
+            background: var(--teal-light);
+        }
+        .print-note p { font-size: 0.92rem; line-height: 1.75; color: var(--text-secondary); }
+        .print-note strong { color: var(--text); font-weight: 500; }
+        .print-note a { color: var(--teal); font-weight: 400; text-decoration: none; }
+        .print-note a:hover { text-decoration: underline; }
+
+        /* Social follow */
+        .follow-label {
+            font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--text-light); margin-bottom: 1rem; margin-top: 2.5rem;
+        }
+        .social-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .social-btn {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            padding: 0.85rem 1.4rem; text-decoration: none;
+            font-size: 0.9rem; font-weight: 400; letter-spacing: 0.02em;
+            transition: all .25s; border: 2px solid var(--text);
         }
         .social-btn.primary { background: var(--text); color: var(--white); }
         .social-btn.primary:hover { background: transparent; color: var(--text); }
         .social-btn.secondary { background: transparent; color: var(--text); }
         .social-btn.secondary:hover { background: var(--text); color: var(--white); }
-        .social-btn svg { width: 18px; height: 18px; }
+        .social-btn svg { width: 17px; height: 17px; }
 
-        /* Print note */
-        .print-note {
-            margin-top: 2.5rem;
-            padding: 1.5rem 2rem;
-            border: 1px solid var(--border);
-            border-left: 3px solid var(--text);
-            background: var(--white);
-        }
-        .print-note p {
-            font-size: 0.92rem;
-            line-height: 1.75;
-            color: var(--text-secondary);
-        }
-        .print-note strong { color: var(--text); font-weight: 500; }
-        .print-note a {
-            color: var(--text);
-            font-weight: 400;
-        }
-        .print-note a:hover { opacity: 0.6; }
-
-        /* Responsive grid */
+        /* Responsive */
         @media (max-width: 900px) {
-            .book-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            .book-mockup { max-width: 280px; }
-        }
-        @media (max-width: 600px) {
+            .book-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .book-mockup { max-width: 260px; }
             .book-section { padding: 4rem 1.5rem; }
-            .book-mockup { max-width: 220px; }
         }
 
         /* Footer */
         .footer-banner { width: 100%; overflow: hidden; }
-        .footer-banner img {
-            width: 100%; height: auto;
-            display: block;
-            filter: grayscale(100%);
-            object-fit: contain;
-        }
+        .footer-banner img { width: 100%; display: block; filter: grayscale(100%); object-fit: contain; }
         footer { padding: 4rem 2.5rem; background: var(--bg); }
         .footer-inner {
             max-width: 1400px; margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr auto;
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr auto;
             gap: 3rem; align-items: start;
         }
-        .footer-brand {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 600; letter-spacing: -0.02em;
-        }
-        .footer-contact h4, .footer-column h4 {
-            font-size: .95rem; font-weight: 500; margin-bottom: .8rem;
-        }
-        .footer-contact a, .footer-column a {
-            color: var(--text); text-decoration: none;
-            font-size: .95rem; font-weight: 300;
-        }
-        .footer-contact a:hover, .footer-column a:hover { opacity: .6; }
-        .footer-column { display: flex; flex-direction: column; gap: .5rem; }
-        .footer-column span { color: var(--text-secondary); font-size: .95rem; font-weight: 300; }
+        .footer-brand { font-family: 'IBM Plex Mono', monospace; font-size: clamp(2rem,4vw,3rem); font-weight: 600; letter-spacing: -0.02em; }
+        .footer-contact h4, .footer-col h4 { font-size: .95rem; font-weight: 500; margin-bottom: .8rem; }
+        .footer-contact a, .footer-col a { color: var(--text); text-decoration: none; font-size: .95rem; font-weight: 300; }
+        .footer-contact a:hover, .footer-col a:hover { opacity: .6; }
+        .footer-col { display: flex; flex-direction: column; gap: .5rem; }
+        .footer-col span { color: var(--text-secondary); font-size: .95rem; font-weight: 300; }
         .footer-icon svg { width: 24px; height: 24px; }
-        @media (max-width: 900px) {
-            .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
-            .footer-brand { grid-column: 1/-1; }
-        }
-        @media (max-width: 600px) { .footer-inner { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .footer-inner { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1/-1; } }
+        @media (max-width: 600px) { .footer-inner { grid-template-columns: 1fr; } footer { padding: 3rem 1.5rem; } }
         .footer-legal {
-            max-width: 1400px; margin: 0 auto;
-            padding-top: 2rem; border-top: 1px solid var(--border);
-            display: flex; justify-content: space-between;
-            align-items: center; flex-wrap: wrap; gap: 1rem;
+            max-width: 1400px; margin: 0 auto; padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
         }
-        .footer-legal p, .footer-legal a {
-            font-size: .85rem; color: var(--text-light);
-            font-weight: 300; text-decoration: none;
-        }
+        .footer-legal p, .footer-legal a { font-size: .85rem; color: var(--text-light); font-weight: 300; text-decoration: none; }
         .footer-legal a:hover { color: var(--text); }
         .footer-legal-links { display: flex; gap: 1.5rem; }
 
-        /* Animations */
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
+        /* Hamburger */
+        .hamburger {
+            width: 26px; height: 18px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            cursor: pointer; background: none; border: none; padding: 0;
         }
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity .8s ease, transform .8s ease;
+        .hamburger span {
+            width: 100%; height: 1.5px; background: var(--text); transition: all .3s ease;
         }
-        .reveal.visible { opacity: 1; transform: none; }
+        .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-        @media (max-width: 768px) {
-            footer { padding: 3rem 1.5rem; }
+        /* Side menu */
+        .side-menu {
+            position: fixed; top: 0; right: -350px; width: 350px; height: 100vh;
+            background: var(--bg); z-index: 999;
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 3rem;
+            transition: right .4s cubic-bezier(0.25,0.46,0.45,0.94);
+            box-shadow: -10px 0 40px rgba(0,0,0,0.15);
         }
+        .side-menu.active { right: 0; }
+        .side-menu nav { display: flex; flex-direction: column; gap: 2rem; }
+        .side-menu a {
+            font-size: 1.5rem; font-weight: 300; color: var(--text);
+            text-decoration: none; transition: opacity .2s, transform .2s;
+        }
+        .side-menu a:hover { opacity: .6; transform: translateX(10px); }
+        .side-menu a.current { font-weight: 500; }
+        .menu-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.4); z-index: 998;
+            opacity: 0; visibility: hidden; transition: all .3s;
+        }
+        .menu-overlay.active { opacity: 1; visibility: visible; }
+        @media (max-width: 768px) { .side-menu { width: 100%; right: -100%; } }
+
+
+
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
         @media (prefers-reduced-motion: reduce) {
-            .hero-kicker, .hero h1, .hero p { opacity: 1; animation: none; }
             .reveal { opacity: 1; transform: none; }
+            .hero-kicker, .hero h1, .hero p { opacity: 1; animation: none; }
         }
     </style>
 </head>
 <body>
     <div class="cursor-dot"></div>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <header>
         <div class="header-inner">
             <a href="index.html" class="logo">ECHO.11</a>
-            <div class="clock" id="clock">00:00:00</div>
+            <div class="header-right">
+                <div class="clock" id="clock">00:00:00</div>
+                <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
     </header>
 
-    <main id="main-content">
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <aside class="side-menu" id="sideMenu" aria-hidden="true">
+        <nav>
+            <a href="index.html#vision" class="menu-link">The Vision</a>
+            <a href="index.html#insights" class="menu-link">Insights</a>
+            <a href="frequency.html" class="menu-link">The Reset</a>
+            <a href="book.html" class="menu-link current">The Book</a>
+            <a href="about.html" class="menu-link">About Echo.11</a>
+        </nav>
+    </aside>
 
+    <main>
         <!-- Hero -->
         <section class="hero">
             <div class="hero-bg">
@@ -424,8 +379,8 @@
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <div class="hero-kicker">ECHO·11 · VOLUME ONE</div>
-                <h1><strong>Behind the Scenes.</strong><br>Coming Soon.</h1>
-                <p>111 pages. Generative AI, neuro-aesthetics, and the quiet architecture of the human mind — documented from the inside.</p>
+                <h1><strong>Behind the Scenes.</strong></h1>
+                <p>Born from the deafening noise of 2025. 111 pages that document the journey from chaos to clarity — blending generative AI, neuro-aesthetics, and binaural frequencies.</p>
             </div>
         </section>
 
@@ -433,14 +388,9 @@
         <section class="book-section">
             <div class="book-grid">
 
-                <!-- Cover mockup -->
+                <!-- Cover -->
                 <div class="book-mockup reveal">
-                    <img
-                        src="book-cover.jpg"
-                        alt="echo·11 — Behind the Scenes, Volume One, by Shira Sarid"
-                        class="book-cover-img"
-                        loading="lazy"
-                    >
+                    <img src="book-cover.jpg" alt="echo·11 Behind the Scenes — Volume One" class="book-cover-img" loading="lazy">
                     <span class="book-badge">Digital PDF</span>
                 </div>
 
@@ -458,53 +408,74 @@
                         <p>Not a how-to. A manifesto. A document of process. <strong>Made for the people who think in layers.</strong></p>
                     </div>
 
-                    <div class="editions">
-                        <div class="edition-tag">
-                            <span class="dot"></span>
-                            Digital Edition — PDF
-                        </div>
-                        <div class="edition-tag limited">
-                            <span class="dot"></span>
-                            Limited Print — 11 copies only
-                        </div>
+                    <!-- Price -->
+                    <div class="price-row">
+                        <div class="price-amount">$38</div>
+                        <div class="price-format">USD · Digital PDF · 111 pages</div>
                     </div>
 
+                    <!-- Edition buttons -->
+                    <div class="editions">
+                        <a href="https://www.paypal.com/ncp/payment/6SBJPUZ3KQ22N"
+                           class="edition-btn btn-digital"
+                           target="_blank" rel="noopener noreferrer"
+                           id="buyButton">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                            </svg>
+                            Digital Edition — $38
+                        </a>
+
+                        <a href="https://instagram.com/shira.sarid"
+                           class="edition-btn btn-print"
+                           target="_blank" rel="noopener noreferrer">
+                            Limited Print
+                            <span class="coming-soon-tag">Coming Soon</span>
+                        </a>
+                    </div>
+
+                    <!-- Follow -->
                     <p class="follow-label">Follow for the drop</p>
                     <div class="social-links">
                         <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer" class="social-btn primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <rect x="2" y="2" width="20" height="20" rx="5"/>
                                 <circle cx="12" cy="12" r="4"/>
                                 <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
                             </svg>
                             Instagram
                         </a>
                         <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer" class="social-btn secondary">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                                 <path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.852 0 1.264.64 1.264 1.408 0 .858-.546 2.141-.828 3.33-.236.995.499 1.806 1.476 1.806 1.771 0 3.135-1.867 3.135-4.561 0-2.385-1.714-4.052-4.161-4.052-2.834 0-4.497 2.126-4.497 4.322 0 .856.33 1.772.741 2.273a.3.3 0 0 1 .069.284c-.075.314-.243.995-.276 1.134-.044.183-.146.222-.338.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.522 0 10-4.477 10-10S17.522 2 12 2z"/>
                             </svg>
                             Pinterest
                         </a>
                     </div>
 
-                    <!-- Print edition note -->
+                    <!-- Print note -->
                     <div class="print-note reveal">
                         <p>
-                            <strong>Limited print edition — 11 copies.</strong>
+                            <strong>Limited print edition — 11 copies only.</strong>
                             Large-format, physical. If there is demand, I will produce exactly 11 numbered copies — no more, no less. To be considered, <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">send me a DM on Instagram</a> before the digital launch. First come, first served.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
-
+        <!-- Copyright notice -->
+        <div style="max-width:1200px;margin:0 auto;padding:0 2.5rem 4rem;border-top:1px solid var(--border);padding-top:2.5rem;">
+            <p style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--text-light);letter-spacing:0.08em;line-height:1.8;">
+                Personal use only. No reproduction, sharing, distribution, or resale permitted.<br>
+                © 2026 Shira Sarid / ECHO.11. All rights reserved.
+            </p>
+        </div>
     </main>
 
     <!-- Footer -->
     <div class="footer-banner">
-        <img src="book-silence.jpg" alt="Astronaut helmet closeup, eyes closed" loading="lazy">
+        <img src="book-silence.jpg" alt="Astronaut helmet, eyes closed" loading="lazy">
     </div>
-
     <footer>
         <div class="footer-inner">
             <div class="footer-brand">ECHO.11</div>
@@ -512,14 +483,14 @@
                 <h4>Let's connect in the noise</h4>
                 <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
             </div>
-            <div class="footer-column">
+            <div class="footer-col">
                 <h4>Subtitle</h4>
                 <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
                 <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
                 <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer">Pinterest</a>
                 <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
             </div>
-            <div class="footer-column">
+            <div class="footer-col">
                 <h4>Signals</h4>
                 <span>Strategy</span>
                 <span>Psychology</span>
@@ -527,54 +498,86 @@
             </div>
             <div class="footer-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
                 </svg>
             </div>
         </div>
         <div class="footer-legal">
             <p>© 2026 ECHO.11 by Shira Sarid. All rights reserved.</p>
             <div class="footer-legal-links">
-                <a href="index.html">← Back to Echo.11</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="accessibility.html">Accessibility</a>
             </div>
         </div>
     </footer>
 
     <script>
+        // Menu
+        const hamburger = document.getElementById('hamburger');
+        const sideMenu  = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        function toggleMenu() {
+            const isOpen = sideMenu.classList.contains('active');
+            hamburger.classList.toggle('active');
+            sideMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', !isOpen);
+            sideMenu.setAttribute('aria-hidden', isOpen);
+            document.body.style.overflow = isOpen ? '' : 'hidden';
+        }
+        hamburger.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+        document.querySelectorAll('.menu-link').forEach(l => l.addEventListener('click', () => {
+            if (sideMenu.classList.contains('active')) toggleMenu();
+        }));
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && sideMenu.classList.contains('active')) toggleMenu();
+        });
+
         // Clock
         function updateClock() {
             const now = new Date();
-            const h = String(now.getHours()).padStart(2,'0');
-            const m = String(now.getMinutes()).padStart(2,'0');
-            const s = String(now.getSeconds()).padStart(2,'0');
-            document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+            document.getElementById('clock').textContent =
+                [now.getHours(),now.getMinutes(),now.getSeconds()]
+                .map(n=>String(n).padStart(2,'0')).join(':');
         }
-        setInterval(updateClock, 1000);
-        updateClock();
+        setInterval(updateClock,1000); updateClock();
 
         // Cursor
-        const cursorDot = document.querySelector('.cursor-dot');
-        if (cursorDot && window.innerWidth > 768) {
+        const dot = document.querySelector('.cursor-dot');
+        if (dot && window.innerWidth > 768) {
             document.addEventListener('mousemove', e => {
-                cursorDot.style.left = e.clientX + 'px';
-                cursorDot.style.top  = e.clientY + 'px';
+                dot.style.left = e.clientX+'px'; dot.style.top = e.clientY+'px';
             });
-            document.querySelectorAll('a, button').forEach(el => {
-                el.addEventListener('mouseenter', () => cursorDot.classList.add('hover'));
-                el.addEventListener('mouseleave', () => cursorDot.classList.remove('hover'));
+            document.querySelectorAll('a,button').forEach(el => {
+                el.addEventListener('mouseenter',()=>dot.classList.add('hover'));
+                el.addEventListener('mouseleave',()=>dot.classList.remove('hover'));
             });
         }
 
-        // Reveal on scroll
-        const revealEls = document.querySelectorAll('.reveal');
+        // Reveal
         const obs = new IntersectionObserver(entries => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
-        revealEls.forEach(el => obs.observe(el));
+            entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
         window.addEventListener('load', () => {
-            revealEls.forEach(el => {
+            document.querySelectorAll('.reveal').forEach(el => {
                 if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
             });
         });
+
+        // GA tracking
+        const buyBtn = document.getElementById('buyButton');
+        if (buyBtn) {
+            buyBtn.addEventListener('click', () => {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'begin_checkout', {
+                        currency: 'USD', value: 38,
+                        items: [{ item_name: 'ECHO.11 Behind the Scenes — Digital Edition' }]
+                    });
+                }
+            });
+        }
     </script>
 </body>
 </html>
