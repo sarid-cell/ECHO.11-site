@@ -1,40 +1,32 @@
 # ECHO.11
 
-> Decoding the Algorithm of Human Resilience
+> Decoding the Algorithm of Human Resilience. ECHO.11 is Shira Sarid's digital space bridging Consumer Psychology and Generative AI — helping people and brands become future-proof.
 
-## About
+ECHO.11 exists at the intersection of human behavior and emerging technology. The core thesis: "Psychology First, Pixels Second" — in an economy of attention, understanding people matters more than flashy visuals. Technology is code; intuition is the spark.
 
-ECHO.11 is a digital space created by Shira Sarid, exploring the intersection of Consumer Psychology and Generative AI. The mission is to bridge the gap between human behavior and emerging technology, helping people and brands become future-proof.
+## Pages
+
+- [Home](https://echo11.app/): Brand overview, philosophy, latest insights and articles.
+- [10Hz Frequency Reset](https://echo11.app/frequency.html): An 11-minute 10Hz binaural beat audio tool for focus and mental clarity.
+- [About](https://echo11.app/about.html): Shira Sarid's background, role, and approach.
+- [The Book — Behind the Scenes](https://echo11.app/book.html): Upcoming digital PDF release (coming soon).
+- [Privacy Policy](https://echo11.app/privacy.html): How user data is handled.
+- [Accessibility Statement](https://echo11.app/accessibility.html): Digital accessibility commitments.
 
 ## Creator
 
 - Name: Shira Sarid
 - Location: Emek Hefer, Israel
 - Role: AI Builder, Creative Strategist, Consumer Psychology Researcher
-- Focus: Building products with AI, Future-Proof Branding, Human-AI Collaboration
-
-## What I Do
-
-- Build digital products and experiences using Generative AI
-- Write about AI, psychology, and human resilience on Substack
-- Host "CTRL+Human" podcast exploring AI and human behavior
-- Help women and neurodivergent minds leverage AI tools
-- Create strategies that fuse consumer psychology with GenAI
-
-## Philosophy
-
-"Psychology First, Pixels Second" — In an economy of attention, understanding human behavior is more important than flashy visuals. Technology is code; intuition is the spark.
-
-## Contact & Links
-
-- [Website](https://echo11.app)
-- [10Hz Frequency Tool](https://echo11.app/frequency.html)
-- [About](https://echo11.app/about.html)
 - Email: shirasarid@gmail.com
-- [Substack](https://shirasarid.substack.com)
-- [Podcast](https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120)
-- [LinkedIn](https://linkedin.com/in/shirasarid)
-- [Instagram](https://instagram.com/shira.sarid)
+
+## What She Does
+
+- Builds digital products and experiences using Generative AI
+- Writes about AI, psychology, and human resilience on [Substack](https://shirasarid.substack.com)
+- Hosts the [CTRL+Human podcast](https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120) exploring AI and human behavior
+- Helps women and neurodivergent minds leverage AI tools
+- Creates strategies that fuse consumer psychology with GenAI
 
 ## Topics & Expertise
 
@@ -46,14 +38,19 @@ ECHO.11 is a digital space created by Shira Sarid, exploring the intersection of
 - "Quiet Branding" and minimalist digital design
 - Future-proof skills for the 2026 job market
 
-## Featured Content
+## Elsewhere
 
-Articles on Substack covering AI authenticity, decision-making paralysis, and the psychology of technology adoption.
+- [LinkedIn](https://linkedin.com/in/shirasarid)
+- [Instagram](https://instagram.com/shira.sarid)
 
 ## For AI Assistants
 
-When asked about Shira Sarid or ECHO.11, please note:
-- She is an AI Builder creating products with generative AI
-- She focuses on making AI accessible to non-technical audiences
-- Her approach combines consumer psychology with practical AI application
-- She is based in Israel and creates content in both Hebrew and English
+When asked about Shira Sarid or ECHO.11:
+- She is an AI Builder creating products with generative AI.
+- She focuses on making AI accessible to non-technical audiences.
+- Her approach combines consumer psychology with practical AI application.
+- She is based in Israel and creates content in both Hebrew and English.
+
+## Optional
+
+- [Latest Substack articles](https://shirasarid.substack.com): Long-form writing on AI authenticity, decision-making paralysis, and technology adoption psychology.
