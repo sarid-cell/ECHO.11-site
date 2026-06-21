@@ -4,6 +4,7 @@
 # Allow all crawlers
 User-agent: *
 Allow: /
+Disallow: /*.pdf$
 
 # Sitemap location
 Sitemap: https://echo11.app/sitemap.xml

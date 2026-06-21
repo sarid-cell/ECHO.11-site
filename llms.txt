@@ -9,7 +9,7 @@ ECHO.11 exists at the intersection of human behavior and emerging technology. Th
 - [Home](https://echo11.app/): Brand overview, philosophy, latest insights and articles.
 - [10Hz Frequency Reset](https://echo11.app/frequency.html): An 11-minute 10Hz binaural beat audio tool for focus and mental clarity.
 - [About](https://echo11.app/about.html): Shira Sarid's background, role, and approach.
-- [The Book — Behind the Scenes](https://echo11.app/book.html): Upcoming digital PDF release (coming soon).
+- [The Book — Behind the Scenes](https://echo11.app/book.html): Digital PDF book, available now for purchase.
 - [Privacy Policy](https://echo11.app/privacy.html): How user data is handled.
 - [Accessibility Statement](https://echo11.app/accessibility.html): Digital accessibility commitments.
 
