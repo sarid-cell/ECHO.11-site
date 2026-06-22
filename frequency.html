@@ -5,6 +5,7 @@
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { analytics_storage: localStorage.getItem('echo11_consent') === 'granted' ? 'granted' : 'denied' });
       gtag('js', new Date());
       gtag('config', 'G-TP9YRD6TN8');
     </script>
@@ -13,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ECHO.11 | 10Hz — The 11-Minute Reset</title>
     <meta name="description" content="11 minutes. One frequency. 10Hz binaural beat for focus and mental clarity. By ECHO.11.">
+    <meta name="author" content="Shira Sarid">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://echo11.app/frequency.html" />
 
@@ -472,6 +474,22 @@
             .sessions-dot { animation:none; }
             .scroll-cue { animation:none; opacity:1; }
         }
+
+        .skip-link {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            background: var(--text);
+            color: var(--white);
+            padding: 12px 20px;
+            z-index: 9999;
+            transition: top 0.3s;
+            text-decoration: none;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
     </style>
 
     <script type="application/ld+json">
@@ -524,6 +542,7 @@
     </script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="cursor-dot"></div>
 
     <header>
@@ -584,7 +603,7 @@
         </div>
     </div>
 
-    <main>
+    <main id="main-content">
         <!-- ── HERO PLAYER ── -->
         <section class="hero">
             <div class="hero-video">
@@ -903,8 +922,23 @@
         // ── MODALS ──
         const headphoneModal = document.getElementById('headphoneModal');
         const completeModal  = document.getElementById('completeModal');
-        function openModal(modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
-        function closeModal(modal) { modal.classList.remove('active'); document.body.style.overflow = ''; }
+        let lastFocusedEl = null;
+
+        function getFocusable(modal) {
+            return Array.from(modal.querySelectorAll('button, a[href]')).filter(el => el.offsetParent !== null);
+        }
+        function openModal(modal) {
+            lastFocusedEl = document.activeElement;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            const focusable = getFocusable(modal);
+            if (focusable[0]) focusable[0].focus();
+        }
+        function closeModal(modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            if (lastFocusedEl) lastFocusedEl.focus();
+        }
 
         document.getElementById('headphoneConfirm').addEventListener('click', () => {
             sessionStorage.setItem('echo11_headphone_ack', '1');
@@ -917,14 +951,20 @@
             m.addEventListener('click', e => { if (e.target === m) closeModal(m); });
         });
         document.addEventListener('keydown', e => {
-            if (e.key !== 'Escape') return;
-            if (headphoneModal.classList.contains('active')) closeModal(headphoneModal);
-            if (completeModal.classList.contains('active')) closeModal(completeModal);
+            const activeModal = [headphoneModal, completeModal].find(m => m.classList.contains('active'));
+            if (!activeModal) return;
+            if (e.key === 'Escape') { closeModal(activeModal); return; }
+            if (e.key !== 'Tab') return;
+            const focusable = getFocusable(activeModal);
+            if (!focusable.length) return;
+            const first = focusable[0], last = focusable[focusable.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
         });
 
         // ── SESSIONS COUNTER ──
         const SUPABASE_URL      = 'https://nomtmlidkuhkllniaytu.supabase.co';
-        const SUPABASE_ANON_KEY = 'PASTE-YOUR-SUPABASE-ANON-KEY-HERE';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vbXRtbGlka3Voa2xsbmlheXR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1ODUzMzIsImV4cCI6MjA5NjE2MTMzMn0.LO7mdpCI_8dmDFdnvQA7fQoSts_yqksKgnLUt6O11_U';
         const TODAY = new Date().toISOString().split('T')[0];
 
         function localCount() {
@@ -939,33 +979,53 @@
         }
 
         async function getCount() {
-            if (SUPABASE_ANON_KEY !== 'PASTE-YOUR-SUPABASE-ANON-KEY-HERE') {
-                try {
-                    const r = await fetch(`${SUPABASE_URL}/rest/v1/frequency_sessions?date=eq.${TODAY}&select=count`,
-                        { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` }});
-                    const d = await r.json();
-                    if (d && d[0]) return d[0].count;
-                } catch(e){}
-            }
+            try {
+                const r = await fetch(`${SUPABASE_URL}/rest/v1/frequency_sessions?date=eq.${TODAY}&select=count`,
+                    { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` }});
+                const d = await r.json();
+                if (d && d[0]) return d[0].count;
+            } catch(e){}
             return localCount();
         }
 
         async function increment() {
             const n = localIncrement();
             document.getElementById('sessionsNum').textContent = n;
-            if (SUPABASE_ANON_KEY !== 'PASTE-YOUR-SUPABASE-ANON-KEY-HERE') {
-                try {
-                    await fetch(`${SUPABASE_URL}/rest/v1/frequency_sessions`, {
-                        method: 'POST',
-                        headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-                            'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates' },
-                        body: JSON.stringify({ date: TODAY, count: n })
-                    });
-                } catch(e){}
-            }
+            try {
+                await fetch(`${SUPABASE_URL}/rest/v1/frequency_sessions`, {
+                    method: 'POST',
+                    headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates' },
+                    body: JSON.stringify({ date: TODAY, count: n })
+                });
+            } catch(e){}
         }
 
         getCount().then(n => { document.getElementById('sessionsNum').textContent = n || 0; });
+    </script>
+
+    <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
+        <span>We use Google Analytics to understand site usage. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Learn more</a></span>
+        <div style="display:flex;gap:8px;">
+            <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;">Accept</button>
+            <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:4px;cursor:pointer;">Decline</button>
+        </div>
+    </div>
+    <script>
+        (function(){
+            var consent = localStorage.getItem('echo11_consent');
+            var banner = document.getElementById('cookieConsent');
+            if (consent === 'granted' || consent === 'denied') { banner.style.display = 'none'; return; }
+            document.getElementById('cookieAccept').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'granted');
+                if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+                banner.style.display = 'none';
+            });
+            document.getElementById('cookieDecline').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'denied');
+                banner.style.display = 'none';
+            });
+        })();
     </script>
 </body>
 </html>

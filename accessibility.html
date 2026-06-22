@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TP9YRD6TN8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { analytics_storage: localStorage.getItem('echo11_consent') === 'granted' ? 'granted' : 'denied' });
+      gtag('js', new Date());
+      gtag('config', 'G-TP9YRD6TN8');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accessibility Statement | ECHO.11</title>
     <meta name="description" content="Accessibility Statement for ECHO.11 - Our commitment to digital accessibility.">
+    <meta name="author" content="Shira Sarid">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://echo11.app/accessibility.html" />
     <meta property="og:url" content="https://echo11.app/accessibility.html" />
@@ -13,6 +24,12 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="ECHO.11">
     <meta property="og:image" content="https://echo11.app/assets/images/hero.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Accessibility Statement | ECHO.11">
+    <meta name="twitter:description" content="Accessibility Statement for ECHO.11 - Our commitment to digital accessibility.">
+    <meta name="twitter:image" content="https://echo11.app/assets/images/hero.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -219,9 +236,26 @@
         body.a11y-high-contrast .a11y-btn { background: #000; border-color: #fff; color: #fff; }
         body.a11y-grayscale { filter: grayscale(100%); }
         body.a11y-highlight-links a { background: yellow !important; color: #000 !important; padding: 2px 4px; }
+
+        .skip-link {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            background: var(--text);
+            color: var(--white);
+            padding: 12px 20px;
+            z-index: 9999;
+            transition: top 0.3s;
+            text-decoration: none;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header>
         <div class="header-inner">
             <a href="index.html" class="logo">ECHO.11</a>
@@ -250,7 +284,7 @@
         </nav>
     </aside>
 
-    <main>
+    <main id="main-content">
         <h1>Accessibility Statement</h1>
         <p class="last-updated">Last updated: March 2026</p>
 
@@ -390,6 +424,30 @@
             a11yBtns.forEach(btn => { document.body.classList.remove(btn.dataset.mode); btn.classList.remove('active'); });
             localStorage.removeItem('a11y');
         });
+    </script>
+
+    <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
+        <span>We use Google Analytics to understand site usage. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Learn more</a></span>
+        <div style="display:flex;gap:8px;">
+            <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;">Accept</button>
+            <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:4px;cursor:pointer;">Decline</button>
+        </div>
+    </div>
+    <script>
+        (function(){
+            var consent = localStorage.getItem('echo11_consent');
+            var banner = document.getElementById('cookieConsent');
+            if (consent === 'granted' || consent === 'denied') { banner.style.display = 'none'; return; }
+            document.getElementById('cookieAccept').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'granted');
+                if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+                banner.style.display = 'none';
+            });
+            document.getElementById('cookieDecline').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'denied');
+                banner.style.display = 'none';
+            });
+        })();
     </script>
 </body>
 </html>

@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TP9YRD6TN8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { analytics_storage: localStorage.getItem('echo11_consent') === 'granted' ? 'granted' : 'denied' });
+      gtag('js', new Date());
+      gtag('config', 'G-TP9YRD6TN8');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy | ECHO.11</title>
     <meta name="description" content="Privacy Policy for ECHO.11 - How we handle your data and protect your privacy.">
+    <meta name="author" content="Shira Sarid">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://echo11.app/privacy.html">
 
@@ -15,6 +26,12 @@
     <meta property="og:url" content="https://echo11.app/privacy.html">
     <meta property="og:site_name" content="ECHO.11">
     <meta property="og:image" content="https://echo11.app/assets/images/hero.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Privacy Policy | ECHO.11">
+    <meta name="twitter:description" content="Privacy Policy for ECHO.11 - How we handle your data and protect your privacy.">
+    <meta name="twitter:image" content="https://echo11.app/assets/images/hero.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -209,9 +226,26 @@
         body.a11y-high-contrast .a11y-btn { background: #000; border-color: #fff; color: #fff; }
         body.a11y-grayscale { filter: grayscale(100%); }
         body.a11y-highlight-links a { background: yellow !important; color: #000 !important; padding: 2px 4px; }
+
+        .skip-link {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            background: var(--text);
+            color: var(--white);
+            padding: 12px 20px;
+            z-index: 9999;
+            transition: top 0.3s;
+            text-decoration: none;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header>
         <div class="header-inner">
             <a href="index.html" class="logo">ECHO.11</a>
@@ -240,7 +274,7 @@
         </nav>
     </aside>
 
-    <main>
+    <main id="main-content">
         <h1>Privacy Policy</h1>
         <p class="last-updated">Last updated: March 2026</p>
 
@@ -249,9 +283,10 @@
         <h2>Information We Collect</h2>
         <p>This website is primarily informational and does not require user registration or login. We may collect limited information in the following ways:</p>
         <ul>
-            <li><strong>Analytics Data:</strong> We may use privacy-focused analytics to understand how visitors interact with our site. This may include anonymized data such as page views, referring sites, and general geographic location.</li>
+            <li><strong>Analytics Data:</strong> We use Google Analytics (Google's gtag.js) to understand how visitors interact with our site. This may include anonymized data such as page views, referring sites, device type, and general geographic location. Google may set cookies to enable this. See Google's <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> for details.</li>
+            <li><strong>Payment Information:</strong> If you purchase a digital product, payment is processed entirely by PayPal. We do not receive or store your card or PayPal account details — only confirmation that a purchase was completed. See PayPal's <a href="https://www.paypal.com/myaccount/privacy/privacyhub" target="_blank" rel="noopener noreferrer">Privacy Policy</a> for details.</li>
             <li><strong>Contact Information:</strong> If you choose to contact us via email, we will receive and store the information you provide, including your email address and message content.</li>
-            <li><strong>Cookies:</strong> We may use essential cookies to ensure basic website functionality. We do not use tracking cookies for advertising purposes.</li>
+            <li><strong>Cookies:</strong> We use essential cookies for basic website functionality, and analytics cookies set by Google Analytics as described above. We do not use cookies for third-party advertising.</li>
         </ul>
 
         <h2>How We Use Information</h2>
@@ -260,10 +295,11 @@
             <li>To improve the website's content and user experience</li>
             <li>To respond to inquiries and communications</li>
             <li>To analyze website traffic and usage patterns</li>
+            <li>To process and confirm digital product purchases via PayPal</li>
         </ul>
 
         <h2>Third-Party Services</h2>
-        <p>This website may contain links to external sites, including Substack for articles and social media platforms. These third-party services have their own privacy policies, and we encourage you to review them. We are not responsible for the privacy practices of external websites.</p>
+        <p>This website uses the following third-party services, each governed by its own privacy policy: <strong>Google Analytics</strong> (website usage analytics) and <strong>PayPal</strong> (payment processing for digital products). The site may also link to external sites, including Substack for articles and social media platforms. We are not responsible for the privacy practices of these external services.</p>
 
         <h2>Data Security</h2>
         <p>We implement reasonable security measures to protect any information collected through this website. However, no method of transmission over the Internet is 100% secure.</p>
@@ -357,6 +393,30 @@
             a11yBtns.forEach(btn => { document.body.classList.remove(btn.dataset.mode); btn.classList.remove('active'); });
             localStorage.removeItem('a11y');
         });
+    </script>
+
+    <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
+        <span>We use Google Analytics to understand site usage. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Learn more</a></span>
+        <div style="display:flex;gap:8px;">
+            <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;">Accept</button>
+            <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:4px;cursor:pointer;">Decline</button>
+        </div>
+    </div>
+    <script>
+        (function(){
+            var consent = localStorage.getItem('echo11_consent');
+            var banner = document.getElementById('cookieConsent');
+            if (consent === 'granted' || consent === 'denied') { banner.style.display = 'none'; return; }
+            document.getElementById('cookieAccept').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'granted');
+                if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+                banner.style.display = 'none';
+            });
+            document.getElementById('cookieDecline').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'denied');
+                banner.style.display = 'none';
+            });
+        })();
     </script>
 </body>
 </html>
