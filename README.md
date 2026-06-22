@@ -1,15 +1,15 @@
-# ECHO.11
+# echo·11
 
 <div align="center">
 
-![ECHO.11](hero.png)
+<img src="assets/images/hero.png" alt="echo·11" width="100%">
 
 ### Decoding the Algorithm of Human Resilience
 
-*Bridging Consumer Psychology and Generative AI to build future-proof brands.*
+*Bridging consumer psychology and generative AI to build future-proof brands.*
 
-[![Live Site](https://img.shields.io/badge/Live%20Site-Visit-black?style=for-the-badge)](https://echo11-site.vercel.app)
-[![Substack](https://img.shields.io/badge/Substack-Subscribe-orange?style=for-the-badge&logo=substack)](https://shira.substack.com)
+[![Live Site](https://img.shields.io/badge/Live%20Site-echo11.app-black?style=for-the-badge)](https://echo11.app)
+[![Substack](https://img.shields.io/badge/Substack-Subscribe-FF6719?style=for-the-badge&logo=substack&logoColor=white)](https://shira.substack.com)
 
 </div>
 
@@ -17,32 +17,66 @@
 
 ## About
 
-**ECHO.11** is a digital laboratory exploring the intersection of consumer psychology and generative AI. Created by [Shira Sarid](https://linkedin.com/in/shirasarid), it's a curated space for "Quiet Branding" and strategic foresight.
+**echo·11** is a digital laboratory exploring the intersection of consumer psychology and generative AI — a curated space for "Quiet Branding" and strategic foresight, created by [Shira Sarid](https://linkedin.com/in/shirasarid).
 
 > *"In an age of artificial intelligence, our most powerful tool remains the human mind."*
 
-## What You'll Find Here
+## What's on the Site
 
-- **Neuro-Aesthetics** — How visual design impacts cognitive load
-- **2026 Design Forecast** — Where generative art is heading
-- **Future-Proof Skills** — Capabilities for the changing job market
-- **Calm AI** — Creating digital spaces that feel human
+| Page | Description |
+|---|---|
+| [`index.html`](index.html) | Homepage — vision, insights, and the core thesis |
+| [`about.html`](about.html) | About echo·11 and Shira Sarid |
+| [`book.html`](book.html) | *Behind the Scenes* — the digital book, available for purchase |
+| [`book-thankyou.html`](book-thankyou.html) | Post-purchase delivery page |
+| [`frequency.html`](frequency.html) | Interactive 10Hz binaural-beat reset tool (Web Audio API) |
+| [`privacy.html`](privacy.html) / [`accessibility.html`](accessibility.html) | Policy pages |
+
+## Project Structure
+
+```
+.
+├── index.html, about.html, book.html, ...   # Pages (static HTML/CSS/JS)
+├── assets/
+│   ├── images/                               # Photos, illustrations (PNG + WebP)
+│   ├── video/                                # Background/loop video
+│   └── docs/                                 # Purchasable PDF
+├── robots.txt, sitemap.xml, llms.txt         # Crawler & LLM discovery config
+└── site-content.md                           # Plain-text content reference
+```
 
 ## Tech Stack
 
-- HTML5 / CSS3 / Vanilla JavaScript
-- Hosted on [Vercel](https://vercel.com)
-- Typography: [Outfit](https://fonts.google.com/specimen/Outfit) + [Space Mono](https://fonts.google.com/specimen/Space+Mono)
-- Google Analytics 4 (GA4)
+- **Frontend** — HTML5, CSS3, vanilla JavaScript (no build step, no framework)
+- **Audio** — Web Audio API for the binaural-beat frequency tool
+- **Hosting** — [Vercel](https://vercel.com), auto-deployed from `main`
+- **Analytics** — Google Analytics 4 (GA4) event tracking
+- **Typography** — [Outfit](https://fonts.google.com/specimen/Outfit) + [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono)
 
-## Features
+## Key Features
 
-- ⏰ Live digital clock
-- 📱 Fully responsive
-- ♿ Accessibility-first (WCAG compliant)
-- 🎭 Scroll reveal animations
-- 🍔 Side navigation menu
-- 📊 Real-time User Tracking with GA4
+- 🎧 10Hz binaural-beat session tool with a live progress ring and headphone check
+- 📖 End-to-end digital book purchase flow (PayPal / card → delivery page → PDF)
+- ♿ Accessibility-first: skip links, `aria-hidden`/`inert` side menu, WCAG-conscious contrast
+- 🤖 SEO + LLM-crawlability: structured data (JSON-LD), `llms.txt`, semantic markup
+- 🖼️ WebP-first images with PNG fallback via `<picture>`
+- 📱 Fully responsive, scroll-reveal animations
+
+## Local Development
+
+This is a static site — no build step required.
+
+```bash
+git clone https://github.com/sarid-cell/ECHO.11-site.git
+cd ECHO.11-site
+python3 -m http.server 8000   # or any static file server
+```
+
+Then open `http://localhost:8000`.
+
+## Deployment
+
+Pushes to `main` deploy automatically to production via Vercel. Feature work happens on branches and is merged into `main` once verified.
 
 ## Connect
 
@@ -60,7 +94,5 @@
 <div align="center">
 
 **Psychology First, Pixels Second.**
-
-*Built with 🖤 by Shira Sarid × Claude*
 
 </div>
