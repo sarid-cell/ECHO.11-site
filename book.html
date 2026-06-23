@@ -634,7 +634,16 @@
                 const edition = fd.get('edition');
                 const name = fd.get('name');
                 const email = fd.get('email');
-                if (!instagram || !edition || !name) return;
+                if (!edition) {
+                    waitlistStatus.style.color = '#c0392b';
+                    waitlistStatus.textContent = 'Please choose Digital PDF or Limited Print above.';
+                    return;
+                }
+                if (!name || !instagram) {
+                    waitlistStatus.style.color = '#c0392b';
+                    waitlistStatus.textContent = 'Please fill in your name and Instagram handle.';
+                    return;
+                }
 
                 const submitBtn = waitlistForm.querySelector('button[type="submit"]');
                 submitBtn.disabled = true;
