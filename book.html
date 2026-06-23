@@ -456,9 +456,10 @@
                                 </label>
                                 <label class="waitlist-option">
                                     <input type="radio" name="edition" value="physical">
-                                    <span>Limited Print (11 copies) <span id="physicalCount" class="waitlist-count"></span></span>
+                                    <span>Limited Print (11 copies, pricing announced soon) <span id="physicalCount" class="waitlist-count"></span></span>
                                 </label>
                             </div>
+                            <p id="digitalRevenue" class="waitlist-count" style="margin-bottom:0.8rem;"></p>
                             <div class="waitlist-fields">
                                 <input type="text" name="name" placeholder="Name" required>
                                 <input type="text" name="instagram" placeholder="Instagram @handle or link" required>
@@ -606,6 +607,14 @@
         const SUPABASE_URL      = 'https://nomtmlidkuhkllniaytu.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vbXRtbGlka3Voa2xsbmlheXR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1ODUzMzIsImV4cCI6MjA5NjE2MTMzMn0.LO7mdpCI_8dmDFdnvQA7fQoSts_yqksKgnLUt6O11_U';
 
+        function renderWaitlistCounts(row) {
+            if (!row) return;
+            document.getElementById('digitalCount').textContent = `· ${row.digital_count} on the list`;
+            document.getElementById('physicalCount').textContent = `· ${row.physical_count} on the list`;
+            document.getElementById('digitalRevenue').textContent =
+                `≈ $${row.digital_count * 38} in potential digital sales so far`;
+        }
+
         async function loadWaitlistCounts() {
             try {
                 const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_waitlist_counts`, {
@@ -615,11 +624,7 @@
                     body: '{}'
                 });
                 const d = await r.json();
-                const row = Array.isArray(d) ? d[0] : d;
-                if (row) {
-                    document.getElementById('digitalCount').textContent = `· ${row.digital_count} on the list`;
-                    document.getElementById('physicalCount').textContent = `· ${row.physical_count} on the list`;
-                }
+                renderWaitlistCounts(Array.isArray(d) ? d[0] : d);
             } catch (e) {}
         }
         loadWaitlistCounts();
@@ -658,11 +663,7 @@
                     });
                     if (!r.ok) throw new Error('request failed');
                     const d = await r.json();
-                    const row = Array.isArray(d) ? d[0] : d;
-                    if (row) {
-                        document.getElementById('digitalCount').textContent = `· ${row.digital_count} on the list`;
-                        document.getElementById('physicalCount').textContent = `· ${row.physical_count} on the list`;
-                    }
+                    renderWaitlistCounts(Array.isArray(d) ? d[0] : d);
                     if (typeof gtag === 'function') {
                         gtag('event', 'join_waitlist', { edition });
                     }
