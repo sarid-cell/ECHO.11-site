@@ -992,12 +992,16 @@
             const n = localIncrement();
             document.getElementById('sessionsNum').textContent = n;
             try {
-                await fetch(`${SUPABASE_URL}/rest/v1/frequency_sessions`, {
+                const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_session_count`, {
                     method: 'POST',
                     headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-                        'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates' },
-                    body: JSON.stringify({ date: TODAY, count: n })
+                        'Content-Type': 'application/json' },
+                    body: JSON.stringify({ p_date: TODAY })
                 });
+                const serverCount = await r.json();
+                if (typeof serverCount === 'number') {
+                    document.getElementById('sessionsNum').textContent = serverCount;
+                }
             } catch(e){}
         }
 
