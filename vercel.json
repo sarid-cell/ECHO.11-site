@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "echo-11-site.vercel.app"
+        }
+      ],
+      "destination": "https://echo11.app/:path*",
+      "permanent": true
+    }
+  ]
+}
