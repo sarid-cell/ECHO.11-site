@@ -443,7 +443,10 @@
                     <!-- Waitlist -->
                     <div class="waitlist-block">
                         <p class="follow-label" style="margin-bottom:1rem;">
-                            Sales open soon. Join the waitlist now and get free postcard downloads from the book on launch.
+                            Sales open soon. Join the waitlist now and get free postcard downloads from the book on launch — early registrants get the launch price for the first 72 hours only.
+                        </p>
+                        <p style="font-size:0.92rem; color:var(--text-secondary); line-height:1.7; margin-bottom:1.2rem;">
+                            Built for people navigating ADHD, post-trauma, misophonia, insomnia, and focus struggles — a tool available 24/7.
                         </p>
                         <form id="waitlistForm" novalidate>
                             <div class="waitlist-options" role="radiogroup" aria-label="Edition preference">
@@ -457,8 +460,9 @@
                                 </label>
                             </div>
                             <div class="waitlist-fields">
-                                <input type="email" name="email" placeholder="Your email" required>
-                                <input type="text" name="name" placeholder="Name (optional)">
+                                <input type="text" name="name" placeholder="Name" required>
+                                <input type="text" name="instagram" placeholder="Instagram @handle or link" required>
+                                <input type="email" name="email" placeholder="Email (optional)">
                                 <button type="submit" class="edition-btn btn-digital">Join the waitlist</button>
                             </div>
                             <p id="waitlistStatus" role="status" style="font-size:0.85rem; margin-top:0.6rem;"></p>
@@ -626,10 +630,11 @@
             waitlistForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const fd = new FormData(waitlistForm);
-                const email = fd.get('email');
+                const instagram = fd.get('instagram');
                 const edition = fd.get('edition');
                 const name = fd.get('name');
-                if (!email || !edition) return;
+                const email = fd.get('email');
+                if (!instagram || !edition || !name) return;
 
                 const submitBtn = waitlistForm.querySelector('button[type="submit"]');
                 submitBtn.disabled = true;
@@ -640,7 +645,7 @@
                         method: 'POST',
                         headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
                             'Content-Type': 'application/json' },
-                        body: JSON.stringify({ p_email: email, p_edition: edition, p_name: name || null })
+                        body: JSON.stringify({ p_instagram: instagram, p_edition: edition, p_name: name, p_email: email || null })
                     });
                     if (!r.ok) throw new Error('request failed');
                     const d = await r.json();
