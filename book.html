@@ -174,8 +174,6 @@
         .book-body strong { color: var(--text); font-weight: 500; }
 
         /* Edition buttons */
-        .editions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-bottom: 3rem; }
-
         .edition-btn {
             display: flex; align-items: center; gap: 0.75rem;
             padding: 0.85rem 1.6rem;
@@ -200,23 +198,6 @@
         }
         .btn-digital svg { width: 18px; height: 18px; }
 
-        /* Print button — teal outline */
-        .btn-print {
-            background: transparent;
-            color: var(--teal);
-            border-color: var(--teal);
-        }
-        .btn-print:hover {
-            background: var(--teal-light);
-            transform: translateY(-2px);
-        }
-        .btn-print .coming-soon-tag {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
-            background: var(--teal); color: var(--white);
-            padding: 0.15rem 0.45rem;
-        }
-
         /* Price */
         .price-row {
             display: flex; align-items: baseline; gap: 0.75rem;
@@ -229,6 +210,36 @@
         .price-format {
             font-size: 0.82rem; color: var(--text-light);
             font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.1em;
+        }
+
+        /* Waitlist */
+        .waitlist-block { margin-bottom: 3rem; }
+        .waitlist-options {
+            display: flex; flex-wrap: wrap; gap: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+        .waitlist-option {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.92rem; color: var(--text-secondary); cursor: pointer;
+        }
+        .waitlist-option input { accent-color: var(--teal); }
+        .waitlist-count {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.78rem; color: var(--text-light);
+        }
+        .waitlist-fields {
+            display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: stretch;
+        }
+        .waitlist-fields input[type="email"],
+        .waitlist-fields input[type="text"] {
+            flex: 1 1 180px;
+            padding: 0.85rem 1rem;
+            font-family: 'Outfit', sans-serif; font-size: 0.95rem;
+            border: 2px solid var(--border); background: var(--white); color: var(--text);
+        }
+        .waitlist-fields input:focus { outline: none; border-color: var(--teal); }
+        .waitlist-fields button {
+            border: none; cursor: pointer; flex: 0 0 auto;
         }
 
         /* Print note */
@@ -429,22 +440,29 @@
                         <div class="price-format">USD · Digital PDF · 111 pages</div>
                     </div>
 
-                    <!-- Edition buttons -->
-                    <div class="editions">
-                        <span class="edition-btn btn-digital" aria-disabled="true" style="opacity:0.6; cursor:default; pointer-events:none;">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                            </svg>
-                            Digital Edition — $38
-                            <span class="coming-soon-tag">Coming Soon</span>
-                        </span>
-
-                        <a href="https://instagram.com/shira.sarid"
-                           class="edition-btn btn-print"
-                           target="_blank" rel="noopener noreferrer">
-                            Limited Print
-                            <span class="coming-soon-tag">Coming Soon</span>
-                        </a>
+                    <!-- Waitlist -->
+                    <div class="waitlist-block">
+                        <p class="follow-label" style="margin-bottom:1rem;">
+                            Sales open soon. Join the waitlist now and get free postcard downloads from the book on launch.
+                        </p>
+                        <form id="waitlistForm" novalidate>
+                            <div class="waitlist-options" role="radiogroup" aria-label="Edition preference">
+                                <label class="waitlist-option">
+                                    <input type="radio" name="edition" value="digital" required>
+                                    <span>Digital PDF — $38 <span id="digitalCount" class="waitlist-count"></span></span>
+                                </label>
+                                <label class="waitlist-option">
+                                    <input type="radio" name="edition" value="physical">
+                                    <span>Limited Print (11 copies) <span id="physicalCount" class="waitlist-count"></span></span>
+                                </label>
+                            </div>
+                            <div class="waitlist-fields">
+                                <input type="email" name="email" placeholder="Your email" required>
+                                <input type="text" name="name" placeholder="Name (optional)">
+                                <button type="submit" class="edition-btn btn-digital">Join the waitlist</button>
+                            </div>
+                            <p id="waitlistStatus" role="status" style="font-size:0.85rem; margin-top:0.6rem;"></p>
+                        </form>
                     </div>
 
                     <!-- Follow -->
@@ -580,6 +598,71 @@
             });
         });
 
+        // ── WAITLIST ──
+        const SUPABASE_URL      = 'https://nomtmlidkuhkllniaytu.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vbXRtbGlka3Voa2xsbmlheXR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1ODUzMzIsImV4cCI6MjA5NjE2MTMzMn0.LO7mdpCI_8dmDFdnvQA7fQoSts_yqksKgnLUt6O11_U';
+
+        async function loadWaitlistCounts() {
+            try {
+                const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_waitlist_counts`, {
+                    method: 'POST',
+                    headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Content-Type': 'application/json' },
+                    body: '{}'
+                });
+                const d = await r.json();
+                const row = Array.isArray(d) ? d[0] : d;
+                if (row) {
+                    document.getElementById('digitalCount').textContent = `· ${row.digital_count} on the list`;
+                    document.getElementById('physicalCount').textContent = `· ${row.physical_count} on the list`;
+                }
+            } catch (e) {}
+        }
+        loadWaitlistCounts();
+
+        const waitlistForm = document.getElementById('waitlistForm');
+        const waitlistStatus = document.getElementById('waitlistStatus');
+        if (waitlistForm) {
+            waitlistForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const fd = new FormData(waitlistForm);
+                const email = fd.get('email');
+                const edition = fd.get('edition');
+                const name = fd.get('name');
+                if (!email || !edition) return;
+
+                const submitBtn = waitlistForm.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                waitlistStatus.textContent = '';
+
+                try {
+                    const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/insert_waitlist_signup`, {
+                        method: 'POST',
+                        headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+                            'Content-Type': 'application/json' },
+                        body: JSON.stringify({ p_email: email, p_edition: edition, p_name: name || null })
+                    });
+                    if (!r.ok) throw new Error('request failed');
+                    const d = await r.json();
+                    const row = Array.isArray(d) ? d[0] : d;
+                    if (row) {
+                        document.getElementById('digitalCount').textContent = `· ${row.digital_count} on the list`;
+                        document.getElementById('physicalCount').textContent = `· ${row.physical_count} on the list`;
+                    }
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'join_waitlist', { edition });
+                    }
+                    waitlistForm.reset();
+                    waitlistStatus.style.color = 'var(--teal)';
+                    waitlistStatus.textContent = "You're on the list — postcards are on their way when the book drops.";
+                } catch (err) {
+                    waitlistStatus.style.color = '#c0392b';
+                    waitlistStatus.textContent = 'Something went wrong. Please try again or email shirasarid@gmail.com.';
+                } finally {
+                    submitBtn.disabled = false;
+                }
+            });
+        }
     </script>
 
     <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
