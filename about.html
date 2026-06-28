@@ -847,6 +847,9 @@
             });
         });
 
+        // Fallback so off-screen sections aren't left at opacity:0 for crawlers/non-scrolling renders
+        setTimeout(() => revealElements.forEach(el => el.classList.add('visible')), 2500);
+
         // Custom Cursor Dot
         const cursorDot = document.querySelector('.cursor-dot');
         

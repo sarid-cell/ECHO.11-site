@@ -830,6 +830,9 @@
             });
         });
 
+        // Fallback so off-screen sections aren't left at opacity:0 for crawlers/non-scrolling renders
+        setTimeout(() => document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible')), 2500);
+
         // ── BINAURAL AUDIO ENGINE ──
         let audioCtx, oscL, oscR, gainL, gainR, isPlaying = false;
 
