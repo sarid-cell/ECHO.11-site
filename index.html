@@ -40,22 +40,50 @@
 
     <!-- Structured Data for LLMs and Search Engines -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "ECHO.11",
-     "url": "https://echo11.app/",
-        "description": "Bridging Consumer Psychology and Generative AI to build future-proof brands",
-        "author": {
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
             "@type": "Person",
+            "@id": "https://echo11.app/#shira-sarid",
             "name": "Shira Sarid",
-            "email": "shirasarid@gmail.com"
+            "url": "https://echo11.app/",
+            "email": "shirasarid@gmail.com",
+            "jobTitle": "AI Strategist & UX/UI Designer",
+            "description": "Digital marketing and e-commerce strategist bridging consumer psychology, generative AI, and human behavior. Creator of ECHO.11.",
+            "knowsAbout": [
+                "Generative AI",
+                "Consumer Psychology",
+                "UX/UI Design",
+                "Digital Marketing",
+                "Neuro-Design",
+                "Sound Frequencies",
+                "AI Strategy"
+            ],
+            "sameAs": [
+                "https://www.linkedin.com/in/shirasarid",
+                "https://www.instagram.com/shira.sarid/",
+                "https://www.pinterest.com/shirasaridAI/",
+                "https://shirasarid.substack.com/",
+                "https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120",
+                "https://github.com/sarid-cell"
+            ]
         },
-        "publisher": {
-            "@type": "Person",
-            "name": "Shira Sarid"
+        {
+            "@type": "WebSite",
+            "@id": "https://echo11.app/#website",
+            "name": "ECHO.11",
+            "url": "https://echo11.app/",
+            "description": "Bridging Consumer Psychology and Generative AI to build future-proof brands",
+            "author": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            }
         }
-    }
+    ]
+}
     </script>
     
     <!-- Fonts -->
