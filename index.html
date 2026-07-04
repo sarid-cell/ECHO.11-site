@@ -1276,7 +1276,7 @@
             </div>
             
             <div class="footer-column">
-                <h4>Subtitle</h4>
+                <h4>Channels</h4>
                 <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
                 <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
                 <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer">Pinterest</a>
@@ -1445,72 +1445,117 @@
         }
 
         // Fetch Latest Article from Substack RSS
+        // Robust version: handles API rate-limit responses (status !== 'ok'),
+        // adds a fetch timeout, caches the last good result in localStorage (6h TTL),
+        // and falls back to a static Substack link card so "Loading..." can never get stuck.
         async function fetchLatestArticle() {
             const RSS_URL = 'https://shirasarid.substack.com/feed';
             const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
-            
+            const CACHE_KEY = 'echo11LatestArticle';
+            const CACHE_TTL = 6 * 60 * 60 * 1000; // 6 hours
+
+            const loading = document.getElementById('latestLoading');
+            const card = document.getElementById('latestCard');
+            const title = document.getElementById('latestTitle');
+            const excerpt = document.getElementById('latestExcerpt');
+            const date = document.getElementById('latestDate');
+            const image = document.getElementById('latestImage');
+
+            function readCache() {
+                try {
+                    return JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+                } catch (e) { return null; }
+            }
+
+            function writeCache(post) {
+                try {
+                    localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), post: post }));
+                } catch (e) { /* private mode / storage full — non-critical */ }
+            }
+
+            function renderPost(latestPost) {
+                // Format date
+                const postDate = new Date(latestPost.pubDate);
+                date.textContent = postDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                // Extract excerpt (strip HTML and limit length)
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = latestPost.description || latestPost.content || '';
+                let excerptText = tempDiv.textContent || tempDiv.innerText || '';
+                excerptText = excerptText.substring(0, 180).trim() + '...';
+
+                // Get thumbnail image
+                let thumbnailUrl = latestPost.thumbnail || latestPost.enclosure?.link || '';
+                if (!thumbnailUrl) {
+                    const imgMatch = latestPost.content?.match(/<img[^>]+src="([^">]+)"/);
+                    if (imgMatch) thumbnailUrl = imgMatch[1];
+                }
+
+                // Populate card
+                title.textContent = latestPost.title;
+                excerpt.textContent = excerptText;
+                card.href = latestPost.link;
+
+                if (thumbnailUrl) {
+                    image.src = thumbnailUrl;
+                    image.alt = latestPost.title;
+                    image.parentElement.style.display = '';
+                } else {
+                    image.parentElement.style.display = 'none';
+                }
+
+                loading.style.display = 'none';
+                card.style.display = 'grid';
+            }
+
+            function renderFallback() {
+                // Never leave "Loading..." stuck and never hide the section —
+                // it is a key conversion path to Substack.
+                title.textContent = 'New signals every week on Substack';
+                excerpt.textContent = 'Essays on AI, psychology, and the future of human potential. Read the latest and join the conversation.';
+                date.textContent = '';
+                card.href = 'https://shirasarid.substack.com/';
+                image.parentElement.style.display = 'none';
+                loading.style.display = 'none';
+                card.style.display = 'grid';
+            }
+
+            // 1) Fresh cache → instant render, zero API calls
+            const cached = readCache();
+            if (cached && cached.post && (Date.now() - cached.ts) < CACHE_TTL) {
+                renderPost(cached.post);
+                return;
+            }
+
+            // 2) Fetch with an 8s timeout
             try {
-                const response = await fetch(API_URL);
+                const controller = new AbortController();
+                const timer = setTimeout(() => controller.abort(), 8000);
+                const response = await fetch(API_URL, { signal: controller.signal });
+                clearTimeout(timer);
                 const data = await response.json();
-                
+
                 if (data.status === 'ok' && data.items && data.items.length > 0) {
-                    const latestPost = data.items[0];
-                    
-                    // Get elements
-                    const loading = document.getElementById('latestLoading');
-                    const card = document.getElementById('latestCard');
-                    const title = document.getElementById('latestTitle');
-                    const excerpt = document.getElementById('latestExcerpt');
-                    const date = document.getElementById('latestDate');
-                    const image = document.getElementById('latestImage');
-                    
-                    // Format date
-                    const postDate = new Date(latestPost.pubDate);
-                    const formattedDate = postDate.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    });
-                    
-                    // Extract excerpt (strip HTML and limit length)
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = latestPost.description || latestPost.content;
-                    let excerptText = tempDiv.textContent || tempDiv.innerText;
-                    excerptText = excerptText.substring(0, 180).trim() + '...';
-                    
-                    // Get thumbnail image
-                    let thumbnailUrl = latestPost.thumbnail || latestPost.enclosure?.link || '';
-                    
-                    // If no thumbnail, try to extract from content
-                    if (!thumbnailUrl) {
-                        const imgMatch = latestPost.content?.match(/<img[^>]+src="([^">]+)"/);
-                        if (imgMatch) thumbnailUrl = imgMatch[1];
-                    }
-                    
-                    // Populate card
-                    title.textContent = latestPost.title;
-                    excerpt.textContent = excerptText;
-                    date.textContent = formattedDate;
-                    card.href = latestPost.link;
-                    
-                    if (thumbnailUrl) {
-                        image.src = thumbnailUrl;
-                        image.alt = latestPost.title;
-                    } else {
-                        // Hide image container if no image
-                        image.parentElement.style.display = 'none';
-                    }
-                    
-                    // Show card, hide loading
-                    loading.style.display = 'none';
-                    card.style.display = 'grid';
+                    writeCache(data.items[0]);
+                    renderPost(data.items[0]);
+                } else {
+                    // API responded but refused (e.g. rate limit) — unified failure path
+                    throw new Error(data.message || 'RSS API returned non-ok status');
                 }
             } catch (error) {
-                // Hide the entire section on error
-                document.getElementById('latestArticle').style.display = 'none';
+                // 3) Stale cache is better than nothing; otherwise static fallback
+                if (cached && cached.post) {
+                    renderPost(cached.post);
+                } else {
+                    renderFallback();
+                }
             }
         }
-        
+
         // Fetch on page load
         fetchLatestArticle();
 
