@@ -17,15 +17,16 @@
     <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="/assets/images/favicon-192.png" type="image/png" sizes="192x192">
     <link rel="apple-touch-icon" href="/assets/images/favicon-180.png">
-    <title>ECHO.11 | 10Hz — The 11-Minute Reset</title>
-    <meta name="description" content="11 minutes. One frequency. 10Hz binaural beat for focus and mental clarity. By ECHO.11.">
+    <title>10Hz Binaural Beat — The 11-Minute Anxiety Reset | ECHO.11</title>
+    <meta name="description" content="A free 10Hz alpha binaural beat for anxiety relief, calm, and focus. 11 minutes, one frequency, no signup. Headphones on, eyes closed. By ECHO.11.">
+    <meta name="keywords" content="10hz binaural beat, binaural beats for anxiety, alpha waves, anxiety relief, calm, sound frequency, neural entrainment, 11 minute reset, relaxation, stress relief">
     <meta name="author" content="Shira Sarid">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://echo11.app/frequency.html" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="ECHO.11 | 10Hz — The 11-Minute Reset">
-    <meta property="og:description" content="11 minutes. One frequency. 10Hz binaural beat for focus and mental clarity. By ECHO.11.">
+    <meta property="og:title" content="10Hz Binaural Beat — The 11-Minute Anxiety Reset | ECHO.11">
+    <meta property="og:description" content="A free 10Hz alpha binaural beat for anxiety relief, calm, and focus. 11 minutes, one frequency, no signup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://echo11.app/frequency.html">
     <meta property="og:site_name" content="ECHO.11">
@@ -35,8 +36,8 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ECHO.11 | 10Hz — The 11-Minute Reset">
-    <meta name="twitter:description" content="11 minutes. One frequency. 10Hz binaural beat for focus and mental clarity. By ECHO.11.">
+    <meta name="twitter:title" content="10Hz Binaural Beat — The 11-Minute Anxiety Reset | ECHO.11">
+    <meta name="twitter:description" content="A free 10Hz alpha binaural beat for anxiety relief, calm, and focus. 11 minutes, one frequency, no signup.">
     <meta name="twitter:image" content="https://echo11.app/assets/images/10hz-og.jpg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,7 +51,7 @@
             --bg: #fafafa;
             --text: #1a1a1a;
             --text-secondary: #4a4a4a;
-            --text-light: #888;
+            --text-light: #666666;
             --white: #fff;
             --border: #e0e0e0;
             --accent: #2dd4f0;
@@ -693,6 +694,14 @@
         },
         {
           "@type": "Question",
+          "name": "Can binaural beats help with anxiety?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Alpha-band (10Hz) entrainment is associated with reduced anxiety and a calmer nervous system. ECHO.11's 11-minute reset was built as a free self-care tool for acute anxious moments, insomnia, and racing thoughts — available 24/7. It is a self-care practice, not a medical treatment; if anxiety is disrupting your life, please also consult a professional."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "What happens in the brain during a binaural beat session?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -887,6 +896,10 @@
                         <div class="info-a">The brain synchronizes to the frequency it perceives — a process called <strong>neural entrainment</strong>. As you listen, your dominant brainwave frequency shifts toward 10Hz. Cortical noise decreases. Attention sharpens without effort.</div>
                     </div>
                     <div class="info-block">
+                        <div class="info-q">Can it help with anxiety?</div>
+                        <div class="info-a">Alpha-band entrainment is associated with <strong>reduced anxiety and a calmer nervous system</strong> — the quiet between stimulus and reaction. ECHO.11 was born from exactly that need: a free tool for acute anxious moments, insomnia, and racing thoughts, available 24/7. It is a self-care practice, not a medical treatment — if anxiety is disrupting your life, please also talk to a professional.</div>
+                    </div>
+                    <div class="info-block">
                         <div class="info-q">What should you feel?</div>
                         <div class="info-a">Individual response varies. Most commonly reported:
                             <div class="feel-tags">
@@ -944,7 +957,7 @@
                 <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
             </div>
             <div class="footer-col">
-                <h4>Subtitle</h4>
+                <h4>Channels</h4>
                 <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
                 <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
                 <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer">Pinterest</a>
@@ -1236,9 +1249,19 @@
             return localCount();
         }
 
+        // zero (or a failed fetch) reads as "nobody is here" — hide the row instead
+        function renderCount(n) {
+            const row = document.querySelector('.sessions-row');
+            if (n > 0) {
+                document.getElementById('sessionsNum').textContent = n;
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        }
+
         async function increment() {
-            const n = localIncrement();
-            document.getElementById('sessionsNum').textContent = n;
+            renderCount(localIncrement());
             try {
                 const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_session_count`, {
                     method: 'POST',
@@ -1247,13 +1270,11 @@
                     body: JSON.stringify({ p_date: TODAY })
                 });
                 const serverCount = await r.json();
-                if (typeof serverCount === 'number') {
-                    document.getElementById('sessionsNum').textContent = serverCount;
-                }
+                if (typeof serverCount === 'number') renderCount(serverCount);
             } catch(e){}
         }
 
-        getCount().then(n => { document.getElementById('sessionsNum').textContent = n || 0; });
+        getCount().then(renderCount);
     </script>
 
     <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
@@ -1280,5 +1301,6 @@
         })();
     </script>
     <script src="assets/js/site-header.js" defer></script>
+    <script src="assets/js/a11y-widget.js" defer></script>
 </body>
 </html>
