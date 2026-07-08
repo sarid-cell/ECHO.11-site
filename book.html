@@ -31,6 +31,77 @@
     <meta name="twitter:description" content="111 pages. A visual manifesto. Digital PDF edition — join the waitlist.">
     <meta name="twitter:image" content="https://echo11.app/assets/images/book-cover.jpg">
 
+    <!-- Structured Data for LLMs and Search Engines -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Person",
+            "@id": "https://echo11.app/#shira-sarid",
+            "name": "Shira Sarid",
+            "url": "https://echo11.app/",
+            "email": "shirasarid@gmail.com",
+            "jobTitle": "AI Strategist & UX/UI Designer",
+            "sameAs": [
+                "https://www.linkedin.com/in/shirasarid",
+                "https://www.instagram.com/shira.sarid/",
+                "https://www.pinterest.com/shirasaridAI/",
+                "https://shirasarid.substack.com/",
+                "https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120",
+                "https://github.com/sarid-cell"
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://echo11.app/#website",
+            "name": "ECHO.11",
+            "url": "https://echo11.app/",
+            "publisher": { "@id": "https://echo11.app/#shira-sarid" }
+        },
+        {
+            "@type": ["Book", "Product"],
+            "@id": "https://echo11.app/book.html#book",
+            "name": "ECHO.11: Behind the Scenes",
+            "url": "https://echo11.app/book.html",
+            "image": "https://echo11.app/assets/images/book-cover.jpg",
+            "description": "111 pages. Generative AI, neuro-aesthetics, and the architecture of a quieter mind.",
+            "author": { "@id": "https://echo11.app/#shira-sarid" },
+            "publisher": { "@id": "https://echo11.app/#shira-sarid" },
+            "numberOfPages": "111",
+            "bookFormat": "https://schema.org/EBook",
+            "inLanguage": "en",
+            "offers": {
+                "@type": "Offer",
+                "url": "https://echo11.app/book.html",
+                "priceCurrency": "USD",
+                "price": "38",
+                "availability": "https://schema.org/PreOrder",
+                "itemCondition": "https://schema.org/NewCondition"
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "https://echo11.app/book.html#webpage",
+            "url": "https://echo11.app/book.html",
+            "name": "ECHO.11 | Behind the Scenes — The Book",
+            "isPartOf": { "@id": "https://echo11.app/#website" },
+            "mainEntity": { "@id": "https://echo11.app/book.html#book" },
+            "breadcrumb": { "@id": "https://echo11.app/book.html#breadcrumb" },
+            "inLanguage": "en"
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://echo11.app/book.html#breadcrumb",
+            "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://echo11.app/" },
+                { "@type": "ListItem", "position": 2, "name": "The Book" }
+            ]
+        }
+    ]
+}
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
