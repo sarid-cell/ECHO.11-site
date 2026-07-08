@@ -49,6 +49,10 @@
     '  will-change: transform;',
     '}',
     'header.header-hidden { transform: translateY(-100%); }',
+    // dark glass only on pages that declare dark support (html.supports-dark)
+    '@media (prefers-color-scheme: dark) {',
+    '  html.supports-dark header { background: rgba(14,16,19,0.75); border-bottom-color: rgba(255,255,255,0.08); }',
+    '}',
     '@media (prefers-reduced-motion: reduce) {',
     '  header { transition-duration: .15s, 1.8s; }',
     '}'

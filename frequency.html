@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="supports-dark">
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TP9YRD6TN8"></script>
     <script>
@@ -12,6 +12,8 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0e1013" media="(prefers-color-scheme: dark)">
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" sizes="48x48">
     <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
@@ -669,6 +671,37 @@
         .skip-link:focus {
             top: 0;
         }
+        /* ── DARK MODE — the 2am palette ──
+           Night-time anxiety is the core use case; a bright screen
+           works against the session. Follows the system preference. */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0e1013;
+                --text: #e9e9e7;
+                --text-secondary: #b3b3b0;
+                --text-light: #8f8f8c;
+                --white: #16181c;
+                --border: #2a2d31;
+                --accent-dim: rgba(45,212,240,0.18);
+            }
+            .hero-video video { filter: grayscale(20%) brightness(0.5); }
+            .hero-overlay {
+                background: linear-gradient(
+                    to bottom,
+                    rgba(14,16,19,0.3)  0%,
+                    rgba(14,16,19,0.5)  40%,
+                    rgba(14,16,19,0.92) 75%,
+                    rgba(14,16,19,1)    100%
+                );
+            }
+            .cursor-dot { background: rgba(200,200,200,0.5); }
+            .soft-cta { background: rgba(22,24,28,0.65); }
+            .menu-overlay { background: rgba(0,0,0,0.6); }
+            .side-menu { box-shadow: -10px 0 40px rgba(0,0,0,0.6); }
+            .modal-overlay { background: rgba(0,0,0,0.72); }
+            .footer-banner img { filter: grayscale(100%) brightness(0.65); }
+        }
+
     </style>
 
     <script type="application/ld+json">
