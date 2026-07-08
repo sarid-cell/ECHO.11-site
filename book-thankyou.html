@@ -523,6 +523,72 @@
             .thankyou { padding: 7.5rem 1.5rem 4rem; min-height: 75vh; }
         }
 
+        /* What's next — post-purchase paths */
+        .whats-next {
+            border-top: 1px solid var(--border);
+            padding: 5rem 2.5rem;
+            background: var(--white);
+        }
+
+        .whats-next-inner { max-width: 960px; margin: 0 auto; }
+
+        .whats-next-title {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .next-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+
+        .next-card {
+            background: var(--bg);
+            padding: 2.2rem;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .next-card:hover { background: var(--white); }
+
+        .next-card-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+
+        .next-card-label {
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--text);
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .next-card-hint {
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .whats-next { padding: 3.5rem 1.5rem; }
+        }
+
         /* Footer */
         .footer-banner { width: 100%; overflow: hidden; }
 
@@ -659,11 +725,12 @@
 
     <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
         <nav>
-            <a href="index.html#vision" class="menu-link">The Vision</a>
-            <a href="index.html#insights" class="menu-link">Insights</a>
             <a href="frequency.html" class="menu-link">The Reset</a>
             <a href="book.html" class="menu-link">The Book</a>
+            <a href="index.html#insights" class="menu-link">Insights</a>
+            <a href="index.html#vision" class="menu-link">The Vision</a>
             <a href="about.html" class="menu-link">About Echo.11</a>
+
         </nav>
     </aside>
 
@@ -684,6 +751,30 @@
                     Personal use only. No reproduction, sharing, or distribution permitted.<br>
                     © 2026 Shira Sarid / ECHO.11. All rights reserved.
                 </p>
+            </div>
+        </section>
+
+        <!-- Post-purchase: keep the loop going -->
+        <section class="whats-next">
+            <div class="whats-next-inner">
+                <div class="whats-next-title reveal">While the book downloads</div>
+                <div class="next-grid reveal">
+                    <a href="frequency.html" class="next-card">
+                        <span class="next-card-tag">01 · Practice</span>
+                        <span class="next-card-label">Take an 11-minute reset →</span>
+                        <span class="next-card-hint">The 10Hz frequency from the book, ready to play. A good first stop before you start reading.</span>
+                    </a>
+                    <a href="https://shirasarid.substack.com/" target="_blank" rel="noopener noreferrer" class="next-card">
+                        <span class="next-card-tag">02 · Read</span>
+                        <span class="next-card-label">The weekly essays →</span>
+                        <span class="next-card-hint">The thinking behind the book continues on Substack — one essay a week, no noise.</span>
+                    </a>
+                    <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer" class="next-card">
+                        <span class="next-card-tag">03 · Listen</span>
+                        <span class="next-card-label">CTRL+HUMAN, the podcast →</span>
+                        <span class="next-card-hint">Conversations on staying human inside the machine.</span>
+                    </a>
+                </div>
             </div>
         </section>
     </main>

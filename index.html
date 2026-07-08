@@ -546,6 +546,68 @@
             font-weight: 300;
         }
 
+        /* Two doors — self-selection paths */
+        .hero-doors {
+            display: flex;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            margin-top: 2.5rem;
+            max-width: 700px;
+        }
+
+        .hero-door {
+            flex: 1;
+            background: rgba(250,250,250,0.92);
+            padding: 1.5rem 1.8rem;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .hero-door:hover {
+            background: var(--white);
+        }
+
+        .hero-door-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-door-label {
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--text);
+            display: block;
+        }
+
+        .hero-door-hint {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            display: block;
+            margin-top: 0.3rem;
+        }
+
+        .hero-door-arrow {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-door:hover .hero-door-arrow {
+            transform: translateX(4px);
+        }
+
+        @media (max-width: 640px) {
+            .hero-doors {
+                flex-direction: column;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero {
                 min-height: 90vh;
@@ -1169,11 +1231,12 @@
 
     <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
         <nav>
-            <a href="#vision" class="menu-link">The Vision</a>
-            <a href="#insights" class="menu-link">Insights</a>
             <a href="frequency.html" class="menu-link">The Reset</a>
             <a href="book.html" class="menu-link">The Book</a>
+            <a href="#insights" class="menu-link">Insights</a>
+            <a href="#vision" class="menu-link">The Vision</a>
             <a href="about.html" class="menu-link">About Echo.11</a>
+
         </nav>
     </aside>
 
@@ -1187,6 +1250,18 @@
             <div class="hero-content">
                 <h1 class="reveal">Decoding the Algorithm of Human Resilience</h1>
                 <p class="reveal">Bridging the gap between Consumer Psychology and Generative AI to build future-proof brands. Exploring the 2026 digital landscape.</p>
+                <nav class="hero-doors reveal" aria-label="Choose your path">
+                    <a href="frequency.html" class="hero-door">
+                        <span class="hero-door-tag">01 · The Experience</span>
+                        <span class="hero-door-label">Need quiet right now? <span class="hero-door-arrow">→</span></span>
+                        <span class="hero-door-hint">An 11-minute frequency reset. Free, no signup.</span>
+                    </a>
+                    <a href="#insights" class="hero-door">
+                        <span class="hero-door-tag">02 · The Ideas</span>
+                        <span class="hero-door-label">Here for the thinking? <span class="hero-door-arrow">→</span></span>
+                        <span class="hero-door-hint">Essays on psychology, AI, and calmer digital spaces.</span>
+                    </a>
+                </nav>
             </div>
         </section>
 

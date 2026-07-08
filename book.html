@@ -292,6 +292,21 @@
 
         /* Waitlist */
         .waitlist-block { margin-bottom: 3rem; }
+
+        .try-first-note {
+            margin-top: 1.4rem;
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        .try-first-note a {
+            color: var(--text-secondary);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: color 0.2s;
+        }
+        .try-first-note a:hover { color: var(--text); }
         .waitlist-options {
             display: flex; flex-wrap: wrap; gap: 1.5rem;
             margin-bottom: 1.2rem;
@@ -466,11 +481,12 @@
     <div class="menu-overlay" id="menuOverlay"></div>
     <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
         <nav>
-            <a href="index.html#vision" class="menu-link">The Vision</a>
-            <a href="index.html#insights" class="menu-link">Insights</a>
             <a href="frequency.html" class="menu-link">The Reset</a>
             <a href="book.html" class="menu-link current">The Book</a>
+            <a href="index.html#insights" class="menu-link">Insights</a>
+            <a href="index.html#vision" class="menu-link">The Vision</a>
             <a href="about.html" class="menu-link">About Echo.11</a>
+
         </nav>
     </aside>
 
@@ -546,6 +562,9 @@
                             </div>
                             <p id="waitlistStatus" role="status" style="font-size:0.85rem; margin-top:0.6rem;"></p>
                         </form>
+                        <p class="try-first-note">
+                            Haven't tried the frequency yet? <a href="frequency.html">Start there — it's free, 11 minutes</a>. The book will still be here.
+                        </p>
                     </div>
 
                     <!-- Follow -->

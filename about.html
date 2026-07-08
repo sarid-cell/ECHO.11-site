@@ -575,6 +575,92 @@
             font-weight: 500;
         }
 
+        /* Story bridge → frequency & book */
+        .story-bridge {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2.5rem 3rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .story-bridge-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            display: block;
+            margin-bottom: 1.2rem;
+        }
+
+        .story-bridge p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            font-weight: 300;
+            max-width: 38rem;
+            margin: 0 auto 2rem;
+        }
+
+        .bridge-primary {
+            display: inline-block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--text);
+            padding: 1rem 2.2rem;
+            text-decoration: none;
+            transition: opacity 0.25s;
+        }
+
+        .bridge-primary:hover {
+            opacity: 0.85;
+        }
+
+        .bridge-secondary {
+            display: block;
+            margin-top: 1.4rem;
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+
+        .bridge-secondary a {
+            color: var(--text);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: opacity 0.2s;
+        }
+
+        .bridge-secondary a:hover {
+            opacity: 0.6;
+        }
+
+        .story-bridge p.bridge-substack {
+            margin: 2.5rem auto 0;
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--text-light);
+        }
+
+        .bridge-substack a {
+            color: var(--text-secondary);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .bridge-substack a:hover {
+            color: var(--text);
+        }
+
+        @media (max-width: 768px) {
+            .story-bridge {
+                padding: 3rem 1.5rem 2.5rem;
+            }
+        }
+
         /* Final Image - Future Astro Man */
         .final-image {
             width: 100vw;
@@ -724,11 +810,12 @@
 
     <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
         <nav>
-            <a href="index.html#vision" class="menu-link">The Vision</a>
-            <a href="index.html#insights" class="menu-link">Insights</a>
             <a href="frequency.html" class="menu-link">The Reset</a>
             <a href="book.html" class="menu-link">The Book</a>
+            <a href="index.html#insights" class="menu-link">Insights</a>
+            <a href="index.html#vision" class="menu-link">The Vision</a>
             <a href="about.html" class="menu-link current">About Echo.11</a>
+
         </nav>
     </aside>
 
@@ -814,6 +901,15 @@
             </ul>
             
             <p class="explore-closing">Stay tuned. It's going to be quiet—in a whole new way.</p>
+        </section>
+
+        <!-- Story bridge: from the origin story to the experience -->
+        <section class="story-bridge reveal">
+            <span class="story-bridge-tag">Where the story leads</span>
+            <p>The frequency I built during those nights is here on the site — 11 minutes, one tone, free. It's the simplest way to understand what ECHO.11 is about.</p>
+            <a href="frequency.html" class="bridge-primary">Try the 11-minute reset</a>
+            <span class="bridge-secondary">Prefer to read first? <a href="book.html">The book documents the whole method</a>.</span>
+            <p class="bridge-substack">I also write a weekly essay on this work — you can find it on <a href="https://shirasarid.substack.com/" target="_blank" rel="noopener noreferrer">Substack</a>.</p>
         </section>
 
         <!-- 9. Future Astro Man Image -->
