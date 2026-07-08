@@ -126,7 +126,9 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { font-size: 18px; scroll-behavior: smooth; }
+        html { font-size: 18px; scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
 
         body {
             font-family: 'Outfit', sans-serif;
@@ -153,7 +155,7 @@
 
         /* Header */
         header {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             background: rgba(250,250,250,0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
@@ -417,10 +419,11 @@
             background: var(--bg); z-index: 999;
             display: flex; flex-direction: column; justify-content: center;
             padding: 3rem;
-            transition: right .4s cubic-bezier(0.25,0.46,0.45,0.94);
+            transition: right .4s cubic-bezier(0.25,0.46,0.45,0.94), visibility 0s linear .4s;
+            visibility: hidden;
             box-shadow: -10px 0 40px rgba(0,0,0,0.15);
         }
-        .side-menu.active { right: 0; }
+        .side-menu.active { right: 0; visibility: visible; transition-delay: 0s; }
         .side-menu nav { display: flex; flex-direction: column; gap: 2rem; }
         .side-menu a {
             font-size: 1.5rem; font-weight: 300; color: var(--text);
