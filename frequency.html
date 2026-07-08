@@ -184,14 +184,14 @@
             position: relative; z-index: 10;
             display: flex; flex-direction: column; align-items: center;
             text-align: center;
-            padding: 8rem 2rem 4rem;
+            padding: 9rem 2rem 6rem;
             width: 100%;
         }
 
         .freq-eyebrow {
             font-family: var(--mono);
             font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
-            color: var(--text-light); margin-bottom: 1.2rem;
+            color: var(--text-light); margin-bottom: 1.6rem;
         }
 
         .freq-title {
@@ -202,14 +202,129 @@
         .freq-subtitle {
             font-family: var(--mono);
             font-size: clamp(0.75rem, 1.5vw, 1rem);
-            letter-spacing: 0.18em; text-transform: uppercase;
-            color: var(--text-secondary); margin-bottom: 3rem;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--text-secondary); margin-bottom: 3.8rem;
         }
 
         /* Timer ring */
         .timer-wrap {
             position: relative; width: 200px; height: 200px;
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Breathing halo — soft organic glow behind the ring.
+           8s cycle = 4s in, 4s out, matching a calm breath pace. */
+        .breath-halo {
+            position: absolute; inset: -38%;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                rgba(45,212,240,0.28) 0%,
+                rgba(45,212,240,0.14) 42%,
+                rgba(45,212,240,0)   70%);
+            filter: blur(24px);
+            opacity: 0;
+            transform: scale(0.82);
+            transition: opacity 1.8s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .timer-wrap.playing .breath-halo {
+            opacity: 1;
+            animation: breathe 8s ease-in-out infinite;
+        }
+        @keyframes breathe {
+            0%   { transform: scale(0.82); opacity: 0.55; }
+            50%  { transform: scale(1.16); opacity: 1; }
+            100% { transform: scale(0.82); opacity: 0.55; }
+        }
+        .timer-svg, .timer-inner { position: relative; z-index: 1; }
+
+        /* Breath guide — inhale/exhale text, synced to the halo cycle */
+        .breath-guide {
+            position: relative;
+            height: 1.4em;
+            margin-bottom: 0.6rem;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            pointer-events: none;
+        }
+        .breath-guide span {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            font-family: var(--mono); font-size: 0.72rem;
+            letter-spacing: 0.28em; text-transform: uppercase;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            opacity: 0;
+        }
+        body.session-active .breath-guide { opacity: 1; }
+        body.session-active .breath-guide .breath-in  { animation: breath-in-txt 8s ease-in-out infinite; }
+        body.session-active .breath-guide .breath-out { animation: breath-out-txt 8s ease-in-out infinite; }
+        @keyframes breath-in-txt {
+            0% { opacity: 0.9; } 40% { opacity: 0.9; }
+            50% { opacity: 0; } 90% { opacity: 0; } 100% { opacity: 0.9; }
+        }
+        @keyframes breath-out-txt {
+            0% { opacity: 0; } 40% { opacity: 0; }
+            50% { opacity: 0.9; } 90% { opacity: 0.9; } 100% { opacity: 0; }
+        }
+
+        /* Focus mode — while the session plays, everything else recedes */
+        header, .freq-eyebrow, .freq-title, .freq-subtitle,
+        .meta-row, .scroll-cue, .science, .footer-banner, footer {
+            transition: opacity 1.8s ease;
+        }
+        body.session-active .freq-eyebrow,
+        body.session-active .freq-subtitle,
+        body.session-active .meta-row,
+        body.session-active .scroll-cue,
+        body.session-active .science,
+        body.session-active .footer-banner,
+        body.session-active footer { opacity: 0.15; }
+        body.session-active .freq-title { opacity: 0.35; }
+        body.session-active header { opacity: 0.25; }
+        body.session-active header:hover,
+        body.session-active .science:hover,
+        body.session-active footer:hover { opacity: 0.9; transition: opacity 0.6s ease; }
+
+        /* Soft CTA — revealed gently after a pause or a long listen */
+        .soft-cta {
+            max-width: 30rem;
+            margin: 0 auto 1.8rem;
+            padding: 1.6rem 1.8rem;
+            background: rgba(255,255,255,0.65);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: opacity 1.4s ease, transform 1.4s ease, visibility 0s linear 1.4s;
+        }
+        .soft-cta.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition: opacity 1.4s ease, transform 1.4s ease;
+        }
+        .soft-cta p {
+            font-size: 0.92rem; font-weight: 300;
+            color: var(--text-secondary); line-height: 1.8;
+            margin-bottom: 0.9rem;
+        }
+        .soft-cta a {
+            font-family: var(--mono); font-size: 0.75rem;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--text); text-decoration: none;
+            border-bottom: 1px solid var(--text);
+            padding-bottom: 2px;
+            transition: opacity 0.4s ease;
+        }
+        .soft-cta a:hover { opacity: 0.55; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .timer-wrap.playing .breath-halo { animation: none; opacity: 0.55; transform: scale(1); }
+            body.session-active .breath-guide { opacity: 0; }
+            .soft-cta { transform: none; }
         }
         .timer-svg { transform: rotate(-90deg); }
         .ring-bg   { fill: none; stroke: var(--border); stroke-width: 1.5; }
@@ -240,7 +355,7 @@
             background: radial-gradient(circle at 50% 40%, #1c2226, #0a0d0f);
             color: var(--accent);
             display: flex; align-items: center; justify-content: center;
-            transition: box-shadow .3s, transform .3s;
+            transition: box-shadow .6s ease, transform .6s ease, border-color .6s ease;
             box-shadow: 0 0 0 1px rgba(45,212,240,0.15), 0 4px 24px rgba(0,0,0,0.18), 0 0 18px var(--accent-dim);
         }
         .play-btn::before {
@@ -260,7 +375,8 @@
         .state-text {
             font-family: var(--mono); font-size: 0.72rem;
             letter-spacing: 0.12em; text-transform: uppercase;
-            color: var(--text-light); margin-bottom: 1.5rem; min-height: 1.2em;
+            color: var(--text-light); margin-bottom: 2.2rem; min-height: 1.2em;
+            transition: opacity 0.5s ease;
         }
 
         /* Meta row — sessions + headphones note share one line */
@@ -654,6 +770,7 @@
 
                 <!-- Timer ring with play control inside -->
                 <div class="timer-wrap">
+                    <div class="breath-halo" aria-hidden="true"></div>
                     <svg class="timer-svg" width="200" height="200" viewBox="0 0 200 200">
                         <circle class="ring-bg" cx="100" cy="100" r="90"/>
                         <circle class="ring-prog" cx="100" cy="100" r="90" id="timerRing"/>
@@ -667,7 +784,17 @@
                     </div>
                 </div>
 
+                <div class="breath-guide" aria-hidden="true">
+                    <span class="breath-in">Breathe in</span>
+                    <span class="breath-out">Breathe out</span>
+                </div>
+
                 <div class="state-text" id="stateText">Use headphones · Press play to begin</div>
+
+                <div class="soft-cta" id="softCta">
+                    <p>The frequency is the beginning. The book documents the full method — a quieter mind, built step by step.</p>
+                    <a href="book.html">Join the early list</a>
+                </div>
 
                 <div class="meta-row">
                     <div class="sessions-row">
@@ -876,29 +1003,45 @@
 
         // ── BINAURAL AUDIO ENGINE ──
         let audioCtx, oscL, oscR, gainL, gainR, isPlaying = false;
+        const FADE_IN = 1.5, FADE_OUT = 0.9, LEVEL = 0.2;
 
         function startAudio() {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             const merger = audioCtx.createChannelMerger(2);
             merger.connect(audioCtx.destination);
+            const t0 = audioCtx.currentTime;
 
             oscL = audioCtx.createOscillator(); oscL.type = 'sine';
             oscL.frequency.value = 200;
-            gainL = audioCtx.createGain(); gainL.gain.value = 0.2;
+            gainL = audioCtx.createGain();
+            gainL.gain.setValueAtTime(0.0001, t0);
+            gainL.gain.exponentialRampToValueAtTime(LEVEL, t0 + FADE_IN);
             oscL.connect(gainL); gainL.connect(merger, 0, 0);
 
             oscR = audioCtx.createOscillator(); oscR.type = 'sine';
             oscR.frequency.value = 210; // 200 + 10Hz = Alpha
-            gainR = audioCtx.createGain(); gainR.gain.value = 0.2;
+            gainR = audioCtx.createGain();
+            gainR.gain.setValueAtTime(0.0001, t0);
+            gainR.gain.exponentialRampToValueAtTime(LEVEL, t0 + FADE_IN);
             oscR.connect(gainR); gainR.connect(merger, 0, 1);
 
             oscL.start(); oscR.start();
         }
 
         function stopAudio() {
-            if (oscL) { oscL.stop(); oscL = null; }
-            if (oscR) { oscR.stop(); oscR = null; }
-            if (audioCtx) { audioCtx.close(); audioCtx = null; }
+            // fade out, then release — no hard click
+            const ctx = audioCtx, l = oscL, r = oscR, gl = gainL, gr = gainR;
+            oscL = oscR = audioCtx = gainL = gainR = null;
+            if (!ctx) return;
+            const t0 = ctx.currentTime;
+            [gl, gr].forEach(g => {
+                g.gain.cancelScheduledValues(t0);
+                g.gain.setValueAtTime(Math.max(g.gain.value, 0.0001), t0);
+                g.gain.exponentialRampToValueAtTime(0.0001, t0 + FADE_OUT);
+            });
+            setTimeout(() => {
+                try { l.stop(); r.stop(); ctx.close(); } catch (e) {}
+            }, FADE_OUT * 1000 + 100);
         }
 
         // ── TIMER ──
@@ -918,14 +1061,41 @@
         const iconPause= document.getElementById('iconPause');
         const stateEl  = document.getElementById('stateText');
         const timerEl  = document.getElementById('timerDisplay');
+        const softCta  = document.getElementById('softCta');
+
+        // state text swaps with a soft cross-fade instead of snapping
+        function setState(text) {
+            stateEl.style.opacity = '0';
+            setTimeout(() => {
+                stateEl.textContent = text;
+                stateEl.style.opacity = '1';
+            }, 500);
+        }
+
+        // focus mode: the page recedes while the session plays
+        function enterFocus() { document.body.classList.add('session-active'); }
+        function exitFocus()  { document.body.classList.remove('session-active'); }
+
+        // soft CTA: revealed once, after ≥60s of actual listening
+        let listenedSeconds = 0, ctaShown = false;
+        function maybeRevealCta() {
+            if (!ctaShown && listenedSeconds >= 60) {
+                ctaShown = true;
+                softCta.classList.add('visible');
+            }
+        }
+
+        let sessionCounted = false; // count once per full session, not on every resume
 
         function endSession() {
             clearInterval(timerInt); stopAudio();
-            isPlaying = false;
+            isPlaying = false; sessionCounted = false;
+            exitFocus();
             iconPlay.style.display = 'block'; iconPause.style.display = 'none';
             playBtn.classList.remove('playing'); timerWrap.classList.remove('playing');
-            stateEl.textContent = 'Session complete.';
+            setState('Session complete.');
             remaining = TOTAL; timerEl.textContent = fmt(TOTAL); updateRing();
+            maybeRevealCta();
             if (typeof gtag==='function') gtag('event','frequency_complete',{duration:660});
             document.getElementById('completeMeta').textContent = `${document.getElementById('sessionsNum').textContent} sessions today`;
             openModal(completeModal);
@@ -935,6 +1105,7 @@
             startAudio();
             timerInt = setInterval(() => {
                 remaining--;
+                listenedSeconds++;
                 timerEl.textContent = fmt(remaining);
                 updateRing();
                 if (remaining <= 0) endSession();
@@ -942,8 +1113,10 @@
             isPlaying = true;
             iconPlay.style.display = 'none'; iconPause.style.display = 'block';
             playBtn.classList.add('playing'); timerWrap.classList.add('playing');
-            stateEl.textContent = 'Session active — close your eyes';
-            increment();
+            enterFocus();
+            softCta.classList.remove('visible');
+            setState('Session active — breathe with the circle');
+            if (!sessionCounted) { sessionCounted = true; increment(); }
             if (typeof gtag==='function') gtag('event','frequency_start',{hz:'10'});
         }
 
@@ -957,9 +1130,11 @@
             } else {
                 clearInterval(timerInt); stopAudio();
                 isPlaying = false;
+                exitFocus();
                 iconPlay.style.display = 'block'; iconPause.style.display = 'none';
                 playBtn.classList.remove('playing'); timerWrap.classList.remove('playing');
-                stateEl.textContent = 'Paused — press play to continue';
+                setState('Paused — press play to continue');
+                maybeRevealCta();
             }
         });
 
