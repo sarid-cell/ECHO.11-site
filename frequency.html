@@ -247,6 +247,23 @@
         }
         .timer-svg, .timer-inner { position: relative; z-index: 1; }
 
+        /* Live waveform — the actual binaural beat, drawn from an
+           AnalyserNode tap on the audio graph while the session plays.
+           Sits between the halo and the timer ring. */
+        .wave-canvas {
+            position: absolute; inset: -60px;
+            width: calc(100% + 120px); height: calc(100% + 120px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 1.8s ease;
+            color: var(--accent); /* stroke color — follows light/dark theme */
+        }
+        .timer-wrap.playing .wave-canvas { opacity: 1; }
+        @media (prefers-reduced-motion: reduce) {
+            .wave-canvas { display: none; }
+        }
+
         /* Breath guide — inhale/exhale text, synced to the halo cycle */
         .breath-guide {
             position: relative;
@@ -843,6 +860,7 @@
                 <!-- Timer ring with play control inside -->
                 <div class="timer-wrap">
                     <div class="breath-halo" aria-hidden="true"></div>
+                    <canvas class="wave-canvas" id="waveCanvas" aria-hidden="true"></canvas>
                     <svg class="timer-svg" width="200" height="200" viewBox="0 0 200 200">
                         <circle class="ring-bg" cx="100" cy="100" r="90"/>
                         <circle class="ring-prog" cx="100" cy="100" r="90" id="timerRing"/>
@@ -1078,7 +1096,7 @@
         setTimeout(() => document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible')), 2500);
 
         // ── BINAURAL AUDIO ENGINE ──
-        let audioCtx, oscL, oscR, gainL, gainR, isPlaying = false;
+        let audioCtx, oscL, oscR, gainL, gainR, analyser, isPlaying = false;
         const FADE_IN = 1.5, FADE_OUT = 0.9, LEVEL = 0.2;
 
         function startAudio() {
@@ -1101,13 +1119,21 @@
             gainR.gain.exponentialRampToValueAtTime(LEVEL, t0 + FADE_IN);
             oscR.connect(gainR); gainR.connect(merger, 0, 1);
 
+            // analysis tap: both ears mixed to mono — the summed wave
+            // physically contains the 10Hz beat the brain perceives
+            analyser = audioCtx.createAnalyser();
+            analyser.fftSize = 2048;
+            gainL.connect(analyser); gainR.connect(analyser);
+
             oscL.start(); oscR.start();
+            startWave();
         }
 
         function stopAudio() {
             // fade out, then release — no hard click
             const ctx = audioCtx, l = oscL, r = oscR, gl = gainL, gr = gainR;
-            oscL = oscR = audioCtx = gainL = gainR = null;
+            oscL = oscR = audioCtx = gainL = gainR = analyser = null;
+            stopWave();
             if (!ctx) return;
             const t0 = ctx.currentTime;
             [gl, gr].forEach(g => {
@@ -1118,6 +1144,75 @@
             setTimeout(() => {
                 try { l.stop(); r.stop(); ctx.close(); } catch (e) {}
             }, FADE_OUT * 1000 + 100);
+        }
+
+        // ── LIVE WAVEFORM ──
+        // Two thin rings around the timer, displaced by the real audio
+        // signal. The rAF loop only runs while a session plays; on pause
+        // the last frame freezes and the canvas fades out via CSS.
+        const waveCanvas = document.getElementById('waveCanvas');
+        const waveCtx = waveCanvas.getContext('2d');
+        const reducedMotionQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+        let waveRaf = null, waveSamples = null, waveRot = 0;
+        const WAVE_POINTS = 180;
+
+        function startWave() {
+            if (reducedMotionQ.matches || waveRaf !== null) return;
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            waveCanvas.width  = waveCanvas.offsetWidth  * dpr;
+            waveCanvas.height = waveCanvas.offsetHeight * dpr;
+            waveSamples = new Float32Array(2048);
+            waveRaf = requestAnimationFrame(drawWave);
+        }
+
+        function stopWave() {
+            if (waveRaf !== null) { cancelAnimationFrame(waveRaf); waveRaf = null; }
+        }
+
+        function drawWave() {
+            waveRaf = null;
+            if (!analyser) return;
+            analyser.getFloatTimeDomainData(waveSamples);
+
+            const w = waveCanvas.width, h = waveCanvas.height;
+            const cx = w / 2, cy = h / 2;
+            // sit just outside the 200px timer ring (r=90 of 200 ≈ 0.45)
+            const baseR = Math.min(w, h) * 0.36;
+            const amp   = Math.min(w, h) * 0.055;
+            const accent = getComputedStyle(waveCanvas).color;
+
+            waveCtx.clearRect(0, 0, w, h);
+            waveCtx.lineWidth = Math.min(window.devicePixelRatio || 1, 2);
+            waveCtx.strokeStyle = accent;
+
+            // two layers, counter-rotating slowly, for gentle depth
+            for (let layer = 0; layer < 2; layer++) {
+                const dir = layer === 0 ? 1 : -1;
+                waveCtx.globalAlpha = layer === 0 ? 0.4 : 0.18;
+                waveCtx.beginPath();
+                for (let i = 0; i <= WAVE_POINTS; i++) {
+                    const frac  = (i % WAVE_POINTS) / WAVE_POINTS;
+                    const angle = frac * Math.PI * 2 + waveRot * dir;
+                    const s = waveSamples[Math.floor(frac * waveSamples.length)];
+                    const r = baseR + layer * amp * 0.5 + s * amp * 2;
+                    const x = cx + Math.cos(angle) * r;
+                    const y = cy + Math.sin(angle) * r;
+                    i === 0 ? waveCtx.moveTo(x, y) : waveCtx.lineTo(x, y);
+                }
+                waveCtx.closePath();
+                waveCtx.stroke();
+            }
+            waveCtx.globalAlpha = 1;
+            waveRot += 0.0007;
+            waveRaf = requestAnimationFrame(drawWave);
+        }
+
+        // a live switch to reduced motion stops the loop mid-session
+        if (reducedMotionQ.addEventListener) {
+            reducedMotionQ.addEventListener('change', () => {
+                if (reducedMotionQ.matches) stopWave();
+                else if (isPlaying) startWave();
+            });
         }
 
         // ── TIMER ──
