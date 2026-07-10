@@ -229,13 +229,55 @@
             gap: 5rem; align-items: start;
         }
 
-        /* Cover mockup */
-        .book-mockup { position: relative; }
+        /* Cover mockup — a physical object: tilts toward the cursor
+           (desktop), floats gently when idle (touch), sheen follows the
+           light. Driven by the small script at the end of the page. */
+        .book-mockup { position: relative; perspective: 900px; }
+        .book-tilt {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
+            filter: drop-shadow(0 18px 28px rgba(0,0,0,0.14));
+        }
+        .book-tilt.tracking { transition: none; }
+        .book-tilt::after {
+            content: '';
+            position: absolute; inset: 0;
+            pointer-events: none;
+            background: linear-gradient(115deg,
+                transparent 32%,
+                rgba(255,255,255, var(--sheen, 0)) 48%,
+                transparent 64%);
+            background-size: 220% 220%;
+            background-position: var(--shx, 50%) var(--shy, 50%);
+            mix-blend-mode: soft-light;
+            transition: opacity 0.6s ease;
+        }
+        .book-badge { transform: translateZ(28px); }
+        @media (hover: none) {
+            .book-tilt { animation: book-float 8s ease-in-out infinite; }
+        }
+        @keyframes book-float {
+            0%, 100% { transform: translateY(0) rotateX(0) rotateY(0); }
+            50%      { transform: translateY(-8px) rotateX(1.5deg) rotateY(-2deg); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .book-tilt {
+                animation: none !important;
+                transform: none !important;
+                transition: none;
+            }
+            .book-tilt::after { display: none; }
+        }
         .book-cover-img {
             width: 100%; aspect-ratio: 3/4; object-fit: cover;
             display: block;
             box-shadow: 4px 4px 0 0 var(--border), 8px 8px 0 0 #e8e8e8, 12px 12px 0 0 #f0f0f0;
             border: 1px solid var(--border);
+        }
+        html[data-theme="dark"] .book-cover-img {
+            box-shadow: 4px 4px 0 0 var(--border), 8px 8px 0 0 #1e2126, 12px 12px 0 0 #191c20;
         }
         .book-badge {
             position: absolute; top: -14px; right: -14px;
@@ -243,6 +285,35 @@
             font-family: 'IBM Plex Mono', monospace;
             font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
             padding: 0.4rem 0.75rem;
+        }
+
+        /* From the pages — quotes lifted straight from the book */
+        .book-quotes {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 2.5rem 6rem;
+            border-top: 1px solid var(--border);
+        }
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 2.5rem;
+        }
+        .quotes-grid blockquote { margin: 0; }
+        .quotes-grid blockquote p {
+            font-size: 1.08rem; font-weight: 300; font-style: italic;
+            line-height: 1.8; color: var(--text);
+            margin-bottom: 1rem;
+        }
+        .quotes-grid cite {
+            font-family: 'IBM Plex Mono', monospace; font-style: normal;
+            font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--text-light);
+        }
+        @media (max-width: 768px) {
+            .quotes-grid { grid-template-columns: 1fr; gap: 2.2rem; }
+            .book-quotes { padding: 3.5rem 1.5rem 4rem; }
         }
 
         /* Book info */
@@ -522,8 +593,10 @@
 
                 <!-- Cover -->
                 <div class="book-mockup reveal">
-                    <img src="assets/images/book-cover.jpg" alt="echo·11 Behind the Scenes — Volume One" class="book-cover-img" loading="lazy">
-                    <span class="book-badge">Digital PDF</span>
+                    <div class="book-tilt" id="bookTilt">
+                        <img src="assets/images/book-cover.jpg" alt="echo·11 Behind the Scenes — Volume One" class="book-cover-img" loading="lazy">
+                        <span class="book-badge">Digital PDF</span>
+                    </div>
                 </div>
 
                 <!-- Info -->
@@ -608,6 +681,26 @@
                 </div>
             </div>
         </section>
+
+        <!-- From the pages -->
+        <section class="book-quotes" aria-label="Quotes from the book">
+            <div class="section-label reveal">From the pages</div>
+            <div class="quotes-grid">
+                <blockquote class="reveal">
+                    <p>“The brand is not what you say. It is what remains after you stop speaking.”</p>
+                    <cite>ECHO 01</cite>
+                </blockquote>
+                <blockquote class="reveal">
+                    <p>“Silence is not absence; it is the space that gives a message its weight.”</p>
+                    <cite>02 · Silence</cite>
+                </blockquote>
+                <blockquote class="reveal">
+                    <p>“Attention is the only scarce resource left. We protect it — ours and our audience’s — like a held breath.”</p>
+                    <cite>07 · Focus</cite>
+                </blockquote>
+            </div>
+        </section>
+
         <!-- Copyright notice -->
         <div style="max-width:1200px;margin:0 auto;padding:0 2.5rem 4rem;border-top:1px solid var(--border);padding-top:2.5rem;">
             <p style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--text-light);letter-spacing:0.08em;line-height:1.8;">
@@ -812,6 +905,46 @@
             document.getElementById('cookieDecline').addEventListener('click', function(){
                 localStorage.setItem('echo11_consent', 'denied');
                 banner.style.display = 'none';
+            });
+        })();
+
+        // 3D cover tilt — desktop fine-pointer only; touch gets the CSS
+        // idle float, reduced motion gets a static cover.
+        (function () {
+            const wrap = document.querySelector('.book-mockup');
+            const tilt = document.getElementById('bookTilt');
+            if (!wrap || !tilt) return;
+            if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+            const MAX_DEG = 6;
+            let raf = null, tx = 0, ty = 0, cx = 0, cy = 0;
+
+            function frame() {
+                cx += (tx - cx) * 0.12;                    // smooth lerp toward target
+                cy += (ty - cy) * 0.12;
+                tilt.style.transform = 'rotateX(' + cy.toFixed(3) + 'deg) rotateY(' + cx.toFixed(3) + 'deg)';
+                tilt.style.setProperty('--shx', (50 - cx * 7) + '%');
+                tilt.style.setProperty('--shy', (50 - cy * 7) + '%');
+                raf = (Math.abs(tx - cx) > 0.01 || Math.abs(ty - cy) > 0.01)
+                    ? requestAnimationFrame(frame) : null;
+            }
+
+            wrap.addEventListener('pointermove', function (e) {
+                const r = wrap.getBoundingClientRect();
+                tx = ((e.clientX - r.left) / r.width - 0.5) * MAX_DEG * 2;
+                ty = -((e.clientY - r.top) / r.height - 0.5) * MAX_DEG * 2;
+                tilt.classList.add('tracking');
+                tilt.style.setProperty('--sheen', 0.4);
+                if (raf === null) raf = requestAnimationFrame(frame);
+            });
+
+            wrap.addEventListener('pointerleave', function () {
+                if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
+                tx = ty = cx = cy = 0;
+                tilt.classList.remove('tracking');         // CSS eases it home
+                tilt.style.transform = '';
+                tilt.style.setProperty('--sheen', 0);
             });
         })();
     </script>
