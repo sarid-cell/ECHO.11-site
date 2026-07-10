@@ -13,6 +13,12 @@
 </script>
 
     <meta charset="UTF-8">
+    <!-- Quiet Mode bootstrap: resolve theme before first paint (no FOUC).
+         Stored choice -> night hours (20:00-07:00) -> system preference. -->
+    <script>
+    (function(){try{var t=localStorage.getItem('echo11_theme');if(t!=='dark'&&t!=='light'){var h=new Date().getHours();t=(h>=20||h<7)||matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -33,6 +39,7 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@200;300;400;500;600;700&display=swap"></noscript>
 
     <link rel="stylesheet" href="assets/css/view-transitions.css">
+    <link rel="stylesheet" href="assets/css/quiet-mode.css">
     <style>
         :root {
             --bg: #fafafa;
@@ -961,6 +968,7 @@
         })();
     </script>
     <script src="assets/js/site-header.js" defer></script>
+    <script src="assets/js/quiet-mode.js" defer></script>
     <script src="assets/js/echo-ripple.js" defer></script>
     <script src="assets/js/a11y-widget.js" defer></script>
 </body>
