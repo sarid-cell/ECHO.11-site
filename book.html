@@ -122,6 +122,7 @@
 
     <link rel="stylesheet" href="assets/css/view-transitions.css">
     <link rel="stylesheet" href="assets/css/quiet-mode.css">
+    <link rel="stylesheet" href="assets/css/micro-interactions.css">
     <style>
         :root {
             --bg: #fafafa;
@@ -287,6 +288,35 @@
             padding: 0.4rem 0.75rem;
         }
 
+        /* Inside the volume — a look at the actual pages, so the sale
+           isn't just a promise on a cover thumbnail */
+        .book-preview {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 2.5rem 0;
+        }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.75rem;
+            margin-top: 2.5rem;
+        }
+        .preview-grid figure { margin: 0; }
+        .preview-grid img {
+            width: 100%; aspect-ratio: 3/4; object-fit: cover;
+            display: block; filter: grayscale(100%);
+        }
+        html[data-theme="dark"] .preview-grid img { filter: grayscale(100%) brightness(0.78); }
+        .preview-grid figcaption {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--text-light); margin-top: 0.7rem;
+        }
+        @media (max-width: 768px) {
+            .preview-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .book-preview { padding: 3.5rem 1.5rem 0; }
+        }
+
         /* From the pages — quotes lifted straight from the book */
         .book-quotes {
             max-width: 1100px;
@@ -371,6 +401,10 @@
             font-size: 0.82rem; color: var(--text-light);
             font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.1em;
         }
+        .book-credit {
+            font-size: 0.8rem; color: var(--text-light);
+            margin-bottom: 2.2rem;
+        }
 
         /* Waitlist */
         .waitlist-block { margin-bottom: 3rem; }
@@ -415,6 +449,11 @@
         .waitlist-fields input:focus { outline: none; border-color: var(--teal); }
         .waitlist-fields button {
             border: none; cursor: pointer; flex: 0 0 auto;
+        }
+        .field-hint {
+            flex: 1 0 100%;
+            font-size: 0.78rem; color: var(--text-light); line-height: 1.5;
+            margin: -0.25rem 0 0.15rem;
         }
 
         /* Print note */
@@ -577,13 +616,16 @@
         <!-- Hero -->
         <section class="hero">
             <div class="hero-bg">
-                <img src="assets/images/book-hero.jpg" alt="Figure in white robes walking across white sand dunes" fetchpriority="high">
+                <picture>
+                    <source srcset="assets/images/book-hero.webp" type="image/webp">
+                    <img src="assets/images/book-hero.jpg" alt="Figure in white robes walking across white sand dunes" fetchpriority="high">
+                </picture>
             </div>
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <div class="hero-kicker">ECHO·11 · VOLUME ONE</div>
-                <h1><strong>Behind the Scenes.</strong></h1>
-                <p>The architecture of a quieter mind — 111 pages on calming an anxious brain with generative AI, neuro-aesthetics, and binaural frequencies. Born from the deafening noise of 2025.</p>
+                <h1><strong>The book behind ECHO.11.</strong></h1>
+                <p>111 pages on calming an anxious mind with generative AI, neuro-aesthetics, and binaural frequencies — the full process, documented. Born from the deafening noise of 2025, written for anyone whose brain won't switch off.</p>
             </div>
         </section>
 
@@ -594,7 +636,7 @@
                 <!-- Cover -->
                 <div class="book-mockup reveal">
                     <div class="book-tilt" id="bookTilt">
-                        <img src="assets/images/book-cover.jpg" alt="echo·11 Behind the Scenes — Volume One" class="book-cover-img" loading="lazy">
+                        <picture><source srcset="assets/images/book-cover.webp" type="image/webp"><img src="assets/images/book-cover.jpg" alt="echo·11 Behind the Scenes — Volume One" class="book-cover-img" loading="lazy"></picture>
                         <span class="book-badge">Digital PDF</span>
                     </div>
                 </div>
@@ -618,11 +660,12 @@
                         <div class="price-amount">$38</div>
                         <div class="price-format">USD · Digital PDF · 111 pages</div>
                     </div>
+                    <p class="book-credit">Written &amp; designed by Shira Sarid — Tel Aviv</p>
 
                     <!-- Waitlist -->
                     <div class="waitlist-block">
                         <p class="follow-label" style="margin-bottom:1rem;">
-                            Sales open soon. Join the waitlist now and get free postcard downloads from the book on launch — early registrants get the launch price for the first 72 hours only.
+                            Join the waitlist — early registrants lock in the $38 launch price for the first 72 hours, before it goes up, plus free postcard downloads from the book.
                         </p>
                         <p style="font-size:0.92rem; color:var(--text-secondary); line-height:1.7; margin-bottom:1.2rem;">
                             Built for people navigating ADHD, post-trauma, misophonia, insomnia, and focus struggles — a tool available 24/7.
@@ -641,8 +684,9 @@
                             <p id="digitalRevenue" class="waitlist-count" style="margin-bottom:0.8rem;"></p>
                             <div class="waitlist-fields">
                                 <input type="text" name="name" placeholder="Name" required>
+                                <input type="email" name="email" placeholder="Email" required>
                                 <input type="text" name="instagram" placeholder="Instagram @handle or link" required>
-                                <input type="email" name="email" placeholder="Email (optional)">
+                                <span class="field-hint">Used to send your launch postcards and print-edition updates by DM.</span>
                                 <button type="submit" class="edition-btn btn-digital">Join the waitlist</button>
                             </div>
                             <p id="waitlistStatus" role="status" style="font-size:0.85rem; margin-top:0.6rem;"></p>
@@ -679,6 +723,25 @@
                         </p>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Inside the volume -->
+        <section class="book-preview" aria-label="A look inside the book">
+            <div class="section-label reveal">Inside the volume</div>
+            <div class="preview-grid">
+                <figure class="reveal">
+                    <picture><source srcset="assets/images/book-gaze.webp" type="image/webp"><img src="assets/images/book-gaze.jpg" alt="Astronaut portrait from the book — direct gaze through the visor" loading="lazy"></picture>
+                    <figcaption>N°08 · The Vision</figcaption>
+                </figure>
+                <figure class="reveal">
+                    <picture><source srcset="assets/images/book-mind.webp" type="image/webp"><img src="assets/images/book-mind.jpg" alt="Astronaut portrait from the book — eyes closed, at rest" loading="lazy"></picture>
+                    <figcaption>N°02 · The Anatomy of Noise</figcaption>
+                </figure>
+                <figure class="reveal">
+                    <picture><source srcset="assets/images/book-spiral.webp" type="image/webp"><img src="assets/images/book-spiral.jpg" alt="Astronaut portrait from the book — profile against a spiral form" loading="lazy"></picture>
+                    <figcaption>N°01 · The Lion &amp; the Gold</figcaption>
+                </figure>
             </div>
         </section>
 
@@ -849,9 +912,9 @@
                     waitlistStatus.textContent = 'Please choose Digital PDF or Limited Print above.';
                     return;
                 }
-                if (!name || !instagram) {
+                if (!name || !email || !instagram) {
                     waitlistStatus.style.color = '#c0392b';
-                    waitlistStatus.textContent = 'Please fill in your name and Instagram handle.';
+                    waitlistStatus.textContent = 'Please fill in your name, email, and Instagram handle.';
                     return;
                 }
 
@@ -950,6 +1013,7 @@
     </script>
     <script src="assets/js/site-header.js" defer></script>
     <script src="assets/js/quiet-mode.js" defer></script>
+    <script src="assets/js/micro-interactions.js" defer></script>
     <script src="assets/js/echo-ripple.js" defer></script>
     <script src="assets/js/a11y-widget.js" defer></script>
 </body>
