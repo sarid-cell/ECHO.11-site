@@ -675,6 +675,16 @@
             .timer-time { font-size: 1.1rem; }
             .meta-row { flex-direction: column; gap: 0.7rem; }
             .scroll-cue { display: none; }
+            /* .info-block-img forces `grid-column: span 2` so auto-fit
+               can be pushed into a 2-column layout even when only one
+               280px track fits — the row (and the whole grid, since a
+               spanning item can widen every track) overflows the
+               viewport and gets silently clipped by overflow-x:hidden,
+               cutting off the right half of every answer. Force a
+               single column below the point auto-fit would collapse
+               to one anyway. */
+            .info-grid { grid-template-columns: 1fr; }
+            .info-block-img { grid-column: span 1; aspect-ratio: 16/10; }
         }
         @media (prefers-reduced-motion: reduce) {
             .reveal { opacity:1; transform:none; }
