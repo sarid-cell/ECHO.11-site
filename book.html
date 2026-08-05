@@ -122,7 +122,8 @@
 
     <link rel="stylesheet" href="assets/css/view-transitions.css">
     <link rel="stylesheet" href="assets/css/quiet-mode.css">
-    <link rel="stylesheet" href="assets/css/micro-interactions.css">
+    <link rel="stylesheet" href="assets/css/micro-interactions.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="assets/css/micro-interactions.css"></noscript>
     <style>
         :root {
             --bg: #fafafa;
@@ -662,35 +663,18 @@
                     </div>
                     <p class="book-credit">Written &amp; designed by Shira Sarid — Tel Aviv</p>
 
-                    <!-- Waitlist -->
+                    <!-- Coming soon -->
                     <div class="waitlist-block">
                         <p class="follow-label" style="margin-bottom:1rem;">
-                            Join the waitlist — early registrants lock in the $38 launch price for the first 72 hours, before it goes up, plus free postcard downloads from the book.
+                            Purchase is opening soon. For now, here's a real look inside the volume — five chapters, 111 pages, the full process laid out.
                         </p>
-                        <p style="font-size:0.92rem; color:var(--text-secondary); line-height:1.7; margin-bottom:1.2rem;">
+                        <p style="font-size:0.92rem; color:var(--text-secondary); line-height:1.7; margin-bottom:1.4rem;">
                             Built for people navigating ADHD, post-trauma, misophonia, insomnia, and focus struggles — a tool available 24/7.
                         </p>
-                        <form id="waitlistForm" novalidate>
-                            <div class="waitlist-options" role="radiogroup" aria-label="Edition preference">
-                                <label class="waitlist-option">
-                                    <input type="radio" name="edition" value="digital" required>
-                                    <span>Digital PDF — $38 <span id="digitalCount" class="waitlist-count"></span></span>
-                                </label>
-                                <label class="waitlist-option">
-                                    <input type="radio" name="edition" value="physical">
-                                    <span>Limited Print (11 copies, pricing announced soon) <span id="physicalCount" class="waitlist-count"></span></span>
-                                </label>
-                            </div>
-                            <p id="digitalRevenue" class="waitlist-count" style="margin-bottom:0.8rem;"></p>
-                            <div class="waitlist-fields">
-                                <input type="text" name="name" placeholder="Name" required>
-                                <input type="email" name="email" placeholder="Email" required>
-                                <input type="text" name="instagram" placeholder="Instagram @handle or link" required>
-                                <span class="field-hint">Used to send your launch postcards and print-edition updates by DM.</span>
-                                <button type="submit" class="edition-btn btn-digital">Join the waitlist</button>
-                            </div>
-                            <p id="waitlistStatus" role="status" style="font-size:0.85rem; margin-top:0.6rem;"></p>
-                        </form>
+                        <a href="#inside-the-volume" class="edition-btn btn-digital">
+                            See inside the book
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                        </a>
                         <p class="try-first-note">
                             Haven't tried the frequency yet? <a href="frequency.html">Start there — it's free, 11 minutes</a>. The book will still be here.
                         </p>
@@ -727,7 +711,7 @@
         </section>
 
         <!-- Inside the volume -->
-        <section class="book-preview" aria-label="A look inside the book">
+        <section class="book-preview" id="inside-the-volume" aria-label="A look inside the book">
             <div class="section-label reveal">Inside the volume</div>
             <div class="preview-grid">
                 <figure class="reveal">
@@ -871,81 +855,6 @@
         // Fallback so off-screen sections aren't left at opacity:0 for crawlers/non-scrolling renders
         setTimeout(() => document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible')), 2500);
 
-        // ── WAITLIST ──
-        const SUPABASE_URL      = 'https://nomtmlidkuhkllniaytu.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vbXRtbGlka3Voa2xsbmlheXR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1ODUzMzIsImV4cCI6MjA5NjE2MTMzMn0.LO7mdpCI_8dmDFdnvQA7fQoSts_yqksKgnLUt6O11_U';
-
-        function renderWaitlistCounts(row) {
-            if (!row) return;
-            document.getElementById('digitalCount').textContent = `· ${row.digital_count} on the list`;
-            document.getElementById('physicalCount').textContent = `· ${row.physical_count} on the list`;
-            document.getElementById('digitalRevenue').textContent =
-                `≈ $${row.digital_count * 38} in potential digital sales so far`;
-        }
-
-        async function loadWaitlistCounts() {
-            try {
-                const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_waitlist_counts`, {
-                    method: 'POST',
-                    headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-                        'Content-Type': 'application/json' },
-                    body: '{}'
-                });
-                const d = await r.json();
-                renderWaitlistCounts(Array.isArray(d) ? d[0] : d);
-            } catch (e) {}
-        }
-        loadWaitlistCounts();
-
-        const waitlistForm = document.getElementById('waitlistForm');
-        const waitlistStatus = document.getElementById('waitlistStatus');
-        if (waitlistForm) {
-            waitlistForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const fd = new FormData(waitlistForm);
-                const instagram = fd.get('instagram');
-                const edition = fd.get('edition');
-                const name = fd.get('name');
-                const email = fd.get('email');
-                if (!edition) {
-                    waitlistStatus.style.color = '#c0392b';
-                    waitlistStatus.textContent = 'Please choose Digital PDF or Limited Print above.';
-                    return;
-                }
-                if (!name || !email || !instagram) {
-                    waitlistStatus.style.color = '#c0392b';
-                    waitlistStatus.textContent = 'Please fill in your name, email, and Instagram handle.';
-                    return;
-                }
-
-                const submitBtn = waitlistForm.querySelector('button[type="submit"]');
-                submitBtn.disabled = true;
-                waitlistStatus.textContent = '';
-
-                try {
-                    const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/insert_waitlist_signup`, {
-                        method: 'POST',
-                        headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-                            'Content-Type': 'application/json' },
-                        body: JSON.stringify({ p_instagram: instagram, p_edition: edition, p_name: name, p_email: email || null })
-                    });
-                    if (!r.ok) throw new Error('request failed');
-                    const d = await r.json();
-                    renderWaitlistCounts(Array.isArray(d) ? d[0] : d);
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'join_waitlist', { edition });
-                    }
-                    waitlistForm.reset();
-                    waitlistStatus.style.color = 'var(--teal)';
-                    waitlistStatus.textContent = "You're on the list — postcards are on their way when the book drops.";
-                } catch (err) {
-                    waitlistStatus.style.color = '#c0392b';
-                    waitlistStatus.textContent = 'Something went wrong. Please try again or email shirasarid@gmail.com.';
-                } finally {
-                    submitBtn.disabled = false;
-                }
-            });
-        }
     </script>
 
     <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
