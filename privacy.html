@@ -2,13 +2,31 @@
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TP9YRD6TN8"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('consent', 'default', { analytics_storage: localStorage.getItem('echo11_consent') === 'granted' ? 'granted' : 'denied' });
       gtag('js', new Date());
       gtag('config', 'G-TP9YRD6TN8');
+
+      // Load the actual gtag.js library off the critical rendering path:
+      // on first interaction, or after a short idle delay, whichever is first.
+      // dataLayer.push already queues consent/js/config above, so nothing is lost.
+      (function () {
+        var loaded = false;
+        function loadGtag() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-TP9YRD6TN8';
+          document.head.appendChild(s);
+        }
+        ['scroll', 'click', 'keydown', 'touchstart', 'mousemove'].forEach(function (ev) {
+          window.addEventListener(ev, loadGtag, { once: true, passive: true });
+        });
+        window.addEventListener('load', function () { setTimeout(loadGtag, 3000); });
+      })();
     </script>
 
     <meta charset="UTF-8">
@@ -95,11 +113,9 @@
     </script>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@200;300;400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@200;300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@200;300;400;500;600;700&display=swap"></noscript>
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/outfit-variable.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/ibm-plex-mono-400.woff2" crossorigin>
+    <link rel="stylesheet" href="assets/css/fonts.css">
     
     <link rel="stylesheet" href="assets/css/view-transitions.css">
     <link rel="stylesheet" href="assets/css/quiet-mode.css">
