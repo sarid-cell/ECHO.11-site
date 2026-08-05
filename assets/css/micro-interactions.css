@@ -1,0 +1,70 @@
+/* ECHO.11 — site-wide micro-interaction polish
+   One quiet motion language for every small interaction:
+   1. Links (footer + side menu) draw a 1px underline in from the left
+   2. The side menu cascades its links in with a stagger
+   3. Magnetic buttons (class added by micro-interactions.js) drift
+      a few px toward the cursor and ease back home
+   4. Scroll reveals get a longer, more cinematic expo-out curve
+   5. Keyboard focus (:focus-visible) mirrors the hover states
+   Everything is disabled under prefers-reduced-motion. */
+
+/* ── 1. Underline draw-in ── */
+footer a,
+.menu-link {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s ease, color 0.3s ease;
+}
+footer a:hover,
+footer a:focus-visible,
+.menu-link:hover,
+.menu-link:focus-visible {
+    background-size: 100% 1px;
+}
+
+/* ── 2. Side-menu cascade ── */
+.side-menu.active .menu-link {
+    animation: menu-link-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+.side-menu.active .menu-link:nth-child(1) { animation-delay: 0.10s; }
+.side-menu.active .menu-link:nth-child(2) { animation-delay: 0.16s; }
+.side-menu.active .menu-link:nth-child(3) { animation-delay: 0.22s; }
+.side-menu.active .menu-link:nth-child(4) { animation-delay: 0.28s; }
+.side-menu.active .menu-link:nth-child(5) { animation-delay: 0.34s; }
+.side-menu.active .menu-link:nth-child(6) { animation-delay: 0.40s; }
+@keyframes menu-link-in {
+    from { opacity: 0; transform: translateX(28px); }
+}
+
+/* ── 3. Magnetic buttons ── */
+.magnetic {
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+}
+.magnetic:focus-visible { transform: none !important; }
+
+/* ── 4. Cinematic reveals ── */
+html .reveal {
+    transform: translateY(48px);
+    transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── 5. Keyboard focus parity ── */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+    outline: 1.5px solid var(--text);
+    outline-offset: 3px;
+}
+
+/* ── Reduced motion: everything settles instantly ── */
+@media (prefers-reduced-motion: reduce) {
+    footer a, .menu-link { transition: opacity 0.3s ease, color 0.3s ease; }
+    .side-menu.active .menu-link { animation: none; }
+    .magnetic { transition: none; transform: none !important; }
+    html .reveal { opacity: 1; transform: none; transition: none; }
+}
