@@ -414,36 +414,75 @@
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
             gap: 0.7rem;
+            perspective: 600px;
         }
         .timer-time {
             font-family: var(--mono); font-size: 1.3rem; font-weight: 500;
             color: var(--text-secondary); line-height: 1;
         }
 
-        /* Play button — HUD-style engage control, sits inside the timer ring */
+        /* Play button — a glass instrument porthole, not a flat icon.
+           Layered like the book cover: a dimensional base surface, a
+           static highlight so it reads as glass even at rest (mobile
+           has no hover), and a pointer-tracked sheen + gentle tilt on
+           desktop that makes it feel like a physical lens the light
+           moves across. */
         .play-btn {
             position: relative;
             width: 64px; height: 64px; border-radius: 50%;
             border: 1.5px solid var(--accent);
-            background: radial-gradient(circle at 50% 40%, #1c2226, #0a0d0f);
+            background:
+                radial-gradient(circle at 32% 26%, rgba(255,255,255,0.16), rgba(255,255,255,0) 45%),
+                radial-gradient(circle at 50% 42%, #232a2f, #05070a 78%);
             color: var(--accent);
             display: flex; align-items: center; justify-content: center;
-            transition: box-shadow .6s ease, transform .6s ease, border-color .6s ease;
-            box-shadow: 0 0 0 1px rgba(45,212,240,0.15), 0 4px 24px rgba(0,0,0,0.18), 0 0 18px var(--accent-dim);
+            transform-style: preserve-3d;
+            transition: box-shadow .6s ease, transform .5s cubic-bezier(0.16,1,0.3,1), border-color .6s ease;
+            box-shadow:
+                0 0 0 1px rgba(45,212,240,0.15),
+                0 4px 24px rgba(0,0,0,0.18),
+                0 0 18px var(--accent-dim),
+                inset 0 1.5px 1.5px rgba(255,255,255,0.2),
+                inset 0 -3px 6px rgba(0,0,0,0.55);
+            will-change: transform;
         }
+        .play-btn.tracking { transition: box-shadow .6s ease, border-color .6s ease; }
+        /* rotating dashed HUD ring — the instrument bezel */
         .play-btn::before {
             content: ''; position: absolute; inset: -9px; border-radius: 50%;
             border: 1px dashed rgba(45,212,240,0.4);
             animation: hud-spin 14s linear infinite;
         }
-        .play-btn:hover { transform: scale(1.06); box-shadow: 0 0 0 1px rgba(45,212,240,0.3), 0 4px 24px rgba(0,0,0,0.22), 0 0 28px var(--accent); }
+        /* pointer-tracked light sheen — inert (opacity 0) until JS
+           activates it on hover; harmless if JS never runs */
+        .play-btn::after {
+            content: '';
+            position: absolute; inset: 0; border-radius: 50%;
+            background: radial-gradient(circle at var(--shx, 50%) var(--shy, 50%), rgba(255,255,255,0.4), rgba(255,255,255,0) 55%);
+            mix-blend-mode: soft-light;
+            opacity: var(--sheen, 0);
+            transition: opacity .5s ease;
+            pointer-events: none;
+        }
+        .play-btn:hover { box-shadow: 0 0 0 1px rgba(45,212,240,0.3), 0 4px 24px rgba(0,0,0,0.22), 0 0 28px var(--accent), inset 0 1.5px 1.5px rgba(255,255,255,0.25), inset 0 -3px 6px rgba(0,0,0,0.55); }
         .play-btn.playing {
             border-color: var(--accent);
-            box-shadow: 0 0 0 1px rgba(45,212,240,0.35), 0 4px 24px rgba(0,0,0,0.22), 0 0 26px var(--accent);
+            box-shadow: 0 0 0 1px rgba(45,212,240,0.35), 0 4px 24px rgba(0,0,0,0.22), 0 0 26px var(--accent), inset 0 1.5px 1.5px rgba(255,255,255,0.22), inset 0 -3px 6px rgba(0,0,0,0.55);
         }
-        .play-btn svg { width: 22px; height: 22px; filter: drop-shadow(0 0 4px var(--accent-dim)); }
+        .play-btn svg { position: relative; z-index: 1; width: 22px; height: 22px; filter: drop-shadow(0 0 4px var(--accent-dim)); }
         @keyframes hud-spin { to { transform: rotate(360deg); } }
-        @media (prefers-reduced-motion: reduce) { .play-btn::before { animation: none; } }
+        @media (hover: none) {
+            .play-btn { animation: play-btn-drift 9s ease-in-out infinite; }
+        }
+        @keyframes play-btn-drift {
+            0%, 100% { transform: rotateX(0) rotateY(0); }
+            50%      { transform: rotateX(2deg) rotateY(-3deg); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .play-btn::before { animation: none; }
+            .play-btn { animation: none !important; transform: none !important; transition: box-shadow .3s ease, border-color .3s ease; }
+            .play-btn::after { display: none; }
+        }
 
         .state-text {
             font-family: var(--mono); font-size: 0.72rem;
@@ -930,8 +969,8 @@
                     </svg>
                     <div class="timer-inner">
                         <button class="play-btn" id="playBtn" aria-label="Start session">
-                            <svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 5v14l11-7-11-7z"/></svg>
-                            <svg id="iconPause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                            <svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#playBtnIconGradient)"><defs><linearGradient id="playBtnIconGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#eafdff"/><stop offset="100%" stop-color="currentColor"/></linearGradient></defs><path d="M6.5 5v14l11-7-11-7z"/></svg>
+                            <svg id="iconPause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#playBtnIconGradient)" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                         </button>
                         <div class="timer-time" id="timerDisplay">11:00</div>
                     </div>
@@ -1399,6 +1438,46 @@
                 if (isPlaying) pauseSession();
             });
         }
+
+        // Play button — glass porthole tilt + light sheen. Desktop
+        // fine-pointer only; touch gets the CSS idle drift instead
+        // (mirrors the book cover's 3D tilt on book.html).
+        (function () {
+            if (!matchMedia('(prefers-reduced-motion: reduce)').matches &&
+                matchMedia('(hover: hover) and (pointer: fine)').matches) {
+                const MAX_DEG = 10;
+                let raf = null, tx = 0, ty = 0, cx = 0, cy = 0;
+
+                function frame() {
+                    cx += (tx - cx) * 0.16;
+                    cy += (ty - cy) * 0.16;
+                    playBtn.style.transform = 'rotateX(' + cy.toFixed(3) + 'deg) rotateY(' + cx.toFixed(3) + 'deg)';
+                    raf = (Math.abs(tx - cx) > 0.01 || Math.abs(ty - cy) > 0.01)
+                        ? requestAnimationFrame(frame) : null;
+                }
+
+                playBtn.addEventListener('pointermove', (e) => {
+                    const r = playBtn.getBoundingClientRect();
+                    const px = (e.clientX - r.left) / r.width;
+                    const py = (e.clientY - r.top) / r.height;
+                    tx = (px - 0.5) * MAX_DEG * 2;
+                    ty = -(py - 0.5) * MAX_DEG * 2;
+                    playBtn.classList.add('tracking');
+                    playBtn.style.setProperty('--shx', (px * 100).toFixed(1) + '%');
+                    playBtn.style.setProperty('--shy', (py * 100).toFixed(1) + '%');
+                    playBtn.style.setProperty('--sheen', 0.55);
+                    if (raf === null) raf = requestAnimationFrame(frame);
+                });
+
+                playBtn.addEventListener('pointerleave', () => {
+                    if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
+                    tx = ty = cx = cy = 0;
+                    playBtn.classList.remove('tracking');
+                    playBtn.style.transform = '';
+                    playBtn.style.setProperty('--sheen', 0);
+                });
+            }
+        })();
 
         // ── MODALS ──
         const headphoneModal = document.getElementById('headphoneModal');
