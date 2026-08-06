@@ -679,7 +679,7 @@
         @media (max-width: 768px) {
             .header-inner { padding: 1rem 1.5rem; }
             .freq-diagram { grid-template-columns: 1fr; }
-            .brain { border-left: none; border-right: none; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+            .brain { border-left: none; border-right: none; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: left; align-items: flex-start; }
             .ear.right { text-align: left; }
             .science { padding: 4rem 1.5rem; }
             footer { padding: 3rem 1.5rem; }
@@ -930,7 +930,7 @@
                     </svg>
                     <div class="timer-inner">
                         <button class="play-btn" id="playBtn" aria-label="Start session">
-                            <svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+                            <svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 5v14l11-7-11-7z"/></svg>
                             <svg id="iconPause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                         </button>
                         <div class="timer-time" id="timerDisplay">11:00</div>
@@ -1333,6 +1333,7 @@
             if (typeof gtag==='function') gtag('event','frequency_complete',{duration:660});
             document.getElementById('completeMeta').textContent = `${document.getElementById('sessionsNum').textContent} sessions today`;
             openModal(completeModal);
+            if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'none';
         }
 
         function beginSession() {
@@ -1352,6 +1353,25 @@
             setState('Session active');
             if (!sessionCounted) { sessionCounted = true; increment(); }
             if (typeof gtag==='function') gtag('event','frequency_start',{hz:'10'});
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: '10Hz Alpha Reset',
+                    artist: 'ECHO.11',
+                    album: 'The 11-Minute Reset'
+                });
+                navigator.mediaSession.playbackState = 'playing';
+            }
+        }
+
+        function pauseSession() {
+            clearInterval(timerInt); stopAudio();
+            isPlaying = false;
+            exitFocus();
+            iconPlay.style.display = 'block'; iconPause.style.display = 'none';
+            playBtn.classList.remove('playing'); timerWrap.classList.remove('playing');
+            setState('Paused — press play to continue');
+            maybeRevealCta();
+            if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
         }
 
         playBtn.addEventListener('click', () => {
@@ -1362,15 +1382,23 @@
                     openModal(headphoneModal);
                 }
             } else {
-                clearInterval(timerInt); stopAudio();
-                isPlaying = false;
-                exitFocus();
-                iconPlay.style.display = 'block'; iconPause.style.display = 'none';
-                playBtn.classList.remove('playing'); timerWrap.classList.remove('playing');
-                setState('Paused — press play to continue');
-                maybeRevealCta();
+                pauseSession();
             }
         });
+
+        // Media Session — surfaces play/pause on the lock screen,
+        // notification shade, and Bluetooth headphone buttons, and helps
+        // supporting browsers keep the session alive while the tab isn't
+        // in the foreground (answers "can't do anything else while it
+        // plays" — this is what a real music/podcast app does too).
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.setActionHandler('play', () => {
+                if (!isPlaying && sessionStorage.getItem('echo11_headphone_ack')) beginSession();
+            });
+            navigator.mediaSession.setActionHandler('pause', () => {
+                if (isPlaying) pauseSession();
+            });
+        }
 
         // ── MODALS ──
         const headphoneModal = document.getElementById('headphoneModal');
@@ -1470,7 +1498,7 @@
     </script>
 
     <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
-        <span>We use Google Analytics to understand site usage. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Learn more</a></span>
+        <span>We use Google Analytics to understand site usage. <a href="privacy.html" style="color:#fff;text-decoration:underline;" aria-label="Learn more about our privacy policy">Learn more</a></span>
         <div style="display:flex;gap:8px;">
             <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;">Accept</button>
             <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:4px;cursor:pointer;">Decline</button>
