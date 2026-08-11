@@ -514,6 +514,55 @@
             visibility: visible;
         }
 
+        /* App teaser (coming soon) in side menu */
+        .menu-app {
+            margin-top: 0.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .menu-app-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #0284c7;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+        .menu-app-badge {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #0369a1;
+            background: #e0f4fa;
+            border: 1px solid #7dd3fc;
+            border-radius: 999px;
+            padding: 0.25em 0.8em;
+            white-space: nowrap;
+        }
+        .menu-app-desc {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--text-light);
+        }
+        body.a11y-high-contrast .menu-app-title { color: var(--text) !important; }
+        body.a11y-high-contrast .menu-app-badge {
+            color: var(--text) !important;
+            background: var(--bg) !important;
+            border-color: var(--text) !important;
+        }
+        body.a11y-high-contrast .menu-app-desc { color: var(--text) !important; }
+        html[data-theme="dark"] .menu-app-title { color: #2dd4f0; }
+        html[data-theme="dark"] .menu-app-badge {
+            color: #7ce4f5;
+            background: rgba(45, 212, 240, 0.12);
+            border-color: rgba(45, 212, 240, 0.4);
+        }
+
         /* Hero - Full width background with text overlay */
         .hero {
             min-height: 100vh;
@@ -1350,6 +1399,12 @@
             <a href="#insights" class="menu-link">Insights</a>
             <a href="#vision" class="menu-link">The Vision</a>
             <a href="about.html" class="menu-link">About Echo.11</a>
+            <div class="menu-app">
+                <span class="menu-app-title">The App
+                    <span class="menu-app-badge">Coming Soon</span>
+                </span>
+                <span class="menu-app-desc">The 10Hz reset, in your pocket.</span>
+            </div>
 
         </nav>
     </aside>

@@ -17,6 +17,16 @@
     { href: 'about.html',          label: 'About Echo.11' }
   ];
 
+  /* App teaser pinned under the links — swap for a real
+     { href: 'app.html', label: 'The App' } NAV entry at launch */
+  var APP_TEASER =
+    '<div class="menu-app">' +
+      '<span class="menu-app-title">The App ' +
+        '<span class="menu-app-badge">Coming Soon</span>' +
+      '</span>' +
+      '<span class="menu-app-desc">The 10Hz reset, in your pocket.</span>' +
+    '</div>';
+
   var header    = document.querySelector('header');
   var sideMenu  = document.getElementById('sideMenu');
   var hamburger = document.getElementById('hamburger');
@@ -29,7 +39,7 @@
       nav.innerHTML = NAV.map(function (item) {
         var current = item.href.split('#')[0] === here ? ' current' : '';
         return '<a href="' + item.href + '" class="menu-link' + current + '">' + item.label + '</a>';
-      }).join('');
+      }).join('') + APP_TEASER;
       // page scripts bound their close-toggle to the original anchors;
       // delegate clicks on the rebuilt ones through the hamburger instead
       nav.addEventListener('click', function (e) {
