@@ -194,6 +194,12 @@
         }
         .logo { font-family: 'IBM Plex Mono', monospace; font-size: 1.1rem; font-weight: 500; color: var(--text); text-decoration: none; }
         .header-right { display: flex; align-items: center; gap: 1.5rem; }
+        /* At 320px the logo, clock, theme toggle and hamburger no longer fit
+           on one row at the full gap, and the menu button gets clipped off
+           the right edge. Tightening the gap keeps it reachable. */
+        @media (max-width: 360px) {
+            .header-right { gap: 0.75rem; }
+        }
         .clock { font-family: 'IBM Plex Mono', monospace; font-size: 1rem; color: var(--text); }
 
         /* Hero */

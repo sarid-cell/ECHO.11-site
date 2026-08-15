@@ -448,7 +448,15 @@
             body.session-active .breath-guide { opacity: 0; }
             .soft-cta { transform: none; }
         }
-        .timer-svg { transform: rotate(-90deg); }
+        /* Fills .timer-wrap rather than keeping the 200x200 of its width/height
+           attributes: the wrap drops to 160px under 768px, and a fixed-size SVG
+           overflows it by 40px, throwing the ring 20px right and 20px down of
+           the play button and waveform. The viewBox handles the scaling. */
+        .timer-svg {
+            transform: rotate(-90deg);
+            display: block;
+            width: 100%; height: 100%;
+        }
         .ring-bg   { fill: none; stroke: var(--border); stroke-width: 1.5; }
         .ring-prog {
             fill: none; stroke: var(--text); stroke-width: 1.5;

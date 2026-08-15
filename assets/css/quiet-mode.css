@@ -29,19 +29,29 @@ html[data-theme="dark"] .astro-banner img,
 html[data-theme="dark"] .footer-banner img {
     filter: grayscale(100%) brightness(0.72);
 }
-html[data-theme="dark"] .hero-bg img {
-    filter: grayscale(20%) brightness(0.75) contrast(1.05);
+/* index.html names this container .hero-background, book.html names it
+   .hero-bg — both need dimming, and missing one leaves that page's hero
+   text sitting on a full-brightness photograph at night. */
+html[data-theme="dark"] .hero-bg img,
+html[data-theme="dark"] .hero-background img {
+    filter: grayscale(20%) brightness(0.82) contrast(1.05);
 }
 html[data-theme="dark"] .info-block-img img {
     filter: grayscale(15%) brightness(0.8) contrast(1.05);
 }
 
 /* surfaces that hardcode the light palette */
+/* The scrim runs taller and denser at night than by day: the hero headline
+   and subtitle sit around 55–75% up from the bottom, which is exactly where
+   the daytime gradient has already faded out. */
 html[data-theme="dark"] .hero-overlay {
+    height: 88%;
     background: linear-gradient(to top,
         rgba(14,16,19,1) 0%,
-        rgba(14,16,19,0.95) 30%,
-        rgba(14,16,19,0.7) 60%,
+        rgba(14,16,19,0.98) 40%,
+        rgba(14,16,19,0.94) 65%,
+        rgba(14,16,19,0.72) 82%,
+        rgba(14,16,19,0.40) 94%,
         rgba(14,16,19,0) 100%);
 }
 

@@ -903,7 +903,10 @@
 
         .pillars-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            /* min() lets the track fall below 300px once the container is
+               narrower than that — a bare minmax(300px, 1fr) keeps the floor
+               and pushes the column past the right edge on 320px screens. */
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
             gap: 3rem;
         }
 
