@@ -113,6 +113,20 @@
             "publisher": {
                 "@id": "https://echo11.app/#shira-sarid"
             }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "https://echo11.app/#webpage",
+            "url": "https://echo11.app/",
+            "name": "ECHO.11 | Decoding the Algorithm of Human Resilience",
+            "description": "ECHO.11 blends consumer psychology, generative AI, and 10Hz sound frequencies — free tools for calm and anxiety self-care, and essays on human resilience.",
+            "isPartOf": {
+                "@id": "https://echo11.app/#website"
+            },
+            "about": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "inLanguage": "en"
         }
     ]
 }
@@ -667,6 +681,14 @@
         }
 
         /* Two doors — self-selection paths */
+        .hero .hero-summary {
+            font-size: clamp(0.92rem, 1.4vw, 1.05rem);
+            color: var(--text-light);
+            max-width: 700px;
+            margin-top: 2.5rem;
+            line-height: 1.9;
+        }
+
         .hero-doors {
             display: flex;
             gap: 1px;
@@ -926,6 +948,13 @@
             color: var(--text-light);
             font-weight: 300;
             margin-top: 0.5rem;
+        }
+
+        .insights-header p + p {
+            font-size: 1rem;
+            max-width: 46rem;
+            line-height: 1.9;
+            margin-top: 1.2rem;
         }
 
         .articles-grid {
@@ -1434,6 +1463,7 @@
                         <span class="hero-door-hint">Essays on psychology, AI, and calmer digital spaces.</span>
                     </a>
                 </nav>
+                <p class="hero-summary reveal">ECHO.11 is two things in one place. A free 10Hz frequency session for the moments a nervous system will not settle, and a body of writing on where consumer psychology and generative AI actually meet. Both come from the same question: what makes a mind resilient when the noise does not stop.</p>
             </div>
         </section>
 
@@ -1479,6 +1509,7 @@
                 <div class="insights-header reveal">
                     <h2>Fresh Insights</h2>
                     <p>Weekly essays on psychology, AI, and quieter digital spaces.</p>
+                    <p>They cover the psychology underneath AI adoption — why capable people stall in front of a blank prompt, why using a tool can feel like cheating, and what shifts when the bottleneck turns out to be belief rather than technology.</p>
                 </div>
                 
                 <div class="articles-grid">
