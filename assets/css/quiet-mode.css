@@ -34,7 +34,7 @@ html[data-theme="dark"] .footer-banner img {
    text sitting on a full-brightness photograph at night. */
 html[data-theme="dark"] .hero-bg img,
 html[data-theme="dark"] .hero-background img {
-    filter: grayscale(20%) brightness(0.55) contrast(1.05);
+    filter: grayscale(20%) brightness(0.82) contrast(1.05);
 }
 html[data-theme="dark"] .info-block-img img {
     filter: grayscale(15%) brightness(0.8) contrast(1.05);
@@ -45,13 +45,13 @@ html[data-theme="dark"] .info-block-img img {
    and subtitle sit around 55–75% up from the bottom, which is exactly where
    the daytime gradient has already faded out. */
 html[data-theme="dark"] .hero-overlay {
-    height: 92%;
+    height: 88%;
     background: linear-gradient(to top,
         rgba(14,16,19,1) 0%,
         rgba(14,16,19,0.98) 40%,
         rgba(14,16,19,0.94) 65%,
-        rgba(14,16,19,0.82) 82%,
-        rgba(14,16,19,0.45) 94%,
+        rgba(14,16,19,0.72) 82%,
+        rgba(14,16,19,0.40) 94%,
         rgba(14,16,19,0) 100%);
 }
 
