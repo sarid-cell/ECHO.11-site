@@ -66,8 +66,8 @@
     <meta name="twitter:description" content="A free 10Hz alpha binaural beat for anxiety relief, calm, and focus. 11 minutes, one frequency, no signup.">
     <meta name="twitter:image" content="https://echo11.app/assets/images/10hz-og.jpg">
 
-    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/outfit-variable.woff2" crossorigin>
-    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/ibm-plex-mono-400.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/outfit-variable-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/ibm-plex-mono-400-latin.woff2" crossorigin>
     <link rel="stylesheet" href="assets/css/fonts.css">
 
     <link rel="stylesheet" href="assets/css/view-transitions.css">
@@ -707,6 +707,24 @@
             text-decoration: underline;
         }
 
+        /* Research card — what the evidence actually supports */
+        .callout .research-headline {
+            font-family: var(--sans); font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+            font-weight: 500; color: var(--text); line-height: 1.4;
+            margin-bottom: 1.1rem;
+        }
+        .callout .research-note {
+            margin-top: 1.6rem; padding-top: 1.2rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.82rem; color: var(--text-light);
+            line-height: 1.75; font-weight: 300;
+        }
+        .callout .research-note a {
+            color: var(--text-light); font-size: inherit;
+            margin-top: 0; text-decoration: underline;
+        }
+        .callout .research-note a:hover { color: var(--text); }
+
         /* Quiet continuation → book */
         .next-step {
             margin-top: 5rem;
@@ -1105,7 +1123,7 @@
                         <div class="info-a">The brain synchronizes to the frequency it perceives — a process called <strong>neural entrainment</strong>. As you listen, your dominant brainwave frequency shifts toward 10Hz. Cortical noise decreases. Attention sharpens without effort.</div>
                     </div>
                     <div class="info-block">
-                        <div class="info-q">Can it help with anxiety?</div>
+                        <div class="info-q" id="anxiety-note">Can it help with anxiety?</div>
                         <div class="info-a">Alpha-band entrainment is associated with <strong>reduced anxiety and a calmer nervous system</strong> — the quiet between stimulus and reaction. ECHO.11 was born from exactly that need: a free tool for acute anxious moments, insomnia, and racing thoughts, available 24/7. It is a self-care practice, not a medical treatment — if anxiety is disrupting your life, please also talk to a professional.</div>
                     </div>
                     <div class="info-block">
@@ -1135,6 +1153,14 @@
                     It concludes that <strong>binaural beat technology can alter consciousness in measurable, reproducible ways</strong> — reducing cortical noise, shifting brainwave activity, and creating conditions for expanded awareness. The science behind ECHO.11 is not speculative. It is documented, peer-reviewed, and declassified.<br><br>
                     This experience is inspired by that research. Not affiliated with or endorsed by any government body.</p>
                     <a href="https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf" target="_blank" rel="noopener noreferrer">View the declassified CIA document →</a>
+                </div>
+
+                <!-- What the research actually shows -->
+                <div class="callout reveal">
+                    <span class="callout-tag">What the research actually shows</span>
+                    <p class="research-headline">Not a cure. A dimmer switch.</p>
+                    <p>Across binaural-beat research, the clearest, most consistent effect isn't cognitive — it's the nervous system. Studies show measurable drops in anxiety and in how intensely pain registers, more reliably than any effect on memory or focus. It doesn't numb sensation or heal tissue. It turns down the volume on your body's alarm system — the same pathway a slow exhale works through, just held there longer and more consistently than a breath alone can manage.</p>
+                    <div class="research-note">Research findings, not medical claims. If you're managing chronic pain or an anxiety condition, this is a complement to care — not a replacement. <a href="#anxiety-note">Read the full disclaimer.</a></div>
                 </div>
 
                 <!-- 11 min note -->
