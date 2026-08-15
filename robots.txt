@@ -1,32 +1,17 @@
 # robots.txt for ECHO.11
 # https://echo11.app/
 
-# Allow all crawlers
+# A crawler obeys only the most specific group that matches its token, and
+# it does not inherit rules from the wildcard group. So every rule that
+# should apply to a named crawler has to be repeated inside its own group.
+# That is why there are no separate Googlebot/Bingbot groups here: they
+# would silently lose the PDF rule below. AI and LLM crawlers are covered
+# by this same group — robots.txt grants access, and "*" already grants it
+# to all of them.
+
 User-agent: *
 Allow: /
 Disallow: /*.pdf$
 
 # Sitemap location
 Sitemap: https://echo11.app/sitemap.xml
-
-# Allow AI/LLM crawlers specifically
-User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: Claude-Web
-Allow: /
-
-User-agent: Anthropic-AI
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Googlebot
-Allow: /
