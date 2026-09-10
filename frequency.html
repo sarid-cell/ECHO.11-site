@@ -74,7 +74,7 @@
     <link rel="stylesheet" href="assets/css/quiet-mode.css">
     <link rel="stylesheet" href="assets/css/micro-interactions.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="assets/css/micro-interactions.css"></noscript>
-    <link rel="stylesheet" href="assets/css/frequency-session.css">
+    <link rel="stylesheet" href="assets/css/session.css">
 
     <script type="application/ld+json">
 {
@@ -293,6 +293,11 @@
 
                 <div class="state-text" id="stateText">Use headphones · Press play to begin</div>
 
+                <button class="loop-toggle" id="loopToggle" aria-pressed="false" aria-label="Loop the session continuously">
+                    <span class="loop-ind" aria-hidden="true"></span>
+                    Loop · Continuous
+                </button>
+
                 <div class="meta-row">
                     <div class="sessions-row" hidden>
                         <div class="sessions-dot"></div>
@@ -464,17 +469,18 @@
 
     <script>
         window.ECHO_SESSION = {
-            hz: 10,
-            carrierLeft: 200,
-            carrierRight: 210,
-            minutes: 11,
-            playLabel: 'Play the 10Hz session',
-            pauseLabel: 'Pause the 10Hz session',
-            mediaTitle: '10Hz Alpha Reset',
-            mediaAlbum: 'The 11-Minute Reset'
+            id: "10hz",
+            label: "The 11-Minute Reset",
+            band: "Alpha",
+            beatHz: 10,
+            leftHz: 200,
+            rightHz: 210,
+            durationMin: 11,
+            loop: false,
+            ogImage: "assets/images/10hz-og.jpg"
         };
     </script>
-    <script src="assets/js/frequency-session.js"></script>
+    <script src="assets/js/session.js"></script>
 
     <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
         <span>We use Google Analytics to understand site usage. <a href="privacy.html" style="color:#fff;text-decoration:underline;" aria-label="Learn more about our privacy policy">Learn more</a></span>
