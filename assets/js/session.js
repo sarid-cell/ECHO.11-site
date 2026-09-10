@@ -1,29 +1,34 @@
 /* ECHO.11 frequency session engine — shared by every frequency page.
-   Each page declares its own parameters before this script loads:
+   Each page declares one config object before this script loads:
 
    window.ECHO_SESSION = {
-     hz: 10,                // perceived beat frequency
-     carrierLeft: 200,      // left-ear carrier tone (Hz)
-     carrierRight: 210,     // right-ear carrier tone (Hz)
-     minutes: 11,           // session length
-     playLabel: 'Play the 10Hz session',
-     pauseLabel: 'Pause the 10Hz session',
-     mediaTitle: '10Hz Alpha Reset',
-     mediaAlbum: 'The 11-Minute Reset'
+     id: "10hz",                     // short slug for storage/analytics keys
+     label: "The 11-Minute Reset",   // session name (Media Session title)
+     band: "Alpha",                  // brainwave band name
+     beatHz: 10,                     // perceived beat frequency
+     leftHz: 200,                    // left-ear carrier tone (Hz)
+     rightHz: 210,                   // right-ear carrier tone (Hz)
+     durationMin: 11,                // session length in minutes
+     loop: false,                    // initial state of the Loop toggle
+     ogImage: "assets/images/10hz-og.jpg" // Media Session artwork (optional)
    };
-*/
+
+   Everything else (aria labels, timer, analytics dimensions) is derived. */
 (function () {
 'use strict';
 var cfg = Object.assign({
-    hz: 10,
-    carrierLeft: 200,
-    carrierRight: 210,
-    minutes: 11,
-    playLabel: 'Play the session',
-    pauseLabel: 'Pause the session',
-    mediaTitle: 'ECHO.11 Session',
-    mediaAlbum: 'ECHO.11'
+    id: 'session',
+    label: 'ECHO.11 Session',
+    band: '',
+    beatHz: 10,
+    leftHz: 200,
+    rightHz: 210,
+    durationMin: 11,
+    loop: false,
+    ogImage: ''
 }, window.ECHO_SESSION || {});
+cfg.playLabel  = 'Play the '  + cfg.beatHz + 'Hz session';
+cfg.pauseLabel = 'Pause the ' + cfg.beatHz + 'Hz session';
 
 // Menu
 const hamburger = document.getElementById('hamburger');
@@ -94,14 +99,14 @@ function startAudio() {
     const t0 = audioCtx.currentTime;
 
     oscL = audioCtx.createOscillator(); oscL.type = 'sine';
-    oscL.frequency.value = cfg.carrierLeft;
+    oscL.frequency.value = cfg.leftHz;
     gainL = audioCtx.createGain();
     gainL.gain.setValueAtTime(0.0001, t0);
     gainL.gain.exponentialRampToValueAtTime(LEVEL, t0 + FADE_IN);
     oscL.connect(gainL); gainL.connect(merger, 0, 0);
 
     oscR = audioCtx.createOscillator(); oscR.type = 'sine';
-    oscR.frequency.value = cfg.carrierRight; // left + beat Hz
+    oscR.frequency.value = cfg.rightHz; // left + beat Hz
     gainR = audioCtx.createGain();
     gainR.gain.setValueAtTime(0.0001, t0);
     gainR.gain.exponentialRampToValueAtTime(LEVEL, t0 + FADE_IN);
@@ -204,7 +209,7 @@ if (reducedMotionQ.addEventListener) {
 }
 
 // ── TIMER ──
-const TOTAL = cfg.minutes * 60;
+const TOTAL = cfg.durationMin * 60;
 const CIRC  = 2 * Math.PI * 90; // r=90
 let remaining = TOTAL, timerInt = null;
 const ring = document.getElementById('timerRing');
@@ -236,19 +241,40 @@ function exitFocus()  { document.body.classList.remove('session-active'); }
 
 let sessionCounted = false; // count once per full session, not on every resume
 
+// ── LOOP ──
+// With Loop on, the countdown restarts seamlessly at 0 — the audio
+// graph never stops, so there is no gap or click — and the Session
+// Complete modal waits until the user presses Stop (the play button).
+let loopOn = false, completedCycles = 0, pendingComplete = false;
+const loopToggle = document.getElementById('loopToggle');
+function setLoop(on) {
+    loopOn = on;
+    if (loopToggle) loopToggle.setAttribute('aria-pressed', String(on));
+}
+if (loopToggle) {
+    loopToggle.addEventListener('click', () => setLoop(!loopOn));
+}
+setLoop(!!cfg.loop);
+
 function endSession() {
     clearInterval(timerInt); stopAudio();
     isPlaying = false; sessionCounted = false;
+    // natural end: the finishing cycle isn't yet in completedCycles.
+    // loop Stop: it is, and the in-progress partial cycle doesn't count.
+    const cycles = pendingComplete ? completedCycles : completedCycles + 1;
+    completedCycles = 0; pendingComplete = false;
     exitFocus();
     iconPlay.style.display = 'block'; iconPause.style.display = 'none';
     playBtn.classList.remove('playing'); timerWrap.classList.remove('playing');
     playBtn.setAttribute('aria-label', cfg.playLabel);
     setState('Session complete.');
     remaining = TOTAL; timerEl.textContent = fmt(TOTAL); updateRing();
-    if (typeof gtag==='function') gtag('event','frequency_complete',{duration: TOTAL});
+    if (typeof gtag==='function') gtag('event','frequency_complete',{duration: TOTAL * cycles, hz: String(cfg.beatHz), id: cfg.id});
     const sessionsRow = document.querySelector('.sessions-row');
-    document.getElementById('completeMeta').textContent = sessionsRow.hidden
-        ? '' : `${document.getElementById('sessionsNum').textContent} sessions today`;
+    const metaParts = [];
+    if (cycles > 1) metaParts.push(`${cycles} continuous cycles`);
+    if (!sessionsRow.hidden) metaParts.push(`${document.getElementById('sessionsNum').textContent} sessions today`);
+    document.getElementById('completeMeta').textContent = metaParts.join(' · ');
     openModal(completeModal);
     if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'none';
 }
@@ -259,7 +285,17 @@ function beginSession() {
         remaining--;
         timerEl.textContent = fmt(remaining);
         updateRing();
-        if (remaining <= 0) endSession();
+        if (remaining <= 0) {
+            if (loopOn) {
+                // seamless restart: audio keeps running, only the
+                // countdown resets; the complete modal waits for Stop
+                completedCycles++; pendingComplete = true;
+                remaining = TOTAL;
+                timerEl.textContent = fmt(remaining); updateRing();
+            } else {
+                endSession();
+            }
+        }
     }, 1000);
     isPlaying = true;
     iconPlay.style.display = 'none'; iconPause.style.display = 'block';
@@ -268,12 +304,13 @@ function beginSession() {
     enterFocus();
     setState('Session active');
     if (!sessionCounted) { sessionCounted = true; increment(); }
-    if (typeof gtag==='function') gtag('event','frequency_start',{hz: String(cfg.hz)});
+    if (typeof gtag==='function') gtag('event','frequency_start',{hz: String(cfg.beatHz), id: cfg.id});
     if ('mediaSession' in navigator) {
         navigator.mediaSession.metadata = new MediaMetadata({
-            title: cfg.mediaTitle,
+            title: cfg.label,
             artist: 'ECHO.11',
-            album: cfg.mediaAlbum
+            album: cfg.beatHz + 'Hz · ' + cfg.band,
+            artwork: cfg.ogImage ? [{ src: cfg.ogImage, sizes: '1200x800', type: 'image/jpeg' }] : []
         });
         navigator.mediaSession.playbackState = 'playing';
     }
@@ -297,6 +334,10 @@ playBtn.addEventListener('click', () => {
         } else {
             openModal(headphoneModal);
         }
+    } else if (pendingComplete) {
+        // a looped session has already run at least one full cycle:
+        // this press is the Stop the complete modal was waiting for
+        endSession();
     } else {
         pauseSession();
     }
@@ -312,7 +353,8 @@ if ('mediaSession' in navigator) {
         if (!isPlaying && sessionStorage.getItem('echo11_headphone_ack')) beginSession();
     });
     navigator.mediaSession.setActionHandler('pause', () => {
-        if (isPlaying) pauseSession();
+        if (!isPlaying) return;
+        if (pendingComplete) endSession(); else pauseSession();
     });
 }
 

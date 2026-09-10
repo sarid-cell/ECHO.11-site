@@ -449,6 +449,29 @@ body.session-active header { opacity: 0.25; }
     transition: opacity 0.5s ease;
 }
 
+/* Loop toggle — mono pill under the state line; aria-pressed drives
+   the visual state so assistive tech and CSS read the same source */
+.loop-toggle {
+    font-family: var(--mono); font-size: 0.65rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-light); background: none;
+    border: 1px solid var(--border);
+    padding: 0.45rem 0.95rem; margin-bottom: 2rem;
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    transition: color .25s ease, border-color .25s ease;
+}
+.loop-toggle:hover { color: var(--text); border-color: var(--text); }
+.loop-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.loop-toggle .loop-ind {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--border); transition: background .25s ease, box-shadow .25s ease;
+}
+.loop-toggle[aria-pressed="true"] { color: var(--text); border-color: var(--text); }
+.loop-toggle[aria-pressed="true"] .loop-ind {
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent-dim);
+}
+
 /* Meta row — sessions + headphones note share one line */
 .meta-row {
     display: flex; align-items: center; gap: 1.5rem;
