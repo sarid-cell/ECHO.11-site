@@ -158,7 +158,6 @@
         <div class="header-inner">
             <a href="/" class="logo">ECHO.11</a>
             <div class="header-right">
-                <div class="clock" id="clock">00:00:00</div>
                 <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
@@ -169,8 +168,7 @@
     <div class="menu-overlay" id="menuOverlay"></div>
     <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
         <nav>
-            <a href="frequency.html" class="menu-link">The Reset</a>
-            <a href="40hz.html" class="menu-link">The Focus</a>
+            <a href="frequencies.html" class="menu-link">The Sessions</a>
             <a href="book.html" class="menu-link">The Book</a>
             <a href="index.html#insights" class="menu-link">Insights</a>
             <a href="index.html#vision" class="menu-link">The Vision</a>
@@ -181,26 +179,26 @@
     <main id="main-content">
         <section class="hub">
             <div class="hub-inner">
-                <div class="freq-eyebrow">Binaural Frequencies · Generated Live</div>
-                <h1 class="hub-title">Frequencies</h1>
+                <div class="freq-eyebrow">The Sessions · Generated Live</div>
+                <h1 class="hub-title">Free binaural beat sessions</h1>
                 <p class="hub-intro">Free binaural sessions, generated live in your browser — nothing to download, nothing to sign up for. Eleven minutes each. Stereo headphones required.</p>
 
                 <div class="session-cards">
                     <a class="session-card" href="frequency.html">
                         <span class="session-card-band">Alpha Wave · 8–13Hz Band</span>
                         <div class="session-card-hz">10 Hz</div>
-                        <div class="session-card-name">The 11-Minute Reset for Anxiety</div>
-                        <p class="session-card-desc">For anxious moments, racing thoughts, and nights the mind won't quiet. Close your eyes and let the alpha rhythm turn the volume down.</p>
+                        <div class="session-card-name">10 Hz · Calm — The 11-Minute Reset</div>
+                        <p class="session-card-desc">For anxious moments and nights the mind will not quiet.</p>
                         <span class="session-card-meta">11:00 · 200Hz / 210Hz carriers · Free</span><br>
-                        <span class="session-card-cta">Begin the reset</span>
+                        <span class="session-card-cta">Play →</span>
                     </a>
                     <a class="session-card" href="40hz.html">
                         <span class="session-card-band">Gamma Wave · 30–80Hz Band</span>
                         <div class="session-card-hz">40 Hz</div>
-                        <div class="session-card-name">The 11-Minute Focus</div>
-                        <p class="session-card-desc">For deep work. Put one task in front of you, press play, and let the gamma rhythm hold your attention on it.</p>
+                        <div class="session-card-name">40 Hz · Focus — The 11-Minute Focus</div>
+                        <p class="session-card-desc">For deep work — press play and start the task.</p>
                         <span class="session-card-meta">11:00 · 200Hz / 240Hz carriers · Free</span><br>
-                        <span class="session-card-cta">Begin the focus session</span>
+                        <span class="session-card-cta">Play →</span>
                     </a>
                 </div>
 
@@ -267,15 +265,6 @@
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape' && sideMenu.classList.contains('active')) toggleMenu();
         });
-
-        // Clock
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('clock').textContent =
-                [now.getHours(),now.getMinutes(),now.getSeconds()]
-                .map(n=>String(n).padStart(2,'0')).join(':');
-        }
-        setInterval(updateClock, 1000); updateClock();
 
         // Cursor
         const dot = document.querySelector('.cursor-dot');
