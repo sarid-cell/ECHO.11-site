@@ -340,6 +340,7 @@ body.session-active header { opacity: 0.25; }
     .freq-subtitle { letter-spacing: 0.14em; }
     .breath-guide span { font-size: 0.66rem; letter-spacing: 0.22em; }
     .state-text { font-size: 0.66rem; letter-spacing: 0.09em; }
+    .tone-note { font-size: 0.64rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -447,9 +448,19 @@ body.session-active header { opacity: 0.25; }
 .state-text {
     font-family: var(--mono); font-size: 0.72rem;
     letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--text-light); margin-bottom: 2.2rem; min-height: 1.2em;
+    color: var(--text-light); margin-bottom: 0.9rem; min-height: 1.2em;
     transition: opacity 0.5s ease;
 }
+
+/* Sets the expectation before the first play: a steady tone is the
+   whole experience, so silence-shaped disappointment never happens. */
+.tone-note {
+    font-family: var(--mono); font-size: 0.68rem;
+    line-height: 1.7; color: var(--text-light);
+    max-width: 26rem; margin: 0 auto 2.2rem;
+    transition: opacity 1.8s ease;
+}
+body.session-active .tone-note { opacity: 0.15; }
 
 /* Loop toggle — mono pill under the state line; aria-pressed drives
    the visual state so assistive tech and CSS read the same source */
@@ -756,8 +767,9 @@ footer { padding: 4rem 2.5rem; background: var(--bg); }
     .timer-wrap { width: 160px; height: 160px; }
     /* lighter GPU load: smaller blur radius on mobile */
     .breath-halo { filter: blur(16px); inset: -32%; }
-    .play-btn { width: 56px; height: 56px; }
-    .play-btn svg { width: 22px; height: 22px; }
+    /* thumb-sized target: 72px is the floor for the primary control */
+    .play-btn { width: 72px; height: 72px; }
+    .play-btn svg { width: 26px; height: 26px; }
     .timer-time { font-size: 1.1rem; }
     .meta-row { flex-direction: column; gap: 0.7rem; }
     .scroll-cue { display: none; }
