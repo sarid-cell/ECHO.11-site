@@ -79,7 +79,7 @@
             --bg: #fafafa;
             --text: #1a1a1a;
             --text-secondary: #4a4a4a;
-            --text-light: #666666;
+            --text-light: #595959;
             --white: #fff;
             --border: #e0e0e0;
             --accent: #2dd4f0;
@@ -272,19 +272,25 @@
         .freq-eyebrow {
             font-family: var(--mono);
             font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
-            color: var(--text-light); margin-bottom: 1.6rem;
+            color: var(--text-secondary); margin-bottom: 1.6rem;
         }
 
+        /* One H1 carries the full keyword phrase; the number keeps the
+           big display styling, the rest reads as the mono subtitle. */
+        .freq-h1 { font-weight: 200; }
         .freq-title {
+            display: block;
             font-size: clamp(3.5rem, 9vw, 7rem);
             font-weight: 200; letter-spacing: -0.04em; line-height: 1;
             color: var(--text); margin-bottom: 0.4rem;
         }
         .freq-subtitle {
-            font-family: var(--mono);
+            display: block;
+            font-family: var(--mono); font-weight: 400;
             font-size: clamp(0.75rem, 1.5vw, 1rem);
             letter-spacing: 0.22em; text-transform: uppercase;
             color: var(--text-secondary); margin-bottom: 3.8rem;
+            max-width: 100%;
         }
 
         /* Timer ring */
@@ -399,54 +405,17 @@
             body.session-active .scroll-cue { pointer-events: none; }
         }
 
-        /* Soft CTA — revealed gently after a pause or a long listen */
-        .soft-cta {
-            max-width: 30rem;
-            margin: 0 auto 1.8rem;
-            padding: 1.6rem 1.8rem;
-            background: rgba(255,255,255,0.65);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(8px);
-            transition: opacity 1.4s ease, transform 1.4s ease, visibility 0s linear 1.4s;
-        }
-        .soft-cta.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-            transition: opacity 1.4s ease, transform 1.4s ease;
-        }
-        .soft-cta p {
-            font-size: 0.92rem; font-weight: 300;
-            color: var(--text-secondary); line-height: 1.8;
-            margin-bottom: 0.9rem;
-        }
-        .soft-cta a {
-            font-family: var(--mono); font-size: 0.75rem;
-            letter-spacing: 0.1em; text-transform: uppercase;
-            color: var(--text); text-decoration: none;
-            border-bottom: 1px solid var(--text);
-            padding-bottom: 2px;
-            transition: opacity 0.4s ease;
-        }
-        .soft-cta a:hover { opacity: 0.55; }
-
-        /* Narrow phones (≤390px): keep every label on one line */
+        /* Narrow phones (≤390px): keep labels legible without overflow */
         @media (max-width: 390px) {
             .freq-subtitle { letter-spacing: 0.14em; }
             .breath-guide span { font-size: 0.66rem; letter-spacing: 0.22em; }
             .state-text { font-size: 0.66rem; letter-spacing: 0.09em; }
-            .soft-cta { padding: 1.3rem 1.4rem; }
-            .soft-cta p { font-size: 0.86rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
             .timer-wrap.playing .breath-halo { animation: none; opacity: 0.55; transform: scale(1); }
             body.session-active .breath-guide { opacity: 0; }
-            .soft-cta { transform: none; }
         }
         /* Fills .timer-wrap rather than keeping the 200x200 of its width/height
            attributes: the wrap drops to 160px under 768px, and a fixed-size SVG
@@ -504,6 +473,10 @@
             will-change: transform;
         }
         .play-btn.tracking { transition: box-shadow .6s ease, border-color .6s ease; }
+        .play-btn:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 6px;
+        }
         /* rotating dashed HUD ring — the instrument bezel */
         .play-btn::before {
             content: ''; position: absolute; inset: -9px; border-radius: 50%;
@@ -555,6 +528,7 @@
             flex-wrap: wrap;
         }
         .sessions-row { display: flex; align-items: center; gap: 0.6rem; }
+        .sessions-row[hidden] { display: none; }
         .sessions-dot {
             width: 6px; height: 6px; border-radius: 50%;
             background: var(--text);
@@ -643,8 +617,12 @@
             gap: 1px; background: var(--border); margin-bottom: 4rem;
         }
         .info-block { background: var(--bg); padding: 2.2rem; }
-        .info-block-img { padding: 0; grid-column: span 2; }
-        .info-block-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(15%); }
+        /* The last text block stretches over the leftover tracks and the
+           image takes a full row, so the grid never shows an empty cell
+           at any column count auto-fit settles on. */
+        .info-block-wide { grid-column: span 2; }
+        .info-block-img { padding: 0; grid-column: 1 / -1; aspect-ratio: 3 / 2; }
+        .info-block-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; display: block; filter: grayscale(15%); }
         .info-q {
             font-family: var(--mono); font-size: 0.68rem;
             letter-spacing: 0.15em; text-transform: uppercase;
@@ -827,6 +805,7 @@
                single column below the point auto-fit would collapse
                to one anyway. */
             .info-grid { grid-template-columns: 1fr; }
+            .info-block-wide { grid-column: span 1; }
             .info-block-img { grid-column: span 1; aspect-ratio: 16/10; }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -912,76 +891,70 @@
             "@type": "BreadcrumbList",
             "@id": "https://echo11.app/frequency.html#breadcrumbs",
             "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "ECHO.11", "item": "https://echo11.app/" },
-                { "@type": "ListItem", "position": 2, "name": "The 11-Minute Reset", "item": "https://echo11.app/frequency.html" }
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://echo11.app/" },
+                { "@type": "ListItem", "position": 2, "name": "Frequencies", "item": "https://echo11.app/frequencies.html" },
+                { "@type": "ListItem", "position": 3, "name": "10 Hz" }
+            ]
+        },
+        {
+            "@type": "AudioObject",
+            "@id": "https://echo11.app/frequency.html#audio",
+            "name": "10 Hz — The 11-Minute Reset for Anxiety",
+            "description": "An 11-minute 10Hz alpha binaural beat session for anxiety relief. The left ear hears a 200Hz tone and the right ear a 210Hz tone, generated live in the browser. Stereo headphones required.",
+            "duration": "PT11M",
+            "isAccessibleForFree": true,
+            "creator": { "@id": "https://echo11.app/#shira-sarid" },
+            "url": "https://echo11.app/frequency.html",
+            "inLanguage": "en"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://echo11.app/frequency.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is a binaural beat?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Two slightly different tones — one per ear. Your brain detects the difference and produces a third tone that doesn't physically exist. An auditory illusion with measurable neurological effects, first documented by physicist Heinrich Wilhelm Dove in 1839."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Why 10 Hz?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "10Hz sits inside the Alpha band (8–13Hz) — the brain's natural state of relaxed alertness. Alpha is associated with reduced anxiety, creative clarity, and the quiet between stimulus and reaction. Present, not reactive."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What happens in the brain?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "The brain synchronizes to the frequency it perceives — a process called neural entrainment. As you listen, your dominant brainwave frequency shifts toward 10Hz. Cortical noise decreases. Attention sharpens without effort."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can it help with anxiety?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Alpha-band entrainment is associated with reduced anxiety and a calmer nervous system — the quiet between stimulus and reaction. ECHO.11 was born from exactly that need: a free tool for acute anxious moments, insomnia, and racing thoughts, available 24/7. It is a self-care practice, not a medical treatment — if anxiety is disrupting your life, please also talk to a professional."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What should you feel?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Individual response varies. Most commonly reported: Mental clarity, Reduced mind-chatter, Gentle warmth, Heightened focus, Present-moment awareness."
+                    }
+                }
             ]
         }
     ]
 }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is a binaural beat?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Two slightly different tones, one per ear. Your brain detects the difference and produces a third tone that doesn't physically exist — an auditory illusion with measurable neurological effects, first documented by physicist Heinrich Wilhelm Dove in 1839."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Why 10 Hz?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "10Hz sits inside the Alpha band (8-13Hz), the brain's natural state of relaxed alertness. Alpha is associated with reduced anxiety, creative clarity, and the quiet between stimulus and reaction."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can binaural beats help with anxiety?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Alpha-band (10Hz) entrainment is associated with reduced anxiety and a calmer nervous system. ECHO.11's 11-minute reset was built as a free self-care tool for acute anxious moments, insomnia, and racing thoughts — available 24/7. It is a self-care practice, not a medical treatment; if anxiety is disrupting your life, please also consult a professional."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What does binaural beat research actually show?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Across binaural-beat research, the clearest and most consistent effect is on the nervous system rather than on cognition. Studies show measurable drops in anxiety and in how intensely pain registers, more reliably than any effect on memory or focus. These are research findings, not medical claims — for chronic pain or an anxiety condition this is a complement to care, not a replacement."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What happens in the brain during a binaural beat session?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The brain synchronizes to the frequency it perceives, a process called neural entrainment. As you listen, your dominant brainwave frequency shifts toward 10Hz, cortical noise decreases, and attention sharpens without effort."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do I need headphones to listen to the 10Hz frequency?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. This is a true binaural beat: the left ear hears 200Hz and the right ear hears 210Hz as separate channels. Phone or laptop speakers blend both channels together before they reach your ears, so the perceived 10Hz difference tone will not form without stereo headphones."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Why is the session 11 minutes long?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Research on neural entrainment suggests that 7-15 minutes is the window in which brainwave synchronization stabilizes. 11 minutes is the minimum effective session length for measurable Alpha entrainment used by ECHO.11."
-          }
-        }
-      ]
-    }
     </script>
 </head>
 <body>
@@ -1046,7 +1019,7 @@
             <div class="modal-title" id="completeTitle">Session complete</div>
             <div class="modal-text">11 minutes at 10Hz. However you feel right now — that's the data point. Come back whenever you need the reset.</div>
             <div class="modal-actions">
-                <a href="book.html" class="modal-btn modal-btn-primary">Read the book behind this →</a>
+                <a href="book.html" class="modal-btn modal-btn-primary">Join the early list</a>
                 <button class="modal-btn modal-btn-ghost" id="completeClose">Close</button>
             </div>
             <div class="modal-meta" id="completeMeta"></div>
@@ -1065,8 +1038,10 @@
 
             <div class="player-card">
                 <div class="freq-eyebrow">Binaural Frequency · Alpha Wave</div>
-                <h1 class="freq-title">10 Hz</h1>
-                <div class="freq-subtitle">The 11-Minute Reset</div>
+                <h1 class="freq-h1">
+                    <span class="freq-title">10 Hz</span>
+                    <span class="freq-subtitle">— The 11-Minute Reset for Anxiety</span>
+                </h1>
 
                 <!-- Timer ring with play control inside -->
                 <div class="timer-wrap">
@@ -1077,11 +1052,11 @@
                         <circle class="ring-prog" cx="100" cy="100" r="90" id="timerRing"/>
                     </svg>
                     <div class="timer-inner">
-                        <button class="play-btn" id="playBtn" aria-label="Start session">
+                        <button class="play-btn" id="playBtn" aria-label="Play the 10Hz session">
                             <svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#playBtnIconGradient)"><defs><linearGradient id="playBtnIconGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#eafdff"/><stop offset="100%" stop-color="currentColor"/></linearGradient></defs><path d="M6.5 5v14l11-7-11-7z"/></svg>
                             <svg id="iconPause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#playBtnIconGradient)" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                         </button>
-                        <div class="timer-time" id="timerDisplay">11:00</div>
+                        <div class="timer-time" id="timerDisplay" aria-live="polite">11:00</div>
                     </div>
                 </div>
 
@@ -1092,13 +1067,8 @@
 
                 <div class="state-text" id="stateText">Use headphones · Press play to begin</div>
 
-                <div class="soft-cta" id="softCta">
-                    <p>The frequency is the beginning. The book documents the full method — a quieter mind, built step by step.</p>
-                    <a href="book.html">Join the early list</a>
-                </div>
-
                 <div class="meta-row">
-                    <div class="sessions-row">
+                    <div class="sessions-row" hidden>
                         <div class="sessions-dot"></div>
                         <div class="sessions-text">
                             <span class="sessions-num" id="sessionsNum">—</span> sessions today
@@ -1162,7 +1132,7 @@
                         <div class="info-q" id="anxiety-note">Can it help with anxiety?</div>
                         <div class="info-a">Alpha-band entrainment is associated with <strong>reduced anxiety and a calmer nervous system</strong> — the quiet between stimulus and reaction. ECHO.11 was born from exactly that need: a free tool for acute anxious moments, insomnia, and racing thoughts, available 24/7. It is a self-care practice, not a medical treatment — if anxiety is disrupting your life, please also talk to a professional.</div>
                     </div>
-                    <div class="info-block">
+                    <div class="info-block info-block-wide">
                         <div class="info-q">What should you feel?</div>
                         <div class="info-a">Individual response varies. Most commonly reported:
                             <div class="feel-tags">
@@ -1177,7 +1147,7 @@
                     <div class="info-block info-block-img">
                         <picture>
                             <source srcset="assets/images/10hz.webp" type="image/webp">
-                            <img src="assets/images/10hz.png" alt="ECHO.11 — astronaut helmet portrait, 10Hz visual identity" loading="lazy" width="1344" height="896">
+                            <img src="assets/images/10hz.png" alt="Astronaut portrait, eyes closed — the 10Hz alpha session" loading="lazy" width="914" height="896">
                         </picture>
                     </div>
                 </div>
@@ -1186,8 +1156,8 @@
                 <div class="callout reveal">
                     <span class="callout-tag">Research Inspiration · Declassified 1983, Released 2003</span>
                     <p>In 1983, the US Army commissioned a classified analysis of The Monroe Institute's research into binaural frequencies and altered consciousness. The document — <strong>Analysis and Assessment of Gateway Process</strong> — was declassified and released by the CIA in 2003.<br><br>
-                    It concludes that <strong>binaural beat technology can alter consciousness in measurable, reproducible ways</strong> — reducing cortical noise, shifting brainwave activity, and creating conditions for expanded awareness. The science behind ECHO.11 is not speculative. It is documented, peer-reviewed, and declassified.<br><br>
-                    This experience is inspired by that research. Not affiliated with or endorsed by any government body.</p>
+                    It concludes that <strong>binaural beat technology can alter consciousness in measurable, reproducible ways</strong> — reducing cortical noise, shifting brainwave activity, and creating conditions for expanded awareness. This experience is inspired by that document. It is a historical source, not a clinical trial.<br><br>
+                    Not affiliated with or endorsed by any government body.</p>
                     <a href="https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf" target="_blank" rel="noopener noreferrer">View the declassified CIA document →</a>
                 </div>
 
@@ -1219,7 +1189,7 @@
                 <div class="next-step reveal">
                     <span class="next-step-tag">If you want to go deeper</span>
                     <p>This frequency is one chapter. The book documents the whole method — how these sessions were built, and the thinking behind a quieter mind.</p>
-                    <a href="book.html">The book behind this frequency</a>
+                    <a href="book.html">Join the early list</a>
                 </div>
 
             </div>
@@ -1461,7 +1431,6 @@
         const iconPause= document.getElementById('iconPause');
         const stateEl  = document.getElementById('stateText');
         const timerEl  = document.getElementById('timerDisplay');
-        const softCta  = document.getElementById('softCta');
 
         // state text swaps with a soft cross-fade instead of snapping
         function setState(text) {
@@ -1476,15 +1445,6 @@
         function enterFocus() { document.body.classList.add('session-active'); }
         function exitFocus()  { document.body.classList.remove('session-active'); }
 
-        // soft CTA: revealed once, after ≥60s of actual listening
-        let listenedSeconds = 0, ctaShown = false;
-        function maybeRevealCta() {
-            if (!ctaShown && listenedSeconds >= 60) {
-                ctaShown = true;
-                softCta.classList.add('visible');
-            }
-        }
-
         let sessionCounted = false; // count once per full session, not on every resume
 
         function endSession() {
@@ -1493,11 +1453,13 @@
             exitFocus();
             iconPlay.style.display = 'block'; iconPause.style.display = 'none';
             playBtn.classList.remove('playing'); timerWrap.classList.remove('playing');
+            playBtn.setAttribute('aria-label', 'Play the 10Hz session');
             setState('Session complete.');
             remaining = TOTAL; timerEl.textContent = fmt(TOTAL); updateRing();
-            maybeRevealCta();
             if (typeof gtag==='function') gtag('event','frequency_complete',{duration:660});
-            document.getElementById('completeMeta').textContent = `${document.getElementById('sessionsNum').textContent} sessions today`;
+            const sessionsRow = document.querySelector('.sessions-row');
+            document.getElementById('completeMeta').textContent = sessionsRow.hidden
+                ? '' : `${document.getElementById('sessionsNum').textContent} sessions today`;
             openModal(completeModal);
             if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'none';
         }
@@ -1506,7 +1468,6 @@
             startAudio();
             timerInt = setInterval(() => {
                 remaining--;
-                listenedSeconds++;
                 timerEl.textContent = fmt(remaining);
                 updateRing();
                 if (remaining <= 0) endSession();
@@ -1514,8 +1475,8 @@
             isPlaying = true;
             iconPlay.style.display = 'none'; iconPause.style.display = 'block';
             playBtn.classList.add('playing'); timerWrap.classList.add('playing');
+            playBtn.setAttribute('aria-label', 'Pause the 10Hz session');
             enterFocus();
-            softCta.classList.remove('visible');
             setState('Session active');
             if (!sessionCounted) { sessionCounted = true; increment(); }
             if (typeof gtag==='function') gtag('event','frequency_start',{hz:'10'});
@@ -1535,8 +1496,8 @@
             exitFocus();
             iconPlay.style.display = 'block'; iconPause.style.display = 'none';
             playBtn.classList.remove('playing'); timerWrap.classList.remove('playing');
+            playBtn.setAttribute('aria-label', 'Play the 10Hz session');
             setState('Paused — press play to continue');
-            maybeRevealCta();
             if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
         }
 
@@ -1675,14 +1636,16 @@
             return localCount();
         }
 
-        // zero (or a failed fetch) reads as "nobody is here" — hide the row instead
+        // zero (or a failed fetch) reads as "nobody is here" — the row starts
+        // hidden in the markup and only appears once a real count exists,
+        // so a dash is never rendered
         function renderCount(n) {
             const row = document.querySelector('.sessions-row');
             if (n > 0) {
                 document.getElementById('sessionsNum').textContent = n;
-                row.style.display = '';
+                row.hidden = false;
             } else {
-                row.style.display = 'none';
+                row.hidden = true;
             }
         }
 
