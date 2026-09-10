@@ -11,6 +11,7 @@
   /* ── 1. Navigation — the conversion journey, in order ── */
   var NAV = [
     { href: 'frequency.html',      label: 'The Reset' },
+    { href: 'frequency-40hz.html', label: 'Deep Focus' },
     { href: 'book.html',           label: 'The Book' },
     { href: 'index.html#insights', label: 'Insights' },
     { href: 'index.html#vision',   label: 'The Vision' },
