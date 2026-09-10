@@ -689,6 +689,27 @@
             line-height: 1.9;
         }
 
+        .hero-ctas {
+            display: flex; align-items: center; gap: 1.6rem;
+            flex-wrap: wrap; margin-bottom: 2.4rem;
+        }
+        .hero-cta-primary {
+            font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            background: var(--text); color: var(--bg);
+            text-decoration: none; padding: 1rem 1.7rem;
+            transition: opacity .25s ease;
+        }
+        .hero-cta-primary:hover { opacity: 0.85; }
+        .hero-cta-secondary {
+            font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--text-secondary); text-decoration: none;
+            border-bottom: 1px solid var(--border); padding-bottom: 2px;
+            transition: color .25s ease, border-color .25s ease;
+        }
+        .hero-cta-secondary:hover { color: var(--text); border-color: var(--text); }
+
         .hero-doors {
             display: flex;
             gap: 1px;
@@ -842,6 +863,45 @@
         }
 
         /* Vision */
+        .sessions-home {
+            padding: 5rem 2.5rem;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+        }
+        .sessions-home .section-label { max-width: 1100px; margin: 0 auto 2.5rem; }
+        .sessions-home-grid {
+            max-width: 1100px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1px; background: var(--border); border: 1px solid var(--border);
+        }
+        .home-session-card {
+            display: block; background: var(--bg);
+            padding: 2.4rem 2.2rem; text-decoration: none; color: var(--text);
+            transition: background .3s ease;
+        }
+        .home-session-card:hover { background: var(--white); }
+        .home-session-band {
+            display: block; font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--text-light); margin-bottom: 1rem;
+        }
+        .home-session-hz {
+            display: block; font-family: 'IBM Plex Mono', monospace;
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 600;
+            line-height: 1.1; margin-bottom: 0.7rem;
+        }
+        .home-session-use {
+            font-size: 0.95rem; color: var(--text-secondary);
+            font-weight: 300; line-height: 1.7; margin-bottom: 1.3rem;
+        }
+        .home-session-play {
+            font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            border-bottom: 1px solid var(--text); padding-bottom: 2px;
+            display: inline-block;
+        }
+        @media (max-width: 768px) { .sessions-home { padding: 3.5rem 1.5rem; } }
+
         .vision {
             border-top: 1px solid var(--border);
         }
@@ -1412,7 +1472,6 @@
             <a href="/" class="logo">ECHO.11</a>
             
             <div class="header-right">
-                <div class="clock" id="clock">00:00:00</div>
                 <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
                     <span></span>
                     <span></span>
@@ -1426,7 +1485,7 @@
 
     <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
         <nav>
-            <a href="frequency.html" class="menu-link">The Reset</a>
+            <a href="frequencies.html" class="menu-link">The Sessions</a>
             <a href="book.html" class="menu-link">The Book</a>
             <a href="#insights" class="menu-link">Insights</a>
             <a href="#vision" class="menu-link">The Vision</a>
@@ -1454,55 +1513,31 @@
                     <span class="hero-line"><span class="hero-line-inner">of Human Resilience</span></span>
                 </h1>
                 <p class="hero-sub">Where consumer psychology meets generative AI — building future-proof brands, and quieter minds. Sound frequencies for calm, essays for clarity.</p>
-                <nav class="hero-doors" aria-label="Choose your path">
-                    <a href="frequency.html" class="hero-door">
-                        <span class="hero-door-tag">01 · The Experience</span>
-                        <span class="hero-door-label">Need quiet right now? <span class="hero-door-arrow">→</span></span>
-                        <span class="hero-door-hint">An 11-minute frequency reset. Free, no signup.</span>
-                    </a>
-                    <a href="#insights" class="hero-door">
-                        <span class="hero-door-tag">02 · The Ideas</span>
-                        <span class="hero-door-label">Here for the thinking? <span class="hero-door-arrow">→</span></span>
-                        <span class="hero-door-hint">Essays on psychology, AI, and calmer digital spaces.</span>
-                    </a>
-                </nav>
+                <div class="hero-ctas">
+                    <a href="frequency.html" class="hero-cta-primary">Start the 10Hz reset →</a>
+                    <a href="40hz.html" class="hero-cta-secondary">or sharpen focus with 40Hz →</a>
+                </div>
                 <p class="hero-summary reveal">ECHO.11 is two things in one place. A free 10Hz frequency session for the moments a nervous system will not settle, and a body of writing on where consumer psychology and generative AI actually meet. Both come from the same question: what makes a mind resilient when the noise does not stop.</p>
             </div>
         </section>
 
-        <!-- Vision -->
-        <section class="vision" id="vision">
-            <div class="section-label reveal">THE VISION</div>
-            <div class="vision-content reveal-lines">
-                <p>
-                    <span class="reveal-line"><strong>Psychology First, Pixels Second.</strong> In an economy of attention, visuals are not enough.</span>
-                    <span class="reveal-line">My approach decodes the neural pathways of your audience.</span>
-                    <span class="reveal-line">With a background in consumer psychology, I leverage Generative AI to craft experiences that cut through the noise.</span>
-                    <span class="reveal-line">We strip away the excess to reach the signal—creating digital spaces that feel human, intuitive, and profound.</span>
-                    <span class="reveal-line">This is not just marketing. This is evolution.</span>
-                </p>
-            </div>
-            <div class="vision-image reveal">
-                <picture><source srcset="assets/images/astro-eyes-closed.webp" type="image/webp"><img src="assets/images/astro-eyes-closed.png" alt="" loading="lazy"></picture>
-                <picture class="awaken-open"><source srcset="assets/images/astro-eyes-open.webp" type="image/webp"><img src="assets/images/astro-eyes-open.png" alt="Close-up portrait of woman astronaut, eyes opening as you scroll" loading="lazy"></picture>
-            </div>
-        </section>
 
-        <!-- Pillars -->
-        <section class="pillars">
-            <div class="pillars-grid">
-                <div class="pillar reveal">
-                    <h2>The Human Edge</h2>
-                    <p>Technology is code; Intuition is the spark. We empower women to lead the revolution, turning "complex" tech into a creative playground.</p>
-                </div>
-                <div class="pillar reveal">
-                    <h2>Generative AI</h2>
-                    <p>We leverage algorithms to decode the noise. Using AI not just to create content, but to curate precision and focus for the neurodivergent mind.</p>
-                </div>
-                <div class="pillar reveal">
-                    <h2>Future-Proof Strategy</h2>
-                    <p>Algorithms change daily, but human nature remains. We fuse consumer psychology with GenAI to build resilient narratives for 2026.</p>
-                </div>
+        <!-- The Sessions -->
+        <section class="sessions-home" id="sessions">
+            <div class="section-label reveal">The Sessions</div>
+            <div class="sessions-home-grid">
+                <a class="home-session-card reveal" href="frequency.html">
+                    <span class="home-session-band">Alpha Wave · 11:00 · Free</span>
+                    <span class="home-session-hz">10 Hz · Calm</span>
+                    <p class="home-session-use">For anxious moments and nights the mind will not quiet.</p>
+                    <span class="home-session-play">Play →</span>
+                </a>
+                <a class="home-session-card reveal" href="40hz.html">
+                    <span class="home-session-band">Gamma Wave · 11:00 or loop · Free</span>
+                    <span class="home-session-hz">40 Hz · Focus</span>
+                    <p class="home-session-use">For deep work — press play and start the task.</p>
+                    <span class="home-session-play">Play →</span>
+                </a>
             </div>
         </section>
 
@@ -1556,7 +1591,7 @@
                             <p class="date" id="latestDate"></p>
                             <h4 id="latestTitle"></h4>
                             <p class="excerpt" id="latestExcerpt"></p>
-                            <span class="read-more">Read Full Article →</span>
+                            <span class="read-more">Read Full Article</span>
                         </div>
                     </a>
                 </div>
@@ -1570,6 +1605,38 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision -->
+        <section class="vision" id="vision">
+            <div class="section-label reveal">THE VISION</div>
+            <div class="vision-content reveal-lines">
+                <p>
+                    <span class="reveal-line"><strong>Psychology First, Pixels Second.</strong> With a background in consumer psychology, I use generative AI to strip away the excess and build digital spaces that feel human, intuitive, and calm.</span>
+                </p>
+            </div>
+            <div class="vision-image reveal">
+                <picture><source srcset="assets/images/astro-eyes-closed.webp" type="image/webp"><img src="assets/images/astro-eyes-closed.png" alt="Close-up portrait of a woman astronaut, eyes closed" loading="lazy"></picture>
+                <picture class="awaken-open"><source srcset="assets/images/astro-eyes-open.webp" type="image/webp"><img src="assets/images/astro-eyes-open.png" alt="Close-up portrait of woman astronaut, eyes opening as you scroll" loading="lazy"></picture>
+            </div>
+        </section>
+
+        <!-- Pillars -->
+        <section class="pillars">
+            <div class="pillars-grid">
+                <div class="pillar reveal">
+                    <h2>The Human Edge</h2>
+                    <p>Technology is code; intuition is the spark.</p>
+                </div>
+                <div class="pillar reveal">
+                    <h2>Generative AI</h2>
+                    <p>AI as an instrument of precision and focus, not just output.</p>
+                </div>
+                <div class="pillar reveal">
+                    <h2>Future-Proof Strategy</h2>
+                    <p>Algorithms change daily; human nature does not.</p>
                 </div>
             </div>
         </section>
@@ -1600,9 +1667,9 @@
             
             <div class="footer-column">
                 <h4>Signals</h4>
-                <span>Strategy</span>
-                <span>Psychology</span>
-                <span>AI Tools</span>
+                <a href="about.html">Strategy</a>
+                <a href="#insights">Psychology</a>
+                <a href="https://shirasarid.substack.com/" target="_blank" rel="noopener noreferrer">AI Tools</a>
             </div>
             
             <div class="footer-icon">
@@ -1661,17 +1728,6 @@
     </div>
 
     <script>
-        // Clock
-        function updateClock() {
-            const now = new Date();
-            const h = String(now.getHours()).padStart(2, '0');
-            const m = String(now.getMinutes()).padStart(2, '0');
-            const s = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${h}:${m}:${s}`;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
         // Menu
         const hamburger = document.getElementById('hamburger');
         const sideMenu = document.getElementById('sideMenu');
@@ -1828,15 +1884,9 @@
             }
 
             function renderFallback() {
-                // Never leave "Loading..." stuck and never hide the section —
-                // it is a key conversion path to Substack.
-                title.textContent = 'New signals every week on Substack';
-                excerpt.textContent = 'Essays on AI, psychology, and the future of human potential. Read the latest and join the conversation.';
-                date.textContent = '';
-                card.href = 'https://shirasarid.substack.com/';
-                image.parentElement.style.display = 'none';
-                loading.style.display = 'none';
-                card.style.display = 'grid';
+                // Feed failed and no cache: hide the whole block rather than
+                // showing a loading line or an empty card.
+                document.getElementById('latestArticle').style.display = 'none';
             }
 
             // 1) Fresh cache → instant render, zero API calls

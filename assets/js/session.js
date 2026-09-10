@@ -53,14 +53,16 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && sideMenu.classList.contains('active')) toggleMenu();
 });
 
-// Clock
-function updateClock() {
-    const now = new Date();
-    document.getElementById('clock').textContent =
-        [now.getHours(),now.getMinutes(),now.getSeconds()]
-        .map(n=>String(n).padStart(2,'0')).join(':');
+// Clock — only on pages that still render one in the header
+const clockEl = document.getElementById('clock');
+if (clockEl) {
+    const updateClock = () => {
+        const now = new Date();
+        clockEl.textContent = [now.getHours(),now.getMinutes(),now.getSeconds()]
+            .map(n=>String(n).padStart(2,'0')).join(':');
+    };
+    setInterval(updateClock, 1000); updateClock();
 }
-setInterval(updateClock, 1000); updateClock();
 
 // Cursor
 const dot = document.querySelector('.cursor-dot');
