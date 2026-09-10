@@ -10,6 +10,11 @@
       ],
       "destination": "https://echo11.app/:path*",
       "permanent": true
+    },
+    {
+      "source": "/frequency-40hz.html",
+      "destination": "/40hz.html",
+      "permanent": true
     }
   ],
   "headers": [

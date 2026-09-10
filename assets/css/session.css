@@ -303,12 +303,13 @@ body.session-active .breath-guide .breath-out { animation: breath-out-txt 8s eas
 
 /* Focus mode — while the session plays, everything else recedes */
 header, .freq-eyebrow, .freq-title, .freq-subtitle,
-.meta-row, .scroll-cue, .science, .footer-banner, footer {
+.meta-row, .player-crosslink, .scroll-cue, .science, .footer-banner, footer {
     transition: opacity 1.8s ease;
 }
 body.session-active .freq-eyebrow,
 body.session-active .freq-subtitle,
 body.session-active .meta-row,
+body.session-active .player-crosslink,
 body.session-active .scroll-cue,
 body.session-active .science,
 body.session-active .footer-banner,
@@ -330,6 +331,7 @@ body.session-active header { opacity: 0.25; }
     body.session-active .footer-banner,
     body.session-active footer,
     body.session-active .meta-row,
+    body.session-active .player-crosslink,
     body.session-active .scroll-cue { pointer-events: none; }
 }
 
@@ -499,6 +501,18 @@ body.session-active header { opacity: 0.25; }
     color: var(--text-light);
 }
 .phones-note svg { width: 15px; height: 15px; }
+
+/* Player cross-link — quiet mono pointer to the paired session */
+.player-crosslink { margin-bottom: 2rem; }
+.player-crosslink a {
+    font-family: var(--mono); font-size: 0.68rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-light); text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color .25s ease, border-color .25s ease;
+}
+.player-crosslink a:hover { color: var(--text); border-color: var(--text); }
+.player-crosslink a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 /* Scroll cue */
 .scroll-cue {
