@@ -243,6 +243,49 @@ function exitFocus()  { document.body.classList.remove('session-active'); }
 
 let sessionCounted = false; // count once per full session, not on every resume
 
+// ── FUNNEL EVENTS ──
+// The player is the whole product, so the drop-off points are worth
+// measuring: how many see the headphone gate, how many pass it, how
+// far into the session people actually get, and where they leave.
+const PROGRESS_MINUTES = [1, 3, 5, 8];
+let playedSeconds = 0;     // seconds of real playback this session
+let progressFired = [];    // minute milestones already reported
+let stopReported = false;  // one stop per interruption, reset on resume
+
+function ev(name, params) {
+    if (typeof gtag === 'function') gtag('event', name, params || {});
+}
+function evDims(extra) {
+    return Object.assign({ hz: String(cfg.beatHz), id: cfg.id }, extra || {});
+}
+function reportProgress() {
+    PROGRESS_MINUTES.forEach(function (m) {
+        if (playedSeconds >= m * 60 && progressFired.indexOf(m) === -1) {
+            progressFired.push(m);
+            ev('frequency_progress', evDims({ minute: m }));
+        }
+    });
+}
+// Reasons: 'pause' (deliberate), 'hidden' (tab or app switched away),
+// 'pagehide' (navigating away or closing). Beacon transport so the
+// request survives the page going away.
+function reportStop(reason) {
+    if (stopReported || playedSeconds === 0) return;
+    stopReported = true;
+    ev('frequency_stop', evDims({
+        seconds_played: playedSeconds,
+        reason: reason,
+        transport_type: 'beacon'
+    }));
+}
+
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden' && isPlaying) reportStop('hidden');
+});
+window.addEventListener('pagehide', () => {
+    if (isPlaying) reportStop('pagehide');
+});
+
 // ── LOOP ──
 // With Loop on, the countdown restarts seamlessly at 0 — the audio
 // graph never stops, so there is no gap or click — and the Session
@@ -285,6 +328,8 @@ function beginSession() {
     startAudio();
     timerInt = setInterval(() => {
         remaining--;
+        playedSeconds++;
+        reportProgress();
         timerEl.textContent = fmt(remaining);
         updateRing();
         if (remaining <= 0) {
@@ -305,8 +350,15 @@ function beginSession() {
     playBtn.setAttribute('aria-label', cfg.pauseLabel);
     enterFocus();
     setState('Session active');
-    if (!sessionCounted) { sessionCounted = true; increment(); }
-    if (typeof gtag==='function') gtag('event','frequency_start',{hz: String(cfg.beatHz), id: cfg.id});
+    stopReported = false;
+    if (!sessionCounted) {
+        // fresh session, not a resume — a start counted on every resume
+        // would inflate the gate_confirmed -> start conversion
+        sessionCounted = true;
+        playedSeconds = 0; progressFired = [];
+        increment();
+        ev('frequency_start', evDims());
+    }
     if ('mediaSession' in navigator) {
         navigator.mediaSession.metadata = new MediaMetadata({
             title: cfg.label,
@@ -321,6 +373,7 @@ function beginSession() {
 function pauseSession() {
     clearInterval(timerInt); stopAudio();
     isPlaying = false;
+    reportStop('pause');
     exitFocus();
     iconPlay.style.display = 'block'; iconPause.style.display = 'none';
     playBtn.classList.remove('playing'); timerWrap.classList.remove('playing');
@@ -334,6 +387,7 @@ playBtn.addEventListener('click', () => {
         if (sessionStorage.getItem('echo11_headphone_ack')) {
             beginSession();
         } else {
+            ev('gate_shown', evDims());
             openModal(headphoneModal);
         }
     } else if (pendingComplete) {
@@ -421,12 +475,13 @@ function closeModal(modal) {
     if (lastFocusedEl) lastFocusedEl.focus();
 }
 
+// single tap: the gate acknowledges and starts the session in one press
 document.getElementById('headphoneConfirm').addEventListener('click', () => {
     sessionStorage.setItem('echo11_headphone_ack', '1');
+    ev('gate_confirmed', evDims());
     closeModal(headphoneModal);
     beginSession();
 });
-document.getElementById('headphoneCancel').addEventListener('click', () => closeModal(headphoneModal));
 document.getElementById('completeClose').addEventListener('click', () => closeModal(completeModal));
 [headphoneModal, completeModal].forEach(m => {
     m.addEventListener('click', e => { if (e.target === m) closeModal(m); });
