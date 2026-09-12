@@ -453,8 +453,10 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(250, 250, 250, 0.95);
-            backdrop-filter: blur(10px);
+            /* site-header.js owns the surface: transparent over the hero,
+               the opaque page ground past it. No blur — the scrolled bar
+               is fully opaque, so it would composite for nothing. */
+            background: var(--bg);
             border-bottom: 1px solid var(--border);
         }
 
@@ -755,25 +757,54 @@
         .hero-cue:hover, .hero-cue:focus-visible { opacity: 1; color: var(--text); }
 
         .hero-ctas {
-            display: flex; align-items: center; gap: 1.6rem;
+            display: flex; align-items: stretch; gap: 1rem;
             flex-wrap: wrap; margin-bottom: 2.4rem;
         }
-        .hero-cta-primary {
-            font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem;
+        /* Both CTAs are controls of the same optical height: the secondary
+           was a 25px underlined link, under any reasonable touch target. */
+        .hero-cta-primary,
+        .hero-cta-secondary {
+            font-family: 'IBM Plex Mono', monospace;
             letter-spacing: 0.08em; text-transform: uppercase;
+            text-decoration: none; min-height: 48px;
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+        .hero-cta-primary {
+            font-size: 0.92rem; font-weight: 500;
             background: var(--text); color: var(--bg);
-            text-decoration: none; padding: 1rem 1.7rem;
+            border: 1px solid var(--text);
+            padding: 1.1rem 2rem;
             transition: opacity .25s ease;
         }
         .hero-cta-primary:hover { opacity: 0.85; }
         .hero-cta-secondary {
-            font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
-            letter-spacing: 0.08em; text-transform: uppercase;
-            color: var(--text-secondary); text-decoration: none;
-            border-bottom: 1px solid var(--border); padding-bottom: 2px;
-            transition: color .25s ease, border-color .25s ease;
+            font-size: 0.82rem;
+            color: var(--text); background: transparent;
+            border: 1px solid rgba(26, 26, 26, 0.35);
+            padding: 0.95rem 1.5rem;
+            transition: border-color .25s ease;
         }
-        .hero-cta-secondary:hover { color: var(--text); border-color: var(--text); }
+        .hero-cta-secondary:hover,
+        .hero-cta-secondary:focus-visible { border-color: var(--text); }
+        html[data-theme="dark"] .hero-cta-secondary { border-color: rgba(233, 233, 231, 0.35); }
+
+        /* One visible focus ring for every control in the hero and the
+           bands row. 2px of --text at 3px offset reads on the light plate;
+           the dark theme flips --text to near-white, so it reads there too. */
+        .hero-cta-primary:focus-visible,
+        .hero-cta-secondary:focus-visible,
+        .hero-cue:focus-visible,
+        .hero-content a:focus-visible,
+        .band-card:focus-visible,
+        .more-articles-btn:focus-visible {
+            outline: 2px solid var(--text);
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 640px) {
+            .hero-ctas { flex-direction: column; align-items: stretch; gap: 1rem; }
+            .hero-cta-primary, .hero-cta-secondary { width: 100%; }
+        }
 
         .hero-doors {
             display: flex;
@@ -1124,7 +1155,7 @@
             font-size: 1rem;
             font-weight: 400;
             letter-spacing: 0.02em;
-            transition: all 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
             border: 2px solid var(--text);
         }
 
@@ -1166,7 +1197,6 @@
             transition: background .25s ease;
         }
         .band-card:hover { background: var(--white); }
-        .band-card:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
         .band-name {
             font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem;
             letter-spacing: 0.18em; text-transform: uppercase; color: var(--text);
