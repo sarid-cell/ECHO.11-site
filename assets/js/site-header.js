@@ -10,16 +10,28 @@
 
   /* ── 1. Navigation — the conversion journey, in order ──
      Items may carry `children`: direct links rendered as an indented
-     mono sub-list, so a visitor reaches a session without the hub hop. */
+     mono sub-list, so a visitor reaches a session without the hub hop.
+     hrefs are root-absolute so the same array works from /he/ too. */
   var NAV = [
-    { href: 'frequencies.html',    label: 'The Sessions', children: [
-        { href: 'frequency.html',  label: '10 Hz · Calm' },
-        { href: '40hz.html',       label: '40 Hz · Focus' }
+    { href: '/frequencies.html',    label: 'The Sessions', children: [
+        { href: '/frequency.html',  label: '10 Hz · Calm' },
+        { href: '/40hz.html',       label: '40 Hz · Focus' }
       ] },
-    { href: 'book.html',           label: 'The Book' },
-    { href: 'index.html#insights', label: 'Insights' },
-    { href: 'index.html#vision',   label: 'The Vision' },
-    { href: 'about.html',          label: 'About Echo.11' }
+    { href: '/book.html',           label: 'The Book' },
+    { href: '/index.html#insights', label: 'Insights' },
+    { href: '/index.html#vision',   label: 'The Vision' },
+    { href: '/about.html',          label: 'About Echo.11' }
+  ];
+
+  /* The Hebrew session pages run the same drawer, in Hebrew. They have
+     no Hebrew hub or essays yet, so the two sessions lead and the rest
+     of the menu points back at the English site. */
+  var NAV_HE = [
+    { href: '/he/teder-10hz.html', label: '10 הרץ · הרגעה' },
+    { href: '/he/teder-40hz.html', label: '40 הרץ · ריכוז' },
+    { href: '/frequencies.html',   label: 'The Sessions (English)' },
+    { href: '/book.html',          label: 'The Book' },
+    { href: '/about.html',         label: 'About Echo.11' }
   ];
 
   /* App teaser pinned under the links — swap for a real
@@ -32,6 +44,14 @@
       '<span class="menu-app-desc">Both sessions, in your pocket.</span>' +
     '</div>';
 
+  var APP_TEASER_HE =
+    '<div class="menu-app">' +
+      '<span class="menu-app-title">האפליקציה ' +
+        '<span class="menu-app-badge">בקרוב</span>' +
+      '</span>' +
+      '<span class="menu-app-desc">שני הסשנים, בכיס שלך.</span>' +
+    '</div>';
+
   var header    = document.querySelector('header');
   var sideMenu  = document.getElementById('sideMenu');
   var hamburger = document.getElementById('hamburger');
@@ -40,9 +60,12 @@
   if (sideMenu && hamburger) {
     var nav = sideMenu.querySelector('nav');
     if (nav) {
-      var here = (location.pathname.split('/').pop() || 'index.html');
+      var here = location.pathname.replace(/\/$/, '/index.html');
       function isHere(href) { return href.split('#')[0] === here; }
-      nav.innerHTML = '<ul class="menu-list">' + NAV.map(function (item) {
+      var isHebrew = document.documentElement.lang === 'he';
+      var items = isHebrew ? NAV_HE : NAV;
+      var teaser = isHebrew ? APP_TEASER_HE : APP_TEASER;
+      nav.innerHTML = '<ul class="menu-list">' + items.map(function (item) {
         var link = '<a href="' + item.href + '" class="menu-link' +
                    (isHere(item.href) ? ' current' : '') + '">' + item.label + '</a>';
         var sub = '';
@@ -53,7 +76,7 @@
           }).join('') + '</ul>';
         }
         return '<li>' + link + sub + '</li>';
-      }).join('') + '</ul>' + APP_TEASER;
+      }).join('') + '</ul>' + teaser;
       // page scripts bound their close-toggle to the original anchors;
       // delegate clicks on the rebuilt ones through the hamburger instead
       nav.addEventListener('click', function (e) {

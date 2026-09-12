@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="supports-dark">
+<head>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { analytics_storage: localStorage.getItem('echo11_consent') === 'granted' ? 'granted' : 'denied' });
+      gtag('js', new Date());
+      gtag('config', 'G-TP9YRD6TN8');
+      (function () {
+        var loaded = false;
+        function loadGtag() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-TP9YRD6TN8';
+          document.head.appendChild(s);
+        }
+        ['scroll', 'click', 'keydown', 'touchstart', 'mousemove'].forEach(function (ev) {
+          window.addEventListener(ev, loadGtag, { once: true, passive: true });
+        });
+        window.addEventListener('load', function () { setTimeout(loadGtag, 3000); });
+      })();
+    </script>
+
+    <meta charset="UTF-8">
+    <!-- Quiet Mode bootstrap: resolve theme before first paint (no FOUC). -->
+    <script>
+    (function(){try{var t=localStorage.getItem('echo11_theme');if(t!=='dark'&&t!=='light'){var h=new Date().getHours();t=(h>=20||h<7)||matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0e1013" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/images/favicon-192.png" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/assets/images/favicon-180.png">
+    <title>תדר 40 הרץ — סשן בינאורלי חינם לריכוז ופוקוס | ECHO.11</title>
+    <meta name="description" content="סשן בינאורלי חינמי של 11 דקות בתדר 40 הרץ — גלי גמא לריכוז, למשימה שלא מצליחים להתחיל. אפשר להפעיל בלולאה. בלי הרשמה, רק האזנה עם אוזניות.">
+    <meta name="keywords" content="ביטים בינאורליים, תדר לריכוז, גלי גמא, תדר 40 הרץ, ריכוז ופוקוס, האזנה עם אוזניות, עבודה עמוקה">
+    <meta name="author" content="Shira Sarid">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://echo11.app/he/teder-40hz.html" />
+
+    <!-- Reciprocal hreflang: this page, its English twin, and the default -->
+    <link rel="alternate" hreflang="he" href="https://echo11.app/he/teder-40hz.html" />
+    <link rel="alternate" hreflang="en" href="https://echo11.app/40hz.html" />
+    <link rel="alternate" hreflang="x-default" href="https://echo11.app/40hz.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="תדר 40 הרץ — סשן בינאורלי חינם לריכוז ופוקוס | ECHO.11">
+    <meta property="og:description" content="11 דקות של גלי גמא בתדר 40 הרץ. תדר לריכוז, חינם, ישר בדפדפן.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://echo11.app/he/teder-40hz.html">
+    <meta property="og:site_name" content="ECHO.11">
+    <meta property="og:locale" content="he_IL">
+    <meta property="og:image" content="https://echo11.app/assets/images/40hz-og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="800">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="תדר 40 הרץ — סשן בינאורלי חינם לריכוז ופוקוס | ECHO.11">
+    <meta name="twitter:description" content="11 דקות של גלי גמא בתדר 40 הרץ. תדר לריכוז, חינם, ישר בדפדפן.">
+    <meta name="twitter:image" content="https://echo11.app/assets/images/40hz-og.jpg">
+
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/outfit-variable-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/fonts.css">
+    <link rel="stylesheet" href="/assets/css/view-transitions.css">
+    <link rel="stylesheet" href="/assets/css/quiet-mode.css">
+    <link rel="stylesheet" href="/assets/css/micro-interactions.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/assets/css/micro-interactions.css"></noscript>
+    <link rel="stylesheet" href="/assets/css/session.css">
+    <link rel="stylesheet" href="/assets/css/rtl.css">
+    <style>
+        .hero-plate picture { display: block; width: 100%; height: 100%; }
+        .hero-plate img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; filter: grayscale(100%); }
+        .player-card::before {
+            content: ''; position: absolute; z-index: -1;
+            top: 0; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: min(100%, 52rem);
+            background: linear-gradient(to right,
+                rgba(250,250,250,0) 0%, rgba(250,250,250,0.55) 14%,
+                rgba(250,250,250,0.55) 86%, rgba(250,250,250,0) 100%);
+        }
+        html[data-theme="dark"] .player-card::before {
+            background: linear-gradient(to right,
+                rgba(14,16,19,0) 0%, rgba(14,16,19,0.55) 14%,
+                rgba(14,16,19,0.55) 86%, rgba(14,16,19,0) 100%);
+        }
+        html[data-theme="dark"] .hero-plate img { filter: grayscale(100%) brightness(0.5); }
+        .hero .freq-eyebrow, .hero .freq-subtitle, .hero .timer-time { color: #262626; }
+        .hero .state-text, .hero .tone-note { color: #3f3f3f; }
+        html[data-theme="dark"] .hero .freq-eyebrow,
+        html[data-theme="dark"] .hero .freq-subtitle,
+        html[data-theme="dark"] .hero .timer-time { color: rgba(255,255,255,0.92); }
+        html[data-theme="dark"] .hero .state-text,
+        html[data-theme="dark"] .hero .tone-note { color: rgba(255,255,255,0.82); }
+    </style>
+    <style>
+        /* אותה הגנה מפני רגישות לאור כמו בעמוד האנגלי:
+           שום דבר כאן לא פועם בקצב 40 הרץ או קרוב אליו. */
+        .wave-canvas { display: none; }
+        .sessions-dot { animation-duration: 4.5s; }
+    </style>
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Person",
+            "@id": "https://echo11.app/#shira-sarid",
+            "name": "Shira Sarid",
+            "url": "https://echo11.app/",
+            "email": "shirasarid@gmail.com"
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://echo11.app/#website",
+            "name": "ECHO.11",
+            "url": "https://echo11.app/",
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "https://echo11.app/he/teder-40hz.html#webpage",
+            "url": "https://echo11.app/he/teder-40hz.html",
+            "name": "תדר 40 הרץ — סשן בינאורלי חינם לריכוז ופוקוס | ECHO.11",
+            "description": "סשן בינאורלי חינמי של 11 דקות בתדר 40 הרץ — גלי גמא לריכוז, למשימה שלא מצליחים להתחיל. אפשר להפעיל בלולאה. בלי הרשמה, רק האזנה עם אוזניות.",
+            "inLanguage": "he",
+            "isPartOf": {
+                "@id": "https://echo11.app/#website"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "mainEntity": {
+                "@id": "https://echo11.app/he/teder-40hz.html#audio"
+            },
+            "speakable": {
+                "@type": "SpeakableSpecification",
+                "cssSelector": [
+                    "#focus-he"
+                ]
+            }
+        },
+        {
+            "@type": "AudioObject",
+            "@id": "https://echo11.app/he/teder-40hz.html#audio",
+            "name": "תדר 40 הרץ — סשן בינאורלי חינם לריכוז ופוקוס | ECHO.11",
+            "description": "סשן בינאורלי חינמי של 11 דקות בתדר 40 הרץ — גלי גמא לריכוז, למשימה שלא מצליחים להתחיל. אפשר להפעיל בלולאה. בלי הרשמה, רק האזנה עם אוזניות.",
+            "duration": "PT11M",
+            "encodingFormat": "audio/basic",
+            "inLanguage": "he",
+            "isAccessibleForFree": true,
+            "creator": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "contentUrl": "https://echo11.app/he/teder-40hz.html",
+            "thumbnailUrl": "https://echo11.app/assets/images/40hz-og.jpg"
+        },
+        {
+            "@type": "HowTo",
+            "@id": "https://echo11.app/he/teder-40hz.html#howto",
+            "name": "איך להאזין לסשן הבינאורלי של 40 הרץ",
+            "totalTime": "PT11M",
+            "supply": [
+                {
+                    "@type": "HowToSupply",
+                    "name": "אוזניות סטריאו"
+                }
+            ],
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "position": 1,
+                    "name": "לשים אוזניות סטריאו",
+                    "text": "כל אוזן צריכה לשמוע צליל אחר. רמקולים מערבבים את שני הערוצים והאפקט לא נוצר.",
+                    "url": "https://echo11.app/he/teder-40hz.html#step1"
+                },
+                {
+                    "@type": "HowToStep",
+                    "position": 2,
+                    "name": "ללחוץ נגן",
+                    "text": "הצליל נבנה בדפדפן בזמן אמת. אין הורדה ואין הרשמה.",
+                    "url": "https://echo11.app/he/teder-40hz.html#step2"
+                },
+                {
+                    "@type": "HowToStep",
+                    "position": 3,
+                    "name": "להישאר 11 דקות",
+                    "text": "זהו החלון שבו הסנכרון מתייצב. אפשר לעצור בכל רגע.",
+                    "url": "https://echo11.app/he/teder-40hz.html#step3"
+                }
+            ]
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://echo11.app/he/teder-40hz.html#faq",
+            "inLanguage": "he",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "מה זה ביט בינאורלי?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "שני צלילים שונים במעט, אחד לכל אוזן. המוח קולט את ההפרש ומייצר צליל שלישי שלא קיים באוויר. בגלל זה צריך אוזניות סטריאו."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "האם תדר 40 הרץ באמת עוזר לריכוז?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "העדות לגבי ריכוז חלשה יותר מהעדות לגבי חרדה. מחקרים של קולזאטו ועמיתיה (2017), רידייק ועמיתיה (2013) וגרסיה-ארגיביי ועמיתיו (2019) מראים תמונה מעורבת בכל מה שנוגע לקשב ולזיכרון, ותמונה עקבית יותר בכל מה שנוגע לחרדה."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "אפשר להפעיל את הסשן בלולאה?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "כן. כפתור הלולאה מריץ את 11 הדקות ברצף בלי הפסקה בין מחזורים, לבלוק עבודה ארוך."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "עיניים פתוחות או עצומות?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "פתוחות. הסשן הזה נועד לעבודה, לא למנוחה."
+                    }
+                }
+            ]
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://echo11.app/he/teder-40hz.html#breadcrumbs",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "ECHO.11",
+                    "item": "https://echo11.app/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "הסשנים",
+                    "item": "https://echo11.app/frequencies.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "תדר 40 הרץ — סשן בינאורלי חינם לריכוז ופוקוס | ECHO.11"
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">דילוג לתוכן הראשי</a>
+    <div class="cursor-dot"></div>
+
+    <header>
+        <div class="header-inner">
+            <a href="/" class="logo">ECHO.11</a>
+            <div class="header-right">
+                <button class="hamburger" id="hamburger" aria-label="פתיחת התפריט" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
+        <nav>
+            <ul class="menu-list">
+                <li><a href="/he/teder-10hz.html" class="menu-link">10 הרץ · הרגעה</a></li>
+                <li><a href="/he/teder-40hz.html" class="menu-link current">40 הרץ · ריכוז</a></li>
+                <li><a href="/frequencies.html" class="menu-link">The Sessions (English)</a></li>
+                <li><a href="/book.html" class="menu-link">The Book</a></li>
+                <li><a href="/about.html" class="menu-link">About Echo.11</a></li>
+            </ul>
+            <div class="menu-app">
+                <span class="menu-app-title">האפליקציה
+                    <span class="menu-app-badge">בקרוב</span>
+                </span>
+                <span class="menu-app-desc">שני הסשנים, בכיס שלך.</span>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- בדיקת אוזניות לפני הסשן הראשון בכל ביקור -->
+    <div class="modal-overlay" id="headphoneModal" role="dialog" aria-modal="true" aria-labelledby="headphoneTitle">
+        <div class="modal-card">
+            <div class="modal-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M14.463 10.29a3.75 3.75 0 010 3.42M9.537 13.71a3.75 3.75 0 010-3.42M4.886 18.364a9 9 0 010-12.728"/>
+                </svg>
+            </div>
+            <div class="modal-title" id="headphoneTitle">שימי אוזניות</div>
+            <div class="modal-text">זה ביט בינאורלי אמיתי — כל אוזן שומעת צליל אחר. רמקולים של טלפון או מחשב מערבבים את שני הערוצים, ולכן האפקט של 40 הרץ פשוט לא נוצר בלי אוזניות סטריאו.</div>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-primary" id="headphoneConfirm">יש לי אוזניות ← נגן</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- סיום הסשן -->
+    <div class="modal-overlay" id="completeModal" role="dialog" aria-modal="true" aria-labelledby="completeTitle">
+        <div class="modal-card">
+            <div class="modal-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                </svg>
+            </div>
+            <div class="modal-title" id="completeTitle">הסשן הסתיים</div>
+            <div class="modal-text">11 דקות בתדר 40 הרץ. אם המשימה זזה — זו נקודת המידע. חזרי לבלוק הבא.</div>
+            <div class="modal-actions">
+                <a href="/book.html" class="modal-btn modal-btn-primary">Join the early list</a>
+                <button class="modal-btn modal-btn-ghost" id="completeClose">סגירה</button>
+            </div>
+            <div class="modal-meta" id="completeMeta"></div>
+        </div>
+    </div>
+
+    <main id="main-content">
+        <!-- ── נגן ── -->
+        <section class="hero">
+            <div class="hero-video hero-plate">
+                <picture>
+                    <source srcset="/assets/images/astro-eyes-open.webp" type="image/webp">
+                    <img src="/assets/images/astro-eyes-open.png" alt="דיוקן אסטרונאוטית בעיניים פתוחות" width="1456" height="816" fetchpriority="high">
+                </picture>
+            </div>
+            <div class="hero-overlay"></div>
+
+            <div class="player-card">
+                <div class="freq-eyebrow">תדר בינאורלי · גלי גמא</div>
+                <h1 class="freq-h1">
+                    <span class="freq-title">40 Hz</span>
+                    <span class="freq-subtitle">אחת-עשרה דקות של ריכוז</span>
+                </h1>
+
+                <div class="timer-wrap">
+                    <div class="breath-halo" aria-hidden="true"></div>
+                    <canvas class="wave-canvas" id="waveCanvas" aria-hidden="true"></canvas>
+                    <svg class="timer-svg" width="200" height="200" viewBox="0 0 200 200">
+                        <circle class="ring-bg" cx="100" cy="100" r="90"/>
+                        <circle class="ring-prog" cx="100" cy="100" r="90" id="timerRing"/>
+                    </svg>
+                    <div class="timer-inner">
+                        <button class="play-btn" id="playBtn" aria-label="הפעלת סשן 40 הרץ">
+                            <svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#playBtnIconGradient)"><defs><linearGradient id="playBtnIconGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#eafdff"/><stop offset="100%" stop-color="currentColor"/></linearGradient></defs><path d="M6.5 5v14l11-7-11-7z"/></svg>
+                            <svg id="iconPause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#playBtnIconGradient)" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        </button>
+                        <div class="timer-time" id="timerDisplay" aria-live="polite">11:00</div>
+                    </div>
+                </div>
+
+                <div class="state-text" id="stateText">אוזניות · עיניים פתוחות · לוחצים נגן ומתחילים לעבוד</div>
+
+                <p class="tone-note">תשמעי צליל רך ויציב. זה הכל — 40 הרץ קורים בפנים.</p>
+
+                <div class="breath-guide" aria-hidden="true">
+                    <span class="breath-in">שאיפה</span>
+                    <span class="breath-out">נשיפה</span>
+                </div>
+
+                <button class="loop-toggle" id="loopToggle" aria-pressed="false">
+                    <span class="loop-ind" aria-hidden="true"></span>
+                    לולאה · רצוף
+                </button>
+
+                <div class="meta-row">
+                    <div class="sessions-row" hidden>
+                        <div class="sessions-dot"></div>
+                        <div class="sessions-text">
+                            <span class="sessions-num" id="sessionsNum">—</span> סשנים היום
+                        </div>
+                    </div>
+                    <div class="phones-note">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M14.463 10.29a3.75 3.75 0 010 3.42M9.537 13.71a3.75 3.75 0 010-3.42M4.886 18.364a9 9 0 010-12.728"/>
+                        </svg>
+                        האזנה עם אוזניות בלבד
+                    </div>
+                </div>
+
+                <div class="player-crosslink">
+                    <a href="/he/teder-10hz.html">צריכה להירגע במקום? ← 10 הרץ</a>
+                </div>
+
+                <div class="scroll-cue">
+                    <span>גללי להסבר</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── הסבר ── -->
+        <section class="science">
+            <div class="science-inner">
+
+                <h2 class="section-label reveal">איך זה עובד</h2>
+
+                <div class="freq-diagram reveal">
+                    <div class="ear">
+                        <div class="ear-tag">אוזן שמאל</div>
+                        <div class="ear-hz ltr">200 Hz</div>
+                        <div class="ear-note">צליל נושא, נשמע לבדו</div>
+                    </div>
+                    <div class="brain">
+                        <div class="brain-tag">המוח מפיק</div>
+                        <div class="brain-hz ltr">40 Hz</div>
+                        <div class="brain-wave">גלי גמא · צליל ההפרש</div>
+                    </div>
+                    <div class="ear right">
+                        <div class="ear-tag">אוזן ימין</div>
+                        <div class="ear-hz ltr">240 Hz</div>
+                        <div class="ear-note">צליל נושא, נשמע לבדו</div>
+                    </div>
+                </div>
+
+                <div class="info-grid reveal">
+                    <div class="info-block">
+                        <div class="info-q">מה זה ביט בינאורלי</div>
+                        <div class="info-a">שני צלילים שונים במעט — אחד לכל אוזן. המוח קולט את ההפרש ומייצר <strong>צליל שלישי שלא קיים באוויר</strong>. אשליה שמיעתית עם השפעה נוירולוגית מדידה. בלי אוזניות סטריאו הרמקולים מערבבים את הערוצים והאפקט לא נוצר.</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-q">למה דווקא תדר 40 הרץ</div>
+                        <div class="info-a" id="focus-he">40 הרץ יושב בתוך <strong>תחום גלי גמא (30 עד 80 הרץ)</strong>, שמזוהה עם קשב, עם קליטה חדה ועם רגעים שבהם המוח מחבר מידע ממקומות שונים. זה התדר לריכוז — לא לרוגע.</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-q">מה המחקר מראה, ומה לא</div>
+                        <div class="info-a">העדות לגבי ריכוז חלשה יותר מהעדות לגבי חרדה, וצריך להגיד את זה בפירוש. קולזאטו, ברונה, סלארו והומל (2017) מצאו השפעות מעורבות על קשב; רידייק, בולדרס והומל (2013) הראו שההשפעה תלויה במצב הנוירולוגי ההתחלתי של המאזין; גרסיה-ארגיביי, סנטד וריאלס (2019) מצאו במטא-אנליזה השפעה עקבית על חרדה, ותמונה הרבה פחות ברורה על קשב וזיכרון. <strong>אם מחפשים הוכחה שתדר מסוים הופך אותך לממוקדת — היא לא קיימת.</strong></div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-q">איך משתמשים בזה בפועל</div>
+                        <div class="info-a">בעיניים פתוחות, תוך כדי עבודה. לוחצים נגן, פותחים את המשימה, ונותנים ל-11 הדקות לרוץ ברקע. אם יש בלוק ארוך של עבודה — מפעילים לולאה והצליל ממשיך ברצף בלי הפסקה בין מחזורים.</div>
+                    </div>
+                    <div class="info-block info-block-wide">
+                        <div class="info-q">מה אמורים להרגיש</div>
+                        <div class="info-a">התגובה אישית ומשתנה. מה שמדווח הכי הרבה:
+                            <div class="feel-tags">
+                                <span class="feel-tag">כניסה מהירה יותר למשימה</span>
+                                <span class="feel-tag">פחות הסחות</span>
+                                <span class="feel-tag">ערנות יציבה</span>
+                                <span class="feel-tag">תחושת רצף</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-block info-block-img">
+                        <picture>
+                            <source srcset="/assets/images/40hz-astro.webp" type="image/webp">
+                            <img src="/assets/images/40hz-astro.png" alt="אסטרונאוטית עובדת מול מחשב — סשן גלי גמא ב-40 הרץ" loading="lazy" width="1536" height="768">
+                        </picture>
+                    </div>
+                </div>
+
+                <div class="callout reveal">
+                    <span class="callout-tag">רקע מחקרי · גירוי חושי ב-40 הרץ</span>
+                    <p>במעבדה של לי-הואי צאי ב-MIT נמצא שגירוי חושי בקצב של 40 הרץ מגביר פעילות גמא במוח, ובמודלים של עכברים גם מפחית משקעי עמילואיד ומשפר תפקוד של תאי ניקוי. יש עבודה מקבילה על פינוי פסולת מהמוח, וניסויים ראשוניים בבני אדם נמצאים בעיצומם.<br><br>
+                    <strong>המחקר הזה משתמש באור ובקול יחד בתנאי מעבדה, בהקשר קליני. העמוד הזה הוא סשן אודיו לטיפוח עצמי ואינו טוען דבר בקשר לעבודה ההיא.</strong></p>
+                    <a href="https://picower.mit.edu/discoveries/40hz-rhythms-fight-alzheimers-cellular-and-molecular-level" target="_blank" rel="noopener noreferrer">המחקר של MIT על מקצבי 40 הרץ ←</a>
+                </div>
+
+                <div class="info-block reveal" style="border:1px solid var(--border);">
+                    <div class="info-q">למה 11 דקות</div>
+                    <div class="info-a">מחקרים על היסחפות עצבית מצביעים על חלון של <strong>7 עד 15 דקות</strong> שבו הסנכרון מתייצב. 11 דקות הן האורך המינימלי שבו אפשר למדוד אותו — והמספר שעומד בבסיס ECHO.11.</div>
+                </div>
+
+                <div class="disclaimer reveal" id="disclaimer">
+                    <span class="callout-tag">הבהרה מלאה</span>
+                    <p>ECHO.11 הוא כלי לטיפוח עצמי, לא מכשיר רפואי, ואין כאן ייעוץ רפואי. הסשן של 40 הרץ אינו אבחנה, אינו טיפול, ואינו תחליף לליווי של רופא, מטפל או פסיכיאטר. אם חרדה, כאב או קשיי שינה מפריעים לך לחיות — דברי עם איש מקצוע. זה יכול ללוות את העבודה הזאת, לא להחליף אותה.</p>
+                    <p>התגובה שונה מאדם לאדם, ויש אנשים שלא מרגישים דבר. זו תוצאה נורמלית, לא כישלון שלך.</p>
+                    <p>כמה מגבלות מעשיות. אין להאזין בזמן נהיגה או הפעלת מכשיר שדורש תשומת לב. אם יש לך אפילפסיה או הפרעת פרכוסים, קוצב לב או שתל שבלול — התייעצי עם רופא לפני שימוש בהיסחפות שמיעתית מכל סוג. שמרי על עוצמת שמע נמוכה; האפקט מגיע מהתדר, לא מהעוצמה. אם סשן מותיר אותך מסוחררת, מבולבלת או נסערת יותר מכפי שהתחלת — עצרי והורידי את האוזניות.</p>
+                    <p>המחקר המתואר בעמוד הזה מסתמך על עבודות שפורסמו בנושא ביטים בינאורליים והיסחפות עצבית. הוא מתאר מה נצפה במחקרים באופן כללי — לא מה יקרה לך, ואין כאן טענה למספרי יעילות של ההקלטה הספציפית הזאת.</p>
+                    <p>זה לא שירות חירום. אם את בסכנה או חושבת לפגוע בעצמך, פני מיד למספר החירום המקומי או לקו סיוע.</p>
+                </div>
+
+                <div class="next-step reveal">
+                    <span class="next-step-tag">להמשיך מכאן</span>
+                    <p>התדר הזה הוא פרק אחד. הספר מתעד את כל השיטה — איך הסשנים נבנו, ומה החשיבה מאחורי מוח שקט יותר. הוא כתוב באנגלית.</p>
+                    <p><a href="/frequencies.html">כל הסשנים הבינאורליים החינמיים</a> נמצאים בעמוד אחד, באנגלית.</p>
+                    <a href="/book.html">Join the early list</a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">ECHO.11</div>
+            <div class="footer-contact">
+                <h2>נשמור על קשר בתוך הרעש</h2>
+                <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
+            </div>
+            <div class="footer-col">
+                <h2>ערוצים</h2>
+                <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
+                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer">Pinterest</a>
+                <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
+            </div>
+            <div class="footer-col">
+                <h2>עוד בעמוד</h2>
+                <a href="/he/teder-10hz.html">תדר 10 הרץ להרגעה</a>
+                <a href="/40hz.html">The 40Hz Focus (English)</a>
+                <a href="#disclaimer">ההבהרה המלאה</a>
+            </div>
+        </div>
+        <div class="footer-legal">
+            <p>© 2026 ECHO.11 by Shira Sarid. All rights reserved.</p>
+            <div class="footer-legal-links">
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/accessibility.html">Accessibility</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="הסכמה לעוגיות">
+        <span>אנחנו משתמשים ב-Google Analytics כדי להבין איך משתמשים באתר. <a href="/privacy.html" style="color:#fff;text-decoration:underline;">קראי את מדיניות הפרטיות</a></span>
+        <div style="display:flex;gap:8px;">
+            <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;">אישור</button>
+            <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:4px;cursor:pointer;">לא תודה</button>
+        </div>
+    </div>
+    <script>
+        (function(){
+            var consent = localStorage.getItem('echo11_consent');
+            var banner = document.getElementById('cookieConsent');
+            if (consent === 'granted' || consent === 'denied') { banner.style.display = 'none'; return; }
+            document.getElementById('cookieAccept').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'granted');
+                if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+                banner.style.display = 'none';
+            });
+            document.getElementById('cookieDecline').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'denied');
+                banner.style.display = 'none';
+            });
+        })();
+    </script>
+
+    <!-- The same engine as the English pages; only the copy is translated. -->
+    <script>
+        window.ECHO_SESSION = {
+            id: "40hz-he",
+            label: "אחת-עשרה דקות של ריכוז",
+            band: "Gamma",
+            beatHz: 40, leftHz: 200, rightHz: 240,
+            durationMin: 11, loop: false,
+            ogImage: "/assets/images/40hz-og.jpg",
+            strings: {
+                play:   "הפעלת סשן 40 הרץ",
+                pause:  "השהיית סשן 40 הרץ",
+                active: "הסשן פועל",
+                paused: "מושהה — לוחצים נגן כדי להמשיך",
+                complete: "הסשן הסתיים.",
+                cycles: function (n) { return n + " מחזורים רצופים"; },
+                sessionsToday: function (n) { return n + " סשנים היום"; }
+            }
+        };
+    </script>
+    <script src="/assets/js/session.js" defer></script>
+    <script src="/assets/js/site-header.js" defer></script>
+    <script src="/assets/js/quiet-mode.js" defer></script>
+    <script src="/assets/js/micro-interactions.js" defer></script>
+    <script src="/assets/js/echo-ripple.js" defer></script>
+    <script src="/assets/js/a11y-widget.js" defer></script>
+    <!-- Vercel Web Analytics — cookieless pageview beacon, served same-origin -->
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

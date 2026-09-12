@@ -44,11 +44,16 @@
     <link rel="icon" href="/assets/images/favicon-192.png" type="image/png" sizes="192x192">
     <link rel="apple-touch-icon" href="/assets/images/favicon-180.png">
     <title>Free 40Hz Binaural Beat for Focus — 11-Minute Focus Session | ECHO.11</title>
-    <meta name="description" content="Press play and keep working: a free 40Hz gamma binaural beat for focus and attention. 11 minutes or loop it, no signup, no download — just headphones. By ECHO.11.">
+    <meta name="description" content="Press play and keep working: a free 40Hz gamma binaural beat for focus and attention. Eleven minutes, or loop it for a longer block. No signup, just headphones.">
     <meta name="keywords" content="40hz binaural beat, gamma waves, binaural beats for focus, deep work, concentration, mental clarity, sound frequency, neural entrainment, 11 minute session">
     <meta name="author" content="Shira Sarid">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://echo11.app/40hz.html" />
+
+    <!-- Reciprocal hreflang: this page, its Hebrew twin, and the default -->
+    <link rel="alternate" hreflang="en" href="https://echo11.app/40hz.html" />
+    <link rel="alternate" hreflang="he" href="https://echo11.app/he/teder-40hz.html" />
+    <link rel="alternate" hreflang="x-default" href="https://echo11.app/40hz.html" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Free 40Hz Binaural Beat for Focus — 11-Minute Focus Session | ECHO.11">
@@ -150,7 +155,9 @@
             "@id": "https://echo11.app/#website",
             "name": "ECHO.11",
             "url": "https://echo11.app/",
-            "publisher": { "@id": "https://echo11.app/#shira-sarid" }
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            }
         },
         {
             "@type": "WebPage",
@@ -158,17 +165,41 @@
             "url": "https://echo11.app/40hz.html",
             "name": "Free 40Hz Binaural Beat for Focus — 11-Minute Focus Session | ECHO.11",
             "description": "Press play and keep working: a free 40Hz gamma binaural beat for focus and attention. 11 minutes or loop it, no signup, no download — just headphones. By ECHO.11.",
-            "isPartOf": { "@id": "https://echo11.app/#website" },
-            "publisher": { "@id": "https://echo11.app/#shira-sarid" },
-            "inLanguage": "en"
+            "isPartOf": {
+                "@id": "https://echo11.app/#website"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "inLanguage": "en",
+            "speakable": {
+                "@type": "SpeakableSpecification",
+                "cssSelector": [
+                    "#why-40hz"
+                ]
+            }
         },
         {
             "@type": "BreadcrumbList",
             "@id": "https://echo11.app/40hz.html#breadcrumbs",
             "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://echo11.app/" },
-                { "@type": "ListItem", "position": 2, "name": "Frequencies", "item": "https://echo11.app/frequencies.html" },
-                { "@type": "ListItem", "position": 3, "name": "40 Hz" }
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://echo11.app/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Frequencies",
+                    "item": "https://echo11.app/frequencies.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "40 Hz"
+                }
             ]
         },
         {
@@ -178,7 +209,9 @@
             "description": "An 11-minute 40Hz gamma binaural beat session for focus and attention, loopable for longer work blocks. The left ear hears a 200Hz tone and the right ear a 240Hz tone, generated live in the browser. Stereo headphones required.",
             "duration": "PT11M",
             "isAccessibleForFree": true,
-            "creator": { "@id": "https://echo11.app/#shira-sarid" },
+            "creator": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
             "url": "https://echo11.app/40hz.html",
             "inLanguage": "en"
         },
@@ -225,6 +258,41 @@
                         "@type": "Answer",
                         "text": "Individual response varies. Most commonly reported: Narrowed attention, Less task-switching, Alert but not wired, Time passing faster, Nothing at all (which is a normal outcome)."
                     }
+                }
+            ]
+        },
+        {
+            "@type": "HowTo",
+            "@id": "https://echo11.app/40hz.html#howto",
+            "name": "How to listen to the 40Hz binaural session",
+            "totalTime": "PT11M",
+            "supply": [
+                {
+                    "@type": "HowToSupply",
+                    "name": "Stereo headphones"
+                }
+            ],
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "position": 1,
+                    "name": "Put on stereo headphones",
+                    "text": "Each ear has to hear a different tone. Speakers blend the two channels together, so the beat never forms.",
+                    "url": "https://echo11.app/40hz.html#step1"
+                },
+                {
+                    "@type": "HowToStep",
+                    "position": 2,
+                    "name": "Press play",
+                    "text": "The tone is generated live in your browser. Nothing to download, nothing to sign up for.",
+                    "url": "https://echo11.app/40hz.html#step2"
+                },
+                {
+                    "@type": "HowToStep",
+                    "position": 3,
+                    "name": "Stay with it for 11 minutes",
+                    "text": "That is the window in which the synchronization settles. You can stop at any point.",
+                    "url": "https://echo11.app/40hz.html#step3"
                 }
             ]
         }
@@ -358,7 +426,7 @@
                     <span class="breath-out">Breathe out</span>
                 </div>
 
-                <button class="loop-toggle" id="loopToggle" aria-pressed="false" aria-label="Loop the session continuously">
+                <button class="loop-toggle" id="loopToggle" aria-pressed="false">
                     <span class="loop-ind" aria-hidden="true"></span>
                     Loop · Continuous
                 </button>
@@ -393,7 +461,7 @@
         <section class="science">
             <div class="science-inner">
 
-                <div class="section-label reveal">How it works</div>
+                <h2 class="section-label reveal">How it works</h2>
 
                 <!-- Frequency diagram -->
                 <div class="freq-diagram reveal">
@@ -422,7 +490,7 @@
                     </div>
                     <div class="info-block">
                         <div class="info-q">Why 40 Hz?</div>
-                        <div class="info-a">40Hz sits inside the <strong>Gamma band (30–100Hz)</strong> — the range EEG research associates with attention and with the binding of sensory information into a single percept. Fast, precise, awake.</div>
+                        <div class="info-a" id="why-40hz">40Hz sits inside the <strong>Gamma band (30–100Hz)</strong> — the range EEG research associates with attention and with the binding of sensory information into a single percept. Fast, precise, awake.</div>
                     </div>
                     <div class="info-block">
                         <div class="info-q">What happens in the brain?</div>
@@ -489,6 +557,7 @@
                 <div class="next-step reveal">
                     <span class="next-step-tag">If you want to go deeper</span>
                     <p>This frequency is one chapter. The book documents the whole method — how these sessions were built, and the thinking behind a quieter mind.</p>
+                    <p>When the problem is settling rather than starting, <a href="frequency.html">the free 10Hz reset session</a> works the other way around — the same eleven minutes, eyes closed. Both sit together with <a href="frequencies.html">all the free binaural sessions</a>.</p>
                     <a href="book.html">Join the early list</a>
                 </div>
 
@@ -504,18 +573,18 @@
         <div class="footer-inner">
             <div class="footer-brand">ECHO.11</div>
             <div class="footer-contact">
-                <h4>Let's connect in the noise</h4>
+                <h2>Let's connect in the noise</h2>
                 <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
             </div>
             <div class="footer-col">
-                <h4>Channels</h4>
+                <h2>Channels</h2>
                 <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
                 <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
                 <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer">Pinterest</a>
                 <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
             </div>
             <div class="footer-col">
-                <h4>Signals</h4>
+                <h2>Signals</h2>
                 <span>Strategy</span>
                 <span>Psychology</span>
                 <span>AI Tools</span>
@@ -551,7 +620,7 @@
     <script src="assets/js/session.js"></script>
 
     <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
-        <span>We use Google Analytics to understand site usage. <a href="privacy.html" style="color:#fff;text-decoration:underline;" aria-label="Learn more about our privacy policy">Learn more</a></span>
+        <span>We use Google Analytics to understand site usage. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Read the privacy policy</a></span>
         <div style="display:flex;gap:8px;">
             <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;">Accept</button>
             <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:4px;cursor:pointer;">Decline</button>
