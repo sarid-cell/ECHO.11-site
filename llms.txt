@@ -12,6 +12,7 @@ ECHO.11 exists at the intersection of human behavior and emerging technology. Th
 - [40Hz Focus Session](https://echo11.app/40hz.html): A free 11-minute 40Hz gamma binaural beat for focus and attention — loopable for longer work blocks. No signup; headphones required.
 - [10Hz Frequency Reset (Hebrew)](https://echo11.app/he/teder-10hz.html): תדר 10 הרץ — the Hebrew version of the 10Hz alpha session for calm and anxiety. Same 11-minute player, written in Hebrew.
 - [40Hz Focus Session (Hebrew)](https://echo11.app/he/teder-40hz.html): תדר 40 הרץ — the Hebrew version of the 40Hz gamma session for focus. Same 11-minute player, loopable, written in Hebrew.
+- [Field Notes](https://echo11.app/essays/): Shira Sarid's essays on the psychology underneath AI adoption — read in full on the site, not only on Substack.
 - [About](https://echo11.app/about.html): Shira Sarid's background, role, and approach.
 - [The Book — Behind the Scenes](https://echo11.app/book.html): 111 pages on anxiety self-care in the AI age ($38 digital PDF, waitlist open; limited print edition of 11 copies).
 - [Privacy Policy](https://echo11.app/privacy.html): How user data is handled.
@@ -27,7 +28,7 @@ ECHO.11 exists at the intersection of human behavior and emerging technology. Th
 ## What She Does
 
 - Builds digital products and experiences using Generative AI
-- Writes about AI, psychology, and human resilience on [Substack](https://shirasarid.substack.com)
+- Writes about AI, psychology, and human resilience — the essays live at https://echo11.app/essays/ and are also on [Substack](https://shirasarid.substack.com)
 - Hosts the [CTRL+Human podcast](https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120) exploring AI and human behavior
 - Helps women and neurodivergent minds leverage AI tools
 - Creates strategies that fuse consumer psychology with GenAI

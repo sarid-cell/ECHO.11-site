@@ -18,7 +18,9 @@
         { href: '/40hz.html',       label: '40 Hz · Focus' }
       ] },
     { href: '/book.html',           label: 'The Book' },
-    { href: '/index.html#insights', label: 'Insights' },
+    { href: '/index.html#insights', label: 'Insights', children: [
+        { href: '/essays/',         label: 'Field Notes' }
+      ] },
     { href: '/index.html#vision',   label: 'The Vision' },
     { href: '/about.html',          label: 'About Echo.11' }
   ];
