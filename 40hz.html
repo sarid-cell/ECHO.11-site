@@ -82,6 +82,48 @@
            is disabled here; the sessions dot is slowed. */
         .wave-canvas { display: none; }
         .sessions-dot { animation-duration: 4.5s; }
+
+        /* Hero plate — eyes open, to match the EYES OPEN instruction.
+           Framed low (center 30%) so the H1 and the play ring land on
+           the helmet and shoulder, not on the nose and mouth. */
+        .hero-plate picture { display: block; width: 100%; height: 100%; }
+        .hero-plate img {
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: center 30%;
+            filter: grayscale(100%);
+        }
+        /* 55% Cloud Dancer wash behind the text column only, so the
+           number, the ring and the helper lines all clear 4.5:1. */
+        .player-card::before {
+            content: ''; position: absolute; z-index: -1;
+            top: 0; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: min(100%, 52rem);
+            background: linear-gradient(to right,
+                rgba(250,250,250,0)    0%,
+                rgba(250,250,250,0.55) 14%,
+                rgba(250,250,250,0.55) 86%,
+                rgba(250,250,250,0)    100%);
+        }
+        html[data-theme="dark"] .player-card::before {
+            background: linear-gradient(to right,
+                rgba(14,16,19,0)    0%,
+                rgba(14,16,19,0.55) 14%,
+                rgba(14,16,19,0.55) 86%,
+                rgba(14,16,19,0)    100%);
+        }
+        html[data-theme="dark"] .hero-plate img { filter: grayscale(100%) brightness(0.5); }
+        /* The plate keeps more mid-tone than the old video did, so the
+           mono helper lines step one shade darker to hold 4.5:1 over it. */
+        .hero .freq-eyebrow,
+        .hero .freq-subtitle,
+        .hero .timer-time { color: #262626; }
+        .hero .state-text,
+        .hero .tone-note { color: #3f3f3f; }
+        html[data-theme="dark"] .hero .freq-eyebrow,
+        html[data-theme="dark"] .hero .freq-subtitle,
+        html[data-theme="dark"] .hero .timer-time { color: rgba(255,255,255,0.92); }
+        html[data-theme="dark"] .hero .state-text,
+        html[data-theme="dark"] .hero .tone-note { color: rgba(255,255,255,0.82); }
     </style>
 
     <script type="application/ld+json">
@@ -208,18 +250,33 @@
     <div class="menu-overlay" id="menuOverlay"></div>
     <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
         <nav>
-            <a href="frequencies.html" class="menu-link current">The Sessions</a>
-            <a href="book.html" class="menu-link">The Book</a>
-            <a href="index.html#insights" class="menu-link">Insights</a>
-            <a href="index.html#vision" class="menu-link">The Vision</a>
-            <a href="about.html" class="menu-link">About Echo.11</a>
+            <ul class="menu-list">
+            <li>
+                <a href="frequencies.html" class="menu-link">The Sessions</a>
+                <ul class="menu-sublist">
+                    <li><a href="frequency.html" class="menu-sublink">10 Hz &middot; Calm</a></li>
+                    <li><a href="40hz.html" class="menu-sublink current">40 Hz &middot; Focus</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="book.html" class="menu-link">The Book</a>
+            </li>
+            <li>
+                <a href="index.html#insights" class="menu-link">Insights</a>
+            </li>
+            <li>
+                <a href="index.html#vision" class="menu-link">The Vision</a>
+            </li>
+            <li>
+                <a href="about.html" class="menu-link">About Echo.11</a>
+            </li>
+            </ul>
             <div class="menu-app">
                 <span class="menu-app-title">The App
                     <span class="menu-app-badge">Coming Soon</span>
                 </span>
-                <span class="menu-app-desc">The 10Hz reset, in your pocket.</span>
+                <span class="menu-app-desc">Both sessions, in your pocket.</span>
             </div>
-
         </nav>
     </aside>
 
@@ -260,10 +317,11 @@
     <main id="main-content">
         <!-- ── HERO PLAYER ── -->
         <section class="hero">
-            <div class="hero-video">
-                <video autoplay muted loop playsinline poster="assets/images/40hz-og.jpg" id="bgVideo">
-                    <source src="assets/video/40hz-loop.mp4" type="video/mp4">
-                </video>
+            <div class="hero-video hero-plate">
+                <picture>
+                    <source srcset="assets/images/astro-eyes-open.webp" type="image/webp">
+                    <img src="assets/images/astro-eyes-open.png" alt="Portrait of an astronaut with her eyes open, looking ahead" width="1456" height="816" fetchpriority="high">
+                </picture>
             </div>
             <div class="hero-overlay"></div>
 
@@ -271,7 +329,7 @@
                 <div class="freq-eyebrow">Binaural Frequency · Gamma Wave</div>
                 <h1 class="freq-h1">
                     <span class="freq-title">40 Hz</span>
-                    <span class="freq-subtitle">— The 11-Minute Focus</span>
+                    <span class="freq-subtitle">The 11-Minute Focus</span>
                 </h1>
 
                 <!-- Timer ring with play control inside -->

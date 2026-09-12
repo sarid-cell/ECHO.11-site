@@ -29,12 +29,20 @@ footer a:focus-visible,
 .side-menu.active .menu-link {
     animation: menu-link-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
-.side-menu.active .menu-link:nth-child(1) { animation-delay: 0.10s; }
-.side-menu.active .menu-link:nth-child(2) { animation-delay: 0.16s; }
-.side-menu.active .menu-link:nth-child(3) { animation-delay: 0.22s; }
-.side-menu.active .menu-link:nth-child(4) { animation-delay: 0.28s; }
-.side-menu.active .menu-link:nth-child(5) { animation-delay: 0.34s; }
-.side-menu.active .menu-link:nth-child(6) { animation-delay: 0.40s; }
+/* The nav is a list once site-header.js rebuilds it (The Sessions carries
+   two child links), so the stagger counts list items, not anchors. */
+.side-menu.active .menu-link:nth-child(1),
+.side-menu.active li:nth-child(1) .menu-link { animation-delay: 0.10s; }
+.side-menu.active .menu-link:nth-child(2),
+.side-menu.active li:nth-child(2) .menu-link { animation-delay: 0.16s; }
+.side-menu.active .menu-link:nth-child(3),
+.side-menu.active li:nth-child(3) .menu-link { animation-delay: 0.22s; }
+.side-menu.active .menu-link:nth-child(4),
+.side-menu.active li:nth-child(4) .menu-link { animation-delay: 0.28s; }
+.side-menu.active .menu-link:nth-child(5),
+.side-menu.active li:nth-child(5) .menu-link { animation-delay: 0.34s; }
+.side-menu.active .menu-link:nth-child(6),
+.side-menu.active li:nth-child(6) .menu-link { animation-delay: 0.40s; }
 @keyframes menu-link-in {
     from { opacity: 0; transform: translateX(28px); }
 }

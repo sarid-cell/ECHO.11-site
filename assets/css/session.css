@@ -465,25 +465,29 @@ body.session-active .tone-note { opacity: 0.15; }
 /* Loop toggle — mono pill under the state line; aria-pressed drives
    the visual state so assistive tech and CSS read the same source */
 .loop-toggle {
-    font-family: var(--mono); font-size: 0.65rem;
+    font-family: var(--mono); font-size: 0.68rem;
     letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--text-light); background: none;
+    /* off is a real state, not a disabled one: full-opacity text on a
+       1px hairline. On adds the filled dot and the darker frame. */
+    color: var(--text); background: none;
     border: 1px solid var(--border);
-    padding: 0.45rem 0.95rem; margin-bottom: 2rem;
-    display: inline-flex; align-items: center; gap: 0.55rem;
-    transition: color .25s ease, border-color .25s ease;
+    padding: 0 1.1rem; min-height: 44px; margin-bottom: 2rem;
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    transition: border-color .25s ease, background .25s ease;
 }
-.loop-toggle:hover { color: var(--text); border-color: var(--text); }
+.loop-toggle:hover { border-color: var(--text); }
 .loop-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .loop-toggle .loop-ind {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--border); transition: background .25s ease, box-shadow .25s ease;
+    width: 9px; height: 9px; border-radius: 50%;
+    border: 1px solid var(--text-light); background: transparent;
+    transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
 }
-.loop-toggle[aria-pressed="true"] { color: var(--text); border-color: var(--text); }
+.loop-toggle[aria-pressed="true"] { border-color: var(--text); background: rgba(26,26,26,0.04); }
 .loop-toggle[aria-pressed="true"] .loop-ind {
-    background: var(--accent);
+    background: var(--accent); border-color: var(--accent);
     box-shadow: 0 0 8px var(--accent-dim);
 }
+html[data-theme="dark"] .loop-toggle[aria-pressed="true"] { background: rgba(255,255,255,0.06); }
 
 /* Meta row — sessions + headphones note share one line */
 .meta-row {

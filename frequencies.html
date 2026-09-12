@@ -73,24 +73,141 @@
         .hub { padding: 11rem 2.5rem 6rem; min-height: 60vh; }
         .hub-inner { max-width: 960px; margin: 0 auto; }
         .hub-title { font-size: clamp(2.6rem, 6vw, 4.5rem); font-weight: 200; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 1rem; }
-        .hub-intro { font-size: 1.05rem; color: var(--text-secondary); font-weight: 300; max-width: 36rem; margin-bottom: 4rem; }
-        .session-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-        .session-card { background: var(--bg); padding: 2.6rem 2.2rem; text-decoration: none; color: var(--text); display: block; transition: background .3s ease; }
-        .session-card:hover { background: var(--white); }
+        .hub-intro { font-size: 1.15rem; color: var(--text-secondary); font-weight: 300; max-width: 34rem; margin-bottom: 3.4rem; }
+
+        /* ── The two session cards — full-bleed plates, whole card is the link ── */
+        .session-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .session-card {
+            position: relative; display: flex; align-items: flex-end;
+            min-height: 420px; overflow: hidden;
+            text-decoration: none; color: var(--text);
+            background: var(--bg);
+        }
+        .session-card-media { position: absolute; inset: 0; z-index: 1; }
+        .session-card-media img {
+            width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+            filter: grayscale(100%);
+            transition: transform 1.2s cubic-bezier(.16,1,.3,1);
+        }
+        .session-card:hover .session-card-media img { transform: scale(1.03); }
+        /* White wash over the plate — 70% at the top, rising to 97% at the
+           bottom where the copy sits, so every line clears 4.5:1 */
+        .session-card-veil {
+            position: absolute; inset: 0; z-index: 2;
+            background: linear-gradient(
+                to top,
+                rgba(250,250,250,0.97) 0%,
+                rgba(250,250,250,0.94) 45%,
+                rgba(250,250,250,0.88) 78%,
+                rgba(250,250,250,0.70) 100%
+            );
+        }
+        .session-card-body {
+            position: relative; z-index: 3;
+            display: flex; flex-direction: column; align-items: flex-start;
+            padding: 2.4rem 2.2rem 2.2rem; width: 100%;
+        }
         .session-card-band {
             font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.2em;
-            text-transform: uppercase; color: var(--text-light); margin-bottom: 1.2rem; display: block;
+            text-transform: uppercase; color: #3f3f3f; margin-bottom: 0.9rem;
         }
-        .session-card-hz { font-family: var(--mono); font-size: clamp(2.6rem, 5vw, 3.6rem); font-weight: 600; line-height: 1; margin-bottom: 0.5rem; }
-        .session-card-name { font-size: 1.05rem; font-weight: 500; margin-bottom: 0.8rem; }
-        .session-card-desc { font-size: 0.92rem; color: var(--text-secondary); font-weight: 300; line-height: 1.75; margin-bottom: 1.4rem; }
-        .session-card-meta { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; color: var(--text-light); }
-        .session-card-cta {
-            font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
-            border-bottom: 1px solid var(--text); padding-bottom: 2px; display: inline-block; margin-top: 1.2rem;
+        .session-card-hz {
+            font-family: var(--mono); font-size: clamp(2.8rem, 5.5vw, 3.8rem);
+            font-weight: 600; line-height: 1; margin-bottom: 0.7rem; color: var(--text);
         }
+        .session-card-line {
+            font-size: 1rem; font-weight: 300; line-height: 1.6;
+            color: var(--text-secondary); margin-bottom: 1.1rem; max-width: 22rem;
+        }
+        .session-card-foot {
+            font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--text-light); margin-bottom: 1.6rem;
+        }
+        .session-card-btn {
+            font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--white); background: var(--text);
+            padding: 0 1.4rem; min-height: 46px;
+            display: inline-flex; align-items: center;
+            transition: opacity .25s ease;
+        }
+        .session-card:hover .session-card-btn { opacity: 0.82; }
+        .session-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+        /* Identity motion — the calm card breathes, the focus card sharpens.
+           Nothing here cycles faster than once per 4 seconds. */
+        .session-card-frame { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+        .session-card--calm .session-card-frame {
+            border: 1px solid var(--text);
+            animation: card-breathe 6s ease-in-out infinite;
+        }
+        @keyframes card-breathe {
+            0%, 100% { opacity: 0.4; }
+            50%      { opacity: 1; }
+        }
+        .session-card--focus .session-card-frame {
+            border: 1px solid var(--border);
+            transition: border-width .25s ease, border-color .25s ease;
+        }
+        .session-card--focus:hover .session-card-frame,
+        .session-card--focus:focus-visible .session-card-frame {
+            border-width: 2px; border-color: var(--text);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .session-card--calm .session-card-frame { animation: none; opacity: 1; }
+            .session-card-media img { transition: none; }
+            .session-card:hover .session-card-media img { transform: none; }
+        }
+
+        /* ── Which one? ── */
+        .which { margin-top: 4.5rem; }
+        .which-title {
+            font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.25em;
+            text-transform: uppercase; color: var(--text-light); font-weight: 400;
+            margin-bottom: 1.4rem;
+        }
+        .which-table { width: 100%; max-width: 40rem; border-collapse: collapse; }
+        .which-table th { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+        .which-table td {
+            border-top: 1px solid var(--border);
+            padding: 1.05rem 0; font-size: 0.98rem; font-weight: 300;
+            color: var(--text-secondary); vertical-align: middle;
+        }
+        .which-table tr:last-child td { border-bottom: 1px solid var(--border); }
+        .which-table td:last-child { text-align: right; white-space: nowrap; }
+        .which-table a {
+            color: var(--text); text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            display: inline-flex; align-items: center; min-height: 44px;
+            transition: border-color .25s ease;
+        }
+        .which-table a:hover, .which-table a:focus-visible { border-color: var(--text); }
+
+        .hub-start { margin-top: 2.6rem; font-family: var(--mono); font-size: 0.7rem;
+            letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); line-height: 1.9; }
         .hub-note { margin-top: 3rem; font-size: 0.85rem; color: var(--text-light); font-weight: 300; max-width: 40rem; line-height: 1.85; }
-        @media (max-width: 768px) { .hub { padding: 8rem 1.5rem 4rem; } }
+
+        @media (max-width: 768px) {
+            .hub { padding: 8rem 1.5rem 4rem; }
+            .session-cards { grid-template-columns: 1fr; gap: 1.2rem; }
+            .session-card { min-height: 420px; }
+            .session-card-body { padding: 2rem 1.6rem 1.8rem; }
+            .which-table td { font-size: 0.92rem; }
+            .which-table td:last-child { white-space: normal; }
+        }
+
+        /* Quiet Mode — the wash flips to the dark ground */
+        html[data-theme="dark"] .session-card-veil {
+            background: linear-gradient(
+                to top,
+                rgba(14,16,19,0.97) 0%,
+                rgba(14,16,19,0.94) 45%,
+                rgba(14,16,19,0.88) 78%,
+                rgba(14,16,19,0.70) 100%
+            );
+        }
+        html[data-theme="dark"] .session-card-btn { color: #0e1013; background: #f5f5f5; }
+        html[data-theme="dark"] .session-card-band { color: #b3b3b0; }
+        html[data-theme="dark"] .session-card--calm .session-card-frame { border-color: var(--text); }
     </style>
 
     <script type="application/ld+json">
@@ -134,8 +251,34 @@
             "@type": "ItemList",
             "@id": "https://echo11.app/frequencies.html#list",
             "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "10 Hz — The 11-Minute Reset for Anxiety", "url": "https://echo11.app/frequency.html" },
-                { "@type": "ListItem", "position": 2, "name": "40 Hz — The 11-Minute Focus", "url": "https://echo11.app/40hz.html" }
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "10 Hz — The 11-Minute Reset for Anxiety",
+                    "description": "An 11-minute 10Hz alpha binaural session for racing thoughts and nights that will not settle. Eyes closed, stereo headphones required.",
+                    "url": "https://echo11.app/frequency.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "40 Hz — The 11-Minute Focus",
+                    "description": "An 11-minute 40Hz gamma binaural session for the task you keep not starting. Eyes open, loopable for longer work blocks, stereo headphones required.",
+                    "url": "https://echo11.app/40hz.html"
+                }
+            ]
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://echo11.app/frequencies.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Which binaural beat session should I use — 10Hz or 40Hz?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Racing thoughts, can't switch off — 10 Hz. Before sleep — 10 Hz. Can't start the task — 40 Hz. Long stretch of work — 40 Hz, and loop it. New here? Start with 10 Hz. Most people feel the reset before they feel the focus."
+                    }
+                }
             ]
         },
         {
@@ -168,11 +311,33 @@
     <div class="menu-overlay" id="menuOverlay"></div>
     <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
         <nav>
-            <a href="frequencies.html" class="menu-link">The Sessions</a>
-            <a href="book.html" class="menu-link">The Book</a>
-            <a href="index.html#insights" class="menu-link">Insights</a>
-            <a href="index.html#vision" class="menu-link">The Vision</a>
-            <a href="about.html" class="menu-link">About Echo.11</a>
+            <ul class="menu-list">
+            <li>
+                <a href="frequencies.html" class="menu-link current">The Sessions</a>
+                <ul class="menu-sublist">
+                    <li><a href="frequency.html" class="menu-sublink">10 Hz &middot; Calm</a></li>
+                    <li><a href="40hz.html" class="menu-sublink">40 Hz &middot; Focus</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="book.html" class="menu-link">The Book</a>
+            </li>
+            <li>
+                <a href="index.html#insights" class="menu-link">Insights</a>
+            </li>
+            <li>
+                <a href="index.html#vision" class="menu-link">The Vision</a>
+            </li>
+            <li>
+                <a href="about.html" class="menu-link">About Echo.11</a>
+            </li>
+            </ul>
+            <div class="menu-app">
+                <span class="menu-app-title">The App
+                    <span class="menu-app-badge">Coming Soon</span>
+                </span>
+                <span class="menu-app-desc">Both sessions, in your pocket.</span>
+            </div>
         </nav>
     </aside>
 
@@ -181,26 +346,56 @@
             <div class="hub-inner">
                 <div class="freq-eyebrow">The Sessions · Generated Live</div>
                 <h1 class="hub-title">Free binaural beat sessions</h1>
-                <p class="hub-intro">Free binaural sessions, generated live in your browser — nothing to download, nothing to sign up for. Eleven minutes each. Stereo headphones required.</p>
+                <p class="hub-intro">Two sessions. Pick the one your nervous system needs right now.</p>
 
                 <div class="session-cards">
-                    <a class="session-card" href="frequency.html">
-                        <span class="session-card-band">Alpha Wave · 8–13Hz Band</span>
-                        <div class="session-card-hz">10 Hz</div>
-                        <div class="session-card-name">10 Hz · Calm — The 11-Minute Reset</div>
-                        <p class="session-card-desc">For anxious moments and nights the mind will not quiet.</p>
-                        <span class="session-card-meta">11:00 · 200Hz / 210Hz carriers · Free</span><br>
-                        <span class="session-card-cta">Play →</span>
+                    <a class="session-card session-card--calm" href="frequency.html" data-hz="10">
+                        <picture class="session-card-media">
+                            <source srcset="assets/images/astro-eyes-closed.webp" type="image/webp">
+                            <img src="assets/images/astro-eyes-closed.png" alt="Portrait of an astronaut with her eyes closed" loading="lazy" width="1456" height="816">
+                        </picture>
+                        <span class="session-card-veil" aria-hidden="true"></span>
+                        <span class="session-card-frame" aria-hidden="true"></span>
+                        <span class="session-card-body">
+                            <span class="session-card-band">Alpha · Calm</span>
+                            <span class="session-card-hz">10 Hz</span>
+                            <span class="session-card-line">For racing thoughts and nights that will not settle.</span>
+                            <span class="session-card-foot">11:00 · Eyes closed · Headphones</span>
+                            <span class="session-card-btn">Start the Reset →</span>
+                        </span>
                     </a>
-                    <a class="session-card" href="40hz.html">
-                        <span class="session-card-band">Gamma Wave · 30–80Hz Band</span>
-                        <div class="session-card-hz">40 Hz</div>
-                        <div class="session-card-name">40 Hz · Focus — The 11-Minute Focus</div>
-                        <p class="session-card-desc">For deep work — press play and start the task.</p>
-                        <span class="session-card-meta">11:00 · 200Hz / 240Hz carriers · Free</span><br>
-                        <span class="session-card-cta">Play →</span>
+                    <a class="session-card session-card--focus" href="40hz.html" data-hz="40">
+                        <picture class="session-card-media">
+                            <source srcset="assets/images/astro-eyes-open.webp" type="image/webp">
+                            <img src="assets/images/astro-eyes-open.png" alt="Portrait of an astronaut with her eyes open" loading="lazy" width="1456" height="816">
+                        </picture>
+                        <span class="session-card-veil" aria-hidden="true"></span>
+                        <span class="session-card-frame" aria-hidden="true"></span>
+                        <span class="session-card-body">
+                            <span class="session-card-band">Gamma · Focus</span>
+                            <span class="session-card-hz">40 Hz</span>
+                            <span class="session-card-line">For the task you keep not starting.</span>
+                            <span class="session-card-foot">11:00 · Eyes open · Loop available</span>
+                            <span class="session-card-btn">Start the Focus →</span>
+                        </span>
                     </a>
                 </div>
+
+                <section class="which">
+                    <h2 class="which-title">Which one?</h2>
+                    <table class="which-table">
+                        <thead>
+                            <tr><th scope="col">What you are feeling</th><th scope="col">The session</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Racing thoughts, can't switch off</td><td><a href="frequency.html" data-hz="10">10 Hz</a></td></tr>
+                            <tr><td>Before sleep</td><td><a href="frequency.html" data-hz="10">10 Hz</a></td></tr>
+                            <tr><td>Can't start the task</td><td><a href="40hz.html" data-hz="40">40 Hz</a></td></tr>
+                            <tr><td>Long stretch of work</td><td><a href="40hz.html" data-hz="40">40 Hz (loop it)</a></td></tr>
+                        </tbody>
+                    </table>
+                    <p class="hub-start">New here? Start with 10 Hz. Most people feel the reset before they feel the focus.</p>
+                </section>
 
                 <p class="hub-note">These sessions are self-care tools, not medical treatments. Each page explains what the research does — and does not — show, and carries a full disclaimer.</p>
             </div>
@@ -264,6 +459,15 @@
         }));
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape' && sideMenu.classList.contains('active')) toggleMenu();
+        });
+
+        // Which session the visitor picked — cards and the Which one? table
+        document.querySelectorAll('[data-hz]').forEach(el => {
+            el.addEventListener('click', () => {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'hub_choice', { hz: el.dataset.hz, transport_type: 'beacon' });
+                }
+            });
         });
 
         // Cursor
