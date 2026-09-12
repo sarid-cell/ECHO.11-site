@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" class="supports-dark">
+<head>
+    <meta charset="UTF-8">
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { analytics_storage: localStorage.getItem('echo11_consent') === 'granted' ? 'granted' : 'denied' });
+      gtag('js', new Date());
+      gtag('config', 'G-TP9YRD6TN8');
+      (function () {
+        var loaded = false;
+        function loadGtag() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-TP9YRD6TN8';
+          document.head.appendChild(s);
+        }
+        ['scroll', 'click', 'keydown', 'touchstart', 'mousemove'].forEach(function (ev) {
+          window.addEventListener(ev, loadGtag, { once: true, passive: true });
+        });
+        window.addEventListener('load', function () { setTimeout(loadGtag, 3000); });
+      })();
+    </script>
+    <!-- Quiet Mode bootstrap: resolve theme before first paint (no FOUC). -->
+    <script>
+    (function(){try{var t=localStorage.getItem('echo11_theme');if(t!=='dark'&&t!=='light'){var h=new Date().getHours();t=(h>=20||h<7)||matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0e1013" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/images/favicon-192.png" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/assets/images/favicon-180.png">
+    <title>Gamma waves (30–100 Hz) — what they are and what the research actually shows | ECHO.11</title>
+    <meta name="description" content="Gamma is the fastest EEG band, 30 to 100 Hz. What research associates with it, what the 40 Hz work does not show, and the free 40 Hz session.">
+    <meta name="author" content="Shira Sarid">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://echo11.app/bands/gamma.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Gamma waves (30–100 Hz) — what they are and what the research actually shows | ECHO.11">
+    <meta property="og:description" content="Gamma is the fastest EEG band, 30 to 100 Hz. What research associates with it, what the 40 Hz work does not show, and the free 40 Hz session.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://echo11.app/bands/gamma.html">
+    <meta property="og:site_name" content="ECHO.11">
+    <meta property="og:image" content="https://echo11.app/assets/images/ghost-machine.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Gamma waves (30–100 Hz) — what they are and what the research actually shows | ECHO.11">
+    <meta name="twitter:description" content="Gamma is the fastest EEG band, 30 to 100 Hz. What research associates with it, what the 40 Hz work does not show, and the free 40 Hz session.">
+    <meta name="twitter:image" content="https://echo11.app/assets/images/ghost-machine.png">
+
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/outfit-variable-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/fonts.css">
+    <link rel="stylesheet" href="/assets/css/view-transitions.css">
+    <link rel="stylesheet" href="/assets/css/quiet-mode.css">
+    <link rel="stylesheet" href="/assets/css/micro-interactions.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/assets/css/micro-interactions.css"></noscript>
+    <link rel="stylesheet" href="/assets/css/session.css">
+    <link rel="stylesheet" href="/assets/css/essay.css">
+    <link rel="stylesheet" href="/assets/css/band.css">
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Person",
+            "@id": "https://echo11.app/#shira-sarid",
+            "name": "Shira Sarid",
+            "url": "https://echo11.app/",
+            "email": "shirasarid@gmail.com"
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://echo11.app/#website",
+            "name": "ECHO.11",
+            "url": "https://echo11.app/",
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "https://echo11.app/bands/gamma.html#webpage",
+            "url": "https://echo11.app/bands/gamma.html",
+            "name": "Gamma waves (30–100 Hz) — what they are and what the research actually shows | ECHO.11",
+            "description": "Gamma is the fastest EEG band, 30 to 100 Hz. What research associates with it, what the 40 Hz work does not show, and the free 40 Hz session.",
+            "inLanguage": "en",
+            "isPartOf": {
+                "@id": "https://echo11.app/#website"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "mainEntity": {
+                "@id": "https://echo11.app/bands/gamma.html#faq"
+            }
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://echo11.app/bands/gamma.html#faq",
+            "inLanguage": "en",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What are gamma waves?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Gamma covers roughly 30 to 100 Hz, the fastest conventional band. It is low in amplitude and hard to record cleanly, because jaw and eye muscle activity produces signal in the same range."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does 40 Hz audio treat Alzheimer's disease?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "No. The 40 Hz work by Iaccarino and colleagues (2016) uses combined light and sound in laboratory animal models. An eleven-minute audio session is not that research and makes no claim related to it."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Which ECHO.11 session uses gamma?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "The free 40 Hz session, eleven minutes or looped, eyes open, stereo headphones required."
+                    }
+                }
+            ]
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://echo11.app/bands/gamma.html#breadcrumbs",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://echo11.app/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "The Bands",
+                    "item": "https://echo11.app/bands/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Gamma waves"
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="cursor-dot"></div>
+
+    <header>
+        <div class="header-inner">
+            <a href="/" class="logo">ECHO.11</a>
+            <div class="header-right">
+                <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
+        <nav>
+            <ul class="menu-list">
+            <li>
+                <a href="/frequencies.html" class="menu-link">The Sessions</a>
+                <ul class="menu-sublist">
+                    <li><a href="/frequency.html" class="menu-sublink">10 Hz &middot; Calm</a></li>
+                    <li><a href="/40hz.html" class="menu-sublink">40 Hz &middot; Focus</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/book.html" class="menu-link">The Book</a>
+            </li>
+            <li>
+                <a href="/index.html#insights" class="menu-link">Insights</a>
+                <ul class="menu-sublist">
+                    <li><a href="/essays/" class="menu-sublink">Field Notes</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/index.html#vision" class="menu-link">The Vision</a>
+            </li>
+            <li>
+                <a href="/about.html" class="menu-link">About Echo.11</a>
+            </li>
+            </ul>
+            <div class="menu-app">
+                <span class="menu-app-title">The App
+                    <span class="menu-app-badge">Coming Soon</span>
+                </span>
+                <span class="menu-app-desc">Both sessions, in your pocket.</span>
+            </div>
+        </nav>
+    </aside>
+
+    <main id="main-content">
+        <article class="band-page">
+            <header class="band-hero">
+                <div class="band-hero-plate">
+                    <picture>
+                        <source srcset="/assets/images/astro-eyes-open.webp" type="image/webp">
+                        <img src="/assets/images/astro-eyes-open.png" alt="Portrait of an astronaut with her eyes open, looking ahead" width="1456" height="816" fetchpriority="high">
+                    </picture>
+                </div>
+                <div class="band-hero-overlay"></div>
+                <div class="band-hero-inner">
+                    <div class="essay-eyebrow"><a href="/bands/">The Bands</a><span>Gamma</span></div>
+                    <h1>Gamma waves (30&ndash;100 Hz) &mdash; what they are and what the research actually shows</h1>
+                    <div class="band-spec">
+                        <span>30&ndash;100 Hz</span>
+                        <span>Focus</span>
+                        <span>Session: 40 Hz &middot; The 11-Minute Focus</span>
+                    </div>
+                    <!-- Band signature: 1.25 seconds of the gamma rhythm, drawn at 32 Hz. -->
+                    <svg class="band-sig" viewBox="0 0 600 56" preserveAspectRatio="none"
+                         aria-hidden="true" focusable="false">
+                        <path d="M0,28 Q3.75,18 7.5,28 Q11.25,38 15,28 Q18.75,18 22.5,28 Q26.25,38 30,28 Q33.75,18 37.5,28 Q41.25,38 45,28 Q48.75,18 52.5,28 Q56.25,38 60,28 Q63.75,18 67.5,28 Q71.25,38 75,28 Q78.75,18 82.5,28 Q86.25,38 90,28 Q93.75,18 97.5,28 Q101.25,38 105,28 Q108.75,18 112.5,28 Q116.25,38 120,28 Q123.75,18 127.5,28 Q131.25,38 135,28 Q138.75,18 142.5,28 Q146.25,38 150,28 Q153.75,18 157.5,28 Q161.25,38 165,28 Q168.75,18 172.5,28 Q176.25,38 180,28 Q183.75,18 187.5,28 Q191.25,38 195,28 Q198.75,18 202.5,28 Q206.25,38 210,28 Q213.75,18 217.5,28 Q221.25,38 225,28 Q228.75,18 232.5,28 Q236.25,38 240,28 Q243.75,18 247.5,28 Q251.25,38 255,28 Q258.75,18 262.5,28 Q266.25,38 270,28 Q273.75,18 277.5,28 Q281.25,38 285,28 Q288.75,18 292.5,28 Q296.25,38 300,28 Q303.75,18 307.5,28 Q311.25,38 315,28 Q318.75,18 322.5,28 Q326.25,38 330,28 Q333.75,18 337.5,28 Q341.25,38 345,28 Q348.75,18 352.5,28 Q356.25,38 360,28 Q363.75,18 367.5,28 Q371.25,38 375,28 Q378.75,18 382.5,28 Q386.25,38 390,28 Q393.75,18 397.5,28 Q401.25,38 405,28 Q408.75,18 412.5,28 Q416.25,38 420,28 Q423.75,18 427.5,28 Q431.25,38 435,28 Q438.75,18 442.5,28 Q446.25,38 450,28 Q453.75,18 457.5,28 Q461.25,38 465,28 Q468.75,18 472.5,28 Q476.25,38 480,28 Q483.75,18 487.5,28 Q491.25,38 495,28 Q498.75,18 502.5,28 Q506.25,38 510,28 Q513.75,18 517.5,28 Q521.25,38 525,28 Q528.75,18 532.5,28 Q536.25,38 540,28 Q543.75,18 547.5,28 Q551.25,38 555,28 Q558.75,18 562.5,28 Q566.25,38 570,28 Q573.75,18 577.5,28 Q581.25,38 585,28 Q588.75,18 592.5,28 Q596.25,38 600,28"/>
+                    </svg>
+                </div>
+            </header>
+            <div class="essay">
+            <div class="essay-inner">
+                <div class="essay-body">
+                <h2>What the band is</h2>
+                <p>Gamma covers roughly <strong>30 to 100 Hz</strong>, the fastest of the conventional bands. It is low in amplitude and hard to record cleanly from the scalp, because muscle activity from the jaw and eyes produces signal in the same range &mdash; a long-standing problem in the literature and a reason to read gamma findings carefully.</p>
+
+                <h2>What research associates with it</h2>
+                <p>Gamma synchrony has been proposed as a mechanism for binding separate features into a single percept &mdash; the temporal correlation hypothesis, reviewed by Singer and Gray (1995, <em>Annual Review of Neuroscience</em>). It is an influential hypothesis rather than a settled account.</p>
+                <p>In mouse models, 40 Hz sensory stimulation has been shown to drive gamma activity and to reduce amyloid load (Iaccarino and colleagues, 2016, <em>Nature</em>). That work uses combined light and sound in a laboratory, in mice; human trials are ongoing and it says nothing about an audio track in headphones.</p>
+                <p>For attention specifically, the picture is mixed. Colzato, Barone, Sellaro and Hommel (2017, <em>Psychological Research</em>) reported effects on attentional focusing, while Reedijk, Bolders and Hommel (2013, <em>Frontiers in Human Neuroscience</em>) found the response depended on the listener's baseline state. The evidence for focus is weaker than the evidence for anxiety.</p>
+
+                <h2>What it is not</h2>
+                <p>Gamma is not a cognitive enhancer you can switch on, and a 40 Hz audio session is not the MIT work. That research combines light and sound in a clinical context and is about disease pathology in animal models; this is an eleven-minute tone for a person trying to start a task.</p>
+                <p>It is also not a treatment for Alzheimer's disease, and nothing on this site should be read as suggesting otherwise.</p>
+
+                <h2>What listeners report</h2>
+                <p>Individual response varies, and some people notice nothing. Most commonly reported:</p>
+                    <div class="feel-tags">
+                        <span class="feel-tag">Getting into the task faster</span>
+                        <span class="feel-tag">Fewer distractions</span>
+                        <span class="feel-tag">Steady alertness</span>
+                        <span class="feel-tag">A sense of continuity</span>
+                    </div>
+
+                <h2>Listen</h2>
+                <a class="band-listen" href="/40hz.html">
+                    <span class="band-listen-label">Listen &mdash; 40 Hz &middot; The 11-Minute Focus</span>
+                    <span class="band-listen-line">Eleven minutes at 40 Hz, low in the gamma band. Eyes open, loopable, stereo headphones.</span>
+                </a>
+                </div>
+
+                <nav class="band-nav" aria-label="The five bands">
+                    <a href="/bands/delta.html">Delta</a>
+                    <a href="/bands/theta.html">Theta</a>
+                    <a href="/bands/alpha.html">Alpha</a>
+                    <a href="/bands/beta.html">Beta</a>
+                    <a href="/bands/gamma.html" aria-current="page">Gamma</a>
+                </nav>
+
+                <div class="essay-foot">
+                    <a href="/bands/">All bands</a>
+                    <a href="/frequencies.html">The sessions</a>
+                    <a href="/essays/">Field notes</a>
+                </div>
+            </div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">ECHO.11</div>
+            <div class="footer-contact">
+                <p class="footer-h">Let's connect in the noise</p>
+                <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
+            </div>
+            <div class="footer-col">
+                <p class="footer-h">Channels</p>
+                <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
+                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer">Pinterest</a>
+            </div>
+            <div class="footer-col">
+                <p class="footer-h">Explore</p>
+                <a href="/about.html">Strategy</a>
+                <a href="/essays/">Field Notes</a>
+                <a href="/frequencies.html">The Sessions</a>
+            </div>
+            <div class="footer-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="footer-legal">
+            <p>&copy; 2026 ECHO.11 by Shira Sarid. All rights reserved.</p>
+            <div class="footer-legal-links">
+                <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer">CTRL+HUMAN podcast — archive</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/accessibility.html">Accessibility</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
+        <span>We use Google Analytics to understand site usage. <a href="/privacy.html" style="color:#fff;text-decoration:underline;">Read the privacy policy</a></span>
+        <div style="display:flex;gap:8px;">
+            <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;">Accept</button>
+            <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:4px;cursor:pointer;">Decline</button>
+        </div>
+    </div>
+    <script>
+        (function(){
+            var consent = localStorage.getItem('echo11_consent');
+            var banner = document.getElementById('cookieConsent');
+            if (consent === 'granted' || consent === 'denied') { banner.style.display = 'none'; return; }
+            document.getElementById('cookieAccept').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'granted');
+                if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+                banner.style.display = 'none';
+            });
+            document.getElementById('cookieDecline').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'denied');
+                banner.style.display = 'none';
+            });
+        })();
+    </script>
+    <script>
+        // Menu
+        const hamburger = document.getElementById('hamburger');
+        const sideMenu  = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        function toggleMenu() {
+            const isOpen = sideMenu.classList.contains('active');
+            hamburger.classList.toggle('active');
+            sideMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', !isOpen);
+            sideMenu.setAttribute('aria-hidden', isOpen);
+            if (isOpen) { sideMenu.setAttribute('inert', ''); } else { sideMenu.removeAttribute('inert'); }
+            document.body.style.overflow = isOpen ? '' : 'hidden';
+        }
+        hamburger.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && sideMenu.classList.contains('active')) toggleMenu();
+        });
+
+        // Cursor
+        const dot = document.querySelector('.cursor-dot');
+        if (dot && window.innerWidth > 768) {
+            document.addEventListener('mousemove', e => { dot.style.left = e.clientX+'px'; dot.style.top = e.clientY+'px'; });
+            document.querySelectorAll('a,button').forEach(el => {
+                el.addEventListener('mouseenter', ()=>dot.classList.add('hover'));
+                el.addEventListener('mouseleave', ()=>dot.classList.remove('hover'));
+            });
+        }
+    </script>
+    <script src="/assets/js/site-header.js" defer></script>
+    <script src="/assets/js/quiet-mode.js" defer></script>
+    <script src="/assets/js/micro-interactions.js" defer></script>
+    <script src="/assets/js/echo-ripple.js" defer></script>
+    <script src="/assets/js/a11y-widget.js" defer></script>
+    <!-- Vercel Web Analytics — cookieless pageview beacon, served same-origin -->
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

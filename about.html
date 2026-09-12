@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <!-- Google tag (gtag.js) -->
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -28,8 +29,6 @@
         window.addEventListener('load', function () { setTimeout(loadGtag, 3000); });
       })();
     </script>
-
-    <meta charset="UTF-8">
     <!-- Quiet Mode bootstrap: resolve theme before first paint (no FOUC).
          Stored choice -> night hours (20:00-07:00) -> system preference. -->
     <script>
@@ -250,7 +249,7 @@
             display: block;
         }
 
-        .a11y-menu h2 {
+        .a11y-menu .a11y-title {
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 0.75rem;
@@ -914,6 +913,9 @@
             </li>
             <li>
                 <a href="index.html#insights" class="menu-link">Insights</a>
+                <ul class="menu-sublist">
+                    <li><a href="/essays/" class="menu-sublink">Field Notes</a></li>
+                </ul>
             </li>
             <li>
                 <a href="index.html#vision" class="menu-link">The Vision</a>
@@ -1049,7 +1051,7 @@
             </svg>
         </button>
         <div class="a11y-menu" id="a11yMenu">
-            <h2>♿ Accessibility</h2>
+            <p class="a11y-title">Accessibility</p>
             <button class="a11y-btn" data-mode="a11y-large-text">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg>
                 Larger Text

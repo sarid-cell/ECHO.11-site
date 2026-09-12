@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <!-- Google tag (gtag.js) -->
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -29,8 +30,6 @@
     window.addEventListener('load', function () { setTimeout(loadGtag, 3000); });
   })();
 </script>
-    
-    <meta charset="UTF-8">
     <!-- Quiet Mode bootstrap: resolve theme before first paint (no FOUC).
          Stored choice -> night hours (20:00-07:00) -> system preference. -->
     <script>
@@ -203,10 +202,22 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --section-y: 6rem;
+            --section-x: 2.5rem;
+        }
+        @media (max-width: 768px) {
+            :root { --section-y: 4rem; --section-x: 1.5rem; }
+        }
+
         html {
-            scroll-behavior: smooth;
             font-size: 18px;
             overflow-x: hidden;
+        }
+        /* Anchor targets clear the fixed bar; scroll-padding-top comes
+           from site-header.js, which owns the bar's height. */
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
         }
 
         body {
@@ -304,7 +315,7 @@
             display: block;
         }
 
-        .a11y-menu h2 {
+        .a11y-menu .a11y-title {
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 0.75rem;
@@ -449,8 +460,10 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(250, 250, 250, 0.95);
-            backdrop-filter: blur(10px);
+            /* site-header.js owns the surface: transparent over the hero,
+               the opaque page ground past it. No blur — the scrolled bar
+               is fully opaque, so it would composite for nothing. */
+            background: var(--bg);
             border-bottom: 1px solid var(--border);
         }
 
@@ -625,7 +638,8 @@
 
         /* Hero - Full width background with text overlay */
         .hero {
-            min-height: 100vh;
+            min-height: 88vh;           /* fallback for browsers without svh */
+            min-height: 88svh;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -735,26 +749,69 @@
             line-height: 1.9;
         }
 
+        /* Scroll cue — the only thing telling a first-time visitor
+           the page continues. Opacity only; no motion to disable. */
+        .hero-cue {
+            display: inline-block; margin-top: 2.2rem;
+            font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--text-secondary); text-decoration: none;
+            /* 0.75 over the hero plate dropped the effective contrast under
+               4.5:1; 0.85 on the darker token clears it and still reads as
+               a quiet cue. */
+            opacity: 0.85; transition: opacity 1.2s ease, color .3s ease;
+        }
+        .hero-cue:hover, .hero-cue:focus-visible { opacity: 1; color: var(--text); }
+
         .hero-ctas {
-            display: flex; align-items: center; gap: 1.6rem;
+            display: flex; align-items: stretch; gap: 1rem;
             flex-wrap: wrap; margin-bottom: 2.4rem;
         }
-        .hero-cta-primary {
-            font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem;
+        /* Both CTAs are controls of the same optical height: the secondary
+           was a 25px underlined link, under any reasonable touch target. */
+        .hero-cta-primary,
+        .hero-cta-secondary {
+            font-family: 'IBM Plex Mono', monospace;
             letter-spacing: 0.08em; text-transform: uppercase;
+            text-decoration: none; min-height: 48px;
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+        .hero-cta-primary {
+            font-size: 0.92rem; font-weight: 500;
             background: var(--text); color: var(--bg);
-            text-decoration: none; padding: 1rem 1.7rem;
+            border: 1px solid var(--text);
+            padding: 1.1rem 2rem;
             transition: opacity .25s ease;
         }
         .hero-cta-primary:hover { opacity: 0.85; }
         .hero-cta-secondary {
-            font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
-            letter-spacing: 0.08em; text-transform: uppercase;
-            color: var(--text-secondary); text-decoration: none;
-            border-bottom: 1px solid var(--border); padding-bottom: 2px;
-            transition: color .25s ease, border-color .25s ease;
+            font-size: 0.82rem;
+            color: var(--text); background: transparent;
+            border: 1px solid rgba(26, 26, 26, 0.35);
+            padding: 0.95rem 1.5rem;
+            transition: border-color .25s ease;
         }
-        .hero-cta-secondary:hover { color: var(--text); border-color: var(--text); }
+        .hero-cta-secondary:hover,
+        .hero-cta-secondary:focus-visible { border-color: var(--text); }
+        html[data-theme="dark"] .hero-cta-secondary { border-color: rgba(233, 233, 231, 0.35); }
+
+        /* One visible focus ring for every control in the hero and the
+           bands row. 2px of --text at 3px offset reads on the light plate;
+           the dark theme flips --text to near-white, so it reads there too. */
+        .hero-cta-primary:focus-visible,
+        .hero-cta-secondary:focus-visible,
+        .hero-cue:focus-visible,
+        .hero-content a:focus-visible,
+        .band-card:focus-visible,
+        .more-articles-btn:focus-visible {
+            outline: 2px solid var(--text);
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 640px) {
+            .hero-ctas { flex-direction: column; align-items: stretch; gap: 1rem; }
+            .hero-cta-primary, .hero-cta-secondary { width: 100%; }
+        }
 
         .hero-doors {
             display: flex;
@@ -842,6 +899,7 @@
         @media (max-width: 768px) {
             .hero {
                 min-height: 90vh;
+                min-height: 90svh;
             }
             
             .hero-content {
@@ -856,6 +914,7 @@
         @media (max-width: 480px) {
             .hero {
                 min-height: 85vh;
+                min-height: 85svh;
             }
             
             .hero h1 {
@@ -867,12 +926,19 @@
         .reveal {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 0.45s ease, transform 0.45s ease;
         }
 
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Content already on screen at first paint has nothing to reveal:
+           it arrives at full opacity with no transition. That also stops
+           contrast tooling from sampling a half-faded colour. */
+        .reveal.instant, .reveal-lines.instant .reveal-line {
+            transition: none;
         }
 
         .reveal-lines .reveal-line {
@@ -893,8 +959,10 @@
         }
 
         /* Sections */
+        /* Section rhythm comes from two custom properties, so every
+           section keeps the same vertical beat at every width. */
         section {
-            padding: 5rem 2.5rem;
+            padding: var(--section-y) var(--section-x);
             max-width: 1600px;
             margin: 0 auto;
         }
@@ -910,7 +978,6 @@
 
         /* Vision */
         .sessions-home {
-            padding: 5rem 2.5rem;
             border-top: 1px solid var(--border);
             background: var(--bg);
         }
@@ -946,7 +1013,6 @@
             border-bottom: 1px solid var(--text); padding-bottom: 2px;
             display: inline-block;
         }
-        @media (max-width: 768px) { .sessions-home { padding: 3.5rem 1.5rem; } }
 
         .vision {
             border-top: 1px solid var(--border);
@@ -1003,10 +1069,8 @@
         }
 
         /* Pillars */
-        .pillars {
-            border-top: 1px solid var(--border);
-        }
-        .pillars .section-label { margin-bottom: 2rem; }
+        /* .pillars is gone: the three columns now sit inside .vision */
+        .vision .pillars-grid { margin: 3.5rem 0 1rem; }
 
         .pillars-grid {
             display: grid;
@@ -1031,11 +1095,11 @@
         }
 
         /* Insights */
+        /* No top border: the white ground already separates it from the
+           sessions block above. */
         .insights {
-            border-top: 1px solid var(--border);
             background: var(--white);
             max-width: 100%;
-            padding: 5rem 2.5rem;
         }
 
         .insights-inner {
@@ -1098,7 +1162,7 @@
             font-size: 1rem;
             font-weight: 400;
             letter-spacing: 0.02em;
-            transition: all 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
             border: 2px solid var(--text);
         }
 
@@ -1118,107 +1182,45 @@
         }
 
         /* Latest Article from Substack (RSS) */
-        .latest-article {
-            margin-top: 4rem;
-            padding-top: 3rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .latest-article-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 2rem;
-        }
-
-        .latest-article-header h3 {
-            font-size: 1rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-light);
-        }
-
-        .latest-badge {
-            background: var(--text);
-            color: var(--white);
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 0.25rem 0.6rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .latest-article-card {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 3rem;
-            align-items: center;
+        /* The bands index — hairline cards, no imagery, so the row reads
+           as a directory rather than competing with the session cards. */
+        /* No top border either: it sits on --bg under the white Insights. */
+        .bands {
             background: var(--bg);
-            padding: 2.5rem;
-            border: 1px solid var(--border);
-            transition: box-shadow 0.3s ease;
         }
-
-        .latest-article-card:hover {
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        .bands-inner { max-width: 1100px; margin: 0 auto; }
+        .bands-line {
+            font-size: 1.05rem; font-weight: 300; line-height: 1.7;
+            color: var(--text-secondary); max-width: 34rem; margin-bottom: 2.2rem;
         }
-
-        .latest-article-image {
-            aspect-ratio: 16/10;
-            overflow: hidden;
-            background: var(--border);
+        .bands-row {
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
+            background: var(--border); border: 1px solid var(--border);
         }
-
-        .latest-article-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+        .band-card {
+            display: flex; flex-direction: column; gap: 0.5rem;
+            padding: 1.6rem 1.2rem; min-height: 132px;
+            background: var(--bg); color: var(--text); text-decoration: none;
+            transition: background .25s ease;
         }
-
-        .latest-article-card:hover .latest-article-image img {
-            transform: scale(1.05);
+        .band-card:hover { background: var(--white); }
+        .band-name {
+            font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem;
+            letter-spacing: 0.18em; text-transform: uppercase; color: var(--text);
         }
-
-        .latest-article-content h4 {
-            font-size: 1.6rem;
-            font-weight: 500;
-            line-height: 1.3;
-            margin-bottom: 1rem;
-            letter-spacing: -0.01em;
+        .band-hz {
+            font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
+            letter-spacing: 0.08em; color: var(--text-light);
         }
-
-        .latest-article-content .excerpt {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            font-weight: 300;
+        .band-state {
+            font-size: 0.95rem; font-weight: 300; color: var(--text-secondary);
+            margin-top: auto;
         }
-
-        .latest-article-content .date {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-        }
-
-        .latest-article-content .read-more {
-            font-weight: 500;
-        }
-
-        .latest-article-loading {
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-light);
-        }
-
-        @media (max-width: 900px) {
-            .latest-article-card {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                padding: 1.5rem;
-            }
+        @media (max-width: 768px) {
+            .bands-row { grid-template-columns: repeat(2, 1fr); }
+            .band-card { min-height: 116px; }
+            /* five cards in a 2-column grid leave a hole; gamma takes the row */
+            .band-card:last-child { grid-column: 1 / -1; }
         }
 
         .article-card {
@@ -1454,10 +1456,6 @@
                 padding: 1rem 1.5rem;
             }
 
-            section {
-                padding: 4rem 1.5rem;
-            }
-
             .hero-content {
                 padding: 0 1.5rem 3rem;
             }
@@ -1564,7 +1562,7 @@
 
     <main id="main-content">
         <!-- Hero -->
-        <section class="hero" id="home">
+        <section class="hero" id="home" data-hero="light">
             <div class="hero-background">
                 <picture><source srcset="assets/images/hero.webp" type="image/webp"><img src="assets/images/hero.png" alt="Futuristic figure in flowing white garments" fetchpriority="high"></picture>
             </div>
@@ -1580,6 +1578,7 @@
                     <a href="40hz.html" class="hero-cta-secondary">or sharpen focus with 40Hz →</a>
                 </div>
                 <p class="hero-summary reveal">ECHO.11 is two things in one place. A free 10Hz frequency session for the moments a nervous system will not settle, and a body of writing on where consumer psychology and generative AI actually meet. Both come from the same question: what makes a mind resilient when the noise does not stop.</p>
+                <a href="#sessions" class="hero-cue">The Sessions &darr;</a>
             </div>
         </section>
 
@@ -1617,7 +1616,7 @@
                         <div class="article-content">
                             <h3>The Ghost in the Machine: Botox, AI, and the Augmented Authenticity Paradox</h3>
                             <p class="subtitle">Why Using AI Feels Like Cheating—even When It Isn't</p>
-                            <a href="https://substack.com/home/post/p-186104472" target="_blank" rel="noopener noreferrer" class="read-more">Read: The Ghost in the Machine</a>
+                            <a href="/essays/ghost-in-the-machine.html" class="read-more">Read: The Ghost in the Machine</a>
                         </div>
                         <div class="article-image">
                             <picture><source srcset="assets/images/ghost-machine.webp" type="image/webp"><img src="assets/images/ghost-machine.png" alt="Digital portrait with fragmented glass and data overlay" loading="lazy"></picture>
@@ -1628,7 +1627,7 @@
                         <div class="article-content">
                             <h3>AI Gave Us Unlimited Tools. So Why Are We Still Stuck?</h3>
                             <p class="subtitle">Because belief, not technology, has become the real bottleneck in decision-making, growth, and identity.</p>
-                            <a href="https://substack.com/home/post/p-186866209" target="_blank" rel="noopener noreferrer" class="read-more">Read: AI Gave Us Unlimited Tools</a>
+                            <a href="/essays/unlimited-tools.html" class="read-more">Read: AI Gave Us Unlimited Tools</a>
                         </div>
                         <div class="article-image">
                             <picture><source srcset="assets/images/unlimited-tools.webp" type="image/webp"><img src="assets/images/unlimited-tools.png" alt="White figure with geometric neural network lines" loading="lazy"></picture>
@@ -1636,36 +1635,50 @@
                     </article>
                 </div>
                 
-                <!-- Latest Article from Substack (Dynamic) -->
-                <div class="latest-article reveal" id="latestArticle">
-                    <div class="latest-article-header">
-                        <span class="latest-badge">New</span>
-                        <h3>Latest from Substack</h3>
-                    </div>
-                    <div class="latest-article-loading" id="latestLoading">
-                        Loading latest article...
-                    </div>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="latest-article-card" id="latestCard" style="display: none; text-decoration: none; color: inherit;">
-                        <div class="latest-article-image">
-                            <img alt="" id="latestImage" loading="lazy">
-                        </div>
-                        <div class="latest-article-content">
-                            <p class="date" id="latestDate"></p>
-                            <h4 id="latestTitle"></h4>
-                            <p class="excerpt" id="latestExcerpt"></p>
-                            <span class="read-more">Read Full Article</span>
-                        </div>
-                    </a>
-                </div>
-                
                 <!-- More Articles CTA -->
                 <div class="more-articles reveal">
                     <p>Explore more thoughts on AI, psychology, and the future of human potential.</p>
-                    <a href="https://shirasarid.substack.com/" target="_blank" rel="noopener noreferrer" class="more-articles-btn">
-                        View All Articles
+                    <a href="/essays/" class="more-articles-btn">
+                        All field notes
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- The bands — an index row, not a nav. Cards are hairline only:
+             no images, so the row stays quiet next to the session cards. -->
+        <section class="bands" id="bands">
+            <div class="bands-inner">
+                <h2 class="section-label reveal">The Bands</h2>
+                <p class="bands-line reveal">Five frequency bands, what the research says about each, and what it does not.</p>
+                <div class="bands-row reveal">
+                    <a class="band-card" href="/bands/delta.html">
+                        <span class="band-name">Delta</span>
+                        <span class="band-hz">0.5&ndash;4 Hz</span>
+                        <span class="band-state">Sleep</span>
+                    </a>
+                    <a class="band-card" href="/bands/theta.html">
+                        <span class="band-name">Theta</span>
+                        <span class="band-hz">4&ndash;8 Hz</span>
+                        <span class="band-state">Drift</span>
+                    </a>
+                    <a class="band-card" href="/bands/alpha.html">
+                        <span class="band-name">Alpha</span>
+                        <span class="band-hz">8&ndash;13 Hz</span>
+                        <span class="band-state">Calm</span>
+                    </a>
+                    <a class="band-card" href="/bands/beta.html">
+                        <span class="band-name">Beta</span>
+                        <span class="band-hz">13&ndash;30 Hz</span>
+                        <span class="band-state">Alert</span>
+                    </a>
+                    <a class="band-card" href="/bands/gamma.html">
+                        <span class="band-name">Gamma</span>
+                        <span class="band-hz">30&ndash;100 Hz</span>
+                        <span class="band-state">Focus</span>
                     </a>
                 </div>
             </div>
@@ -1683,25 +1696,25 @@
                 <picture><source srcset="assets/images/astro-eyes-closed.webp" type="image/webp"><img src="assets/images/astro-eyes-closed.png" alt="Close-up portrait of a woman astronaut, eyes closed" loading="lazy"></picture>
                 <picture class="awaken-open"><source srcset="assets/images/astro-eyes-open.webp" type="image/webp"><img src="assets/images/astro-eyes-open.png" alt="Close-up portrait of woman astronaut, eyes opening as you scroll" loading="lazy"></picture>
             </div>
-        </section>
 
-        <!-- Pillars -->
-        <section class="pillars">
-            <h2 class="section-label reveal">The approach</h2>
-            <div class="pillars-grid">
-                <div class="pillar reveal">
+            <!-- The approach folded in, and seated between the two portraits:
+                 the cross-fade plate closes the Vision text, the three columns
+                 keep it from touching the footer plate. -->
+            <div class="pillars-grid reveal">
+                <div class="pillar">
                     <h3>The Human Edge</h3>
                     <p>Technology is code; intuition is the spark.</p>
                 </div>
-                <div class="pillar reveal">
+                <div class="pillar">
                     <h3>Generative AI</h3>
                     <p>AI as an instrument of precision and focus, not just output.</p>
                 </div>
-                <div class="pillar reveal">
+                <div class="pillar">
                     <h3>Future-Proof Strategy</h3>
                     <p>Algorithms change daily; human nature does not.</p>
                 </div>
             </div>
+
         </section>
 
     </main>
@@ -1716,23 +1729,22 @@
             <div class="footer-brand">ECHO.11</div>
             
             <div class="footer-contact">
-                <h2>Let's connect in the noise</h2>
+                <p class="footer-h">Let's connect in the noise</p>
                 <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
             </div>
             
             <div class="footer-column">
-                <h2>Channels</h2>
+                <p class="footer-h">Channels</p>
                 <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
                 <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
                 <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer">Pinterest</a>
-                <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
             </div>
             
             <div class="footer-column">
-                <h2>Signals</h2>
-                <a href="about.html">Strategy</a>
-                <a href="#insights">Psychology</a>
-                <a href="https://shirasarid.substack.com/" target="_blank" rel="noopener noreferrer">AI Tools</a>
+                <p class="footer-h">Explore</p>
+                <a href="/about.html">Strategy</a>
+                <a href="/essays/">Field Notes</a>
+                <a href="/frequencies.html">The Sessions</a>
             </div>
             
             <div class="footer-icon">
@@ -1745,6 +1757,7 @@
         <div class="footer-legal">
             <p>© 2026 ECHO.11 by Shira Sarid. All rights reserved.</p>
             <div class="footer-legal-links">
+                <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer">CTRL+HUMAN podcast — archive</a>
                 <a href="privacy.html">Privacy Policy</a>
                 <a href="accessibility.html">Accessibility</a>
             </div>
@@ -1759,7 +1772,7 @@
             </svg>
         </button>
         <div class="a11y-menu" id="a11yMenu" role="menu" aria-label="Accessibility options">
-            <h2>♿ Accessibility</h2>
+            <p class="a11y-title">Accessibility</p>
             <button class="a11y-btn" data-mode="a11y-large-text" role="menuitem">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
@@ -1830,15 +1843,22 @@
 
         revealElements.forEach(el => observer.observe(el));
 
+        // Anything in the first viewport is shown at once, without the fade
+        revealElements.forEach(el => {
+            if (el.getBoundingClientRect().top < window.innerHeight) {
+                el.classList.add('instant', 'visible');
+            }
+        });
+
         window.addEventListener('load', () => {
             revealElements.forEach(el => {
                 const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight) el.classList.add('visible');
+                if (rect.top < window.innerHeight) el.classList.add('instant', 'visible');
             });
         });
 
         // Fallback so off-screen sections aren't left at opacity:0 for crawlers/non-scrolling renders
-        setTimeout(() => revealElements.forEach(el => el.classList.add('visible')), 2500);
+        setTimeout(() => revealElements.forEach(el => el.classList.add('instant', 'visible')), 2500);
 
         // Custom Cursor Dot
         const cursorDot = document.querySelector('.cursor-dot');
@@ -1877,115 +1897,6 @@
                 }
             });
         }
-
-        // Fetch Latest Article from Substack RSS
-        // Robust version: handles API rate-limit responses (status !== 'ok'),
-        // adds a fetch timeout, caches the last good result in localStorage (6h TTL),
-        // and falls back to a static Substack link card so "Loading..." can never get stuck.
-        async function fetchLatestArticle() {
-            const RSS_URL = 'https://shirasarid.substack.com/feed';
-            const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
-            const CACHE_KEY = 'echo11LatestArticle';
-            const CACHE_TTL = 6 * 60 * 60 * 1000; // 6 hours
-
-            const loading = document.getElementById('latestLoading');
-            const card = document.getElementById('latestCard');
-            const title = document.getElementById('latestTitle');
-            const excerpt = document.getElementById('latestExcerpt');
-            const date = document.getElementById('latestDate');
-            const image = document.getElementById('latestImage');
-
-            function readCache() {
-                try {
-                    return JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
-                } catch (e) { return null; }
-            }
-
-            function writeCache(post) {
-                try {
-                    localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), post: post }));
-                } catch (e) { /* private mode / storage full — non-critical */ }
-            }
-
-            function renderPost(latestPost) {
-                // Format date
-                const postDate = new Date(latestPost.pubDate);
-                date.textContent = postDate.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-
-                // Extract excerpt (strip HTML and limit length)
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = latestPost.description || latestPost.content || '';
-                let excerptText = tempDiv.textContent || tempDiv.innerText || '';
-                excerptText = excerptText.substring(0, 180).trim() + '...';
-
-                // Get thumbnail image
-                let thumbnailUrl = latestPost.thumbnail || latestPost.enclosure?.link || '';
-                if (!thumbnailUrl) {
-                    const imgMatch = latestPost.content?.match(/<img[^>]+src="([^">]+)"/);
-                    if (imgMatch) thumbnailUrl = imgMatch[1];
-                }
-
-                // Populate card
-                title.textContent = latestPost.title;
-                excerpt.textContent = excerptText;
-                card.href = latestPost.link;
-
-                if (thumbnailUrl) {
-                    image.src = thumbnailUrl;
-                    image.alt = latestPost.title;
-                    image.parentElement.style.display = '';
-                } else {
-                    image.parentElement.style.display = 'none';
-                }
-
-                loading.style.display = 'none';
-                card.style.display = 'grid';
-            }
-
-            function renderFallback() {
-                // Feed failed and no cache: hide the whole block rather than
-                // showing a loading line or an empty card.
-                document.getElementById('latestArticle').style.display = 'none';
-            }
-
-            // 1) Fresh cache → instant render, zero API calls
-            const cached = readCache();
-            if (cached && cached.post && (Date.now() - cached.ts) < CACHE_TTL) {
-                renderPost(cached.post);
-                return;
-            }
-
-            // 2) Fetch with an 8s timeout
-            try {
-                const controller = new AbortController();
-                const timer = setTimeout(() => controller.abort(), 8000);
-                const response = await fetch(API_URL, { signal: controller.signal });
-                clearTimeout(timer);
-                const data = await response.json();
-
-                if (data.status === 'ok' && data.items && data.items.length > 0) {
-                    writeCache(data.items[0]);
-                    renderPost(data.items[0]);
-                } else {
-                    // API responded but refused (e.g. rate limit) — unified failure path
-                    throw new Error(data.message || 'RSS API returned non-ok status');
-                }
-            } catch (error) {
-                // 3) Stale cache is better than nothing; otherwise static fallback
-                if (cached && cached.post) {
-                    renderPost(cached.post);
-                } else {
-                    renderFallback();
-                }
-            }
-        }
-
-        // Fetch on page load
-        fetchLatestArticle();
 
         // Custom Accessibility Widget
         const a11yToggle = document.getElementById('a11yToggle');

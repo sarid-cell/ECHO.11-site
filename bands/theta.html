@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" class="supports-dark">
+<head>
+    <meta charset="UTF-8">
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { analytics_storage: localStorage.getItem('echo11_consent') === 'granted' ? 'granted' : 'denied' });
+      gtag('js', new Date());
+      gtag('config', 'G-TP9YRD6TN8');
+      (function () {
+        var loaded = false;
+        function loadGtag() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-TP9YRD6TN8';
+          document.head.appendChild(s);
+        }
+        ['scroll', 'click', 'keydown', 'touchstart', 'mousemove'].forEach(function (ev) {
+          window.addEventListener(ev, loadGtag, { once: true, passive: true });
+        });
+        window.addEventListener('load', function () { setTimeout(loadGtag, 3000); });
+      })();
+    </script>
+    <!-- Quiet Mode bootstrap: resolve theme before first paint (no FOUC). -->
+    <script>
+    (function(){try{var t=localStorage.getItem('echo11_theme');if(t!=='dark'&&t!=='light'){var h=new Date().getHours();t=(h>=20||h<7)||matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0e1013" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/images/favicon-192.png" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/assets/images/favicon-180.png">
+    <title>Theta waves (4–8 Hz) — what they are and what the research actually shows | ECHO.11</title>
+    <meta name="description" content="Theta sits between sleep and waking, at 4 to 8 Hz. What the research associates with it, the overclaims to ignore, and why ECHO.11 has no theta session yet.">
+    <meta name="author" content="Shira Sarid">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://echo11.app/bands/theta.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Theta waves (4–8 Hz) — what they are and what the research actually shows | ECHO.11">
+    <meta property="og:description" content="Theta sits between sleep and waking, at 4 to 8 Hz. What the research associates with it, the overclaims to ignore, and why ECHO.11 has no theta session yet.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://echo11.app/bands/theta.html">
+    <meta property="og:site_name" content="ECHO.11">
+    <meta property="og:image" content="https://echo11.app/assets/images/ghost-machine.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Theta waves (4–8 Hz) — what they are and what the research actually shows | ECHO.11">
+    <meta name="twitter:description" content="Theta sits between sleep and waking, at 4 to 8 Hz. What the research associates with it, the overclaims to ignore, and why ECHO.11 has no theta session yet.">
+    <meta name="twitter:image" content="https://echo11.app/assets/images/ghost-machine.png">
+
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/outfit-variable-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/fonts.css">
+    <link rel="stylesheet" href="/assets/css/view-transitions.css">
+    <link rel="stylesheet" href="/assets/css/quiet-mode.css">
+    <link rel="stylesheet" href="/assets/css/micro-interactions.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/assets/css/micro-interactions.css"></noscript>
+    <link rel="stylesheet" href="/assets/css/session.css">
+    <link rel="stylesheet" href="/assets/css/essay.css">
+    <link rel="stylesheet" href="/assets/css/band.css">
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Person",
+            "@id": "https://echo11.app/#shira-sarid",
+            "name": "Shira Sarid",
+            "url": "https://echo11.app/",
+            "email": "shirasarid@gmail.com"
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://echo11.app/#website",
+            "name": "ECHO.11",
+            "url": "https://echo11.app/",
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "https://echo11.app/bands/theta.html#webpage",
+            "url": "https://echo11.app/bands/theta.html",
+            "name": "Theta waves (4–8 Hz) — what they are and what the research actually shows | ECHO.11",
+            "description": "Theta sits between sleep and waking, at 4 to 8 Hz. What the research associates with it, the overclaims to ignore, and why ECHO.11 has no theta session yet.",
+            "inLanguage": "en",
+            "isPartOf": {
+                "@id": "https://echo11.app/#website"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "mainEntity": {
+                "@id": "https://echo11.app/bands/theta.html#faq"
+            }
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://echo11.app/bands/theta.html#faq",
+            "inLanguage": "en",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What are theta waves?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Theta runs roughly 4 to 8 Hz, between delta and alpha. In adults it appears in drowsiness and in the drift before sleep, and also over frontal sites during sustained concentration."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is theta the creativity frequency?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "No. Theta appears both when someone is drifting toward sleep and when someone is concentrating, which is a good reason to distrust any single-feeling description of it."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does ECHO.11 have a theta session?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Not yet. The two sessions on the site are 10 Hz alpha and 40 Hz gamma."
+                    }
+                }
+            ]
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://echo11.app/bands/theta.html#breadcrumbs",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://echo11.app/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "The Bands",
+                    "item": "https://echo11.app/bands/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Theta waves"
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="cursor-dot"></div>
+
+    <header>
+        <div class="header-inner">
+            <a href="/" class="logo">ECHO.11</a>
+            <div class="header-right">
+                <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
+        <nav>
+            <ul class="menu-list">
+            <li>
+                <a href="/frequencies.html" class="menu-link">The Sessions</a>
+                <ul class="menu-sublist">
+                    <li><a href="/frequency.html" class="menu-sublink">10 Hz &middot; Calm</a></li>
+                    <li><a href="/40hz.html" class="menu-sublink">40 Hz &middot; Focus</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/book.html" class="menu-link">The Book</a>
+            </li>
+            <li>
+                <a href="/index.html#insights" class="menu-link">Insights</a>
+                <ul class="menu-sublist">
+                    <li><a href="/essays/" class="menu-sublink">Field Notes</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/index.html#vision" class="menu-link">The Vision</a>
+            </li>
+            <li>
+                <a href="/about.html" class="menu-link">About Echo.11</a>
+            </li>
+            </ul>
+            <div class="menu-app">
+                <span class="menu-app-title">The App
+                    <span class="menu-app-badge">Coming Soon</span>
+                </span>
+                <span class="menu-app-desc">Both sessions, in your pocket.</span>
+            </div>
+        </nav>
+    </aside>
+
+    <main id="main-content">
+        <article class="band-page">
+            <header class="band-hero">
+                <div class="band-hero-plate">
+                    <picture>
+                        <source srcset="/assets/images/astro-eyes-closed.webp" type="image/webp">
+                        <img src="/assets/images/astro-eyes-closed.png" alt="Portrait of an astronaut with her eyes closed" width="1456" height="816" fetchpriority="high">
+                    </picture>
+                </div>
+                <div class="band-hero-overlay"></div>
+                <div class="band-hero-inner">
+                    <div class="essay-eyebrow"><a href="/bands/">The Bands</a><span>Theta</span></div>
+                    <h1>Theta waves (4&ndash;8 Hz) &mdash; what they are and what the research actually shows</h1>
+                    <div class="band-spec">
+                        <span>4&ndash;8 Hz</span>
+                        <span>Drift</span>
+                        <span>No session yet</span>
+                    </div>
+                    <!-- Band signature: 1.25 seconds of the theta rhythm, drawn at 6.4 Hz. -->
+                    <svg class="band-sig" viewBox="0 0 600 56" preserveAspectRatio="none"
+                         aria-hidden="true" focusable="false">
+                        <path d="M0,28 Q18.75,-4 37.5,28 Q56.25,60 75,28 Q93.75,-4 112.5,28 Q131.25,60 150,28 Q168.75,-4 187.5,28 Q206.25,60 225,28 Q243.75,-4 262.5,28 Q281.25,60 300,28 Q318.75,-4 337.5,28 Q356.25,60 375,28 Q393.75,-4 412.5,28 Q431.25,60 450,28 Q468.75,-4 487.5,28 Q506.25,60 525,28 Q543.75,-4 562.5,28 Q581.25,60 600,28"/>
+                    </svg>
+                </div>
+            </header>
+            <div class="essay">
+            <div class="essay-inner">
+                <div class="essay-body">
+                <h2>What the band is</h2>
+                <p>Theta runs roughly <strong>4 to 8 Hz</strong>, between delta and alpha. In adults it shows up in drowsiness, in the drift just before sleep, and in some meditative states. It is also recorded from the hippocampus during certain kinds of movement and learning, though hippocampal theta and scalp theta are not the same measurement and should not be treated as interchangeable.</p>
+
+                <h2>What research associates with it</h2>
+                <p>Theta activity recorded over frontal midline sites has been associated with sustained attention and with working-memory load, which is the opposite of the drowsiness association and shows the band does not map onto one mental state.</p>
+                <!-- CITATION NEEDED: the association between frontal midline theta and working-memory load -->
+                <p>Hippocampal theta has a long literature in rodent spatial navigation and memory encoding. Extending it to what a human hears through headphones is an inference, not a finding.</p>
+                <!-- CITATION NEEDED: the rodent hippocampal theta literature on spatial navigation and memory encoding -->
+                <p>In the meta-analysis by Garcia-Argibay, Santed and Reales (2019, <em>Psychological Research</em>), the effect binaural beats showed most consistently was on anxiety, with a much less consistent picture for memory and attention. That caution applies to theta as much as to any other band.</p>
+
+                <h2>What it is not</h2>
+                <p>Theta is not a shortcut to a meditative state, and it is not a creativity switch. The band appears both when someone is drifting toward sleep and when someone is concentrating hard, which is a good reason to distrust any description that assigns it a single feeling.</p>
+                <p>It is also not evidence of anything mystical. Theta is a frequency range in a voltage recording. What it means depends entirely on where it was recorded, when, and in whom.</p>
+
+                <h2>What listeners report</h2>
+                <p>Individual response varies, and some people notice nothing. Most commonly reported:</p>
+                    <div class="feel-tags">
+                        <span class="feel-tag">Drifting</span>
+                        <span class="feel-tag">Loose associations</span>
+                        <span class="feel-tag">Sleepiness</span>
+                        <span class="feel-tag">Time passing oddly</span>
+                    </div>
+
+                <h2>Listen</h2>
+                <div class="band-none">
+                    <span class="band-none-band">Theta &middot; 4&ndash;8 Hz</span>
+                    <p class="band-none-line">No echo&middot;11 session yet.</p>
+                    <div class="band-none-links">
+                        <a href="/frequency.html">10 Hz &middot; Calm</a>
+                        <a href="/40hz.html">40 Hz &middot; Focus</a>
+                    </div>
+                </div>
+                </div>
+
+                <nav class="band-nav" aria-label="The five bands">
+                    <a href="/bands/delta.html">Delta</a>
+                    <a href="/bands/theta.html" aria-current="page">Theta</a>
+                    <a href="/bands/alpha.html">Alpha</a>
+                    <a href="/bands/beta.html">Beta</a>
+                    <a href="/bands/gamma.html">Gamma</a>
+                </nav>
+
+                <div class="essay-foot">
+                    <a href="/bands/">All bands</a>
+                    <a href="/frequencies.html">The sessions</a>
+                    <a href="/essays/">Field notes</a>
+                </div>
+            </div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">ECHO.11</div>
+            <div class="footer-contact">
+                <p class="footer-h">Let's connect in the noise</p>
+                <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
+            </div>
+            <div class="footer-col">
+                <p class="footer-h">Channels</p>
+                <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
+                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer">Pinterest</a>
+            </div>
+            <div class="footer-col">
+                <p class="footer-h">Explore</p>
+                <a href="/about.html">Strategy</a>
+                <a href="/essays/">Field Notes</a>
+                <a href="/frequencies.html">The Sessions</a>
+            </div>
+            <div class="footer-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="footer-legal">
+            <p>&copy; 2026 ECHO.11 by Shira Sarid. All rights reserved.</p>
+            <div class="footer-legal-links">
+                <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer">CTRL+HUMAN podcast — archive</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/accessibility.html">Accessibility</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
+        <span>We use Google Analytics to understand site usage. <a href="/privacy.html" style="color:#fff;text-decoration:underline;">Read the privacy policy</a></span>
+        <div style="display:flex;gap:8px;">
+            <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;">Accept</button>
+            <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:4px;cursor:pointer;">Decline</button>
+        </div>
+    </div>
+    <script>
+        (function(){
+            var consent = localStorage.getItem('echo11_consent');
+            var banner = document.getElementById('cookieConsent');
+            if (consent === 'granted' || consent === 'denied') { banner.style.display = 'none'; return; }
+            document.getElementById('cookieAccept').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'granted');
+                if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+                banner.style.display = 'none';
+            });
+            document.getElementById('cookieDecline').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'denied');
+                banner.style.display = 'none';
+            });
+        })();
+    </script>
+    <script>
+        // Menu
+        const hamburger = document.getElementById('hamburger');
+        const sideMenu  = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        function toggleMenu() {
+            const isOpen = sideMenu.classList.contains('active');
+            hamburger.classList.toggle('active');
+            sideMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', !isOpen);
+            sideMenu.setAttribute('aria-hidden', isOpen);
+            if (isOpen) { sideMenu.setAttribute('inert', ''); } else { sideMenu.removeAttribute('inert'); }
+            document.body.style.overflow = isOpen ? '' : 'hidden';
+        }
+        hamburger.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && sideMenu.classList.contains('active')) toggleMenu();
+        });
+
+        // Cursor
+        const dot = document.querySelector('.cursor-dot');
+        if (dot && window.innerWidth > 768) {
+            document.addEventListener('mousemove', e => { dot.style.left = e.clientX+'px'; dot.style.top = e.clientY+'px'; });
+            document.querySelectorAll('a,button').forEach(el => {
+                el.addEventListener('mouseenter', ()=>dot.classList.add('hover'));
+                el.addEventListener('mouseleave', ()=>dot.classList.remove('hover'));
+            });
+        }
+    </script>
+    <script src="/assets/js/site-header.js" defer></script>
+    <script src="/assets/js/quiet-mode.js" defer></script>
+    <script src="/assets/js/micro-interactions.js" defer></script>
+    <script src="/assets/js/echo-ripple.js" defer></script>
+    <script src="/assets/js/a11y-widget.js" defer></script>
+    <!-- Vercel Web Analytics — cookieless pageview beacon, served same-origin -->
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

@@ -18,7 +18,9 @@
         { href: '/40hz.html',       label: '40 Hz · Focus' }
       ] },
     { href: '/book.html',           label: 'The Book' },
-    { href: '/index.html#insights', label: 'Insights' },
+    { href: '/index.html#insights', label: 'Insights', children: [
+        { href: '/essays/',         label: 'Field Notes' }
+      ] },
     { href: '/index.html#vision',   label: 'The Vision' },
     { href: '/about.html',          label: 'About Echo.11' }
   ];
@@ -85,20 +87,37 @@
     }
   }
 
-  /* ── 2. Glass surface + hide-on-scroll styles ── */
+  /* ── 2. Header surface + hide-on-scroll styles ──
+     Over a hero the bar is transparent, so nothing scrolls visibly
+     through it; past the hero it becomes the opaque page ground with
+     its hairline. Pages without a hero keep the opaque bar from the
+     first pixel. */
   var css = [
     'header {',
-    '  background: rgba(250,250,250,0.8);',
-    '  -webkit-backdrop-filter: blur(12px) saturate(1.5);',
-    '  backdrop-filter: blur(12px) saturate(1.5);',
+    '  background: var(--bg, #fafafa);',
     '  border-bottom: 1px solid rgba(26,26,26,0.07);',
-    '  transition: transform .45s cubic-bezier(.22,.61,.36,1), opacity 1.8s ease;',
+    '  transition: transform .45s cubic-bezier(.22,.61,.36,1),',
+    '              background-color .35s ease, border-color .35s ease, opacity 1.8s ease;',
     '  will-change: transform;',
     '}',
     'header.header-hidden { transform: translateY(-100%); }',
+    'header.over-hero:not(.scrolled) {',
+    '  background: transparent;',
+    '  border-bottom-color: transparent;',
+    '  -webkit-backdrop-filter: none;',
+    '  backdrop-filter: none;',
+    '}',
+    // anchor targets clear the fixed bar instead of hiding behind it
+    'html { scroll-padding-top: calc(var(--header-h, 78px) + 1rem); }',
+    '@media (max-width: 768px) { html { --header-h: 67px; } }',
+    '@media (prefers-reduced-motion: reduce) {',
+    '  html { scroll-behavior: auto; }',
+    '  header { transition: none; }',
+    '}',
     // dark glass follows Quiet Mode (data-theme is set before first paint
     // by the bootstrap script in every page head)
-    'html[data-theme="dark"] header { background: rgba(14,16,19,0.75); border-bottom-color: rgba(255,255,255,0.08); }',
+    'html[data-theme="dark"] header { background: var(--bg, #0e1013); border-bottom-color: rgba(255,255,255,0.08); }',
+    'html[data-theme="dark"] header.over-hero:not(.scrolled) { background: transparent; border-bottom-color: transparent; }',
     '@media (prefers-reduced-motion: reduce) {',
     '  header { transition-duration: .15s, 1.8s; }',
     '}',
@@ -129,7 +148,32 @@
   style.textContent = css;
   document.head.appendChild(style);
 
-  /* ── 3. Smart scroll: hide going down, reveal going up ── */
+  /* ── 3. Transparent over the hero, opaque past it ──
+     An IntersectionObserver on the hero, not a scroll listener: the
+     browser reports the crossing itself, so there is no per-frame work
+     and no threshold to keep in sync with the hero's height. */
+  /* Opt-in, not automatic: a transparent bar puts the ink logo straight
+     onto the hero image, and the session-page plates have dark regions
+     at the top where it measures under 4.5:1. A page marks its hero
+     data-hero="light" only when the whole strip under the bar is light. */
+  var hero = document.querySelector('.hero[data-hero="light"]');
+  if (hero && 'IntersectionObserver' in window) {
+    header.classList.add('over-hero');
+    // Shrink the observation box down by the bar's own height, so the
+    // hero stops intersecting exactly when its last pixel slides under
+    // the bar — the moment the bar needs a background.
+    var mark = function () {
+      var h = Math.round(header.getBoundingClientRect().height) || 78;
+      document.documentElement.style.setProperty('--header-h', h + 'px');
+      return h;
+    };
+    var heroObs = new IntersectionObserver(function (entries) {
+      header.classList.toggle('scrolled', !entries[0].isIntersecting);
+    }, { rootMargin: '-' + mark() + 'px 0px 0px 0px', threshold: 0 });
+    heroObs.observe(hero);
+  }
+
+  /* ── 4. Smart scroll: hide going down, reveal going up ── */
   var TOP_ZONE = 90;  // never hide this close to the top
   var DELTA    = 6;   // ignore micro-jitter (rubber-banding, trackpads)
   var lastY = window.scrollY, ticking = false;

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" class="supports-dark">
+<head>
+    <meta charset="UTF-8">
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { analytics_storage: localStorage.getItem('echo11_consent') === 'granted' ? 'granted' : 'denied' });
+      gtag('js', new Date());
+      gtag('config', 'G-TP9YRD6TN8');
+      (function () {
+        var loaded = false;
+        function loadGtag() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-TP9YRD6TN8';
+          document.head.appendChild(s);
+        }
+        ['scroll', 'click', 'keydown', 'touchstart', 'mousemove'].forEach(function (ev) {
+          window.addEventListener(ev, loadGtag, { once: true, passive: true });
+        });
+        window.addEventListener('load', function () { setTimeout(loadGtag, 3000); });
+      })();
+    </script>
+    <!-- Quiet Mode bootstrap: resolve theme before first paint (no FOUC). -->
+    <script>
+    (function(){try{var t=localStorage.getItem('echo11_theme');if(t!=='dark'&&t!=='light'){var h=new Date().getHours();t=(h>=20||h<7)||matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0e1013" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/images/favicon-192.png" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/assets/images/favicon-180.png">
+    <title>Beta waves (13–30 Hz) — what they are and what the research actually shows | ECHO.11</title>
+    <meta name="description" content="Beta is the band of ordinary alert wakefulness, 13 to 30 Hz. What research associates with it, why more of it is not better, and why no session uses it.">
+    <meta name="author" content="Shira Sarid">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://echo11.app/bands/beta.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Beta waves (13–30 Hz) — what they are and what the research actually shows | ECHO.11">
+    <meta property="og:description" content="Beta is the band of ordinary alert wakefulness, 13 to 30 Hz. What research associates with it, why more of it is not better, and why no session uses it.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://echo11.app/bands/beta.html">
+    <meta property="og:site_name" content="ECHO.11">
+    <meta property="og:image" content="https://echo11.app/assets/images/ghost-machine.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Beta waves (13–30 Hz) — what they are and what the research actually shows | ECHO.11">
+    <meta name="twitter:description" content="Beta is the band of ordinary alert wakefulness, 13 to 30 Hz. What research associates with it, why more of it is not better, and why no session uses it.">
+    <meta name="twitter:image" content="https://echo11.app/assets/images/ghost-machine.png">
+
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/outfit-variable-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/fonts.css">
+    <link rel="stylesheet" href="/assets/css/view-transitions.css">
+    <link rel="stylesheet" href="/assets/css/quiet-mode.css">
+    <link rel="stylesheet" href="/assets/css/micro-interactions.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/assets/css/micro-interactions.css"></noscript>
+    <link rel="stylesheet" href="/assets/css/session.css">
+    <link rel="stylesheet" href="/assets/css/essay.css">
+    <link rel="stylesheet" href="/assets/css/band.css">
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Person",
+            "@id": "https://echo11.app/#shira-sarid",
+            "name": "Shira Sarid",
+            "url": "https://echo11.app/",
+            "email": "shirasarid@gmail.com"
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://echo11.app/#website",
+            "name": "ECHO.11",
+            "url": "https://echo11.app/",
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "https://echo11.app/bands/beta.html#webpage",
+            "url": "https://echo11.app/bands/beta.html",
+            "name": "Beta waves (13–30 Hz) — what they are and what the research actually shows | ECHO.11",
+            "description": "Beta is the band of ordinary alert wakefulness, 13 to 30 Hz. What research associates with it, why more of it is not better, and why no session uses it.",
+            "inLanguage": "en",
+            "isPartOf": {
+                "@id": "https://echo11.app/#website"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "mainEntity": {
+                "@id": "https://echo11.app/bands/beta.html#faq"
+            }
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://echo11.app/bands/beta.html#faq",
+            "inLanguage": "en",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What are beta waves?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Beta covers roughly 13 to 30 Hz and is the background rhythm of ordinary alert wakefulness. You are producing it while reading this."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is more beta better for focus?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "No. Beta is a correlate of being awake and engaged, and elevated beta has also been reported in anxious states. There is no good evidence that a beta-frequency tone improves productivity."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does ECHO.11 have a beta session?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "No, deliberately. Building one would mean claiming an effect the evidence does not support."
+                    }
+                }
+            ]
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://echo11.app/bands/beta.html#breadcrumbs",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://echo11.app/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "The Bands",
+                    "item": "https://echo11.app/bands/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Beta waves"
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="cursor-dot"></div>
+
+    <header>
+        <div class="header-inner">
+            <a href="/" class="logo">ECHO.11</a>
+            <div class="header-right">
+                <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
+        <nav>
+            <ul class="menu-list">
+            <li>
+                <a href="/frequencies.html" class="menu-link">The Sessions</a>
+                <ul class="menu-sublist">
+                    <li><a href="/frequency.html" class="menu-sublink">10 Hz &middot; Calm</a></li>
+                    <li><a href="/40hz.html" class="menu-sublink">40 Hz &middot; Focus</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/book.html" class="menu-link">The Book</a>
+            </li>
+            <li>
+                <a href="/index.html#insights" class="menu-link">Insights</a>
+                <ul class="menu-sublist">
+                    <li><a href="/essays/" class="menu-sublink">Field Notes</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/index.html#vision" class="menu-link">The Vision</a>
+            </li>
+            <li>
+                <a href="/about.html" class="menu-link">About Echo.11</a>
+            </li>
+            </ul>
+            <div class="menu-app">
+                <span class="menu-app-title">The App
+                    <span class="menu-app-badge">Coming Soon</span>
+                </span>
+                <span class="menu-app-desc">Both sessions, in your pocket.</span>
+            </div>
+        </nav>
+    </aside>
+
+    <main id="main-content">
+        <article class="band-page">
+            <header class="band-hero">
+                <div class="band-hero-plate">
+                    <picture>
+                        <source srcset="/assets/images/luna.webp" type="image/webp">
+                        <img src="/assets/images/luna.png" alt="Astronaut standing in a transparent helmet, looking into the distance" width="1536" height="768" fetchpriority="high">
+                    </picture>
+                </div>
+                <div class="band-hero-overlay"></div>
+                <div class="band-hero-inner">
+                    <div class="essay-eyebrow"><a href="/bands/">The Bands</a><span>Beta</span></div>
+                    <h1>Beta waves (13&ndash;30 Hz) &mdash; what they are and what the research actually shows</h1>
+                    <div class="band-spec">
+                        <span>13&ndash;30 Hz</span>
+                        <span>Alert</span>
+                        <span>No session yet</span>
+                    </div>
+                    <!-- Band signature: 1.25 seconds of the beta rhythm, drawn at 19.2 Hz. -->
+                    <svg class="band-sig" viewBox="0 0 600 56" preserveAspectRatio="none"
+                         aria-hidden="true" focusable="false">
+                        <path d="M0,28 Q6.25,12 12.5,28 Q18.75,44 25,28 Q31.25,12 37.5,28 Q43.75,44 50,28 Q56.25,12 62.5,28 Q68.75,44 75,28 Q81.25,12 87.5,28 Q93.75,44 100,28 Q106.25,12 112.5,28 Q118.75,44 125,28 Q131.25,12 137.5,28 Q143.75,44 150,28 Q156.25,12 162.5,28 Q168.75,44 175,28 Q181.25,12 187.5,28 Q193.75,44 200,28 Q206.25,12 212.5,28 Q218.75,44 225,28 Q231.25,12 237.5,28 Q243.75,44 250,28 Q256.25,12 262.5,28 Q268.75,44 275,28 Q281.25,12 287.5,28 Q293.75,44 300,28 Q306.25,12 312.5,28 Q318.75,44 325,28 Q331.25,12 337.5,28 Q343.75,44 350,28 Q356.25,12 362.5,28 Q368.75,44 375,28 Q381.25,12 387.5,28 Q393.75,44 400,28 Q406.25,12 412.5,28 Q418.75,44 425,28 Q431.25,12 437.5,28 Q443.75,44 450,28 Q456.25,12 462.5,28 Q468.75,44 475,28 Q481.25,12 487.5,28 Q493.75,44 500,28 Q506.25,12 512.5,28 Q518.75,44 525,28 Q531.25,12 537.5,28 Q543.75,44 550,28 Q556.25,12 562.5,28 Q568.75,44 575,28 Q581.25,12 587.5,28 Q593.75,44 600,28"/>
+                    </svg>
+                </div>
+            </header>
+            <div class="essay">
+            <div class="essay-inner">
+                <div class="essay-body">
+                <h2>What the band is</h2>
+                <p>Beta covers roughly <strong>13 to 30 Hz</strong> and is what an ordinary awake, alert, thinking adult produces most of the time. It is prominent over the sensorimotor areas, where it has a well-studied relationship with movement: beta drops as a movement is prepared and executed, and rebounds afterwards.</p>
+
+                <h2>What research associates with it</h2>
+                <p>Sensorimotor beta is one of the more reliable EEG phenomena, precisely because it is tied to an observable event &mdash; a movement &mdash; rather than to a self-reported state.</p>
+                <!-- CITATION NEEDED: the reliability of the sensorimotor beta decrease and rebound around movement -->
+                <p>Elevated beta has been reported in anxious states, which is awkward for any product that sells beta as the frequency of productivity.</p>
+                <!-- CITATION NEEDED: reports of elevated beta activity in anxious states -->
+                <p>There is no good evidence that listening to a beta-frequency tone makes a person more productive. The band is a correlate of being awake and engaged, and being awake is not something a tone supplies.</p>
+                <!-- CITATION NEEDED: the absence of evidence that beta-frequency audio improves productivity -->
+
+                <h2>What it is not</h2>
+                <p>Beta is not a focus dial, and more of it is not better. It is the background rhythm of being awake; you are producing it while you read this. Framing it as a state to reach is like selling someone their own pulse.</p>
+                <p>ECHO.11 has no beta session, and that is deliberate. Building one would mean claiming an effect the evidence does not support.</p>
+
+                <h2>What listeners report</h2>
+                <p>Individual response varies, and some people notice nothing. Most commonly reported:</p>
+                    <div class="feel-tags">
+                        <span class="feel-tag">Ordinary alertness</span>
+                        <span class="feel-tag">Busy thinking</span>
+                        <span class="feel-tag">Nothing distinctive</span>
+                    </div>
+
+                <h2>Listen</h2>
+                <div class="band-none">
+                    <span class="band-none-band">Beta &middot; 13&ndash;30 Hz</span>
+                    <p class="band-none-line">No echo&middot;11 session yet.</p>
+                    <div class="band-none-links">
+                        <a href="/frequency.html">10 Hz &middot; Calm</a>
+                        <a href="/40hz.html">40 Hz &middot; Focus</a>
+                    </div>
+                </div>
+                </div>
+
+                <nav class="band-nav" aria-label="The five bands">
+                    <a href="/bands/delta.html">Delta</a>
+                    <a href="/bands/theta.html">Theta</a>
+                    <a href="/bands/alpha.html">Alpha</a>
+                    <a href="/bands/beta.html" aria-current="page">Beta</a>
+                    <a href="/bands/gamma.html">Gamma</a>
+                </nav>
+
+                <div class="essay-foot">
+                    <a href="/bands/">All bands</a>
+                    <a href="/frequencies.html">The sessions</a>
+                    <a href="/essays/">Field notes</a>
+                </div>
+            </div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">ECHO.11</div>
+            <div class="footer-contact">
+                <p class="footer-h">Let's connect in the noise</p>
+                <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
+            </div>
+            <div class="footer-col">
+                <p class="footer-h">Channels</p>
+                <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
+                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer">Pinterest</a>
+            </div>
+            <div class="footer-col">
+                <p class="footer-h">Explore</p>
+                <a href="/about.html">Strategy</a>
+                <a href="/essays/">Field Notes</a>
+                <a href="/frequencies.html">The Sessions</a>
+            </div>
+            <div class="footer-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="footer-legal">
+            <p>&copy; 2026 ECHO.11 by Shira Sarid. All rights reserved.</p>
+            <div class="footer-legal-links">
+                <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer">CTRL+HUMAN podcast — archive</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/accessibility.html">Accessibility</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
+        <span>We use Google Analytics to understand site usage. <a href="/privacy.html" style="color:#fff;text-decoration:underline;">Read the privacy policy</a></span>
+        <div style="display:flex;gap:8px;">
+            <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;">Accept</button>
+            <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:4px;cursor:pointer;">Decline</button>
+        </div>
+    </div>
+    <script>
+        (function(){
+            var consent = localStorage.getItem('echo11_consent');
+            var banner = document.getElementById('cookieConsent');
+            if (consent === 'granted' || consent === 'denied') { banner.style.display = 'none'; return; }
+            document.getElementById('cookieAccept').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'granted');
+                if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+                banner.style.display = 'none';
+            });
+            document.getElementById('cookieDecline').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'denied');
+                banner.style.display = 'none';
+            });
+        })();
+    </script>
+    <script>
+        // Menu
+        const hamburger = document.getElementById('hamburger');
+        const sideMenu  = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        function toggleMenu() {
+            const isOpen = sideMenu.classList.contains('active');
+            hamburger.classList.toggle('active');
+            sideMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', !isOpen);
+            sideMenu.setAttribute('aria-hidden', isOpen);
+            if (isOpen) { sideMenu.setAttribute('inert', ''); } else { sideMenu.removeAttribute('inert'); }
+            document.body.style.overflow = isOpen ? '' : 'hidden';
+        }
+        hamburger.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && sideMenu.classList.contains('active')) toggleMenu();
+        });
+
+        // Cursor
+        const dot = document.querySelector('.cursor-dot');
+        if (dot && window.innerWidth > 768) {
+            document.addEventListener('mousemove', e => { dot.style.left = e.clientX+'px'; dot.style.top = e.clientY+'px'; });
+            document.querySelectorAll('a,button').forEach(el => {
+                el.addEventListener('mouseenter', ()=>dot.classList.add('hover'));
+                el.addEventListener('mouseleave', ()=>dot.classList.remove('hover'));
+            });
+        }
+    </script>
+    <script src="/assets/js/site-header.js" defer></script>
+    <script src="/assets/js/quiet-mode.js" defer></script>
+    <script src="/assets/js/micro-interactions.js" defer></script>
+    <script src="/assets/js/echo-ripple.js" defer></script>
+    <script src="/assets/js/a11y-widget.js" defer></script>
+    <!-- Vercel Web Analytics — cookieless pageview beacon, served same-origin -->
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

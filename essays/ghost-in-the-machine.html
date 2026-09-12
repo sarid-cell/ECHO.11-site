@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" class="supports-dark">
+<head>
+    <meta charset="UTF-8">
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { analytics_storage: localStorage.getItem('echo11_consent') === 'granted' ? 'granted' : 'denied' });
+      gtag('js', new Date());
+      gtag('config', 'G-TP9YRD6TN8');
+      (function () {
+        var loaded = false;
+        function loadGtag() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-TP9YRD6TN8';
+          document.head.appendChild(s);
+        }
+        ['scroll', 'click', 'keydown', 'touchstart', 'mousemove'].forEach(function (ev) {
+          window.addEventListener(ev, loadGtag, { once: true, passive: true });
+        });
+        window.addEventListener('load', function () { setTimeout(loadGtag, 3000); });
+      })();
+    </script>
+    <!-- Quiet Mode bootstrap: resolve theme before first paint (no FOUC). -->
+    <script>
+    (function(){try{var t=localStorage.getItem('echo11_theme');if(t!=='dark'&&t!=='light'){var h=new Date().getHours();t=(h>=20||h<7)||matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0e1013" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/images/favicon-192.png" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/assets/images/favicon-180.png">
+    <title>The Ghost in the Machine: Botox, AI, and the Augmented Authenticity Paradox | ECHO.11</title>
+    <meta name="description" content="Why using AI feels like cheating even when it isn't — the authenticity paradox, from Botox to generative tools. A field note by Shira Sarid.">
+    <meta name="author" content="Shira Sarid">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://echo11.app/essays/ghost-in-the-machine.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="The Ghost in the Machine: Botox, AI, and the Augmented Authenticity Paradox | ECHO.11">
+    <meta property="og:description" content="Why using AI feels like cheating even when it isn't — the authenticity paradox, from Botox to generative tools. A field note by Shira Sarid.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://echo11.app/essays/ghost-in-the-machine.html">
+    <meta property="og:site_name" content="ECHO.11">
+    <meta property="og:image" content="https://echo11.app/assets/images/ghost-machine.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Ghost in the Machine: Botox, AI, and the Augmented Authenticity Paradox | ECHO.11">
+    <meta name="twitter:description" content="Why using AI feels like cheating even when it isn't — the authenticity paradox, from Botox to generative tools. A field note by Shira Sarid.">
+    <meta name="twitter:image" content="https://echo11.app/assets/images/ghost-machine.png">
+
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/outfit-variable-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/fonts.css">
+    <link rel="stylesheet" href="/assets/css/view-transitions.css">
+    <link rel="stylesheet" href="/assets/css/quiet-mode.css">
+    <link rel="stylesheet" href="/assets/css/micro-interactions.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/assets/css/micro-interactions.css"></noscript>
+    <link rel="stylesheet" href="/assets/css/session.css">
+    <link rel="stylesheet" href="/assets/css/essay.css">
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Person",
+            "@id": "https://echo11.app/#shira-sarid",
+            "name": "Shira Sarid",
+            "url": "https://echo11.app/",
+            "email": "shirasarid@gmail.com"
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://echo11.app/#website",
+            "name": "ECHO.11",
+            "url": "https://echo11.app/",
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            }
+        },
+        {
+            "@type": "Article",
+            "@id": "https://echo11.app/essays/ghost-in-the-machine.html#article",
+            "headline": "The Ghost in the Machine: Botox, AI, and the Augmented Authenticity Paradox",
+            "description": "Why using AI feels like cheating even when it isn't — the authenticity paradox, from Botox to generative tools. A field note by Shira Sarid.",
+            "url": "https://echo11.app/essays/ghost-in-the-machine.html",
+            "inLanguage": "en",
+            "image": "https://echo11.app/assets/images/ghost-machine.png",
+            "datePublished": "PUBLICATION-DATE",
+            "dateModified": "PUBLICATION-DATE",
+            "author": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "creator": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "isPartOf": {
+                "@id": "https://echo11.app/#website"
+            },
+            "mainEntityOfPage": {
+                "@id": "https://echo11.app/essays/ghost-in-the-machine.html#webpage"
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "https://echo11.app/essays/ghost-in-the-machine.html#webpage",
+            "url": "https://echo11.app/essays/ghost-in-the-machine.html",
+            "name": "The Ghost in the Machine: Botox, AI, and the Augmented Authenticity Paradox",
+            "description": "Why using AI feels like cheating even when it isn't — the authenticity paradox, from Botox to generative tools. A field note by Shira Sarid.",
+            "inLanguage": "en",
+            "isPartOf": {
+                "@id": "https://echo11.app/#website"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "mainEntity": {
+                "@id": "https://echo11.app/essays/ghost-in-the-machine.html#article"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://echo11.app/essays/ghost-in-the-machine.html#breadcrumbs",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://echo11.app/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Field Notes",
+                    "item": "https://echo11.app/essays/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "The Ghost in the Machine: Botox, AI, and the Augmented Authenticity Paradox"
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</head>
+    <!-- ════════════════════════════════════════════════════════════
+         AWAITING TEXT. Before this page ships it needs, from Shira:
+           1. the essay text, in place of <!-- ESSAY BODY --> below
+           2. the publication date, in two places: the .essay-meta line
+              and datePublished / dateModified in the JSON-LD above
+         Both are marked PUBLICATION-DATE. Nothing else is outstanding.
+         ════════════════════════════════════════════════════════════ -->
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="cursor-dot"></div>
+
+    <header>
+        <div class="header-inner">
+            <a href="/" class="logo">ECHO.11</a>
+            <div class="header-right">
+                <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
+        <nav>
+            <ul class="menu-list">
+            <li>
+                <a href="/frequencies.html" class="menu-link">The Sessions</a>
+                <ul class="menu-sublist">
+                    <li><a href="/frequency.html" class="menu-sublink">10 Hz &middot; Calm</a></li>
+                    <li><a href="/40hz.html" class="menu-sublink">40 Hz &middot; Focus</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/book.html" class="menu-link">The Book</a>
+            </li>
+            <li>
+                <a href="/index.html#insights" class="menu-link">Insights</a>
+                <ul class="menu-sublist">
+                    <li><a href="/essays/" class="menu-sublink current">Field Notes</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/index.html#vision" class="menu-link">The Vision</a>
+            </li>
+            <li>
+                <a href="/about.html" class="menu-link">About Echo.11</a>
+            </li>
+            </ul>
+            <div class="menu-app">
+                <span class="menu-app-title">The App
+                    <span class="menu-app-badge">Coming Soon</span>
+                </span>
+                <span class="menu-app-desc">Both sessions, in your pocket.</span>
+            </div>
+        </nav>
+    </aside>
+
+    <main id="main-content">
+        <article class="essay">
+            <div class="essay-inner">
+                <div class="essay-eyebrow">
+                    <a href="/essays/">Field Notes</a>
+                    <span>Essay</span>
+                </div>
+
+                <h1>The Ghost in the Machine: Botox, AI, and the Augmented Authenticity Paradox</h1>
+                <p class="essay-standfirst">Why using AI feels like cheating — even when it isn't.</p>
+                <div class="essay-meta">
+                    <!-- PUBLICATION DATE — replace the placeholder below and the
+                         datePublished / dateModified values in the JSON-LD above -->
+                    PUBLICATION-DATE &middot; Shira Sarid
+                </div>
+
+                <figure class="essay-figure">
+                    <picture>
+                        <source srcset="/assets/images/ghost-machine.webp" type="image/webp">
+                        <img src="/assets/images/ghost-machine.png" alt="Digital portrait with fragmented glass and data overlay" width="1200" height="800" loading="lazy">
+                    </picture>
+                </figure>
+
+                <div class="essay-body">
+<!-- ESSAY BODY -->
+<!-- Paste the essay here as plain <p>, <h2>, <h3>, <blockquote>, <ul> and
+     <a> elements. essay.css styles all of them; no classes are needed. -->
+                </div>
+
+                <div class="essay-foot">
+                    <a href="/essays/">All field notes</a>
+                    <a href="/frequencies.html">The sessions</a>
+                    <a href="https://shirasarid.substack.com/" target="_blank" rel="noopener noreferrer">Subscribe on Substack</a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">ECHO.11</div>
+            <div class="footer-contact">
+                <p class="footer-h">Let's connect in the noise</p>
+                <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
+            </div>
+            <div class="footer-col">
+                <p class="footer-h">Channels</p>
+                <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
+                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer">Pinterest</a>
+            </div>
+            <div class="footer-col">
+                <p class="footer-h">Explore</p>
+                <a href="/about.html">Strategy</a>
+                <a href="/essays/">Field Notes</a>
+                <a href="/frequencies.html">The Sessions</a>
+            </div>
+            <div class="footer-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="footer-legal">
+            <p>&copy; 2026 ECHO.11 by Shira Sarid. All rights reserved.</p>
+            <div class="footer-legal-links">
+                <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer">CTRL+HUMAN podcast — archive</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/accessibility.html">Accessibility</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
+        <span>We use Google Analytics to understand site usage. <a href="/privacy.html" style="color:#fff;text-decoration:underline;">Read the privacy policy</a></span>
+        <div style="display:flex;gap:8px;">
+            <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;">Accept</button>
+            <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:4px;cursor:pointer;">Decline</button>
+        </div>
+    </div>
+    <script>
+        (function(){
+            var consent = localStorage.getItem('echo11_consent');
+            var banner = document.getElementById('cookieConsent');
+            if (consent === 'granted' || consent === 'denied') { banner.style.display = 'none'; return; }
+            document.getElementById('cookieAccept').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'granted');
+                if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+                banner.style.display = 'none';
+            });
+            document.getElementById('cookieDecline').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'denied');
+                banner.style.display = 'none';
+            });
+        })();
+    </script>
+    <script>
+        // Menu
+        const hamburger = document.getElementById('hamburger');
+        const sideMenu  = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        function toggleMenu() {
+            const isOpen = sideMenu.classList.contains('active');
+            hamburger.classList.toggle('active');
+            sideMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', !isOpen);
+            sideMenu.setAttribute('aria-hidden', isOpen);
+            if (isOpen) { sideMenu.setAttribute('inert', ''); } else { sideMenu.removeAttribute('inert'); }
+            document.body.style.overflow = isOpen ? '' : 'hidden';
+        }
+        hamburger.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && sideMenu.classList.contains('active')) toggleMenu();
+        });
+
+        // Cursor
+        const dot = document.querySelector('.cursor-dot');
+        if (dot && window.innerWidth > 768) {
+            document.addEventListener('mousemove', e => { dot.style.left = e.clientX+'px'; dot.style.top = e.clientY+'px'; });
+            document.querySelectorAll('a,button').forEach(el => {
+                el.addEventListener('mouseenter', ()=>dot.classList.add('hover'));
+                el.addEventListener('mouseleave', ()=>dot.classList.remove('hover'));
+            });
+        }
+    </script>
+    <script src="/assets/js/site-header.js" defer></script>
+    <script src="/assets/js/quiet-mode.js" defer></script>
+    <script src="/assets/js/micro-interactions.js" defer></script>
+    <script src="/assets/js/echo-ripple.js" defer></script>
+    <script src="/assets/js/a11y-widget.js" defer></script>
+    <!-- Vercel Web Analytics — cookieless pageview beacon, served same-origin -->
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
