@@ -1,0 +1,48 @@
+/* ECHO.11 — right-to-left overrides for the Hebrew session pages.
+   session.css stays the single source of layout; this file only flips
+   the handful of rules that carry a direction. Everything scoped to
+   [dir="rtl"], so loading it changes nothing on the English pages. */
+
+/* The drawer slides in from the left, and the hamburger's X is mirrored */
+[dir="rtl"] .side-menu { right: auto; left: -350px; box-shadow: 10px 0 40px rgba(0,0,0,0.15); }
+[dir="rtl"] .side-menu.active { left: 0; right: auto; }
+[dir="rtl"] .side-menu a:hover { transform: translateX(-10px); }
+@media (max-width: 768px) {
+    [dir="rtl"] .side-menu { width: 100%; left: -100%; }
+    [dir="rtl"] .side-menu.active { left: 0; }
+}
+
+/* The nested session links indent from the right */
+[dir="rtl"] .side-menu nav .menu-sublist {
+    padding-left: 0; padding-right: 1.1rem;
+    border-left: 0; border-right: 1px solid rgba(26,26,26,0.12);
+}
+[dir="rtl"] html[data-theme="dark"] .side-menu nav .menu-sublist,
+html[data-theme="dark"] [dir="rtl"] .side-menu nav .menu-sublist {
+    border-right-color: rgba(255,255,255,0.16);
+}
+
+/* Mono runs (11:00, 10 Hz, · separators) stay left-to-right inside
+   Hebrew sentences so digits and dots do not reorder */
+[dir="rtl"] .freq-title,
+[dir="rtl"] .timer-time,
+[dir="rtl"] .info-num,
+[dir="rtl"] .ltr { direction: ltr; unicode-bidi: isolate; }
+
+/* Text blocks that were left-aligned by hand */
+[dir="rtl"] .info-block,
+[dir="rtl"] .callout,
+[dir="rtl"] .disclaimer,
+[dir="rtl"] .next-step,
+[dir="rtl"] .section-label { text-align: right; }
+
+/* Accessibility widget sits on the opposite corner */
+[dir="rtl"] .a11y-fab { right: auto; left: 20px; }
+[dir="rtl"] .a11y-menu { right: auto; left: 20px; text-align: right; }
+
+/* Footer columns read right to left */
+[dir="rtl"] .footer-inner { direction: rtl; }
+[dir="rtl"] .footer-legal { direction: rtl; }
+
+/* Hebrew reads better with slightly more line height at body sizes */
+[dir="rtl"] body { line-height: 1.85; }

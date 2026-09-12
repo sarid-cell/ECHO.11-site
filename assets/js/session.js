@@ -10,10 +10,13 @@
      rightHz: 210,                   // right-ear carrier tone (Hz)
      durationMin: 11,                // session length in minutes
      loop: false,                    // initial state of the Loop toggle
-     ogImage: "assets/images/10hz-og.jpg" // Media Session artwork (optional)
+     ogImage: "assets/images/10hz-og.jpg", // Media Session artwork (optional)
+     strings: { ... }                // UI copy overrides (optional, see STRINGS)
    };
 
-   Everything else (aria labels, timer, analytics dimensions) is derived. */
+   Everything else (aria labels, timer, analytics dimensions) is derived.
+   `strings` exists so a translated page can run this same engine rather
+   than fork it; anything it leaves out falls back to the English below. */
 (function () {
 'use strict';
 var cfg = Object.assign({
@@ -27,8 +30,18 @@ var cfg = Object.assign({
     loop: false,
     ogImage: ''
 }, window.ECHO_SESSION || {});
-cfg.playLabel  = 'Play the '  + cfg.beatHz + 'Hz session';
-cfg.pauseLabel = 'Pause the ' + cfg.beatHz + 'Hz session';
+
+var STRINGS = Object.assign({
+    play:       'Play the '  + cfg.beatHz + 'Hz session',
+    pause:      'Pause the ' + cfg.beatHz + 'Hz session',
+    active:     'Session active',
+    paused:     'Paused — press play to continue',
+    complete:   'Session complete.',
+    cycles:     function (n) { return n + ' continuous cycles'; },
+    sessionsToday: function (n) { return n + ' sessions today'; }
+}, cfg.strings || {});
+cfg.playLabel  = STRINGS.play;
+cfg.pauseLabel = STRINGS.pause;
 
 // Menu
 const hamburger = document.getElementById('hamburger');
@@ -312,13 +325,13 @@ function endSession() {
     iconPlay.style.display = 'block'; iconPause.style.display = 'none';
     playBtn.classList.remove('playing'); timerWrap.classList.remove('playing');
     playBtn.setAttribute('aria-label', cfg.playLabel);
-    setState('Session complete.');
+    setState(STRINGS.complete);
     remaining = TOTAL; timerEl.textContent = fmt(TOTAL); updateRing();
     if (typeof gtag==='function') gtag('event','frequency_complete',{duration: TOTAL * cycles, hz: String(cfg.beatHz), id: cfg.id});
     const sessionsRow = document.querySelector('.sessions-row');
     const metaParts = [];
-    if (cycles > 1) metaParts.push(`${cycles} continuous cycles`);
-    if (!sessionsRow.hidden) metaParts.push(`${document.getElementById('sessionsNum').textContent} sessions today`);
+    if (cycles > 1) metaParts.push(STRINGS.cycles(cycles));
+    if (!sessionsRow.hidden) metaParts.push(STRINGS.sessionsToday(document.getElementById('sessionsNum').textContent));
     document.getElementById('completeMeta').textContent = metaParts.join(' · ');
     openModal(completeModal);
     if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'none';
@@ -349,7 +362,7 @@ function beginSession() {
     playBtn.classList.add('playing'); timerWrap.classList.add('playing');
     playBtn.setAttribute('aria-label', cfg.pauseLabel);
     enterFocus();
-    setState('Session active');
+    setState(STRINGS.active);
     stopReported = false;
     if (!sessionCounted) {
         // fresh session, not a resume — a start counted on every resume
@@ -378,7 +391,7 @@ function pauseSession() {
     iconPlay.style.display = 'block'; iconPause.style.display = 'none';
     playBtn.classList.remove('playing'); timerWrap.classList.remove('playing');
     playBtn.setAttribute('aria-label', cfg.playLabel);
-    setState('Paused — press play to continue');
+    setState(STRINGS.paused);
     if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
 }
 

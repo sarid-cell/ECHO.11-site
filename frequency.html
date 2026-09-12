@@ -50,6 +50,11 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://echo11.app/frequency.html" />
 
+    <!-- Reciprocal hreflang: this page, its Hebrew twin, and the default -->
+    <link rel="alternate" hreflang="en" href="https://echo11.app/frequency.html" />
+    <link rel="alternate" hreflang="he" href="https://echo11.app/he/teder-10hz.html" />
+    <link rel="alternate" hreflang="x-default" href="https://echo11.app/frequency.html" />
+
     <!-- Open Graph -->
     <meta property="og:title" content="Free 10Hz Binaural Beat for Anxiety — 11-Minute Reset | ECHO.11">
     <meta property="og:description" content="Press play, close your eyes: a free 10Hz alpha binaural beat for anxiety relief, calm, and focus. 11 minutes, no signup.">
@@ -100,7 +105,9 @@
             "@id": "https://echo11.app/#website",
             "name": "ECHO.11",
             "url": "https://echo11.app/",
-            "publisher": { "@id": "https://echo11.app/#shira-sarid" }
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            }
         },
         {
             "@type": "WebPage",
@@ -108,17 +115,41 @@
             "url": "https://echo11.app/frequency.html",
             "name": "Free 10Hz Binaural Beat for Anxiety — 11-Minute Reset | ECHO.11",
             "description": "Press play, close your eyes: a free 10Hz alpha binaural beat for anxiety relief, calm, and focus. 11 minutes, no signup, no download — just headphones. By ECHO.11.",
-            "isPartOf": { "@id": "https://echo11.app/#website" },
-            "publisher": { "@id": "https://echo11.app/#shira-sarid" },
-            "inLanguage": "en"
+            "isPartOf": {
+                "@id": "https://echo11.app/#website"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "inLanguage": "en",
+            "speakable": {
+                "@type": "SpeakableSpecification",
+                "cssSelector": [
+                    "#why-10hz"
+                ]
+            }
         },
         {
             "@type": "BreadcrumbList",
             "@id": "https://echo11.app/frequency.html#breadcrumbs",
             "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://echo11.app/" },
-                { "@type": "ListItem", "position": 2, "name": "Frequencies", "item": "https://echo11.app/frequencies.html" },
-                { "@type": "ListItem", "position": 3, "name": "10 Hz" }
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://echo11.app/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Frequencies",
+                    "item": "https://echo11.app/frequencies.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "10 Hz"
+                }
             ]
         },
         {
@@ -128,7 +159,9 @@
             "description": "An 11-minute 10Hz alpha binaural beat session for anxiety relief. The left ear hears a 200Hz tone and the right ear a 210Hz tone, generated live in the browser. Stereo headphones required.",
             "duration": "PT11M",
             "isAccessibleForFree": true,
-            "creator": { "@id": "https://echo11.app/#shira-sarid" },
+            "creator": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
             "url": "https://echo11.app/frequency.html",
             "inLanguage": "en"
         },
@@ -175,6 +208,41 @@
                         "@type": "Answer",
                         "text": "Individual response varies. Most commonly reported: Mental clarity, Reduced mind-chatter, Gentle warmth, Heightened focus, Present-moment awareness."
                     }
+                }
+            ]
+        },
+        {
+            "@type": "HowTo",
+            "@id": "https://echo11.app/frequency.html#howto",
+            "name": "How to listen to the 10Hz binaural session",
+            "totalTime": "PT11M",
+            "supply": [
+                {
+                    "@type": "HowToSupply",
+                    "name": "Stereo headphones"
+                }
+            ],
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "position": 1,
+                    "name": "Put on stereo headphones",
+                    "text": "Each ear has to hear a different tone. Speakers blend the two channels together, so the beat never forms.",
+                    "url": "https://echo11.app/frequency.html#step1"
+                },
+                {
+                    "@type": "HowToStep",
+                    "position": 2,
+                    "name": "Press play",
+                    "text": "The tone is generated live in your browser. Nothing to download, nothing to sign up for.",
+                    "url": "https://echo11.app/frequency.html#step2"
+                },
+                {
+                    "@type": "HowToStep",
+                    "position": 3,
+                    "name": "Stay with it for 11 minutes",
+                    "text": "That is the window in which the synchronization settles. You can stop at any point.",
+                    "url": "https://echo11.app/frequency.html#step3"
                 }
             ]
         }
@@ -371,7 +439,7 @@
                     </div>
                     <div class="info-block">
                         <div class="info-q">Why 10 Hz?</div>
-                        <div class="info-a">10Hz sits inside the <strong>Alpha band (8–13Hz)</strong> — the brain's natural state of relaxed alertness. Alpha is associated with reduced anxiety, creative clarity, and the quiet between stimulus and reaction. Present, not reactive.</div>
+                        <div class="info-a" id="why-10hz">10Hz sits inside the <strong>Alpha band (8–13Hz)</strong> — the brain's natural state of relaxed alertness. Alpha is associated with reduced anxiety, creative clarity, and the quiet between stimulus and reaction. Present, not reactive.</div>
                     </div>
                     <div class="info-block">
                         <div class="info-q">What happens in the brain?</div>
@@ -438,6 +506,7 @@
                 <div class="next-step reveal">
                     <span class="next-step-tag">If you want to go deeper</span>
                     <p>This frequency is one chapter. The book documents the whole method — how these sessions were built, and the thinking behind a quieter mind.</p>
+                    <p>When the problem is starting rather than settling, <a href="40hz.html">the 40Hz focus session</a> works the other way around — the same eleven minutes, eyes open. Both sit together with <a href="frequencies.html">all the free binaural sessions</a>.</p>
                     <a href="book.html">Join the early list</a>
                 </div>
 
