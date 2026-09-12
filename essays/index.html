@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="supports-dark">
 <head>
+    <meta charset="UTF-8">
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -23,8 +24,6 @@
         window.addEventListener('load', function () { setTimeout(loadGtag, 3000); });
       })();
     </script>
-
-    <meta charset="UTF-8">
     <!-- Quiet Mode bootstrap: resolve theme before first paint (no FOUC). -->
     <script>
     (function(){try{var t=localStorage.getItem('echo11_theme');if(t!=='dark'&&t!=='light'){var h=new Date().getHours();t=(h>=20||h<7)||matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
