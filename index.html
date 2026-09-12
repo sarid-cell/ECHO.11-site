@@ -308,7 +308,7 @@
             display: block;
         }
 
-        .a11y-menu h2 {
+        .a11y-menu .a11y-title {
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 0.75rem;
@@ -746,8 +746,11 @@
             display: inline-block; margin-top: 2.2rem;
             font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
             letter-spacing: 0.18em; text-transform: uppercase;
-            color: var(--text-light); text-decoration: none;
-            opacity: 0.75; transition: opacity 1.2s ease, color .3s ease;
+            color: var(--text-secondary); text-decoration: none;
+            /* 0.75 over the hero plate dropped the effective contrast under
+               4.5:1; 0.85 on the darker token clears it and still reads as
+               a quiet cue. */
+            opacity: 0.85; transition: opacity 1.2s ease, color .3s ease;
         }
         .hero-cue:hover, .hero-cue:focus-visible { opacity: 1; color: var(--text); }
 
@@ -885,12 +888,19 @@
         .reveal {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 0.45s ease, transform 0.45s ease;
         }
 
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Content already on screen at first paint has nothing to reveal:
+           it arrives at full opacity with no transition. That also stops
+           contrast tooling from sampling a half-faded colour. */
+        .reveal.instant, .reveal-lines.instant .reveal-line {
+            transition: none;
         }
 
         .reveal-lines .reveal-line {
@@ -1021,10 +1031,8 @@
         }
 
         /* Pillars */
-        .pillars {
-            border-top: 1px solid var(--border);
-        }
-        .pillars .section-label { margin-bottom: 2rem; }
+        /* .pillars is gone: the three columns now sit inside .vision */
+        .vision .pillars-grid { margin: 3.5rem 0 1rem; }
 
         .pillars-grid {
             display: grid;
@@ -1638,28 +1646,26 @@
                     <span class="reveal-line"><strong>Psychology First, Pixels Second.</strong> With a background in consumer psychology, I use generative AI to strip away the excess and build digital spaces that feel human, intuitive, and calm.</span>
                 </p>
             </div>
-            <div class="vision-image reveal">
-                <picture><source srcset="assets/images/astro-eyes-closed.webp" type="image/webp"><img src="assets/images/astro-eyes-closed.png" alt="Close-up portrait of a woman astronaut, eyes closed" loading="lazy"></picture>
-                <picture class="awaken-open"><source srcset="assets/images/astro-eyes-open.webp" type="image/webp"><img src="assets/images/astro-eyes-open.png" alt="Close-up portrait of woman astronaut, eyes opening as you scroll" loading="lazy"></picture>
-            </div>
-        </section>
-
-        <!-- Pillars -->
-        <section class="pillars">
-            <h2 class="section-label reveal">The approach</h2>
-            <div class="pillars-grid">
-                <div class="pillar reveal">
+            <!-- The approach folded in: one h2, one closing image, and the
+                 three columns as a row inside the section they restated. -->
+            <div class="pillars-grid reveal">
+                <div class="pillar">
                     <h3>The Human Edge</h3>
                     <p>Technology is code; intuition is the spark.</p>
                 </div>
-                <div class="pillar reveal">
+                <div class="pillar">
                     <h3>Generative AI</h3>
                     <p>AI as an instrument of precision and focus, not just output.</p>
                 </div>
-                <div class="pillar reveal">
+                <div class="pillar">
                     <h3>Future-Proof Strategy</h3>
                     <p>Algorithms change daily; human nature does not.</p>
                 </div>
+            </div>
+
+            <div class="vision-image reveal">
+                <picture><source srcset="assets/images/astro-eyes-closed.webp" type="image/webp"><img src="assets/images/astro-eyes-closed.png" alt="Close-up portrait of a woman astronaut, eyes closed" loading="lazy"></picture>
+                <picture class="awaken-open"><source srcset="assets/images/astro-eyes-open.webp" type="image/webp"><img src="assets/images/astro-eyes-open.png" alt="Close-up portrait of woman astronaut, eyes opening as you scroll" loading="lazy"></picture>
             </div>
         </section>
 
@@ -1675,23 +1681,22 @@
             <div class="footer-brand">ECHO.11</div>
             
             <div class="footer-contact">
-                <h2>Let's connect in the noise</h2>
+                <p class="footer-h">Let's connect in the noise</p>
                 <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
             </div>
             
             <div class="footer-column">
-                <h2>Channels</h2>
+                <p class="footer-h">Channels</p>
                 <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
                 <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
                 <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer">Pinterest</a>
-                <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
             </div>
             
             <div class="footer-column">
-                <h2>Signals</h2>
-                <a href="about.html">Strategy</a>
-                <a href="#insights">Psychology</a>
-                <a href="https://shirasarid.substack.com/" target="_blank" rel="noopener noreferrer">AI Tools</a>
+                <p class="footer-h">Explore</p>
+                <a href="/about.html">Strategy</a>
+                <a href="/essays/">Field Notes</a>
+                <a href="/frequencies.html">The Sessions</a>
             </div>
             
             <div class="footer-icon">
@@ -1704,6 +1709,7 @@
         <div class="footer-legal">
             <p>© 2026 ECHO.11 by Shira Sarid. All rights reserved.</p>
             <div class="footer-legal-links">
+                <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer">CTRL+HUMAN podcast — archive</a>
                 <a href="privacy.html">Privacy Policy</a>
                 <a href="accessibility.html">Accessibility</a>
             </div>
@@ -1718,7 +1724,7 @@
             </svg>
         </button>
         <div class="a11y-menu" id="a11yMenu" role="menu" aria-label="Accessibility options">
-            <h2>♿ Accessibility</h2>
+            <p class="a11y-title">Accessibility</p>
             <button class="a11y-btn" data-mode="a11y-large-text" role="menuitem">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
@@ -1789,15 +1795,22 @@
 
         revealElements.forEach(el => observer.observe(el));
 
+        // Anything in the first viewport is shown at once, without the fade
+        revealElements.forEach(el => {
+            if (el.getBoundingClientRect().top < window.innerHeight) {
+                el.classList.add('instant', 'visible');
+            }
+        });
+
         window.addEventListener('load', () => {
             revealElements.forEach(el => {
                 const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight) el.classList.add('visible');
+                if (rect.top < window.innerHeight) el.classList.add('instant', 'visible');
             });
         });
 
         // Fallback so off-screen sections aren't left at opacity:0 for crawlers/non-scrolling renders
-        setTimeout(() => revealElements.forEach(el => el.classList.add('visible')), 2500);
+        setTimeout(() => revealElements.forEach(el => el.classList.add('instant', 'visible')), 2500);
 
         // Custom Cursor Dot
         const cursorDot = document.querySelector('.cursor-dot');
