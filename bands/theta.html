@@ -64,6 +64,7 @@
     <noscript><link rel="stylesheet" href="/assets/css/micro-interactions.css"></noscript>
     <link rel="stylesheet" href="/assets/css/session.css">
     <link rel="stylesheet" href="/assets/css/essay.css">
+    <link rel="stylesheet" href="/assets/css/band.css">
 
     <script type="application/ld+json">
 {
@@ -159,43 +160,6 @@
     ]
 }
     </script>
-    <style>
-        /* Band pages — the reading column from essay.css, plus a spec strip
-           and the same experiential chips the session pages use. */
-        .band-spec {
-            display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem;
-            font-family: var(--mono); font-size: 0.7rem;
-            letter-spacing: 0.14em; text-transform: uppercase;
-            color: var(--text-light);
-            padding: 1.1rem 0; margin-bottom: 2.4rem;
-            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-        }
-        .band-listen {
-            margin-top: 1.2rem; padding: 1.8rem;
-            border: 1px solid var(--border); display: block;
-            text-decoration: none; color: var(--text);
-            transition: border-color .25s ease;
-        }
-        a.band-listen:hover, a.band-listen:focus-visible { border-color: var(--text); }
-        a.band-listen:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
-        .band-listen-label {
-            font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.14em;
-            text-transform: uppercase; display: block; margin-bottom: 0.6rem;
-        }
-        .band-listen-line { font-size: 0.95rem; font-weight: 300; color: var(--text-secondary); }
-        .band-nav {
-            display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 3rem;
-        }
-        .band-nav a {
-            font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em;
-            text-transform: uppercase; text-decoration: none; color: var(--text-light);
-            border: 1px solid var(--border); padding: 0.5rem 0.9rem;
-            transition: color .25s ease, border-color .25s ease;
-        }
-        .band-nav a:hover, .band-nav a:focus-visible { color: var(--text); border-color: var(--text); }
-        .band-nav a:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
-        .band-nav a[aria-current="page"] { color: var(--text); border-color: var(--text); }
-    </style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -249,17 +213,32 @@
     </aside>
 
     <main id="main-content">
-        <article class="essay">
-            <div class="essay-inner">
-                <div class="essay-eyebrow"><a href="/bands/">The Bands</a><span>Theta</span></div>
-                <h1>Theta waves (4&ndash;8 Hz) &mdash; what they are and what the research actually shows</h1>
-
-                <div class="band-spec">
-                    <span>4&ndash;8 Hz</span>
-                    <span>Drift</span>
-                    <span>No session yet</span>
+        <article class="band-page">
+            <header class="band-hero">
+                <div class="band-hero-plate">
+                    <picture>
+                        <source srcset="/assets/images/astro-eyes-closed.webp" type="image/webp">
+                        <img src="/assets/images/astro-eyes-closed.png" alt="Portrait of an astronaut with her eyes closed" width="1456" height="816" fetchpriority="high">
+                    </picture>
                 </div>
-
+                <div class="band-hero-overlay"></div>
+                <div class="band-hero-inner">
+                    <div class="essay-eyebrow"><a href="/bands/">The Bands</a><span>Theta</span></div>
+                    <h1>Theta waves (4&ndash;8 Hz) &mdash; what they are and what the research actually shows</h1>
+                    <div class="band-spec">
+                        <span>4&ndash;8 Hz</span>
+                        <span>Drift</span>
+                        <span>No session yet</span>
+                    </div>
+                    <!-- Band signature: 1.25 seconds of the theta rhythm, drawn at 6.4 Hz. -->
+                    <svg class="band-sig" viewBox="0 0 600 56" preserveAspectRatio="none"
+                         aria-hidden="true" focusable="false">
+                        <path d="M0,28 Q18.75,-4 37.5,28 Q56.25,60 75,28 Q93.75,-4 112.5,28 Q131.25,60 150,28 Q168.75,-4 187.5,28 Q206.25,60 225,28 Q243.75,-4 262.5,28 Q281.25,60 300,28 Q318.75,-4 337.5,28 Q356.25,60 375,28 Q393.75,-4 412.5,28 Q431.25,60 450,28 Q468.75,-4 487.5,28 Q506.25,60 525,28 Q543.75,-4 562.5,28 Q581.25,60 600,28"/>
+                    </svg>
+                </div>
+            </header>
+            <div class="essay">
+            <div class="essay-inner">
                 <div class="essay-body">
                 <h2>What the band is</h2>
                 <p>Theta runs roughly <strong>4 to 8 Hz</strong>, between delta and alpha. In adults it shows up in drowsiness, in the drift just before sleep, and in some meditative states. It is also recorded from the hippocampus during certain kinds of movement and learning, though hippocampal theta and scalp theta are not the same measurement and should not be treated as interchangeable.</p>
@@ -285,7 +264,14 @@
                     </div>
 
                 <h2>Listen</h2>
-                <p>There is no theta session on ECHO.11. The two that exist are <a href="/frequency.html">10 Hz for calm</a> and <a href="/40hz.html">40 Hz for focus</a>.</p>
+                <div class="band-none">
+                    <span class="band-none-band">Theta &middot; 4&ndash;8 Hz</span>
+                    <p class="band-none-line">No echo&middot;11 session yet.</p>
+                    <div class="band-none-links">
+                        <a href="/frequency.html">10 Hz &middot; Calm</a>
+                        <a href="/40hz.html">40 Hz &middot; Focus</a>
+                    </div>
+                </div>
                 </div>
 
                 <nav class="band-nav" aria-label="The five bands">
@@ -301,6 +287,7 @@
                     <a href="/frequencies.html">The sessions</a>
                     <a href="/essays/">Field notes</a>
                 </div>
+            </div>
             </div>
         </article>
     </main>

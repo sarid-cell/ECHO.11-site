@@ -64,6 +64,7 @@
     <noscript><link rel="stylesheet" href="/assets/css/micro-interactions.css"></noscript>
     <link rel="stylesheet" href="/assets/css/session.css">
     <link rel="stylesheet" href="/assets/css/essay.css">
+    <link rel="stylesheet" href="/assets/css/band.css">
 
     <script type="application/ld+json">
 {
@@ -159,43 +160,6 @@
     ]
 }
     </script>
-    <style>
-        /* Band pages — the reading column from essay.css, plus a spec strip
-           and the same experiential chips the session pages use. */
-        .band-spec {
-            display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem;
-            font-family: var(--mono); font-size: 0.7rem;
-            letter-spacing: 0.14em; text-transform: uppercase;
-            color: var(--text-light);
-            padding: 1.1rem 0; margin-bottom: 2.4rem;
-            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-        }
-        .band-listen {
-            margin-top: 1.2rem; padding: 1.8rem;
-            border: 1px solid var(--border); display: block;
-            text-decoration: none; color: var(--text);
-            transition: border-color .25s ease;
-        }
-        a.band-listen:hover, a.band-listen:focus-visible { border-color: var(--text); }
-        a.band-listen:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
-        .band-listen-label {
-            font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.14em;
-            text-transform: uppercase; display: block; margin-bottom: 0.6rem;
-        }
-        .band-listen-line { font-size: 0.95rem; font-weight: 300; color: var(--text-secondary); }
-        .band-nav {
-            display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 3rem;
-        }
-        .band-nav a {
-            font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em;
-            text-transform: uppercase; text-decoration: none; color: var(--text-light);
-            border: 1px solid var(--border); padding: 0.5rem 0.9rem;
-            transition: color .25s ease, border-color .25s ease;
-        }
-        .band-nav a:hover, .band-nav a:focus-visible { color: var(--text); border-color: var(--text); }
-        .band-nav a:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
-        .band-nav a[aria-current="page"] { color: var(--text); border-color: var(--text); }
-    </style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -249,17 +213,32 @@
     </aside>
 
     <main id="main-content">
-        <article class="essay">
-            <div class="essay-inner">
-                <div class="essay-eyebrow"><a href="/bands/">The Bands</a><span>Delta</span></div>
-                <h1>Delta waves (0.5&ndash;4 Hz) &mdash; what they are and what the research actually shows</h1>
-
-                <div class="band-spec">
-                    <span>0.5&ndash;4 Hz</span>
-                    <span>Sleep</span>
-                    <span>No session yet</span>
+        <article class="band-page">
+            <header class="band-hero">
+                <div class="band-hero-plate">
+                    <picture>
+                        <source srcset="/assets/images/astro.webp" type="image/webp">
+                        <img src="/assets/images/astro.png" alt="Close-up portrait of an astronaut, eyes closed, at rest" width="1456" height="816" fetchpriority="high">
+                    </picture>
                 </div>
-
+                <div class="band-hero-overlay"></div>
+                <div class="band-hero-inner">
+                    <div class="essay-eyebrow"><a href="/bands/">The Bands</a><span>Delta</span></div>
+                    <h1>Delta waves (0.5&ndash;4 Hz) &mdash; what they are and what the research actually shows</h1>
+                    <div class="band-spec">
+                        <span>0.5&ndash;4 Hz</span>
+                        <span>Sleep</span>
+                        <span>No session yet</span>
+                    </div>
+                    <!-- Band signature: 1.25 seconds of the delta rhythm, drawn at 4 Hz. -->
+                    <svg class="band-sig" viewBox="0 0 600 56" preserveAspectRatio="none"
+                         aria-hidden="true" focusable="false">
+                        <path d="M0,28 Q30,-12 60,28 Q90,68 120,28 Q150,-12 180,28 Q210,68 240,28 Q270,-12 300,28 Q330,68 360,28 Q390,-12 420,28 Q450,68 480,28 Q510,-12 540,28 Q570,68 600,28"/>
+                    </svg>
+                </div>
+            </header>
+            <div class="essay">
+            <div class="essay-inner">
                 <div class="essay-body">
                 <h2>What the band is</h2>
                 <p>Delta is the slowest of the conventional EEG bands, roughly <strong>0.5 to 4 Hz</strong>. On a scalp recording it appears as large, slow, high-amplitude waves. In healthy adults it dominates during the deepest stage of non-REM sleep, which is why that stage is also called slow-wave sleep. Delta activity in a waking adult recording is unusual and is one of the things a clinician looks for.</p>
@@ -286,7 +265,14 @@
                     </div>
 
                 <h2>Listen</h2>
-                <p>There is no delta session on ECHO.11. The two that exist are <a href="/frequency.html">10 Hz for calm</a> and <a href="/40hz.html">40 Hz for focus</a>.</p>
+                <div class="band-none">
+                    <span class="band-none-band">Delta &middot; 0.5&ndash;4 Hz</span>
+                    <p class="band-none-line">No echo&middot;11 session yet.</p>
+                    <div class="band-none-links">
+                        <a href="/frequency.html">10 Hz &middot; Calm</a>
+                        <a href="/40hz.html">40 Hz &middot; Focus</a>
+                    </div>
+                </div>
                 </div>
 
                 <nav class="band-nav" aria-label="The five bands">
@@ -302,6 +288,7 @@
                     <a href="/frequencies.html">The sessions</a>
                     <a href="/essays/">Field notes</a>
                 </div>
+            </div>
             </div>
         </article>
     </main>

@@ -64,6 +64,7 @@
     <noscript><link rel="stylesheet" href="/assets/css/micro-interactions.css"></noscript>
     <link rel="stylesheet" href="/assets/css/session.css">
     <link rel="stylesheet" href="/assets/css/essay.css">
+    <link rel="stylesheet" href="/assets/css/band.css">
 
     <script type="application/ld+json">
 {
@@ -163,43 +164,6 @@
     ]
 }
     </script>
-    <style>
-        /* Band pages — the reading column from essay.css, plus a spec strip
-           and the same experiential chips the session pages use. */
-        .band-spec {
-            display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem;
-            font-family: var(--mono); font-size: 0.7rem;
-            letter-spacing: 0.14em; text-transform: uppercase;
-            color: var(--text-light);
-            padding: 1.1rem 0; margin-bottom: 2.4rem;
-            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-        }
-        .band-listen {
-            margin-top: 1.2rem; padding: 1.8rem;
-            border: 1px solid var(--border); display: block;
-            text-decoration: none; color: var(--text);
-            transition: border-color .25s ease;
-        }
-        a.band-listen:hover, a.band-listen:focus-visible { border-color: var(--text); }
-        a.band-listen:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
-        .band-listen-label {
-            font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.14em;
-            text-transform: uppercase; display: block; margin-bottom: 0.6rem;
-        }
-        .band-listen-line { font-size: 0.95rem; font-weight: 300; color: var(--text-secondary); }
-        .band-nav {
-            display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 3rem;
-        }
-        .band-nav a {
-            font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em;
-            text-transform: uppercase; text-decoration: none; color: var(--text-light);
-            border: 1px solid var(--border); padding: 0.5rem 0.9rem;
-            transition: color .25s ease, border-color .25s ease;
-        }
-        .band-nav a:hover, .band-nav a:focus-visible { color: var(--text); border-color: var(--text); }
-        .band-nav a:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
-        .band-nav a[aria-current="page"] { color: var(--text); border-color: var(--text); }
-    </style>
     <style>
         /* The index rows carry no thumbnail, so the grid collapses to one column */
         .band-index-item { grid-template-columns: 1fr; }
