@@ -204,9 +204,13 @@
         }
 
         html {
-            scroll-behavior: smooth;
             font-size: 18px;
             overflow-x: hidden;
+        }
+        /* Anchor targets clear the fixed bar; scroll-padding-top comes
+           from site-header.js, which owns the bar's height. */
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
         }
 
         body {
@@ -625,7 +629,8 @@
 
         /* Hero - Full width background with text overlay */
         .hero {
-            min-height: 100vh;
+            min-height: 88vh;           /* fallback for browsers without svh */
+            min-height: 88svh;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -735,6 +740,17 @@
             line-height: 1.9;
         }
 
+        /* Scroll cue — the only thing telling a first-time visitor
+           the page continues. Opacity only; no motion to disable. */
+        .hero-cue {
+            display: inline-block; margin-top: 2.2rem;
+            font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--text-light); text-decoration: none;
+            opacity: 0.75; transition: opacity 1.2s ease, color .3s ease;
+        }
+        .hero-cue:hover, .hero-cue:focus-visible { opacity: 1; color: var(--text); }
+
         .hero-ctas {
             display: flex; align-items: center; gap: 1.6rem;
             flex-wrap: wrap; margin-bottom: 2.4rem;
@@ -842,6 +858,7 @@
         @media (max-width: 768px) {
             .hero {
                 min-height: 90vh;
+                min-height: 90svh;
             }
             
             .hero-content {
@@ -856,6 +873,7 @@
         @media (max-width: 480px) {
             .hero {
                 min-height: 85vh;
+                min-height: 85svh;
             }
             
             .hero h1 {
@@ -1564,7 +1582,7 @@
 
     <main id="main-content">
         <!-- Hero -->
-        <section class="hero" id="home">
+        <section class="hero" id="home" data-hero="light">
             <div class="hero-background">
                 <picture><source srcset="assets/images/hero.webp" type="image/webp"><img src="assets/images/hero.png" alt="Futuristic figure in flowing white garments" fetchpriority="high"></picture>
             </div>
@@ -1580,6 +1598,7 @@
                     <a href="40hz.html" class="hero-cta-secondary">or sharpen focus with 40Hz →</a>
                 </div>
                 <p class="hero-summary reveal">ECHO.11 is two things in one place. A free 10Hz frequency session for the moments a nervous system will not settle, and a body of writing on where consumer psychology and generative AI actually meet. Both come from the same question: what makes a mind resilient when the noise does not stop.</p>
+                <a href="#sessions" class="hero-cue">The Sessions &darr;</a>
             </div>
         </section>
 
