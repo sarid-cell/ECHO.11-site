@@ -203,6 +203,14 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --section-y: 6rem;
+            --section-x: 2.5rem;
+        }
+        @media (max-width: 768px) {
+            :root { --section-y: 4rem; --section-x: 1.5rem; }
+        }
+
         html {
             font-size: 18px;
             overflow-x: hidden;
@@ -952,8 +960,10 @@
         }
 
         /* Sections */
+        /* Section rhythm comes from two custom properties, so every
+           section keeps the same vertical beat at every width. */
         section {
-            padding: 5rem 2.5rem;
+            padding: var(--section-y) var(--section-x);
             max-width: 1600px;
             margin: 0 auto;
         }
@@ -969,7 +979,6 @@
 
         /* Vision */
         .sessions-home {
-            padding: 5rem 2.5rem;
             border-top: 1px solid var(--border);
             background: var(--bg);
         }
@@ -1005,7 +1014,6 @@
             border-bottom: 1px solid var(--text); padding-bottom: 2px;
             display: inline-block;
         }
-        @media (max-width: 768px) { .sessions-home { padding: 3.5rem 1.5rem; } }
 
         .vision {
             border-top: 1px solid var(--border);
@@ -1088,11 +1096,11 @@
         }
 
         /* Insights */
+        /* No top border: the white ground already separates it from the
+           sessions block above. */
         .insights {
-            border-top: 1px solid var(--border);
             background: var(--white);
             max-width: 100%;
-            padding: 5rem 2.5rem;
         }
 
         .insights-inner {
@@ -1177,9 +1185,9 @@
         /* Latest Article from Substack (RSS) */
         /* The bands index — hairline cards, no imagery, so the row reads
            as a directory rather than competing with the session cards. */
+        /* No top border either: it sits on --bg under the white Insights. */
         .bands {
-            padding: 5rem 2.5rem;
-            border-top: 1px solid var(--border);
+            background: var(--bg);
         }
         .bands-inner { max-width: 1100px; margin: 0 auto; }
         .bands-line {
@@ -1210,7 +1218,6 @@
             margin-top: auto;
         }
         @media (max-width: 768px) {
-            .bands { padding: 3.5rem 1.5rem; }
             .bands-row { grid-template-columns: repeat(2, 1fr); }
             .band-card { min-height: 116px; }
             /* five cards in a 2-column grid leave a hole; gamma takes the row */
@@ -1448,10 +1455,6 @@
 
             .header-inner {
                 padding: 1rem 1.5rem;
-            }
-
-            section {
-                padding: 4rem 1.5rem;
             }
 
             .hero-content {
