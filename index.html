@@ -994,6 +994,42 @@
             font-weight: 500;
         }
 
+        .vision-image {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-top: 5rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .vision-image img {
+            width: 100%;
+            height: 550px;
+            object-fit: cover;
+            filter: grayscale(100%);
+        }
+
+        /* The awakening — eyes-closed is the base layer; the eyes-open
+           shot fades in over it, driven by scroll position, so the
+           astronaut wakes up as the reader moves through the vision.
+           Default is fully open (the pre-existing static image), then
+           scroll-driven animation or the JS fallback takes over. */
+        .awaken-open {
+            position: absolute;
+            inset: 0;
+        }
+
+        /* Scroll progress is computed in JS (rAF-throttled, opacity only).
+           CSS scroll-driven view() timelines can't work here: both
+           .vision-image (overflow: hidden) and body (overflow-x: hidden)
+           are scroll containers that never actually scroll, so a view
+           timeline resolves against them and never progresses. */
+        @media (prefers-reduced-motion: reduce) {
+            .awaken-open {
+                opacity: 1 !important;
+            }
+        }
+
         /* Pillars */
         /* .pillars is gone: the three columns now sit inside .vision */
         .vision .pillars-grid { margin: 3.5rem 0 1rem; }
@@ -1405,6 +1441,10 @@
                 right: -100%;
             }
 
+            .vision-image img {
+                height: 350px;
+            }
+
             .article-image img {
                 height: 300px;
             }
@@ -1620,8 +1660,14 @@
                     <span class="reveal-line"><strong>Psychology First, Pixels Second.</strong> With a background in consumer psychology, I use generative AI to strip away the excess and build digital spaces that feel human, intuitive, and calm.</span>
                 </p>
             </div>
-            <!-- The approach folded in: one h2, one closing image, and the
-                 three columns as a row inside the section they restated. -->
+            <div class="vision-image reveal">
+                <picture><source srcset="assets/images/astro-eyes-closed.webp" type="image/webp"><img src="assets/images/astro-eyes-closed.png" alt="Close-up portrait of a woman astronaut, eyes closed" loading="lazy"></picture>
+                <picture class="awaken-open"><source srcset="assets/images/astro-eyes-open.webp" type="image/webp"><img src="assets/images/astro-eyes-open.png" alt="Close-up portrait of woman astronaut, eyes opening as you scroll" loading="lazy"></picture>
+            </div>
+
+            <!-- The approach folded in, and seated between the two portraits:
+                 the cross-fade plate closes the Vision text, the three columns
+                 keep it from touching the footer plate. -->
             <div class="pillars-grid reveal">
                 <div class="pillar">
                     <h3>The Human Edge</h3>
@@ -1897,6 +1943,32 @@
             });
         })();
 
+        // Awakening cross-fade — scroll-linked, all browsers.
+        // (CSS view() timelines can't track here; see the CSS comment.)
+        (function () {
+            const open = document.querySelector('.awaken-open');
+            if (!open) return;
+            const rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+            function update() {
+                if (rm.matches) { open.style.opacity = ''; return; }
+                const r = open.parentElement.getBoundingClientRect();
+                const vh = window.innerHeight;
+                // 0 as the image enters from below → 1 when its top nears mid-viewport
+                const progress = (vh - r.top) / (vh * 0.55);
+                open.style.opacity = Math.min(1, Math.max(0, progress));
+            }
+
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(() => { update(); ticking = false; });
+                }
+            }, { passive: true });
+            window.addEventListener('resize', update, { passive: true });
+            update();
+        })();
     </script>
     <script src="assets/js/site-header.js" defer></script>
     <script src="assets/js/quiet-mode.js" defer></script>
