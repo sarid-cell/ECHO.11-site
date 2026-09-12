@@ -8,9 +8,14 @@
 (function () {
   'use strict';
 
-  /* ── 1. Navigation — the conversion journey, in order ── */
+  /* ── 1. Navigation — the conversion journey, in order ──
+     Items may carry `children`: direct links rendered as an indented
+     mono sub-list, so a visitor reaches a session without the hub hop. */
   var NAV = [
-    { href: 'frequencies.html',    label: 'The Sessions' },
+    { href: 'frequencies.html',    label: 'The Sessions', children: [
+        { href: 'frequency.html',  label: '10 Hz · Calm' },
+        { href: '40hz.html',       label: '40 Hz · Focus' }
+      ] },
     { href: 'book.html',           label: 'The Book' },
     { href: 'index.html#insights', label: 'Insights' },
     { href: 'index.html#vision',   label: 'The Vision' },
@@ -24,7 +29,7 @@
       '<span class="menu-app-title">The App ' +
         '<span class="menu-app-badge">Coming Soon</span>' +
       '</span>' +
-      '<span class="menu-app-desc">The 10Hz reset, in your pocket.</span>' +
+      '<span class="menu-app-desc">Both sessions, in your pocket.</span>' +
     '</div>';
 
   var header    = document.querySelector('header');
@@ -36,10 +41,19 @@
     var nav = sideMenu.querySelector('nav');
     if (nav) {
       var here = (location.pathname.split('/').pop() || 'index.html');
-      nav.innerHTML = NAV.map(function (item) {
-        var current = item.href.split('#')[0] === here ? ' current' : '';
-        return '<a href="' + item.href + '" class="menu-link' + current + '">' + item.label + '</a>';
-      }).join('') + APP_TEASER;
+      function isHere(href) { return href.split('#')[0] === here; }
+      nav.innerHTML = '<ul class="menu-list">' + NAV.map(function (item) {
+        var link = '<a href="' + item.href + '" class="menu-link' +
+                   (isHere(item.href) ? ' current' : '') + '">' + item.label + '</a>';
+        var sub = '';
+        if (item.children) {
+          sub = '<ul class="menu-sublist">' + item.children.map(function (child) {
+            return '<li><a href="' + child.href + '" class="menu-sublink' +
+                   (isHere(child.href) ? ' current' : '') + '">' + child.label + '</a></li>';
+          }).join('') + '</ul>';
+        }
+        return '<li>' + link + sub + '</li>';
+      }).join('') + '</ul>' + APP_TEASER;
       // page scripts bound their close-toggle to the original anchors;
       // delegate clicks on the rebuilt ones through the hamburger instead
       nav.addEventListener('click', function (e) {
@@ -64,7 +78,29 @@
     'html[data-theme="dark"] header { background: rgba(14,16,19,0.75); border-bottom-color: rgba(255,255,255,0.08); }',
     '@media (prefers-reduced-motion: reduce) {',
     '  header { transition-duration: .15s, 1.8s; }',
-    '}'
+    '}',
+    // ── menu list + the direct session links nested under The Sessions ──
+    '.side-menu nav .menu-list,',
+    '.side-menu nav .menu-sublist { list-style: none; margin: 0; padding: 0; }',
+    '.side-menu nav .menu-list { display: flex; flex-direction: column; gap: 2rem; }',
+    '.side-menu nav .menu-list > li { display: flex; flex-direction: column; }',
+    '.side-menu nav .menu-sublist { margin-top: 1.1rem; padding-left: 1.1rem;',
+    '  border-left: 1px solid rgba(26,26,26,0.12); display: flex; flex-direction: column; gap: 0.3rem; }',
+    '.side-menu nav .menu-sublink {',
+    "  font-family: 'IBM Plex Mono', ui-monospace, monospace;",
+    '  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;',
+    '  font-weight: 400; color: #595959; text-decoration: none;',
+    '  display: inline-flex; align-items: center; padding: 0.35rem 0; min-height: 44px;',
+    '}',
+    '.side-menu nav .menu-sublink:hover,',
+    '.side-menu nav .menu-sublink:focus-visible { color: #1a1a1a; }',
+    '.side-menu nav .menu-sublink.current { color: #1a1a1a; font-weight: 500; }',
+    'html[data-theme="dark"] .side-menu nav .menu-sublist { border-left-color: rgba(255,255,255,0.16); }',
+    'html[data-theme="dark"] .side-menu nav .menu-sublink { color: rgba(255,255,255,0.62); }',
+    'html[data-theme="dark"] .side-menu nav .menu-sublink:hover,',
+    'html[data-theme="dark"] .side-menu nav .menu-sublink:focus-visible,',
+    'html[data-theme="dark"] .side-menu nav .menu-sublink.current { color: #fff; }',
+    'body.a11y-high-contrast .side-menu nav .menu-sublink { color: #1a1a1a !important; }'
   ].join('\n');
   var style = document.createElement('style');
   style.textContent = css;
