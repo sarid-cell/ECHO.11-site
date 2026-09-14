@@ -1,0 +1,189 @@
+/* ECHO.11 — the brainwave band pages.
+   Layered on session.css (palette, header, drawer, footer) and
+   essay.css (the reading column). What lives here is the band
+   treatment: the hero plate, the mono spec strip, the waveform
+   signature, the mono section labels and the two card styles. */
+
+/* ── Hero plate ──
+   Same treatment as the session pages: a full-width grayscale plate,
+   a Cloud Dancer gradient fading it into the page, and a wash behind
+   the text column only so the H1 and the spec strip hold 4.5:1. */
+.band-hero {
+    position: relative;
+    display: flex; align-items: flex-end;
+    min-height: min(68vh, 620px);
+    overflow: hidden;
+}
+.band-hero-plate { position: absolute; inset: 0; z-index: 1; }
+.band-hero-plate picture { display: block; width: 100%; height: 100%; }
+.band-hero-plate img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+}
+html[data-theme="dark"] .band-hero-plate img { filter: grayscale(100%) brightness(0.5); }
+
+.band-hero-overlay {
+    position: absolute; inset: 0; z-index: 2;
+    background: linear-gradient(
+        to bottom,
+        rgba(250,250,250,0.15) 0%,
+        rgba(250,250,250,0.35) 45%,
+        rgba(250,250,250,0.85) 82%,
+        rgba(250,250,250,1)    100%);
+}
+html[data-theme="dark"] .band-hero-overlay {
+    background: linear-gradient(
+        to bottom,
+        rgba(14,16,19,0.2)  0%,
+        rgba(14,16,19,0.4)  45%,
+        rgba(14,16,19,0.88) 82%,
+        rgba(14,16,19,1)    100%);
+}
+
+.band-hero-inner {
+    position: relative; z-index: 3;
+    width: 100%; max-width: 68ch;
+    margin: 0 auto;
+    padding: 12rem 2.5rem 3.2rem;
+}
+/* The wash sits behind the text column only, so the plate stays
+   itself at both edges. */
+.band-hero-inner::before {
+    content: ''; position: absolute; z-index: -1;
+    top: 0; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: min(100vw, 100% + 6rem);
+    background: linear-gradient(to right,
+        rgba(250,250,250,0)    0%,
+        rgba(250,250,250,0.78) 10%,
+        rgba(250,250,250,0.78) 90%,
+        rgba(250,250,250,0)    100%);
+}
+html[data-theme="dark"] .band-hero-inner::before {
+    background: linear-gradient(to right,
+        rgba(14,16,19,0)    0%,
+        rgba(14,16,19,0.78) 10%,
+        rgba(14,16,19,0.78) 90%,
+        rgba(14,16,19,0)    100%);
+}
+.band-hero .essay-eyebrow { color: var(--text-secondary); }
+.band-hero .essay-eyebrow a { color: var(--text-secondary); }
+.band-hero h1 {
+    font-size: clamp(2rem, 4.5vw, 3.1rem);
+    font-weight: 200; letter-spacing: -0.025em; line-height: 1.12;
+    margin-bottom: 1.1rem;
+}
+
+/* ── Spec strip ── */
+.band-spec {
+    display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem;
+    font-family: var(--mono); font-size: 0.7rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-secondary);
+    padding: 1.1rem 0;
+    border-top: 1px solid rgba(26,26,26,0.22);
+    border-bottom: 1px solid rgba(26,26,26,0.22);
+}
+html[data-theme="dark"] .band-spec {
+    border-top-color: rgba(233,233,231,0.28);
+    border-bottom-color: rgba(233,233,231,0.28);
+}
+
+/* ── Band signature ──
+   One static line: 1.25 seconds of that band's rhythm, drawn at a
+   frequency inside the band and at the amplitude the band is known
+   for — slow and tall for delta, fast and shallow for gamma. */
+.band-sig {
+    display: block; width: 100%; height: 56px;
+    margin-top: 1.4rem;
+    color: var(--text);
+}
+.band-sig path {
+    fill: none; stroke: currentColor; stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+}
+
+/* ── The reading column ── */
+.band-page .essay { padding-top: 4.5rem; }
+.band-page .essay-inner { max-width: 68ch; }
+
+/* Section headings read as mono labels with a hairline above,
+   the way the session pages label their sections. */
+.band-page .essay-body h2 {
+    font-family: var(--mono);
+    font-size: 0.75rem; font-weight: 400;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-light);
+    line-height: 1.5;
+    margin-top: 3.6rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+}
+.band-page .essay-body h2:first-child { margin-top: 0; }
+
+/* ── Listen card ── */
+.band-listen {
+    margin-top: 1.2rem; padding: 1.8rem;
+    border: 1px solid var(--border); display: block;
+    text-decoration: none; color: var(--text);
+    transition: border-color .25s ease;
+}
+a.band-listen:hover, a.band-listen:focus-visible { border-color: var(--text); }
+a.band-listen:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.band-listen-label {
+    font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.14em;
+    text-transform: uppercase; display: block; margin-bottom: 0.6rem;
+}
+.band-listen-line { font-size: 0.95rem; font-weight: 300; color: var(--text-secondary); }
+
+/* ── No-session card ──
+   The three bands without a session get the same bordered card, so
+   the page closes on the two sessions that do exist instead of on a
+   dead end. */
+.band-none {
+    margin-top: 1.2rem; padding: 1.8rem;
+    border: 1px solid var(--border);
+}
+.band-none-band {
+    font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.14em;
+    text-transform: uppercase; display: block; margin-bottom: 0.6rem;
+}
+.band-none-line {
+    font-size: 0.95rem; font-weight: 300; color: var(--text-secondary);
+    margin-bottom: 1.4rem;
+}
+.band-none-links { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.band-none-links a {
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em;
+    text-transform: uppercase; text-decoration: none; color: var(--text);
+    border: 1px solid var(--border); padding: 0.75rem 1.1rem;
+    min-height: 44px; display: inline-flex; align-items: center;
+    transition: border-color .25s ease;
+}
+.band-none-links a:hover, .band-none-links a:focus-visible { border-color: var(--text); }
+.band-none-links a:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+
+/* ── The five-band nav ── */
+.band-nav { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 3rem; }
+.band-nav a {
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em;
+    text-transform: uppercase; text-decoration: none; color: var(--text-light);
+    border: 1px solid var(--border); padding: 0.5rem 0.9rem;
+    transition: color .25s ease, border-color .25s ease;
+}
+.band-nav a:hover, .band-nav a:focus-visible { color: var(--text); border-color: var(--text); }
+.band-nav a:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.band-nav a[aria-current="page"] { color: var(--text); border-color: var(--text); }
+
+@media (max-width: 768px) {
+    .band-hero { min-height: min(58vh, 460px); }
+    .band-hero-inner { padding: 9rem 1.5rem 2.6rem; }
+    /* At this width the text column is the whole screen, so the wash
+       runs edge to edge rather than fading out across the type. */
+    .band-hero-inner::before {
+        width: 100%;
+        background: rgba(250,250,250,0.82);
+    }
+    html[data-theme="dark"] .band-hero-inner::before { background: rgba(14,16,19,0.82); }
+    .band-page .essay { padding-top: 3rem; }
+    .band-sig { height: 44px; }
+}

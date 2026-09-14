@@ -15,7 +15,7 @@
     '.a11y-toggle svg { width: 26px; height: 26px; }',
     '.a11y-menu { position: absolute; bottom: 60px; left: 0; background: var(--white, #fff); border: 1px solid var(--border, #e0e0e0); border-radius: 12px; padding: 1rem; min-width: 220px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); display: none; }',
     '.a11y-menu.active { display: block; }',
-    '.a11y-menu h2 { font-size: 0.85rem; font-weight: 600; margin: 0 0 0.75rem; color: var(--text, #1a1a1a); }',
+    '.a11y-menu .a11y-title { font-size: 0.85rem; font-weight: 600; margin: 0 0 0.75rem; color: var(--text, #1a1a1a); }',
     '.a11y-btn { width: 100%; padding: 0.6rem 0.75rem; margin-bottom: 0.4rem; background: var(--bg, #fafafa); border: 1px solid var(--border, #e0e0e0); border-radius: 6px; cursor: pointer; font-size: 0.85rem; color: var(--text, #1a1a1a); text-align: left; display: flex; align-items: center; gap: 0.6rem; transition: all 0.2s; }',
     '.a11y-btn:hover, .a11y-btn.active { background: var(--text, #1a1a1a); color: var(--white, #fff); }',
     '.a11y-btn svg { width: 18px; height: 18px; flex-shrink: 0; }',
@@ -43,7 +43,7 @@
   widget.innerHTML =
     '<button class="a11y-toggle" id="a11yToggle" aria-label="Accessibility options" title="Accessibility">' + icons.person + '</button>' +
     '<div class="a11y-menu" id="a11yMenu">' +
-      '<h2>♿ Accessibility</h2>' +
+      '<p class="a11y-title">Accessibility</p>' +
       '<button class="a11y-btn" data-mode="a11y-large-text">' + icons.text + 'Larger Text</button>' +
       '<button class="a11y-btn" data-mode="a11y-high-contrast">' + icons.contrast + 'High Contrast</button>' +
       '<button class="a11y-btn" data-mode="a11y-grayscale">' + icons.gray + 'Grayscale</button>' +

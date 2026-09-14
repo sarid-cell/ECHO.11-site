@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl" class="supports-dark">
 <head>
+    <meta charset="UTF-8">
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -23,8 +24,6 @@
         window.addEventListener('load', function () { setTimeout(loadGtag, 3000); });
       })();
     </script>
-
-    <meta charset="UTF-8">
     <!-- Quiet Mode bootstrap: resolve theme before first paint (no FOUC). -->
     <script>
     (function(){try{var t=localStorage.getItem('echo11_theme');if(t!=='dark'&&t!=='light'){var h=new Date().getHours();t=(h>=20||h<7)||matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
@@ -504,18 +503,18 @@
         <div class="footer-inner">
             <div class="footer-brand">ECHO.11</div>
             <div class="footer-contact">
-                <h2>נשמור על קשר בתוך הרעש</h2>
+                <p class="footer-h">נשמור על קשר בתוך הרעש</p>
                 <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
             </div>
             <div class="footer-col">
-                <h2>ערוצים</h2>
+                <p class="footer-h">ערוצים</p>
                 <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
                 <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
                 <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer">Pinterest</a>
                 <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
             </div>
             <div class="footer-col">
-                <h2>עוד בעמוד</h2>
+                <p class="footer-h">עוד בעמוד</p>
                 <a href="/he/teder-10hz.html">תדר 10 הרץ להרגעה</a>
                 <a href="/40hz.html">The 40Hz Focus (English)</a>
                 <a href="#disclaimer">ההבהרה המלאה</a>
