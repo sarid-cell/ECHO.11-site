@@ -335,9 +335,27 @@
         <!-- ── HERO PLAYER ── -->
         <section class="hero">
             <div class="hero-video">
-                <video autoplay muted loop playsinline poster="assets/images/book-hero.jpg" id="bgVideo">
-                    <source src="assets/video/frequency-loop.mp4" type="video/mp4">
-                </video>
+                <video autoplay muted loop playsinline preload="none" poster="assets/images/book-hero.jpg" id="bgVideo"></video>
+                <!-- Sources are attached only on desktop, full-motion, non-data-saver visits; phones keep the poster. -->
+                <template id="bgVideoSources">
+                    <source src="assets/video/frequency-loop-720.mp4" type="video/mp4">
+                    <source src="assets/video/frequency-loop-720.webm" type="video/webm">
+                </template>
+                <script>
+                (function () {
+                    var v = document.getElementById('bgVideo');
+                    var t = document.getElementById('bgVideoSources');
+                    if (!v || !t) return;
+                    var desktop = window.matchMedia('(min-width: 768px)').matches;
+                    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    var saveData = !!(navigator.connection && navigator.connection.saveData);
+                    if (!desktop || calm || saveData) return;
+                    v.appendChild(t.content.cloneNode(true));
+                    v.load();
+                    var p = v.play();
+                    if (p && p.catch) p.catch(function () {});
+                })();
+                </script>
             </div>
             <div class="hero-overlay"></div>
 
