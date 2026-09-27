@@ -18,7 +18,7 @@
         { href: '/40hz.html',       label: '40 Hz · Focus', he: '/he/teder-40hz.html' }
       ] },
     { href: '/book.html',           label: 'The Book' },
-    { href: '/index.html#insights', label: 'Insights' },
+    { href: '/index.html#insights', label: 'Field Notes' },
     { href: '/index.html#vision',   label: 'The Vision' },
     { href: '/about.html',          label: 'About Echo.11' }
   ];
@@ -34,15 +34,14 @@
     { href: '/about.html',         label: 'About Echo.11' }
   ];
 
-  /* App teaser pinned under the links — swap for a real
-     { href: 'app.html', label: 'The App' } NAV entry at launch */
+  /* App link pinned under the links — the beta lives at echo11.space */
   var APP_TEASER =
-    '<div class="menu-app">' +
+    '<a class="menu-app" href="https://echo11.space" target="_blank" rel="noopener">' +
       '<span class="menu-app-title">The App ' +
-        '<span class="menu-app-badge">Coming Soon</span>' +
+        '<span class="menu-app-badge">Beta</span>' +
       '</span>' +
       '<span class="menu-app-desc">Both sessions, in your pocket.</span>' +
-    '</div>';
+    '</a>';
 
   var APP_TEASER_HE =
     '<div class="menu-app">' +
@@ -176,6 +175,9 @@
     '.side-menu nav .menu-sublink-he:hover, .side-menu nav .menu-sublink-he:focus-visible { color: #1a1a1a; text-decoration: underline; }',
     'html[data-theme="dark"] .side-menu nav .menu-sublink-he { color: rgba(255,255,255,0.62); }',
     'html[data-theme="dark"] .side-menu nav .menu-sublink-he:hover { color: #fff; }',
+    // the app teaser is a link now: keep the teaser look, add a focus cue
+    'a.menu-app { text-decoration: none; }',
+    'a.menu-app:hover .menu-app-title, a.menu-app:focus-visible .menu-app-title { text-decoration: underline; text-underline-offset: 4px; }',
     // header language toggle
     '.header-right .lang-toggle {',
     "  font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.75rem; letter-spacing: 0.08em;",
