@@ -922,6 +922,78 @@
             }
         }
 
+        /* ── Hero composition (Sep 2026) ──
+           The figure stands at ~30–57% of hero.png's width, so a full-bleed
+           cover crop put the headline straight through her helmet. Text and
+           figure now never share pixels: side by side from 1024px, stacked
+           (plate on top, text below) under it. The plate starts under the
+           header, so the transparent bar always sits on plain --bg. The
+           .hero-overlay scrim is retired; a short edge fade on the plate
+           itself blends it into the page in both themes. */
+        .hero .hero-overlay { display: none; }
+
+        .hero-background {
+            top: var(--header-h, 78px);
+            overflow: hidden;
+        }
+        .hero-background::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        @media (min-width: 1024px) {
+            .hero {
+                justify-content: center;
+            }
+            .hero-background {
+                left: auto;
+                width: 46%;
+            }
+            .hero-background img {
+                object-position: 36% top;
+            }
+            .hero-background::after {
+                background: linear-gradient(to right, var(--bg) 0%, transparent 18%),
+                            linear-gradient(to top, var(--bg) 0%, transparent 14%);
+            }
+            .hero-content {
+                max-width: 54%;
+                padding: calc(var(--header-h, 78px) + 2.5rem) 2.5rem 4.5rem 5.5vw;
+            }
+            .hero h1 {
+                font-size: clamp(2.75rem, 4.3vw, 4.25rem);
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .hero {
+                min-height: 0;
+                justify-content: flex-start;
+            }
+            .hero-background {
+                position: relative;
+                top: auto;
+                height: 44svh;
+                min-height: 280px;
+                max-height: 460px;
+                margin-top: var(--header-h, 78px);
+            }
+            .hero-background img {
+                object-position: 34% top;
+            }
+            .hero-background::after {
+                background: linear-gradient(to top, var(--bg) 0%, transparent 28%);
+            }
+            .hero .hero-content {
+                padding-top: 0.5rem;
+                padding-left: 0;
+                padding-right: 0;
+                max-width: 720px;
+            }
+        }
+
         /* Animations */
         .reveal {
             opacity: 0;
@@ -1577,7 +1649,7 @@
                     <a href="frequency.html" class="hero-cta-primary">Start the 10Hz reset →</a>
                     <a href="40hz.html" class="hero-cta-secondary">or sharpen focus with 40Hz →</a>
                 </div>
-                <p class="hero-summary reveal">ECHO.11 is two things in one place. A free 10Hz frequency session for the moments a nervous system will not settle, and a body of writing on where consumer psychology and generative AI actually meet. Both come from the same question: what makes a mind resilient when the noise does not stop.</p>
+                <p class="hero-summary reveal">ECHO.11 is two things in one place. Two free frequency sessions — 10Hz for the moments a nervous system will not settle, 40Hz for the hours that need one clear task — and a body of writing on where consumer psychology and generative AI actually meet. Both come from the same question: what makes a mind resilient when the noise does not stop.</p>
                 <a href="#sessions" class="hero-cue">The Sessions &darr;</a>
             </div>
         </section>
@@ -1888,8 +1960,11 @@
                 const heroHeight = hero.offsetHeight;
                 
                 if (scrolled < heroHeight) {
-                    // Background moves slower (parallax effect)
-                    heroBackground.style.transform = `translateY(${scrolled * 0.4}px)`;
+                    // Background moves slower (parallax effect) — desktop only:
+                    // below 1024px the plate is stacked above the text, and
+                    // pushing it down would slide it back over the headline.
+                    heroBackground.style.transform = window.innerWidth >= 1024
+                        ? `translateY(${scrolled * 0.4}px)` : '';
                     
                     // Text moves up as user scrolls
                     heroContent.style.transform = `translateY(${-scrolled * 0.3}px)`;
