@@ -8,8 +8,12 @@
    Same treatment as the session pages: a full-width grayscale plate,
    a Cloud Dancer gradient fading it into the page, and a wash behind
    the text column only so the H1 and the spec strip hold 4.5:1. */
+/* The hero is a <header> element, so it picks up the site header's
+   z-index: 1000 and, coming later in the page, would sit over the fixed
+   bar and swallow clicks on the menu button. Keep it at page level. */
 .band-hero {
     position: relative;
+    z-index: 0;
     display: flex; align-items: flex-end;
     min-height: min(68vh, 620px);
     overflow: hidden;
