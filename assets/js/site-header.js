@@ -15,7 +15,8 @@
   var NAV = [
     { href: '/frequencies.html',    label: 'The Sessions', children: [
         { href: '/frequency.html',  label: '10 Hz · Calm',  he: '/he/teder-10hz.html' },
-        { href: '/40hz.html',       label: '40 Hz · Focus', he: '/he/teder-40hz.html' }
+        { href: '/40hz.html',       label: '40 Hz · Focus', he: '/he/teder-40hz.html' },
+        { href: '/sleep.html',      label: 'Delta · Sleep' }
       ] },
     { href: '/book.html',           label: 'The Book' },
     { href: '/index.html#insights', label: 'Field Notes' },
@@ -29,6 +30,7 @@
   var NAV_HE = [
     { href: '/he/teder-10hz.html', label: '10 הרץ · הרגעה' },
     { href: '/he/teder-40hz.html', label: '40 הרץ · ריכוז' },
+    { href: '/sleep.html',         label: 'שינה · Delta (English)' },
     { href: '/frequencies.html',   label: 'The Sessions (English)' },
     { href: '/book.html',          label: 'The Book' },
     { href: '/about.html',         label: 'About Echo.11' }
