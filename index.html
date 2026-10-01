@@ -1138,10 +1138,32 @@
             margin-top: 1.2rem;
         }
 
+        /* At most two columns: the featured card spans the row above them */
         .articles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(max(400px, calc((100% - 4rem) / 2)), 1fr));
             gap: 4rem;
+        }
+
+        .article-card.featured {
+            grid-column: 1 / -1;
+        }
+
+        .article-card.featured .article-image img {
+            object-position: center 80%;
+        }
+
+        .article-badge {
+            align-self: flex-start;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            border: 1px solid currentColor;
+            border-radius: 999px;
+            padding: 0.25em 0.9em;
+            margin-bottom: 1rem;
         }
 
         .more-articles {
@@ -1625,11 +1647,23 @@
                 </div>
                 
                 <div class="articles-grid">
+                    <article class="article-card featured reveal">
+                        <div class="article-content">
+                            <span class="article-badge">Latest</span>
+                            <h3>An AI asked me what makes me uncomfortable about AI. I needed a minute.</h3>
+                            <p class="subtitle">Three questions from Anthropic's public interview, and the rule I didn't know I had.</p>
+                            <a href="https://substack.com/home/post/p-218151990" target="_blank" rel="noopener noreferrer" class="read-more">Read: An AI asked me</a>
+                        </div>
+                        <div class="article-image">
+                            <picture><source srcset="assets/images/ai-asked-me.webp" type="image/webp"><img src="assets/images/ai-asked-me.jpg" alt="A silver sofa and an ivory armchair on a pale rock under a deep teal sky with soft clouds" loading="lazy" width="966" height="967"></picture>
+                        </div>
+                    </article>
+
                     <article class="article-card reveal">
                         <div class="article-content">
                             <h3>The Ghost in the Machine: Botox, AI, and the Augmented Authenticity Paradox</h3>
                             <p class="subtitle">Why Using AI Feels Like Cheating—even When It Isn't</p>
-                            <a href="https://substack.com/home/post/p-186104472" target="_blank" rel="noopener noreferrer" class="read-more">Read: The Ghost in the Machine</a>
+                            <a href="https://shirasarid.substack.com/p/the-ghost-in-the-machine-botox-ai" target="_blank" rel="noopener noreferrer" class="read-more">Read: The Ghost in the Machine</a>
                         </div>
                         <div class="article-image">
                             <picture><source srcset="assets/images/ghost-machine.webp" type="image/webp"><img src="assets/images/ghost-machine.png" alt="Digital portrait with fragmented glass and data overlay" loading="lazy" width="928" height="1232"></picture>
@@ -1640,7 +1674,7 @@
                         <div class="article-content">
                             <h3>AI Gave Us Unlimited Tools. So Why Are We Still Stuck?</h3>
                             <p class="subtitle">Because belief, not technology, has become the real bottleneck in decision-making, growth, and identity.</p>
-                            <a href="https://substack.com/home/post/p-186866209" target="_blank" rel="noopener noreferrer" class="read-more">Read: AI Gave Us Unlimited Tools</a>
+                            <a href="https://shirasarid.substack.com/p/ai-gave-us-unlimited-tools-so-why" target="_blank" rel="noopener noreferrer" class="read-more">Read: AI Gave Us Unlimited Tools</a>
                         </div>
                         <div class="article-image">
                             <picture><source srcset="assets/images/unlimited-tools.webp" type="image/webp"><img src="assets/images/unlimited-tools.png" alt="White figure with geometric neural network lines" loading="lazy" width="1536" height="768"></picture>
