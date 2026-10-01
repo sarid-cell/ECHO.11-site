@@ -279,7 +279,7 @@
                 <a href="book.html" class="menu-link">The Book</a>
             </li>
             <li>
-                <a href="index.html#insights" class="menu-link">Insights</a>
+                <a href="index.html#insights" class="menu-link">Field Notes</a>
             </li>
             <li>
                 <a href="index.html#vision" class="menu-link">The Vision</a>
@@ -288,12 +288,12 @@
                 <a href="about.html" class="menu-link">About Echo.11</a>
             </li>
             </ul>
-            <div class="menu-app">
+            <a class="menu-app" href="https://echo11.space" target="_blank" rel="noopener">
                 <span class="menu-app-title">The App
-                    <span class="menu-app-badge">Coming Soon</span>
+                    <span class="menu-app-badge">Beta</span>
                 </span>
                 <span class="menu-app-desc">Both sessions, in your pocket.</span>
-            </div>
+            </a>
         </nav>
     </aside>
 
@@ -335,9 +335,27 @@
         <!-- ── HERO PLAYER ── -->
         <section class="hero">
             <div class="hero-video">
-                <video autoplay muted loop playsinline poster="assets/images/book-hero.jpg" id="bgVideo">
-                    <source src="assets/video/frequency-loop.mp4" type="video/mp4">
-                </video>
+                <video autoplay muted loop playsinline preload="none" poster="assets/images/book-hero.jpg" id="bgVideo"></video>
+                <!-- Sources are attached only on desktop, full-motion, non-data-saver visits; phones keep the poster. -->
+                <template id="bgVideoSources">
+                    <source src="assets/video/frequency-loop-720.mp4" type="video/mp4">
+                    <source src="assets/video/frequency-loop-720.webm" type="video/webm">
+                </template>
+                <script>
+                (function () {
+                    var v = document.getElementById('bgVideo');
+                    var t = document.getElementById('bgVideoSources');
+                    if (!v || !t) return;
+                    var desktop = window.matchMedia('(min-width: 768px)').matches;
+                    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    var saveData = !!(navigator.connection && navigator.connection.saveData);
+                    if (!desktop || calm || saveData) return;
+                    v.appendChild(t.content.cloneNode(true));
+                    v.load();
+                    var p = v.play();
+                    if (p && p.catch) p.catch(function () {});
+                })();
+                </script>
             </div>
             <div class="hero-overlay"></div>
 
@@ -463,7 +481,7 @@
                     <div class="info-block info-block-img">
                         <picture>
                             <source srcset="assets/images/10hz.webp" type="image/webp">
-                            <img src="assets/images/10hz.png" alt="Astronaut portrait, eyes closed — the 10Hz alpha session" loading="lazy" width="914" height="896">
+                            <img src="assets/images/10hz.jpg" alt="Astronaut portrait, eyes closed — the 10Hz alpha session" loading="lazy" width="914" height="896">
                         </picture>
                     </div>
                 </div>

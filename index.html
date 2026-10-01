@@ -52,7 +52,7 @@
     
     <!-- Open Graph -->
     <meta property="og:title" content="ECHO.11 — Free 10Hz and 40Hz Binaural Beat Sessions | Calm and Focus">
-    <meta property="og:description" content="Consumer psychology, generative AI, and 10Hz sound frequencies — tools for calm and essays on human resilience.">
+    <meta property="og:description" content="Two free binaural beat sessions generated live in your browser: 10Hz alpha for calm and anxious moments, 40Hz gamma for focus. No signup, no download. Plus essays on psychology and AI by Shira Sarid.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://echo11.app/">
     <meta property="og:site_name" content="ECHO.11">
@@ -64,7 +64,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="ECHO.11 — Free 10Hz and 40Hz Binaural Beat Sessions | Calm and Focus">
-    <meta name="twitter:description" content="Consumer psychology, generative AI, and 10Hz sound frequencies — tools for calm and essays on human resilience.">
+    <meta name="twitter:description" content="Two free binaural beat sessions generated live in your browser: 10Hz alpha for calm and anxious moments, 40Hz gamma for focus. No signup, no download. Plus essays on psychology and AI by Shira Sarid.">
     <meta name="twitter:image" content="https://echo11.app/assets/images/hero.png">
 
     <!-- Structured Data for LLMs and Search Engines -->
@@ -993,6 +993,13 @@
             transition: background .3s ease;
         }
         .home-session-card:hover { background: var(--white); }
+        .home-session-cell { background: var(--bg); display: flex; flex-direction: column; }
+        .home-session-cell .home-session-card { flex: 1; padding-bottom: 1.2rem; }
+        .home-session-he {
+            align-self: flex-start; margin: 0 2.2rem 1.8rem; padding: 0.3rem 0;
+            font-size: 0.85rem; color: var(--text-light); text-decoration: none;
+        }
+        .home-session-he:hover, .home-session-he:focus-visible { color: var(--text); text-decoration: underline; }
         .home-session-band {
             display: block; font-family: 'IBM Plex Mono', monospace;
             font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
@@ -1542,7 +1549,7 @@
                 <a href="book.html" class="menu-link">The Book</a>
             </li>
             <li>
-                <a href="#insights" class="menu-link current">Insights</a>
+                <a href="#insights" class="menu-link current">Field Notes</a>
             </li>
             <li>
                 <a href="#vision" class="menu-link current">The Vision</a>
@@ -1551,12 +1558,12 @@
                 <a href="about.html" class="menu-link">About Echo.11</a>
             </li>
             </ul>
-            <div class="menu-app">
+            <a class="menu-app" href="https://echo11.space" target="_blank" rel="noopener">
                 <span class="menu-app-title">The App
-                    <span class="menu-app-badge">Coming Soon</span>
+                    <span class="menu-app-badge">Beta</span>
                 </span>
                 <span class="menu-app-desc">Both sessions, in your pocket.</span>
-            </div>
+            </a>
         </nav>
     </aside>
 
@@ -1564,7 +1571,7 @@
         <!-- Hero -->
         <section class="hero" id="home" data-hero="light">
             <div class="hero-background">
-                <picture><source srcset="assets/images/hero.webp" type="image/webp"><img src="assets/images/hero.png" alt="Futuristic figure in flowing white garments" fetchpriority="high"></picture>
+                <picture><source srcset="assets/images/hero.webp" type="image/webp"><img src="assets/images/hero.png" alt="Futuristic figure in flowing white garments" fetchpriority="high" width="1536" height="768"></picture>
             </div>
             <div class="hero-overlay"></div>
             <div class="hero-content">
@@ -1577,7 +1584,7 @@
                     <a href="frequency.html" class="hero-cta-primary">Start the 10Hz reset →</a>
                     <a href="40hz.html" class="hero-cta-secondary">or sharpen focus with 40Hz →</a>
                 </div>
-                <p class="hero-summary reveal">ECHO.11 is two things in one place. A free 10Hz frequency session for the moments a nervous system will not settle, and a body of writing on where consumer psychology and generative AI actually meet. Both come from the same question: what makes a mind resilient when the noise does not stop.</p>
+                <p class="hero-summary reveal">ECHO.11 is two things in one place. Two free frequency sessions — 10Hz for the moments a nervous system will not settle, 40Hz for the hours that need one clear task — and a body of writing on where consumer psychology and generative AI actually meet. Both come from the same question: what makes a mind resilient when the noise does not stop.</p>
                 <a href="#sessions" class="hero-cue">The Sessions &darr;</a>
             </div>
         </section>
@@ -1587,18 +1594,24 @@
         <section class="sessions-home" id="sessions">
             <h2 class="section-label reveal">The Sessions</h2>
             <div class="sessions-home-grid">
-                <a class="home-session-card reveal" href="frequency.html">
-                    <span class="home-session-band">Alpha Wave · 11:00 · Free</span>
-                    <span class="home-session-hz">10 Hz · Calm</span>
-                    <p class="home-session-use">For anxious moments and nights the mind will not quiet.</p>
-                    <span class="home-session-play">Play →</span>
-                </a>
-                <a class="home-session-card reveal" href="40hz.html">
-                    <span class="home-session-band">Gamma Wave · 11:00 or loop · Free</span>
-                    <span class="home-session-hz">40 Hz · Focus</span>
-                    <p class="home-session-use">For deep work — press play and start the task.</p>
-                    <span class="home-session-play">Play →</span>
-                </a>
+                <div class="home-session-cell reveal">
+                    <a class="home-session-card" href="frequency.html">
+                        <span class="home-session-band">Alpha Wave · 11:00 · Free</span>
+                        <span class="home-session-hz">10 Hz · Calm</span>
+                        <p class="home-session-use">For anxious moments and nights the mind will not quiet.</p>
+                        <span class="home-session-play">Play →</span>
+                    </a>
+                    <a class="home-session-he" href="/he/teder-10hz.html" lang="he" dir="rtl" hreflang="he">בעברית ←</a>
+                </div>
+                <div class="home-session-cell reveal">
+                    <a class="home-session-card" href="40hz.html">
+                        <span class="home-session-band">Gamma Wave · 11:00 or loop · Free</span>
+                        <span class="home-session-hz">40 Hz · Focus</span>
+                        <p class="home-session-use">For deep work — press play and start the task.</p>
+                        <span class="home-session-play">Play →</span>
+                    </a>
+                    <a class="home-session-he" href="/he/teder-40hz.html" lang="he" dir="rtl" hreflang="he">בעברית ←</a>
+                </div>
             </div>
         </section>
 
@@ -1606,8 +1619,8 @@
         <section class="insights" id="insights">
             <div class="insights-inner">
                 <div class="insights-header reveal">
-                    <h2>Fresh Insights</h2>
-                    <p>Weekly essays on psychology, AI, and quieter digital spaces.</p>
+                    <h2>Field Notes</h2>
+                    <p>Selected essays on psychology, AI, and quieter digital spaces.</p>
                     <p>They cover the psychology underneath AI adoption — why capable people stall in front of a blank prompt, why using a tool can feel like cheating, and what shifts when the bottleneck turns out to be belief rather than technology.</p>
                 </div>
                 
@@ -1619,7 +1632,7 @@
                             <a href="https://substack.com/home/post/p-186104472" target="_blank" rel="noopener noreferrer" class="read-more">Read: The Ghost in the Machine</a>
                         </div>
                         <div class="article-image">
-                            <picture><source srcset="assets/images/ghost-machine.webp" type="image/webp"><img src="assets/images/ghost-machine.png" alt="Digital portrait with fragmented glass and data overlay" loading="lazy"></picture>
+                            <picture><source srcset="assets/images/ghost-machine.webp" type="image/webp"><img src="assets/images/ghost-machine.png" alt="Digital portrait with fragmented glass and data overlay" loading="lazy" width="928" height="1232"></picture>
                         </div>
                     </article>
                     
@@ -1630,7 +1643,7 @@
                             <a href="https://substack.com/home/post/p-186866209" target="_blank" rel="noopener noreferrer" class="read-more">Read: AI Gave Us Unlimited Tools</a>
                         </div>
                         <div class="article-image">
-                            <picture><source srcset="assets/images/unlimited-tools.webp" type="image/webp"><img src="assets/images/unlimited-tools.png" alt="White figure with geometric neural network lines" loading="lazy"></picture>
+                            <picture><source srcset="assets/images/unlimited-tools.webp" type="image/webp"><img src="assets/images/unlimited-tools.png" alt="White figure with geometric neural network lines" loading="lazy" width="1536" height="768"></picture>
                         </div>
                     </article>
                 </div>
@@ -1693,8 +1706,8 @@
                 </p>
             </div>
             <div class="vision-image reveal">
-                <picture><source srcset="assets/images/astro-eyes-closed.webp" type="image/webp"><img src="assets/images/astro-eyes-closed.png" alt="Close-up portrait of a woman astronaut, eyes closed" loading="lazy"></picture>
-                <picture class="awaken-open"><source srcset="assets/images/astro-eyes-open.webp" type="image/webp"><img src="assets/images/astro-eyes-open.png" alt="Close-up portrait of woman astronaut, eyes opening as you scroll" loading="lazy"></picture>
+                <picture><source srcset="assets/images/astro-eyes-closed.webp" type="image/webp"><img src="assets/images/astro-eyes-closed.png" alt="Close-up portrait of a woman astronaut, eyes closed" loading="lazy" width="1456" height="816"></picture>
+                <picture class="awaken-open"><source srcset="assets/images/astro-eyes-open.webp" type="image/webp"><img src="assets/images/astro-eyes-open.png" alt="Close-up portrait of woman astronaut, eyes opening as you scroll" loading="lazy" width="1456" height="816"></picture>
             </div>
 
             <!-- The approach folded in, and seated between the two portraits:
@@ -1721,7 +1734,7 @@
 
     <!-- Footer -->
     <div class="footer-banner">
-        <picture><source srcset="assets/images/astro-eyes-closed.webp" type="image/webp"><img src="assets/images/astro-eyes-closed.png" alt="Astronaut helmet closeup" loading="lazy"></picture>
+        <picture><source srcset="assets/images/astro-eyes-closed.webp" type="image/webp"><img src="assets/images/astro-eyes-closed.png" alt="Astronaut helmet closeup" loading="lazy" width="1456" height="816"></picture>
     </div>
 
     <footer>

@@ -14,11 +14,11 @@
      hrefs are root-absolute so the same array works from /he/ too. */
   var NAV = [
     { href: '/frequencies.html',    label: 'The Sessions', children: [
-        { href: '/frequency.html',  label: '10 Hz · Calm' },
-        { href: '/40hz.html',       label: '40 Hz · Focus' }
+        { href: '/frequency.html',  label: '10 Hz · Calm',  he: '/he/teder-10hz.html' },
+        { href: '/40hz.html',       label: '40 Hz · Focus', he: '/he/teder-40hz.html' }
       ] },
     { href: '/book.html',           label: 'The Book' },
-    { href: '/index.html#insights', label: 'Insights' },
+    { href: '/index.html#insights', label: 'Field Notes' },
     { href: '/index.html#vision',   label: 'The Vision' },
     { href: '/about.html',          label: 'About Echo.11' }
   ];
@@ -34,15 +34,14 @@
     { href: '/about.html',         label: 'About Echo.11' }
   ];
 
-  /* App teaser pinned under the links — swap for a real
-     { href: 'app.html', label: 'The App' } NAV entry at launch */
+  /* App link pinned under the links — the beta lives at echo11.space */
   var APP_TEASER =
-    '<div class="menu-app">' +
+    '<a class="menu-app" href="https://echo11.space" target="_blank" rel="noopener">' +
       '<span class="menu-app-title">The App ' +
-        '<span class="menu-app-badge">Coming Soon</span>' +
+        '<span class="menu-app-badge">Beta</span>' +
       '</span>' +
       '<span class="menu-app-desc">Both sessions, in your pocket.</span>' +
-    '</div>';
+    '</a>';
 
   var APP_TEASER_HE =
     '<div class="menu-app">' +
@@ -51,6 +50,16 @@
       '</span>' +
       '<span class="menu-app-desc">שני הסשנים, בכיס שלך.</span>' +
     '</div>';
+
+  /* Language twins — the header toggle only appears on pages that
+     have one, so there is never a dead link. Keys are paths without
+     .html so clean URLs match too. */
+  var TWINS = {
+    '/frequency':        { href: '/he/teder-10hz.html', label: 'עברית',   lang: 'he' },
+    '/40hz':             { href: '/he/teder-40hz.html', label: 'עברית',   lang: 'he' },
+    '/he/teder-10hz':    { href: '/frequency.html',     label: 'English', lang: 'en' },
+    '/he/teder-40hz':    { href: '/40hz.html',          label: 'English', lang: 'en' }
+  };
 
   var header    = document.querySelector('header');
   var sideMenu  = document.getElementById('sideMenu');
@@ -71,8 +80,9 @@
         var sub = '';
         if (item.children) {
           sub = '<ul class="menu-sublist">' + item.children.map(function (child) {
+            var he = child.he ? '<a href="' + child.he + '" class="menu-sublink-he" lang="he" dir="rtl" hreflang="he">בעברית ←</a>' : '';
             return '<li><a href="' + child.href + '" class="menu-sublink' +
-                   (isHere(child.href) ? ' current' : '') + '">' + child.label + '</a></li>';
+                   (isHere(child.href) ? ' current' : '') + '">' + child.label + '</a>' + he + '</li>';
           }).join('') + '</ul>';
         }
         return '<li>' + link + sub + '</li>';
@@ -83,6 +93,21 @@
         if (e.target.closest('a') && sideMenu.classList.contains('active')) hamburger.click();
       });
     }
+  }
+
+  /* ── 1b. Language toggle, at the far end of the bar (before the menu) ── */
+  var twin = TWINS[location.pathname.replace(/\.html$/, '').replace(/\/$/, '')];
+  var headerRight = header.querySelector('.header-right');
+  if (twin && headerRight) {
+    var langLink = document.createElement('a');
+    langLink.className = 'lang-toggle';
+    langLink.href = twin.href;
+    langLink.hreflang = twin.lang;
+    langLink.lang = twin.lang;
+    if (twin.lang === 'he') langLink.dir = 'rtl';
+    langLink.setAttribute('aria-label', 'Switch language');
+    langLink.textContent = twin.label;
+    headerRight.insertBefore(langLink, hamburger && hamburger.parentNode === headerRight ? hamburger : null);
   }
 
   /* ── 2. Header surface + hide-on-scroll styles ──
@@ -124,6 +149,7 @@
     '.side-menu nav .menu-sublist { list-style: none; margin: 0; padding: 0; }',
     '.side-menu nav .menu-list { display: flex; flex-direction: column; gap: 2rem; }',
     '.side-menu nav .menu-list > li { display: flex; flex-direction: column; }',
+    '.side-menu nav .menu-sublist > li { display: flex; flex-direction: column; }',
     '.side-menu nav .menu-sublist { margin-top: 1.1rem; padding-left: 1.1rem;',
     '  border-left: 1px solid rgba(26,26,26,0.12); display: flex; flex-direction: column; gap: 0.3rem; }',
     '.side-menu nav .menu-sublink {',
@@ -140,7 +166,27 @@
     'html[data-theme="dark"] .side-menu nav .menu-sublink:hover,',
     'html[data-theme="dark"] .side-menu nav .menu-sublink:focus-visible,',
     'html[data-theme="dark"] .side-menu nav .menu-sublink.current { color: #fff; }',
-    'body.a11y-high-contrast .side-menu nav .menu-sublink { color: #1a1a1a !important; }'
+    'body.a11y-high-contrast .side-menu nav .menu-sublink { color: #1a1a1a !important; }',
+    // secondary "in Hebrew" link under each session
+    '.side-menu nav .menu-sublink-he {',
+    "  font-family: 'Outfit', system-ui, sans-serif; font-size: 0.8rem; color: #595959;",
+    '  text-decoration: none; align-self: flex-start; padding: 0.1rem 0 0.5rem; min-height: 24px;',
+    '}',
+    '.side-menu nav .menu-sublink-he:hover, .side-menu nav .menu-sublink-he:focus-visible { color: #1a1a1a; text-decoration: underline; }',
+    'html[data-theme="dark"] .side-menu nav .menu-sublink-he { color: rgba(255,255,255,0.62); }',
+    'html[data-theme="dark"] .side-menu nav .menu-sublink-he:hover { color: #fff; }',
+    // the app teaser is a link now: keep the teaser look, add a focus cue
+    'a.menu-app { text-decoration: none; }',
+    'a.menu-app:hover .menu-app-title, a.menu-app:focus-visible .menu-app-title { text-decoration: underline; text-underline-offset: 4px; }',
+    // header language toggle
+    '.header-right .lang-toggle {',
+    "  font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.75rem; letter-spacing: 0.08em;",
+    '  color: var(--text, #1a1a1a); text-decoration: none; display: inline-flex; align-items: center;',
+    '  min-height: 44px; min-width: 44px; justify-content: center; padding: 0 0.5rem; opacity: 0.75;',
+    '  transition: opacity .2s ease;',
+    '}',
+    '.header-right .lang-toggle:hover, .header-right .lang-toggle:focus-visible { opacity: 1; text-decoration: underline; }',
+    'html[data-theme="dark"] .header-right .lang-toggle { color: #fff; }'
   ].join('\n');
   var style = document.createElement('style');
   style.textContent = css;
