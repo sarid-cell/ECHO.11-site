@@ -14,6 +14,13 @@
      strings: { ... }                // UI copy overrides (optional, see STRINGS)
    };
 
+   A pre-rendered session sets `audioSrc` instead of the carrier tones:
+   it plays through an <audio> element, which keeps going with the
+   screen locked (a live Web Audio graph is suspended there), and the
+   timer follows the file's own clock. `headphones: false` skips the
+   headphone check, `beatHz: null` marks a session with no beat, and
+   `progressMinutes` overrides the analytics milestones.
+
    Everything else (aria labels, timer, analytics dimensions) is derived.
    `strings` exists so a translated page can run this same engine rather
    than fork it; anything it leaves out falls back to the English below. */
@@ -28,8 +35,14 @@ var cfg = Object.assign({
     rightHz: 210,
     durationMin: 11,
     loop: false,
-    ogImage: ''
+    ogImage: '',
+    audioSrc: '',
+    headphones: true,
+    progressMinutes: [1, 3, 5, 8]
 }, window.ECHO_SESSION || {});
+var FILE_MODE = !!cfg.audioSrc;
+// analytics dimension: the beat frequency, or the session id when there is none
+var HZ_DIM = cfg.beatHz != null ? String(cfg.beatHz) : cfg.id;
 
 var STRINGS = Object.assign({
     play:       'Play the '  + cfg.beatHz + 'Hz session',
@@ -107,7 +120,29 @@ setTimeout(() => document.querySelectorAll('.reveal').forEach(el => el.classList
 let audioCtx, oscL, oscR, gainL, gainR, analyser, isPlaying = false;
 const FADE_IN = 1.5, FADE_OUT = 0.9, LEVEL = 0.2;
 
+// ── PRE-RENDERED AUDIO (file mode) ──
+// Fades and the breathing swell are baked into the file, so pause and
+// resume just stop and continue the element where it was.
+let mediaEl = null;
+function getMedia() {
+    if (!mediaEl) {
+        mediaEl = new Audio(cfg.audioSrc);
+        mediaEl.preload = 'none';
+        mediaEl.addEventListener('ended', () => { if (isPlaying) endSession(); });
+    }
+    return mediaEl;
+}
+function mediaSeconds() { return mediaEl ? Math.floor(mediaEl.currentTime) : 0; }
+
 function startAudio() {
+    if (FILE_MODE) {
+        const el = getMedia();
+        // line the breathing halo up with the swell in the file (10 s cycle)
+        document.documentElement.style.setProperty('--breath-delay', -(el.currentTime % 10) + 's');
+        const p = el.play();
+        if (p && p.catch) p.catch(() => { if (isPlaying) pauseSession(); });
+        return;
+    }
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     const merger = audioCtx.createChannelMerger(2);
     merger.connect(audioCtx.destination);
@@ -138,6 +173,7 @@ function startAudio() {
 }
 
 function stopAudio() {
+    if (FILE_MODE) { if (mediaEl) mediaEl.pause(); return; }
     // fade out, then release — no hard click
     const ctx = audioCtx, l = oscL, r = oscR, gl = gainL, gr = gainR;
     oscL = oscR = audioCtx = gainL = gainR = analyser = null;
@@ -260,7 +296,7 @@ let sessionCounted = false; // count once per full session, not on every resume
 // The player is the whole product, so the drop-off points are worth
 // measuring: how many see the headphone gate, how many pass it, how
 // far into the session people actually get, and where they leave.
-const PROGRESS_MINUTES = [1, 3, 5, 8];
+const PROGRESS_MINUTES = cfg.progressMinutes;
 let playedSeconds = 0;     // seconds of real playback this session
 let progressFired = [];    // minute milestones already reported
 let stopReported = false;  // one stop per interruption, reset on resume
@@ -269,7 +305,7 @@ function ev(name, params) {
     if (typeof gtag === 'function') gtag('event', name, params || {});
 }
 function evDims(extra) {
-    return Object.assign({ hz: String(cfg.beatHz), id: cfg.id }, extra || {});
+    return Object.assign({ hz: HZ_DIM, id: cfg.id }, extra || {});
 }
 function reportProgress() {
     PROGRESS_MINUTES.forEach(function (m) {
@@ -293,7 +329,8 @@ function reportStop(reason) {
 }
 
 document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden' && isPlaying) reportStop('hidden');
+    // a file keeps playing with the screen off, so hiding isn't a stop there
+    if (document.visibilityState === 'hidden' && isPlaying && !FILE_MODE) reportStop('hidden');
 });
 window.addEventListener('pagehide', () => {
     if (isPlaying) reportStop('pagehide');
@@ -316,6 +353,7 @@ setLoop(!!cfg.loop);
 
 function endSession() {
     clearInterval(timerInt); stopAudio();
+    if (mediaEl) mediaEl.currentTime = 0;
     isPlaying = false; sessionCounted = false;
     // natural end: the finishing cycle isn't yet in completedCycles.
     // loop Stop: it is, and the in-progress partial cycle doesn't count.
@@ -327,7 +365,7 @@ function endSession() {
     playBtn.setAttribute('aria-label', cfg.playLabel);
     setState(STRINGS.complete);
     remaining = TOTAL; timerEl.textContent = fmt(TOTAL); updateRing();
-    if (typeof gtag==='function') gtag('event','frequency_complete',{duration: TOTAL * cycles, hz: String(cfg.beatHz), id: cfg.id});
+    if (typeof gtag==='function') gtag('event','frequency_complete',{duration: TOTAL * cycles, hz: HZ_DIM, id: cfg.id});
     const sessionsRow = document.querySelector('.sessions-row');
     const metaParts = [];
     if (cycles > 1) metaParts.push(STRINGS.cycles(cycles));
@@ -340,8 +378,15 @@ function endSession() {
 function beginSession() {
     startAudio();
     timerInt = setInterval(() => {
-        remaining--;
-        playedSeconds++;
+        if (FILE_MODE) {
+            // follow the file's clock: intervals are throttled while the
+            // screen is off, and the countdown catches up on return
+            playedSeconds = mediaSeconds();
+            remaining = Math.max(0, TOTAL - playedSeconds);
+        } else {
+            remaining--;
+            playedSeconds++;
+        }
         reportProgress();
         timerEl.textContent = fmt(remaining);
         updateRing();
@@ -376,7 +421,7 @@ function beginSession() {
         navigator.mediaSession.metadata = new MediaMetadata({
             title: cfg.label,
             artist: 'ECHO.11',
-            album: cfg.beatHz + 'Hz · ' + cfg.band,
+            album: cfg.beatHz != null ? cfg.beatHz + 'Hz · ' + cfg.band : cfg.band,
             artwork: cfg.ogImage ? [{ src: cfg.ogImage, sizes: '1200x800', type: 'image/jpeg' }] : []
         });
         navigator.mediaSession.playbackState = 'playing';
@@ -397,7 +442,7 @@ function pauseSession() {
 
 playBtn.addEventListener('click', () => {
     if (!isPlaying) {
-        if (sessionStorage.getItem('echo11_headphone_ack')) {
+        if (!cfg.headphones || sessionStorage.getItem('echo11_headphone_ack')) {
             beginSession();
         } else {
             ev('gate_shown', evDims());
@@ -419,7 +464,7 @@ playBtn.addEventListener('click', () => {
 // plays" — this is what a real music/podcast app does too).
 if ('mediaSession' in navigator) {
     navigator.mediaSession.setActionHandler('play', () => {
-        if (!isPlaying && sessionStorage.getItem('echo11_headphone_ack')) beginSession();
+        if (!isPlaying && (!cfg.headphones || sessionStorage.getItem('echo11_headphone_ack'))) beginSession();
     });
     navigator.mediaSession.setActionHandler('pause', () => {
         if (!isPlaying) return;
@@ -489,18 +534,21 @@ function closeModal(modal) {
 }
 
 // single tap: the gate acknowledges and starts the session in one press
-document.getElementById('headphoneConfirm').addEventListener('click', () => {
+// (a session without the headphone check has no gate in its markup)
+const headphoneConfirm = document.getElementById('headphoneConfirm');
+if (headphoneConfirm) headphoneConfirm.addEventListener('click', () => {
     sessionStorage.setItem('echo11_headphone_ack', '1');
     ev('gate_confirmed', evDims());
     closeModal(headphoneModal);
     beginSession();
 });
 document.getElementById('completeClose').addEventListener('click', () => closeModal(completeModal));
-[headphoneModal, completeModal].forEach(m => {
+const modals = [headphoneModal, completeModal].filter(Boolean);
+modals.forEach(m => {
     m.addEventListener('click', e => { if (e.target === m) closeModal(m); });
 });
 document.addEventListener('keydown', e => {
-    const activeModal = [headphoneModal, completeModal].find(m => m.classList.contains('active'));
+    const activeModal = modals.find(m => m.classList.contains('active'));
     if (!activeModal) return;
     if (e.key === 'Escape') { closeModal(activeModal); return; }
     if (e.key !== 'Tab') return;

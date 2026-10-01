@@ -187,3 +187,11 @@ a.band-listen:focus-visible { outline: 2px solid var(--text); outline-offset: 3p
     .band-page .essay { padding-top: 3rem; }
     .band-sig { height: 44px; }
 }
+
+/* Source line under a claim — quieter than the paragraph it backs */
+.band-cite {
+    font-size: 0.82rem; line-height: 1.7;
+    color: var(--text-light); font-weight: 300;
+    margin-top: -0.4rem;
+}
+.band-cite a { color: inherit; }

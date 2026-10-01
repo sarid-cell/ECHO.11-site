@@ -36,16 +36,16 @@
     <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="/assets/images/favicon-192.png" type="image/png" sizes="192x192">
     <link rel="apple-touch-icon" href="/assets/images/favicon-180.png">
-    <title>10Hz or 40Hz? Free Binaural Beat Sessions for Calm and Focus | ECHO.11</title>
-    <meta name="description" content="Two free 11-minute binaural sessions — 10Hz alpha to settle a racing mind, 40Hz gamma to start the task. Pick one, put headphones on, press play.">
-    <meta name="keywords" content="binaural beats, 10hz, 40hz, alpha waves, gamma waves, anxiety relief, deep focus, sound frequency, neural entrainment">
+    <title>Free Sessions for Calm, Focus and Sleep — 10Hz, 40Hz and Sleep Sounds | ECHO.11</title>
+    <meta name="description" content="Three free sessions — 10Hz alpha to settle a racing mind, 40Hz gamma to start the task, and a 30-minute sleep descent for a bedside speaker. Pick one, press play.">
+    <meta name="keywords" content="binaural beats, 10hz, 40hz, sleep sounds, alpha waves, gamma waves, delta waves, anxiety relief, deep focus, fall asleep">
     <meta name="author" content="Shira Sarid">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://echo11.app/frequencies.html" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="10Hz or 40Hz? Free Binaural Beat Sessions for Calm and Focus | ECHO.11">
-    <meta property="og:description" content="Two free binaural beat sessions, generated live in your browser. 11 minutes each, no signup — just headphones.">
+    <meta property="og:title" content="Free Sessions for Calm, Focus and Sleep | ECHO.11">
+    <meta property="og:description" content="Three free sessions: 10Hz calm and 40Hz focus binaural beats, plus a 30-minute sleep descent that needs no headphones. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://echo11.app/frequencies.html">
     <meta property="og:site_name" content="ECHO.11">
@@ -55,8 +55,8 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="10Hz or 40Hz? Free Binaural Beat Sessions for Calm and Focus | ECHO.11">
-    <meta name="twitter:description" content="Two free binaural beat sessions, generated live in your browser. 11 minutes each, no signup — just headphones.">
+    <meta name="twitter:title" content="Free Sessions for Calm, Focus and Sleep | ECHO.11">
+    <meta name="twitter:description" content="Three free sessions: 10Hz calm and 40Hz focus binaural beats, plus a 30-minute sleep descent that needs no headphones. No signup.">
     <meta name="twitter:image" content="https://echo11.app/assets/images/10hz-og.jpg">
 
     <link rel="preload" as="font" type="font/woff2" href="assets/fonts/outfit-variable-latin.woff2" crossorigin>
@@ -75,7 +75,7 @@
         .hub-intro { font-size: 1.15rem; color: var(--text-secondary); font-weight: 300; max-width: 34rem; margin-bottom: 3.4rem; }
 
         /* ── The two session cards — full-bleed plates, whole card is the link ── */
-        .session-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .session-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         .session-card {
             position: relative; display: flex; align-items: flex-end;
             min-height: 420px; overflow: hidden;
@@ -143,12 +143,15 @@
             0%, 100% { opacity: 0.4; }
             50%      { opacity: 1; }
         }
-        .session-card--focus .session-card-frame {
+        .session-card--focus .session-card-frame,
+        .session-card--sleep .session-card-frame {
             border: 1px solid var(--border);
             transition: border-width .25s ease, border-color .25s ease;
         }
         .session-card--focus:hover .session-card-frame,
-        .session-card--focus:focus-visible .session-card-frame {
+        .session-card--focus:focus-visible .session-card-frame,
+        .session-card--sleep:hover .session-card-frame,
+        .session-card--sleep:focus-visible .session-card-frame {
             border-width: 2px; border-color: var(--text);
         }
         @media (prefers-reduced-motion: reduce) {
@@ -239,8 +242,8 @@
             "@type": "CollectionPage",
             "@id": "https://echo11.app/frequencies.html#webpage",
             "url": "https://echo11.app/frequencies.html",
-            "name": "Free Binaural Beat Sessions — 10Hz Calm, 40Hz Focus | ECHO.11",
-            "description": "Two free binaural beat sessions, generated live in your browser: a 10Hz alpha reset for anxiety and a 40Hz gamma session for deep focus. 11 minutes each, no signup — just headphones.",
+            "name": "Free Sessions for Calm, Focus and Sleep — 10Hz, 40Hz and Sleep Sounds | ECHO.11",
+            "description": "Three free sessions: a 10Hz alpha binaural reset for anxiety, a 40Hz gamma binaural session for deep focus, and a 30-minute sleep descent of brown noise and a slow-breathing tone for a bedside speaker. No signup.",
             "isPartOf": { "@id": "https://echo11.app/#website" },
             "publisher": { "@id": "https://echo11.app/#shira-sarid" },
             "inLanguage": "en",
@@ -263,6 +266,13 @@
                     "name": "40 Hz — The 11-Minute Focus",
                     "description": "An 11-minute 40Hz gamma binaural session for the task you keep not starting. Eyes open, loopable for longer work blocks, stereo headphones required.",
                     "url": "https://echo11.app/40hz.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Delta — The 30-Minute Descent",
+                    "description": "A 30-minute sleep session: brown noise and a low tone that swell at six breaths a minute, then fade to silence. Not a binaural beat — made for a bedside speaker, no headphones.",
+                    "url": "https://echo11.app/sleep.html"
                 }
             ]
         },
@@ -272,10 +282,10 @@
             "mainEntity": [
                 {
                     "@type": "Question",
-                    "name": "Which binaural beat session should I use — 10Hz or 40Hz?",
+                    "name": "Which session should I use — 10Hz, 40Hz or Sleep?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Racing thoughts, can't switch off — 10 Hz. Before sleep — 10 Hz. Can't start the task — 40 Hz. Long stretch of work — 40 Hz, and loop it. New here? Start with 10 Hz. Most people feel the reset before they feel the focus."
+                        "text": "Racing thoughts, can't switch off — 10 Hz. Lights out, ready for bed — Sleep, on a speaker. Can't start the task — 40 Hz. Long stretch of work — 40 Hz, and loop it. New here? Start with 10 Hz. Most people feel the reset before they feel the focus."
                     }
                 }
             ]
@@ -316,6 +326,7 @@
                 <ul class="menu-sublist">
                     <li><a href="frequency.html" class="menu-sublink">10 Hz &middot; Calm</a></li>
                     <li><a href="40hz.html" class="menu-sublink">40 Hz &middot; Focus</a></li>
+                    <li><a href="sleep.html" class="menu-sublink">Delta &middot; Sleep</a></li>
                 </ul>
             </li>
             <li>
@@ -343,9 +354,9 @@
     <main id="main-content">
         <section class="hub">
             <div class="hub-inner">
-                <div class="freq-eyebrow">The Sessions · Generated Live</div>
-                <h1 class="hub-title">Free binaural beat sessions</h1>
-                <p class="hub-intro">Two sessions. Pick the one your nervous system needs right now.</p>
+                <div class="freq-eyebrow">The Sessions · Free</div>
+                <h1 class="hub-title">Free sessions for calm, focus and sleep</h1>
+                <p class="hub-intro">Three sessions. Pick the one your nervous system needs right now.</p>
 
                 <div class="session-cards">
                     <a class="session-card session-card--calm" href="frequency.html" data-hz="10">
@@ -378,6 +389,21 @@
                             <span class="session-card-btn">Start the Focus →</span>
                         </span>
                     </a>
+                    <a class="session-card session-card--sleep" href="sleep.html" data-hz="sleep">
+                        <picture class="session-card-media">
+                            <source srcset="assets/images/astro.webp" type="image/webp">
+                            <img src="assets/images/astro.png" alt="Close-up portrait of an astronaut, eyes closed, at rest" loading="lazy" width="1456" height="816">
+                        </picture>
+                        <span class="session-card-veil" aria-hidden="true"></span>
+                        <span class="session-card-frame" aria-hidden="true"></span>
+                        <span class="session-card-body">
+                            <span class="session-card-band">Delta · Sleep</span>
+                            <span class="session-card-hz">Sleep</span>
+                            <span class="session-card-line">For lights out. Fades to silence on its own.</span>
+                            <span class="session-card-foot">30:00 · Speaker · No headphones</span>
+                            <span class="session-card-btn">Start Sleep →</span>
+                        </span>
+                    </a>
                 </div>
 
                 <section class="which">
@@ -388,7 +414,8 @@
                         </thead>
                         <tbody>
                             <tr><td>Racing thoughts, can't switch off</td><td><a href="frequency.html" data-hz="10">10 Hz</a></td></tr>
-                            <tr><td>Before sleep</td><td><a href="frequency.html" data-hz="10">10 Hz</a></td></tr>
+                            <tr><td>Too wired to lie down yet</td><td><a href="frequency.html" data-hz="10">10 Hz</a></td></tr>
+                            <tr><td>Lights out, ready for bed</td><td><a href="sleep.html" data-hz="sleep">Sleep</a></td></tr>
                             <tr><td>Can't start the task</td><td><a href="40hz.html" data-hz="40">40 Hz</a></td></tr>
                             <tr><td>Long stretch of work</td><td><a href="40hz.html" data-hz="40">40 Hz (loop it)</a></td></tr>
                         </tbody>
@@ -396,7 +423,7 @@
                     <p class="hub-start">New here? Start with 10 Hz. Most people feel the reset before they feel the focus.</p>
                 </section>
 
-                <p class="hub-note">These sessions are self-care tools, not medical treatments. Each page explains what the research does — and does not — show, and carries a full disclaimer.</p>
+                <p class="hub-note">10 Hz and 40 Hz are binaural beats and need stereo headphones. Sleep is not — it plays on a speaker, so nothing has to stay in your ears overnight. These sessions are self-care tools, not medical treatments. Each page explains what the research does — and does not — show, and carries a full disclaimer.</p>
             </div>
         </section>
     </main>
