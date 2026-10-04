@@ -544,14 +544,6 @@
             box-shadow: -10px 0 40px rgba(0,0,0,0.15);
         }
 
-        /* a short window: let the drawer scroll instead of centering its
-           top out of reach, and clear the fixed bar above it */
-        .side-menu {
-            justify-content: safe center;
-            overflow-y: auto;
-            padding-top: calc(var(--header-h, 78px) + 1rem);
-        }
-
         .side-menu.active {
             right: 0;
             visibility: visible;
