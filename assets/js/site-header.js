@@ -146,6 +146,18 @@
     '@media (prefers-reduced-motion: reduce) {',
     '  header { transition-duration: .15s, 1.8s; }',
     '}',
+    // ── the drawer on a short window ──
+    // every page centres the drawer's list in a 100vh column; when the list
+    // is taller than the window, centring pushed its top out of reach. Let
+    // the drawer scroll instead, start below the fixed bar, and size to the
+    // visible viewport on phones. Unchanged whenever the list fits.
+    '.side-menu {',
+    '  justify-content: safe center;',
+    '  overflow-y: auto;',
+    '  overscroll-behavior: contain;',
+    '  height: 100vh; height: 100dvh;',
+    '  padding-top: calc(var(--header-h, 78px) + 1rem);',
+    '}',
     // ── menu list + the direct session links nested under The Sessions ──
     '.side-menu nav .menu-list,',
     '.side-menu nav .menu-sublist { list-style: none; margin: 0; padding: 0; }',
