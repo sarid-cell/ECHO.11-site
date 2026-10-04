@@ -544,6 +544,14 @@
             box-shadow: -10px 0 40px rgba(0,0,0,0.15);
         }
 
+        /* a short window: let the drawer scroll instead of centering its
+           top out of reach, and clear the fixed bar above it */
+        .side-menu {
+            justify-content: safe center;
+            overflow-y: auto;
+            padding-top: calc(var(--header-h, 78px) + 1rem);
+        }
+
         .side-menu.active {
             right: 0;
             visibility: visible;
@@ -1047,6 +1055,14 @@
                 outline: 2px solid var(--text);
                 outline-offset: 3px;
             }
+            /* the header sits above the drawer; with the drawer open the
+               inline links would run over its contents */
+            .header-nav { transition: opacity .25s ease, visibility 0s linear 0s; }
+            body.menu-open .header-nav {
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity .2s ease, visibility 0s linear .2s;
+            }
 
             /* Desktop hero: text in a left column on the clean plate, the
                figure in the right third. hero-wide.jpg is drawn at the hero's
@@ -1113,6 +1129,13 @@
             .hero-row-label { font-size: clamp(1.25rem, 2.9svh, 1.75rem); }
             .hero .hero-note { margin-top: clamp(0.8rem, 2svh, 1.4rem); }
             .hero-cue { margin-top: 1rem; }
+        }
+        /* short desktop windows: the column narrows with the height, so
+           the meta drops under the label rather than squeezing it */
+        @media (min-width: 1024px) and (max-height: 700px) {
+            .hero-row-text { flex-direction: column; align-items: flex-start; gap: 0.1rem; }
+            .hero-row-label { white-space: nowrap; }
+            .hero-row-meta { font-size: 0.68rem; }
         }
 
         /* Quiet Mode on desktop: the plate is bright, so dim it harder and
@@ -2131,6 +2154,7 @@
             sideMenu.setAttribute('aria-hidden', isOpen);
             if (isOpen) { sideMenu.setAttribute('inert', ''); } else { sideMenu.removeAttribute('inert'); }
             document.body.style.overflow = isOpen ? '' : 'hidden';
+            document.body.classList.toggle('menu-open', !isOpen);
         }
 
         hamburger.addEventListener('click', toggleMenu);
