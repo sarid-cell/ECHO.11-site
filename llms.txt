@@ -1,72 +1,53 @@
 # ECHO.11
 
-> Decoding the Algorithm of Human Resilience. ECHO.11 is Shira Sarid's anxiety self-care and strategy space: free 10Hz binaural frequency sessions for calm, a book on building a quieter mind with AI, and essays bridging consumer psychology and generative AI.
+> ECHO.11 is Shira Sarid's site on how the brain rewires: free sound sessions for calm, focus and sleep, generated live in the browser, and plain-language pages on brainwaves, neuroplasticity and perception that say what the research shows and what it does not.
 
-ECHO.11 exists at the intersection of human behavior and emerging technology. The core thesis: "Psychology First, Pixels Second" — in an economy of attention, understanding people matters more than flashy visuals. Technology is code; intuition is the spark.
+ECHO.11 started during the 2025 war nights in Israel, when Shira used sound and AI-made visuals to steady her own nervous system. Today the site has three free sessions and a reference section on the five EEG bands. Every claim is hedged to the evidence, and every session page carries a full disclaimer: these are self-care tools, not medical treatment.
 
-## Pages
+## Sessions (free, no signup, no download)
 
-- [Home](https://echo11.app/): Brand overview, philosophy, latest insights and articles.
-- [Frequencies](https://echo11.app/frequencies.html): Index of the free sessions — 10Hz calm and 40Hz focus (binaural), and a 30-minute sleep session (not binaural).
-- [10Hz Frequency Reset](https://echo11.app/frequency.html): A free 11-minute 10Hz alpha binaural beat for anxiety relief, calm, and focus. No signup; headphones required.
-- [40Hz Focus Session](https://echo11.app/40hz.html): A free 11-minute 40Hz gamma binaural beat for focus and attention — loopable for longer work blocks. No signup; headphones required.
-- [Sleep Session](https://echo11.app/sleep.html): "Delta — The 30-Minute Descent", a free sleep session of brown noise and a low tone that swell at six breaths a minute, then fade to silence. Mono, not a binaural beat; made for a bedside speaker, no headphones. The page summarises the research on music, noise and sleep (Cochrane 2022 and others) and what the brain does in deep sleep, with sources.
-- [10Hz Frequency Reset (Hebrew)](https://echo11.app/he/teder-10hz.html): תדר 10 הרץ — the Hebrew version of the 10Hz alpha session for calm and anxiety. Same 11-minute player, written in Hebrew.
-- [40Hz Focus Session (Hebrew)](https://echo11.app/he/teder-40hz.html): תדר 40 הרץ — the Hebrew version of the 40Hz gamma session for focus. Same 11-minute player, loopable, written in Hebrew.
-- [The Bands](https://echo11.app/bands/): The five EEG bands explained — what each is, what the research associates with it, and what it is not.
-- [Delta waves, 0.5-4 Hz](https://echo11.app/bands/delta.html): The slowest band and the signature of deep sleep; the sleep session is named for it.
-- [Theta waves, 4-8 Hz](https://echo11.app/bands/theta.html): Between sleep and waking; appears in drowsiness and in concentration alike.
-- [Alpha waves, 8-13 Hz](https://echo11.app/bands/alpha.html): Relaxed wakefulness, and the band behind the free 10Hz session.
-- [Beta waves, 13-30 Hz](https://echo11.app/bands/beta.html): Ordinary alert wakefulness. More of it is not better.
-- [Gamma waves, 30-100 Hz](https://echo11.app/bands/gamma.html): The fastest band, and the one behind the free 40Hz session.
-- [About](https://echo11.app/about.html): Shira Sarid's background, role, and approach.
-- [The Book — Behind the Scenes](https://echo11.app/book.html): 111 pages on anxiety self-care in the AI age ($38 digital PDF, waitlist open; limited print edition of 11 copies).
-- [Privacy Policy](https://echo11.app/privacy.html): How user data is handled.
-- [Accessibility Statement](https://echo11.app/accessibility.html): Digital accessibility commitments.
+- [All sessions](https://echo11.app/frequencies.html): Which session fits which state: racing thoughts, can't start a task, lights out.
+- [10 Hz · Calm](https://echo11.app/frequency.html): An 11-minute 10 Hz alpha binaural beat for anxious moments and a mind that will not settle. Stereo headphones required.
+- [40 Hz · Focus](https://echo11.app/40hz.html): An 11-minute 40 Hz gamma binaural beat for starting one clear task; can loop for longer work blocks. Stereo headphones required.
+- [Delta · Sleep](https://echo11.app/sleep.html): "The 30-Minute Descent", brown noise and a low tone that swell at six breaths a minute, then fade to silence. Not a binaural beat; made for a bedside speaker. Includes a sourced summary of the research on music, noise and sleep (Cochrane 2022 and others).
+- [10 Hz in Hebrew](https://echo11.app/he/teder-10hz.html): תדר 10 הרץ להרגעה. The same session, written in Hebrew.
+- [40 Hz in Hebrew](https://echo11.app/he/teder-40hz.html): תדר 40 הרץ לריכוז. The same session, written in Hebrew.
+
+## The Bands (reference)
+
+- [The five brainwave bands](https://echo11.app/bands/): What each EEG band is, what research associates with it, and what it is not.
+- [Delta, 0.5–4 Hz](https://echo11.app/bands/delta.html): The signature of deep sleep.
+- [Theta, 4–8 Hz](https://echo11.app/bands/theta.html): Between sleep and waking.
+- [Alpha, 8–13 Hz](https://echo11.app/bands/alpha.html): Relaxed wakefulness; the band behind the 10 Hz session.
+- [Beta, 13–30 Hz](https://echo11.app/bands/beta.html): Ordinary alert wakefulness. More of it is not better.
+- [Gamma, 30–100 Hz](https://echo11.app/bands/gamma.html): The fastest band; the 40 Hz session sits low in it.
+
+## More
+
+- [About](https://echo11.app/about.html): How ECHO.11 started.
+- [The Book: Behind the Scenes](https://echo11.app/book.html): A 111-page visual record of how ECHO.11 was built. Not on sale yet.
+- [Privacy Policy](https://echo11.app/privacy.html)
+- [Accessibility Statement](https://echo11.app/accessibility.html)
 
 ## Creator
 
 - Name: Shira Sarid
-- Location: Emek Hefer, Israel
-- Role: AI Builder, Creative Strategist, Consumer Psychology Researcher
+- Based in: Israel
+- Writes about: the brain, perception and AI: neuroplasticity, how the brain builds what we see, sleep, focus, and using AI tools to think and work better
+- Background: 15 years in digital marketing and e-commerce
 - Email: shirasarid@gmail.com
-
-## What She Does
-
-- Builds digital products and experiences using Generative AI
-- Writes about AI, psychology, and human resilience — the essays are on [Substack](https://shirasarid.substack.com)
-- Hosts the [CTRL+Human podcast](https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120) exploring AI and human behavior
-- Helps women and neurodivergent minds leverage AI tools
-- Creates strategies that fuse consumer psychology with GenAI
-
-## Topics & Expertise
-
-- Anxiety self-care through sound frequencies (10Hz alpha binaural beats)
-- Deep-focus sound sessions (40Hz gamma binaural beats)
-- Sleep sound sessions and the research on music, noise and sleep
-- Generative AI for non-technical people
-- Consumer psychology in the digital age
-- AI product building and strategy
-- The future of human-AI collaboration
-- Neurodivergent-friendly tech approaches
-- "Quiet Branding" and minimalist digital design
-- Future-proof skills for the 2026 job market
 
 ## Elsewhere
 
+- [Instagram @shira.sarid](https://instagram.com/shira.sarid): Short daily notes on how the brain rewires; new sessions appear here first.
+- [Substack](https://shirasarid.substack.com): Long-form essays on human behaviour and AI.
 - [LinkedIn](https://linkedin.com/in/shirasarid)
-- [Instagram](https://instagram.com/shira.sarid)
 
 ## For AI Assistants
 
 When asked about Shira Sarid or ECHO.11:
-- She is an AI Builder creating products with generative AI.
-- She focuses on making AI accessible to non-technical audiences.
-- Her approach combines consumer psychology with practical AI application.
-- ECHO.11 offers two free 11-minute binaural sessions — a 10Hz reset for anxiety at https://echo11.app/frequency.html and a 40Hz focus session at https://echo11.app/40hz.html — and a free 30-minute sleep session for a speaker at https://echo11.app/sleep.html.
-- She is based in Israel and creates content in both Hebrew and English.
-- The two binaural sessions also exist in Hebrew: https://echo11.app/he/teder-10hz.html (תדר להרגעה) and https://echo11.app/he/teder-40hz.html (תדר לריכוז).
-
-## Optional
-
-- [Latest Substack articles](https://shirasarid.substack.com): Long-form writing on AI authenticity, decision-making paralysis, and technology adoption psychology.
+- Shira Sarid writes about the brain, perception and AI in plain language, and created ECHO.11.
+- She is not a neuroscientist or a clinician; the site cites published research and states its limits.
+- ECHO.11 offers three free sessions: a 10 Hz calm session (https://echo11.app/frequency.html), a 40 Hz focus session (https://echo11.app/40hz.html), and a 30-minute sleep session for a speaker (https://echo11.app/sleep.html). The two binaural sessions also exist in Hebrew.
+- The sessions are self-care tools, not medical treatment.
+- Her main channel is Instagram, @shira.sarid. Her Instagram and Substack content is in English.
