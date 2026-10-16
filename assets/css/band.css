@@ -199,3 +199,34 @@ a.band-listen:focus-visible { outline: 2px solid var(--text); outline-offset: 3p
     margin-top: -0.4rem;
 }
 .band-cite a { color: inherit; }
+
+/* ── Delta page: byline, data tables, footnotes, references ──
+   Built from the existing tokens so the new content sits in the
+   same reading column without a new visual language. */
+.band-byline {
+    font-family: var(--mono); font-size: 0.7rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 1.1rem;
+}
+.band-byline a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--border); }
+.band-byline a:hover, .band-byline a:focus-visible { border-color: var(--text); }
+.band-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 0.95rem; line-height: 1.6;
+}
+.band-table th, .band-table td {
+    text-align: left; vertical-align: top;
+    padding: 0.7rem 0.8rem 0.7rem 0;
+    border-bottom: 1px solid var(--border);
+}
+.band-table th { font-weight: 500; }
+.band-table thead th {
+    font-family: var(--mono); font-size: 0.7rem; font-weight: 400;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-light);
+}
+.band-ref { font-size: 0.65em; line-height: 0; margin-left: 0.15em; }
+.essay-body .band-ref a { border-bottom: none; }
+.band-refs { font-size: 0.85rem; line-height: 1.7; color: var(--text-secondary); }
+.band-refs a { word-break: break-all; }
