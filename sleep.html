@@ -359,6 +359,12 @@
         .nc-note { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; font-weight: 300; }
         .next-more { margin: 1.5rem 0 0; font-size: 0.9rem; line-height: 1.8; color: var(--text-secondary); }
 
+        /* Closing image: a calm band instead of a full-height portrait */
+        .footer-band { background: #e7ebee; padding: 0 1.25rem clamp(3rem, 6vw, 5rem); }
+        html[data-theme="dark"] .footer-band { background: #060709; }
+        .footer-band img { max-width: 60rem; margin: 0 auto; height: auto; aspect-ratio: 896 / 384; object-fit: cover; }
+        html[data-theme="dark"] .footer-band img { filter: grayscale(100%) brightness(0.75); }
+
         /* Floating play — mirrors the main player once it has scrolled away */
         .float-play {
             position: fixed; left: 50%; bottom: calc(max(1rem, env(safe-area-inset-bottom)) + var(--lift, 0px)); z-index: 900;
@@ -1070,8 +1076,8 @@
     </main>
 
     <!-- Footer -->
-    <div class="footer-banner">
-        <img src="assets/images/book-silence.jpg" alt="Astronaut helmet, eyes closed" loading="lazy">
+    <div class="footer-banner footer-band">
+        <img src="assets/images/book-silence-band.webp" alt="Astronaut helmet, eyes closed" loading="lazy" decoding="async" width="896" height="384">
     </div>
     <footer>
         <div class="footer-inner">
