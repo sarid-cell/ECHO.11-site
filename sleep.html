@@ -129,35 +129,6 @@
         html[data-theme="dark"] .hero .state-text,
         html[data-theme="dark"] .hero .tone-note { color: rgba(255,255,255,0.82); }
 
-        /* Three-part diagram: what is in the sound, left to right in time */
-        .freq-diagram .brain-hz { font-size: clamp(2rem, 4vw, 3rem); }
-
-        /* Sleep stages strip */
-        .stages {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            border: 1px solid var(--border);
-            margin: 0 0 2.5rem;
-        }
-        .stage { padding: 1.4rem 1.2rem; }
-        .stage + .stage { border-left: 1px solid var(--border); }
-        .stage-tag {
-            font-family: var(--mono); font-size: 0.6rem;
-            letter-spacing: 0.2em; text-transform: uppercase;
-            color: var(--text-light); margin-bottom: 0.45rem;
-        }
-        .stage-name { font-family: var(--mono); font-size: 1.25rem; font-weight: 600; color: var(--text); }
-        .stage-note { font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.35rem; line-height: 1.55; }
-        .stage.deep { background: var(--accent-dim, rgba(45,212,240,0.08)); }
-        @media (max-width: 768px) {
-            .stages { grid-template-columns: 1fr 1fr; }
-            .stage:nth-child(3) { border-left: 0; }
-            .stage:nth-child(n+3) { border-top: 1px solid var(--border); }
-        }
-
-        /* The research callout runs to several paragraphs here */
-        .callout p + p { margin-top: 1rem; }
-        #sources { margin-top: 3rem; }
-
         /* Sources list */
         .refs { margin: 0; padding-left: 1.2rem; }
         .refs li {
@@ -187,16 +158,247 @@
         }
         .yt-play svg { width: 26px; height: 26px; margin-left: 4px; fill: #111; }
         .yt-facade:hover .yt-play, .yt-facade:focus-visible .yt-play { transform: scale(1.06); }
-        .yt-label {
-            position: absolute; left: 1rem; bottom: 0.8rem; z-index: 1;
-            font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em;
-            text-transform: uppercase; color: #fff;
-        }
-        @media (max-width: 560px) { .yt-label { display: none; } }
         .yt-frame { display: block; width: 100%; aspect-ratio: 16 / 9; margin-top: 1.1rem; border: 0; }
         .yt-links { margin-top: 0.9rem; font-size: 0.85rem; }
         .yt-links a { color: var(--text-secondary); }
         .yt-links a:hover { color: var(--text); }
+
+        /* ═══ The Descent — lower page layout ═══
+           The page gets quietly darker as you read down, the way the
+           session itself moves toward silence. Everything else stays still. */
+        .descent {
+            --ink-accent: #0a6f80;            /* accent for text on light */
+            --deep-1: #f2f4f5; --deep-2: #e7ebee;
+            --card: #ffffff;
+            background: linear-gradient(180deg, var(--bg) 0%, var(--deep-1) 45%, var(--deep-2) 100%);
+            padding: 0 1.25rem 4rem;
+        }
+        html[data-theme="dark"] .descent {
+            --ink-accent: #6fe3f6;
+            --deep-1: #0b0d10; --deep-2: #060709;
+            --card: #13161a;
+        }
+        .descent .d-wrap { max-width: 60rem; margin: 0 auto; padding-top: clamp(4rem, 9vw, 7rem); scroll-margin-top: 4.5rem; }
+        .descent .d-narrow { max-width: 44rem; }
+        .d-eyebrow {
+            font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.2em;
+            text-transform: uppercase; color: var(--text-light); margin-bottom: 1rem;
+        }
+        .d-h2 {
+            font-family: var(--sans); font-weight: 300; color: var(--text);
+            font-size: clamp(1.75rem, 4.2vw, 2.7rem); line-height: 1.12; letter-spacing: -0.02em;
+            margin: 0 0 1.25rem; text-wrap: balance;
+        }
+        .d-lede { font-size: 1.05rem; line-height: 1.75; color: var(--text-secondary); font-weight: 300; max-width: 36rem; margin: 0; }
+        .descent strong { color: var(--text); font-weight: 500; }
+        .descent a:not([class]) { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 3px; }
+
+        /* On this page */
+        .page-jump {
+            max-width: 60rem; margin: 0 auto; padding: 2rem 0 0;
+            display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none;
+            -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+                    mask-image: linear-gradient(90deg, #000 85%, transparent);
+        }
+        .page-jump::-webkit-scrollbar { display: none; }
+        .page-jump a {
+            flex: none; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em;
+            color: var(--text-secondary); text-decoration: none; white-space: nowrap;
+            border: 1px solid var(--border); border-radius: 999px; padding: 0.5rem 0.9rem;
+            transition: border-color .25s ease, color .25s ease;
+        }
+        .page-jump a:hover { border-color: var(--text-secondary); color: var(--text); }
+
+        /* In short */
+        .descent .d-short { padding-top: 2.5rem; }
+        .short-box { border: 1px solid var(--border); background: var(--card); padding: 1.6rem 1.75rem 1.4rem; border-left: 2px solid var(--accent); }
+        .short-list { list-style: none; margin: 0; padding: 0; }
+        .short-list li { display: grid; grid-template-columns: 11rem 1fr; gap: 1.25rem; padding: 0.85rem 0; border-top: 1px solid var(--border); }
+        .short-list li:first-child { border-top: 0; padding-top: 0.2rem; }
+        .short-list b { font-family: var(--mono); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); padding-top: 0.2rem; }
+        .short-list span { font-size: 0.98rem; line-height: 1.7; color: var(--text-secondary); font-weight: 300; }
+        .short-meta { margin-top: 1rem; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.06em; color: var(--text-light); }
+        .short-meta a { color: var(--text-secondary); }
+
+        /* 1 · The score: the 30 minutes on one line */
+        .score { margin: 2.75rem 0 0; position: relative; }
+        .score-svg { display: block; width: 100%; height: clamp(90px, 14vw, 140px); overflow: visible; }
+        .score-grid { stroke: var(--border); stroke-width: 1; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
+        .score-noise { fill: var(--accent); opacity: 0.16; }
+        .score-tone { fill: none; stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+        .score.reveal .score-tone { clip-path: inset(0 100% 0 0); }
+        .score.reveal.visible .score-tone { animation: score-draw 3.2s cubic-bezier(.45,.05,.25,1) .2s forwards; }
+        @keyframes score-draw { to { clip-path: inset(0 0 0 0); } }
+        .score-marks { list-style: none; margin: 0.9rem 0 0; padding: 0; position: relative; height: 3.4rem; border-top: 1px solid var(--border); }
+        .score-marks li { position: absolute; left: var(--x); top: 0; width: 8.5rem; padding-top: 0.7rem; transform: translateX(-50%); text-align: center; }
+        .score-marks li:first-child { transform: none; text-align: left; }
+        .score-marks li:last-child { transform: translateX(-100%); text-align: right; }
+        .score-marks li::before { content: ''; position: absolute; top: -4px; left: 50%; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 50%; background: var(--text-light); }
+        .score-marks li:first-child::before { left: 0; margin-left: 0; background: var(--accent); }
+        .score-marks li:last-child::before { left: auto; right: 0; margin-left: 0; background: transparent; border: 1px solid var(--text-light); }
+        .score-marks b { display: block; font-family: var(--mono); font-weight: 500; font-size: 0.78rem; color: var(--text); }
+        .score-marks span { display: block; font-size: 0.78rem; color: var(--text-light); line-height: 1.35; margin-top: 0.15rem; }
+        .layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 2.5rem 0 0; }
+        .layer dt { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--text); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem; }
+        .layer dd { margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary); font-weight: 300; }
+        .sw { display: inline-block; width: 22px; height: 10px; flex: none; }
+        .sw-noise { background: var(--accent); opacity: 0.25; border-radius: 2px; }
+        .sw-tone { height: 2px; background: var(--accent); }
+        .sw-end { height: 1px; background: var(--text-light); }
+
+        /* 2 · Steps — a real sequence, so it is numbered */
+        .steps { list-style: none; margin: 2.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .step { background: var(--card); padding: 1.75rem 1.6rem 1.9rem; }
+        .step-n { display: block; font-family: var(--sans); font-weight: 200; font-size: 3rem; line-height: 1; color: var(--ink-accent); margin-bottom: 1.1rem; }
+        .step strong { display: block; font-size: 1.02rem; line-height: 1.4; margin-bottom: 0.5rem; scroll-margin-top: 6rem; }
+        .step p { margin: 0; font-size: 0.92rem; line-height: 1.7; color: var(--text-secondary); font-weight: 300; }
+
+        /* 3 · Questions — folded, one open */
+        .qa-list { border-top: 1px solid var(--border); margin-top: 1.5rem; }
+        .qa { border-bottom: 1px solid var(--border); }
+        .qa summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.35rem 0; }
+        .qa summary::-webkit-details-marker { display: none; }
+        .qa summary h3 { margin: 0; font-family: var(--sans); font-weight: 400; font-size: 1.15rem; line-height: 1.35; color: var(--text); }
+        .qa summary::after {
+            content: ''; flex: none; width: 13px; height: 13px;
+            background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat,
+                        linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat;
+            color: var(--text-secondary); transition: transform .35s ease;
+        }
+        .qa[open] summary::after { transform: rotate(45deg); }
+        .qa summary:hover h3 { color: var(--ink-accent); }
+        .qa-a { padding: 0 2.5rem 1.6rem 0; font-size: 1rem; line-height: 1.8; color: var(--text-secondary); font-weight: 300; }
+        .qa[open] .qa-a { animation: qa-in .45s ease; }
+        @keyframes qa-in { from { opacity: 0; transform: translateY(-6px); } }
+        .qa .feel-tags { margin-top: 0.9rem; }
+
+        .d-plate { max-width: 60rem; margin: clamp(4rem, 9vw, 7rem) auto 0; aspect-ratio: 21 / 9; overflow: hidden; }
+        .d-plate picture, .d-plate img { display: block; width: 100%; height: 100%; }
+        .d-plate img { object-fit: cover; object-position: 50% 38%; filter: grayscale(100%); }
+        html[data-theme="dark"] .d-plate img { filter: grayscale(100%) brightness(0.7); }
+
+        /* 4 · Research — each finding carries its evidence weight */
+        .d-quote { font-size: clamp(2rem, 5.2vw, 3.3rem); }
+        .d-quote em { font-style: normal; color: var(--ink-accent); }
+        .findings { list-style: none; margin: 2.5rem 0 0; padding: 0; }
+        .finding { padding: 1.9rem 0; border-top: 1px solid var(--border); }
+        .finding h3 { font-family: var(--sans); font-weight: 500; font-size: 1.12rem; line-height: 1.4; color: var(--text); margin: 0.85rem 0 0.6rem; }
+        .finding p { margin: 0; font-size: 0.98rem; line-height: 1.8; color: var(--text-secondary); font-weight: 300; }
+        .ev {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--text-secondary); border: 1px solid var(--border); border-radius: 999px; padding: 0.3rem 0.75rem 0.3rem 0.6rem;
+        }
+        .ev::before { content: ''; width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--text-light); }
+        .ev-strong::before { background: var(--accent); border-color: var(--accent); }
+        .ev-weak::before { background: transparent; }
+        .cite {
+            font-family: var(--mono); font-size: 0.62rem; vertical-align: super; line-height: 0;
+            color: var(--ink-accent); text-decoration: none; padding: 0 0.12em; margin-left: 0.05em;
+        }
+        .cite + .cite::before { content: ','; color: var(--text-light); margin-right: 0.1em; }
+        .cite:hover { text-decoration: underline; }
+        .d-note { margin: 1.5rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--text-light); line-height: 1.6; }
+
+        /* 5 · Hypnogram: the stages step down, then REM climbs back up */
+        .hypno { list-style: none; margin: 2.5rem 0 0; padding: 0 0 4.5rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; position: relative; }
+        .hs { position: relative; transform: translateY(calc(var(--d) * 2.25rem)); padding: 1.1rem 1.1rem 1.25rem; border-top: 2px solid var(--text-light); background: var(--card); }
+        .hs-deep { border-top-color: var(--accent); background: linear-gradient(180deg, var(--accent-dim), var(--card) 70%); }
+        .hs-tag { display: block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-light); }
+        .hs-name { display: block; font-family: var(--mono); font-size: 1.35rem; font-weight: 600; color: var(--text); margin: 0.3rem 0 0.35rem; }
+        .hs-note { display: block; font-size: 0.84rem; color: var(--text-secondary); line-height: 1.55; }
+        .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-top: 1rem; }
+        .pair-card h3 { font-family: var(--sans); font-weight: 500; font-size: 1.12rem; color: var(--text); margin: 0 0 0.6rem; }
+        .pair-card p { margin: 0; font-size: 0.96rem; line-height: 1.8; color: var(--text-secondary); font-weight: 300; }
+        .closer { margin: 3.5rem 0 0; padding: 0 0 0 1.5rem; border-left: 2px solid var(--accent); max-width: 44rem; }
+        .closer h3 { font-family: var(--mono); font-weight: 400; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-light); margin: 0 0 0.9rem; }
+        .closer p { margin: 0; font-family: var(--sans); font-weight: 300; font-size: clamp(1.2rem, 2.4vw, 1.5rem); line-height: 1.55; color: var(--text); }
+
+        /* 6 · The full night */
+        .night { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
+        .night-text p { margin: 0; font-size: 1rem; line-height: 1.8; color: var(--text-secondary); font-weight: 300; }
+        .night .d-h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); }
+        .night .yt-facade { margin-top: 0; border-radius: 6px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.45); }
+        .night .yt-frame { margin-top: 0; border-radius: 6px; }
+        .night .yt-links { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: 0.6rem 1.25rem; font-size: 0.88rem; }
+        .night .yt-links a { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 4px; }
+
+        /* 7 · Fine print, folded */
+        .fine-box { padding: 1.75rem; background: var(--card); border: 1px solid var(--border); scroll-margin-top: 5rem; }
+        .fine-lead { margin: 0; font-size: 0.95rem; line-height: 1.75; color: var(--text-secondary); }
+        .fold summary {
+            list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: 0.75rem;
+            font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; color: var(--text);
+            padding: 1.1rem 0 0;
+        }
+        .fold summary::-webkit-details-marker { display: none; }
+        .fold summary::before { content: '+'; font-size: 0.95rem; color: var(--ink-accent); width: 0.8rem; transition: transform .3s ease; }
+        .fold[open] summary::before { content: '–'; }
+        .fold-body { padding-top: 1rem; animation: qa-in .45s ease; }
+        .fold-body p { margin: 0 0 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--text-secondary); font-weight: 300; }
+        .fold-sources { margin-top: 1rem; padding: 0 1.75rem 1.5rem; border: 1px solid var(--border); scroll-margin-top: 5rem; }
+        .fold-sources > summary { padding-top: 1.5rem; }
+        .fold-count { color: var(--text-light); font-size: 0.68rem; letter-spacing: 0.06em; }
+        .descent .refs { padding-left: 1.4rem; }
+        .descent .refs li { scroll-margin-top: 6rem; transition: background-color 1.2s ease; }
+        .descent .refs li.ref-hit { animation: ref-hit 2.4s ease; }
+        @keyframes ref-hit { 0%, 40% { background: var(--accent-dim); } 100% { background: transparent; } }
+        .refs-also { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.7; margin: 0.5rem 0 0; }
+
+        /* 8 · Next */
+        .next-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .next-card {
+            display: flex; flex-direction: column; gap: 0.45rem; padding: 1.5rem; text-decoration: none;
+            background: var(--card); border: 1px solid var(--border);
+            transition: border-color .3s ease, transform .3s ease;
+        }
+        .next-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+        .nc-tag { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-light); }
+        .nc-title { font-size: 1.08rem; color: var(--text); line-height: 1.35; }
+        .nc-title::after { content: ' →'; color: var(--ink-accent); }
+        .nc-note { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; font-weight: 300; }
+        .next-more { margin: 1.5rem 0 0; font-size: 0.9rem; line-height: 1.8; color: var(--text-secondary); }
+
+        /* Floating play — mirrors the main player once it has scrolled away */
+        .float-play {
+            position: fixed; left: 50%; bottom: calc(max(1rem, env(safe-area-inset-bottom)) + var(--lift, 0px)); z-index: 900;
+            transform: translate(-50%, 160%); opacity: 0;
+            display: inline-flex; align-items: center; gap: 0.7rem;
+            padding: 0.8rem 1.25rem 0.8rem 1rem; border-radius: 999px; cursor: pointer;
+            font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em;
+            white-space: nowrap; color: #eafdff; background: rgba(14,16,19,0.88); border: 1px solid rgba(45,212,240,0.35);
+            -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+            box-shadow: 0 12px 30px -12px rgba(0,0,0,.5);
+            transition: transform .5s cubic-bezier(.2,.8,.2,1), opacity .4s ease;
+        }
+        .float-play.show { transform: translate(-50%, 0); opacity: 1; }
+        .fp-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 0 rgba(45,212,240,.5); }
+        .float-play.is-on .fp-dot { animation: fp-breathe 10s ease-in-out infinite; }
+        @keyframes fp-breathe { 0%, 100% { box-shadow: 0 0 0 0 rgba(45,212,240,.45); } 50% { box-shadow: 0 0 0 7px rgba(45,212,240,0); } }
+
+        .descent :focus-visible, .float-play:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+        @media (max-width: 860px) {
+            .layers, .steps, .next-grid { grid-template-columns: 1fr; }
+            .layers { gap: 1.25rem; }
+            .pair { grid-template-columns: 1fr; gap: 1.75rem; }
+            .night { grid-template-columns: 1fr; }
+            .night .yt-facade { order: -1; }
+            .hypno { grid-template-columns: 1fr; gap: 0.5rem; padding-bottom: 0; }
+            .hs { transform: none; margin-left: calc(var(--d) * 1.5rem); }
+            .score-marks li { width: 4rem; }
+            .score-marks span { display: none; }
+            .score-marks { height: 2.2rem; }
+            .short-list li { grid-template-columns: 1fr; gap: 0.3rem; }
+            .d-plate { aspect-ratio: 16 / 10; }
+            .fold-sources, .fine-box { padding-left: 1.2rem; padding-right: 1.2rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .score.reveal .score-tone { clip-path: none; animation: none !important; }
+            .qa[open] .qa-a, .fold-body { animation: none; }
+            .float-play { transition: opacity .2s ease; }
+            .float-play.is-on .fp-dot { animation: none; }
+        }
     </style>
 
     <script type="application/ld+json">
@@ -507,51 +709,114 @@
         </section>
 
         <!-- ── SCIENCE ── -->
-        <section class="science">
-            <div class="science-inner">
+        <section class="science descent">
 
-                <h2 class="section-label reveal">How it works</h2>
+            <nav class="page-jump" aria-label="On this page">
+                <a href="#how-it-works">How it works</a>
+                <a href="#how-to-use">How to use it</a>
+                <a href="#questions">Questions</a>
+                <a href="#research">The research</a>
+                <a href="#full-night">The full night</a>
+                <a href="#sources">Sources</a>
+            </nav>
 
-                <!-- What is in the sound, in order of time -->
-                <div class="freq-diagram reveal">
-                    <div class="ear">
-                        <div class="ear-tag">The bed</div>
-                        <div class="ear-hz">Brown noise</div>
-                        <div class="ear-note">Low and soft, like distant surf — it covers the small sounds of the room</div>
-                    </div>
-                    <div class="brain">
-                        <div class="brain-tag">The swell</div>
-                        <div class="brain-hz">6 / min</div>
-                        <div class="brain-wave">Rises and settles every 10 seconds</div>
-                    </div>
-                    <div class="ear right">
-                        <div class="ear-tag">The ending</div>
-                        <div class="ear-hz">0 at 30:00</div>
-                        <div class="ear-note">The tone recedes from minute 14; everything fades out from 22</div>
-                    </div>
+            <!-- In short: the page in three lines -->
+            <aside class="d-wrap d-short reveal" aria-label="In short">
+                <div class="short-box">
+                    <div class="d-eyebrow">In 20 seconds</div>
+                    <ul class="short-list">
+                        <li><b>What it is</b><span>A free 30-minute session: soft brown noise and a low tone that rise and settle six times a minute, then fade to silence on their own. Made for a bedside speaker — no headphones, no signup.</span></li>
+                        <li><b>What the research says</b><span>Music helps people feel they slept better; steady noise on its own has weak evidence. So the noise here stays low and switches itself off.</span></li>
+                        <li><b>All night?</b><span><a href="#full-night">A 10-hour brown noise version</a> keeps going until morning.</span></li>
+                    </ul>
+                    <div class="short-meta">Updated October 2026 · 15 studies and reviews cited · <a href="#sources">See sources</a></div>
                 </div>
+            </aside>
 
-                <!-- Info blocks -->
-                <div class="info-grid reveal">
-                    <div class="info-block">
-                        <div class="info-q">Is this a binaural beat?</div>
-                        <div class="info-a" id="not-binaural"><strong>No.</strong> Both ears hear exactly the same sound. A binaural beat only forms when each ear gets a different tone, which means headphones — and earbuds in bed shift and press every time you turn over. No study has tested sleeping in earbuds, and everyday earphone use has been linked to more bacteria in the ear canal. This one is built for a speaker on the bedside table.</div>
+            <!-- 1. The session, minute by minute -->
+            <div class="d-wrap" id="how-it-works">
+                <div class="d-eyebrow">How it works</div>
+                <h2 class="d-h2">Thirty minutes, from sound to silence</h2>
+                <p class="d-lede">Three layers, one direction. Everything in the session is moving toward quiet — you can see the whole night's first half-hour on one line.</p>
+
+                <figure class="score reveal" aria-label="Timeline of the 30-minute session: brown noise and a swelling tone together until minute 14, the tone recedes until minute 22, then everything fades to silence at 30:00">
+                    <svg class="score-svg" viewBox="0 0 600 120" preserveAspectRatio="none" aria-hidden="true">
+                        <line class="score-grid" x1="280" y1="4" x2="280" y2="116"/>
+                        <line class="score-grid" x1="440" y1="4" x2="440" y2="116"/>
+                        <path class="score-noise" d="M0,47 L6,41 L12,50 L18,49 L24,46 L30,47 L36,42 L42,47 L48,48 L54,40 L60,47 L66,53 L72,43 L78,47 L84,49 L90,43 L96,48 L102,42 L108,42 L114,54 L120,45 L126,41 L132,49 L138,45 L144,44 L150,48 L156,42 L162,49 L168,48 L174,40 L180,49 L186,52 L192,40 L198,45 L204,46 L210,47 L216,48 L222,41 L228,43 L234,51 L240,42 L246,43 L252,50 L258,45 L264,48 L270,46 L276,42 L282,53 L288,48 L294,39 L300,51 L306,48 L312,42 L318,48 L324,43 L330,48 L336,49 L342,41 L348,46 L354,53 L360,42 L366,44 L372,50 L378,45 L384,46 L390,46 L396,45 L402,53 L408,43 L414,40 L420,52 L426,47 L432,45 L438,47 L444,46 L450,49 L456,48 L462,41 L468,50 L474,51 L480,47 L486,51 L492,51 L498,50 L504,53 L510,49 L516,52 L522,56 L528,52 L534,53 L540,57 L546,56 L552,56 L558,56 L564,56 L570,59 L576,58 L582,58 L588,59 L594,60 L600,60 L600,60 L594,60 L588,61 L582,62 L576,62 L570,61 L564,64 L558,64 L552,64 L546,64 L540,63 L534,67 L528,68 L522,64 L516,68 L510,71 L504,67 L498,70 L492,69 L486,69 L480,73 L474,69 L468,70 L462,79 L456,72 L450,71 L444,74 L438,73 L432,75 L426,73 L420,68 L414,80 L408,77 L402,67 L396,75 L390,74 L384,74 L378,75 L372,70 L366,76 L360,78 L354,67 L348,74 L342,79 L336,71 L330,72 L324,77 L318,72 L312,78 L306,72 L300,69 L294,81 L288,72 L282,67 L276,78 L270,74 L264,72 L258,75 L252,70 L246,77 L240,78 L234,69 L228,77 L222,79 L216,72 L210,73 L204,74 L198,75 L192,80 L186,68 L180,71 L174,80 L168,72 L162,71 L156,78 L150,72 L144,76 L138,75 L132,71 L126,79 L120,75 L114,66 L108,78 L102,78 L96,72 L90,77 L84,71 L78,73 L72,77 L66,67 L60,73 L54,80 L48,72 L42,73 L36,78 L30,73 L24,74 L18,71 L12,70 L6,79 L0,73Z"/>
+                        <path class="score-tone" d="M0,60.0 L3,44.6 L6,32.5 L9,26.4 L12,27.7 L15,36.0 L18,49.5 L21,65.3 L24,80.0 L27,90.3 L30,94.0 L33,90.3 L36,80.0 L39,65.3 L42,49.5 L45,36.0 L48,27.7 L51,26.4 L54,32.5 L57,44.6 L60,60.0 L63,75.4 L66,87.5 L69,93.6 L72,92.3 L75,84.0 L78,70.5 L81,54.7 L84,40.0 L87,29.7 L90,26.0 L93,29.7 L96,40.0 L99,54.7 L102,70.5 L105,84.0 L108,92.3 L111,93.6 L114,87.5 L117,75.4 L120,60.0 L123,44.6 L126,32.5 L129,26.4 L132,27.7 L135,36.0 L138,49.5 L141,65.3 L144,80.0 L147,90.3 L150,94.0 L153,90.3 L156,80.0 L159,65.3 L162,49.5 L165,36.0 L168,27.7 L171,26.4 L174,32.5 L177,44.6 L180,60.0 L183,75.4 L186,87.5 L189,93.6 L192,92.3 L195,84.0 L198,70.5 L201,54.7 L204,40.0 L207,29.7 L210,26.0 L213,29.7 L216,40.0 L219,54.7 L222,70.5 L225,84.0 L228,92.3 L231,93.6 L234,87.5 L237,75.4 L240,60.0 L243,44.6 L246,32.5 L249,26.4 L252,27.7 L255,36.0 L258,49.5 L261,65.3 L264,80.0 L267,90.3 L270,94.0 L273,90.3 L276,80.0 L279,65.3 L282,49.6 L285,36.7 L288,29.3 L291,28.7 L294,34.9 L297,46.2 L300,60.0 L303,73.2 L306,83.0 L309,87.5 L312,85.9 L315,78.8 L318,68.0 L321,56.0 L324,45.5 L327,38.6 L330,36.6 L333,39.7 L336,47.0 L339,56.6 L342,66.4 L345,74.3 L348,78.6 L351,78.7 L354,74.8 L357,68.0 L360,60.0 L363,52.6 L366,47.3 L369,45.1 L372,46.3 L375,50.2 L378,55.9 L381,62.0 L384,67.0 L387,70.0 L390,70.6 L393,68.9 L396,65.5 L399,61.4 L402,57.5 L405,54.7 L408,53.5 L411,53.9 L414,55.5 L417,57.8 L420,60.0 L423,61.6 L426,62.4 L429,62.3 L432,61.6 L435,60.8 L438,60.1 L441,60.0 L444,60.0 L447,60.0 L450,60.0 L453,60.0 L456,60.0 L459,60.0 L462,60.0 L465,60.0 L468,60.0 L471,60.0 L474,60.0 L477,60.0 L480,60.0 L483,60.0 L486,60.0 L489,60.0 L492,60.0 L495,60.0 L498,60.0 L501,60.0 L504,60.0 L507,60.0 L510,60.0 L513,60.0 L516,60.0 L519,60.0 L522,60.0 L525,60.0 L528,60.0 L531,60.0 L534,60.0 L537,60.0 L540,60.0 L543,60.0 L546,60.0 L549,60.0 L552,60.0 L555,60.0 L558,60.0 L561,60.0 L564,60.0 L567,60.0 L570,60.0 L573,60.0 L576,60.0 L579,60.0 L582,60.0 L585,60.0 L588,60.0 L591,60.0 L594,60.0 L597,60.0 L600,60.0"/>
+                    </svg>
+                    <ol class="score-marks">
+                        <li style="--x:0%"><b>0:00</b><span>Noise and tone swell together</span></li>
+                        <li style="--x:46.67%"><b>14:00</b><span>The tone recedes</span></li>
+                        <li style="--x:73.33%"><b>22:00</b><span>Everything fades</span></li>
+                        <li style="--x:100%"><b>30:00</b><span>Silence</span></li>
+                    </ol>
+                </figure>
+
+                <dl class="layers reveal">
+                    <div class="layer">
+                        <dt><i class="sw sw-noise" aria-hidden="true"></i>The bed · Brown noise</dt>
+                        <dd>Low and soft, like distant surf — it covers the small sounds of the room.</dd>
                     </div>
-                    <div class="info-block">
-                        <div class="info-q">Then why is it called Delta?</div>
-                        <div class="info-a">Delta (<strong>0.5–4 Hz</strong>) is the brain's own rhythm in the deepest stage of sleep (see <a href="bands/delta.html">what delta waves are</a>). The name marks where you're headed.</div>
+                    <div class="layer">
+                        <dt><i class="sw sw-tone" aria-hidden="true"></i>The swell · 6 / min</dt>
+                        <dd>Rises and settles every 10 seconds, something to breathe with.</dd>
                     </div>
-                    <div class="info-block">
-                        <div class="info-q">What you'll hear</div>
-                        <div class="info-a">Low-passed <strong>brown noise</strong> under a soft open fifth — <strong>110, 165 and 220 Hz</strong>, tuned to exact ratios so the tones never beat against each other. Both rise and settle on a ten-second cycle. After 14 minutes the tone recedes and only the noise is left; from minute 22 everything fades, and the last seconds are silence.</div>
+                    <div class="layer">
+                        <dt><i class="sw sw-end" aria-hidden="true"></i>The ending · 0 at 30:00</dt>
+                        <dd>The tone recedes from minute 14; everything fades out from 22.</dd>
                     </div>
-                    <div class="info-block">
-                        <div class="info-q">Why six breaths a minute?</div>
-                        <div class="info-a">It's the pace used in heart-rate-variability biofeedback, where it produces the largest swings in heart rate (<strong>Lehrer &amp; Gevirtz, 2014</strong>). In one small study, 20 minutes of it before bed shortened the time to fall asleep in 14 people with insomnia (<strong>Tsai et al., 2015</strong>). Promising, not proven — and you don't have to follow it. The swell is there if you want something to breathe with.</div>
-                    </div>
-                    <div class="info-block info-block-wide">
-                        <div class="info-q">What should you feel?</div>
-                        <div class="info-a">Individual response varies. Most commonly reported:
+                </dl>
+            </div>
+
+            <!-- 2. How to use -->
+            <div class="d-wrap" id="how-to-use">
+                <div class="d-eyebrow">How to use it</div>
+                <h2 class="d-h2">Three steps, then nothing to do</h2>
+                <ol class="steps reveal">
+                    <li class="step">
+                        <span class="step-n" aria-hidden="true">1</span>
+                        <strong id="step1">Phone on the bedside table, volume low</strong>
+                        <p>Just above the sound of the room. No headphones.</p>
+                    </li>
+                    <li class="step">
+                        <span class="step-n" aria-hidden="true">2</span>
+                        <strong id="step2">Lights out, press play, screen down.</strong>
+                        <p>The audio keeps playing with the screen locked on most phones.</p>
+                    </li>
+                    <li class="step">
+                        <span class="step-n" aria-hidden="true">3</span>
+                        <strong id="step3">Breathe with the swell while you're awake.</strong>
+                        <p>When you drift, stop following it. At 30 minutes it reaches silence — there is nothing to switch off.</p>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- 3. Questions -->
+            <div class="d-wrap d-narrow" id="questions">
+                <div class="d-eyebrow">Questions people ask</div>
+                <h2 class="d-h2">Before you press play</h2>
+                <div class="qa-list reveal">
+                    <details class="qa" open>
+                        <summary><h3>Is this a binaural beat?</h3></summary>
+                        <div class="qa-a" id="not-binaural"><strong>No.</strong> Both ears hear exactly the same sound. A binaural beat only forms when each ear gets a different tone, which means headphones — and earbuds in bed shift and press every time you turn over. No study has tested sleeping in earbuds, and everyday earphone use has been linked to more bacteria in the ear canal. This one is built for a speaker on the bedside table.</div>
+                    </details>
+                    <details class="qa">
+                        <summary><h3>Then why is it called Delta?</h3></summary>
+                        <div class="qa-a">Delta (<strong>0.5–4 Hz</strong>) is the brain's own rhythm in the deepest stage of sleep (see <a href="bands/delta.html">what delta waves are</a>). The name marks where you're headed.</div>
+                    </details>
+                    <details class="qa">
+                        <summary><h3>What will I hear?</h3></summary>
+                        <div class="qa-a">Low-passed <strong>brown noise</strong> under a soft open fifth — <strong>110, 165 and 220 Hz</strong>, tuned to exact ratios so the tones never beat against each other. Both rise and settle on a ten-second cycle. After 14 minutes the tone recedes and only the noise is left; from minute 22 everything fades, and the last seconds are silence.</div>
+                    </details>
+                    <details class="qa">
+                        <summary><h3>Why six breaths a minute?</h3></summary>
+                        <div class="qa-a">It's the pace used in heart-rate-variability biofeedback, where it produces the largest swings in heart rate (<strong>Lehrer &amp; Gevirtz, 2014</strong>). In one small study, 20 minutes of it before bed shortened the time to fall asleep in 14 people with insomnia (<strong>Tsai et al., 2015</strong>). Promising, not proven — and you don't have to follow it. The swell is there if you want something to breathe with.</div>
+                    </details>
+                    <details class="qa">
+                        <summary><h3>What should I feel?</h3></summary>
+                        <div class="qa-a">Individual response varies. Most commonly reported:
                             <div class="feel-tags">
                                 <span class="feel-tag">Heaviness</span>
                                 <span class="feel-tag">Slower breathing</span>
@@ -560,82 +825,109 @@
                                 <span class="feel-tag">Nothing at all (normal)</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="info-block info-block-img">
-                        <picture>
-                            <source srcset="assets/images/astro-eyes-closed.webp" type="image/webp">
-                            <img src="assets/images/astro-eyes-closed.png" alt="Close-up portrait of a woman astronaut, eyes closed" loading="lazy" width="1456" height="816">
-                        </picture>
-                    </div>
+                    </details>
+                </div>
+            </div>
+
+            <figure class="d-plate reveal">
+                <picture>
+                    <source srcset="assets/images/astro-eyes-closed.webp" type="image/webp">
+                    <img src="assets/images/astro-eyes-closed.png" alt="Close-up portrait of a woman astronaut, eyes closed" loading="lazy" decoding="async" width="1456" height="816">
+                </picture>
+            </figure>
+
+            <!-- 4. Research -->
+            <div class="d-wrap d-narrow" id="research">
+                <div class="d-eyebrow">What the research on sound and sleep actually shows</div>
+                <h2 class="d-h2 d-quote">Not a sleeping pill.<br><em>A dimmer switch.</em></h2>
+
+                <ul class="findings reveal">
+                    <li class="finding">
+                        <span class="ev ev-strong">Moderate evidence · 13 trials</span>
+                        <h3>Music helps people feel they slept better — the stopwatch is less sure.</h3>
+                        <p>A 2022 Cochrane review of 13 trials (1,007 adults with insomnia) found moderate-certainty evidence that listening to music improves self-rated sleep quality, and low-certainty evidence that it may ease self-reported trouble falling asleep. In the three studies that measured sleep objectively, it did not clearly shorten the time to fall asleep or lengthen sleep.<a class="cite" href="#ref-1">1</a> Earlier meta-analyses point the same way, with the benefit showing up on questionnaires rather than instruments.<a class="cite" href="#ref-2">2</a></p>
+                    </li>
+                    <li class="finding">
+                        <span class="ev">Survey · 651 people</span>
+                        <h3>Why people reach for it.</h3>
+                        <p>In a survey of 651 people, 62% said they use music to fall asleep — to relax, and to block out noise and their own thoughts. There was no single "sleep sound": what worked was personal.<a class="cite" href="#ref-3">3</a></p>
+                    </li>
+                    <li class="finding">
+                        <span class="ev ev-weak">Very low evidence · 38 studies</span>
+                        <h3>Steady noise is the weakest link.</h3>
+                        <p>A systematic review of 38 studies rated the evidence that continuous noise improves sleep as very low quality, and warned it may also disturb sleep and hearing.<a class="cite" href="#ref-4">4</a> A 2022 review of 34 studies likewise found no strong evidence for white or pink noise.<a class="cite" href="#ref-5">5</a> That is why the noise here stays low, sits under 650 Hz, and switches itself off.</p>
+                    </li>
+                    <li class="finding">
+                        <span class="ev">Lab only · needs live EEG</span>
+                        <h3>The impressive results come from the lab.</h3>
+                        <p>When short sounds are timed to the brain's own slow waves during deep sleep — with an EEG reading them in real time — slow waves grow stronger and next-day recall improves, in young adults and in 13 adults aged 60–84.<a class="cite" href="#ref-6">6</a><a class="cite" href="#ref-7">7</a> A track on a phone can't see your brainwaves, and this session doesn't pretend to.</p>
+                    </li>
+                    <li class="finding">
+                        <span class="ev ev-weak">Tiny study · 8 people</span>
+                        <h3>Delta binaural beats: one tiny study.</h3>
+                        <p>A 3 Hz binaural beat played during sleep lengthened deep sleep in 8 people.<a class="cite" href="#ref-8">8</a> A 2023 systematic review of 14 EEG studies found binaural beats entrain brainwaves inconsistently — five studies yes, eight no, one mixed.<a class="cite" href="#ref-9">9</a> Too thin to build a bedtime on, and it would need headphones.</p>
+                    </li>
+                </ul>
+                <p class="d-note">Research findings, not medical claims. Nothing here treats or prevents any condition. <a href="#disclaimer">Read the full disclaimer.</a></p>
+            </div>
+
+            <!-- 5. The brain after you let go -->
+            <div class="d-wrap" id="brain">
+                <div class="d-eyebrow">After you let go</div>
+                <h2 class="d-h2">What your brain does after you let go</h2>
+
+                <ol class="hypno reveal" aria-label="Stages of a night's sleep, from light to deep and back up to dreaming">
+                    <li class="hs" style="--d:0">
+                        <span class="hs-tag">Drifting</span>
+                        <span class="hs-name">N1</span>
+                        <span class="hs-note">Light sleep. Easy to wake; the room still gets through.</span>
+                    </li>
+                    <li class="hs" style="--d:1">
+                        <span class="hs-tag">Settling</span>
+                        <span class="hs-name">N2</span>
+                        <span class="hs-note">Sleep spindles appear — short bursts that help shut out sound.</span>
+                    </li>
+                    <li class="hs hs-deep" style="--d:2">
+                        <span class="hs-tag">Delta</span>
+                        <span class="hs-name">N3</span>
+                        <span class="hs-note">Slow-wave sleep. Large, slow 0.5–4 Hz waves. Hardest to wake.</span>
+                    </li>
+                    <li class="hs" style="--d:0">
+                        <span class="hs-tag">Dreaming</span>
+                        <span class="hs-name">REM</span>
+                        <span class="hs-note">Vivid dreams. The cycle repeats every 90 minutes or so.</span>
+                    </li>
+                </ol>
+
+                <div class="pair reveal">
+                    <article class="pair-card">
+                        <h3>Sorting the day</h3>
+                        <p>During slow-wave sleep the brain replays what it learned while awake. The slow oscillations act as a conductor, grouping faster rhythms — spindles and hippocampal ripples — so memories move into longer-term storage (<strong>Diekelmann &amp; Born, 2010</strong>).<a class="cite" href="#ref-10">10</a></p>
+                    </article>
+                    <article class="pair-card">
+                        <h3>Rinsing the brain</h3>
+                        <p>In mice, sleep widened the space between brain cells by about 60% and sped up the clearance of waste, including β-amyloid (<strong>Xie et al., 2013</strong>).<a class="cite" href="#ref-11">11</a> In sleeping humans, each slow wave was followed by a pulse of cerebrospinal fluid through the brain (<strong>Fultz et al., 2019</strong>).<a class="cite" href="#ref-12">12</a> That human study shows the rhythm, not the cleaning itself — but the two pictures fit.</p>
+                    </article>
                 </div>
 
-                <!-- What the research actually shows -->
-                <div class="callout reveal">
-                    <span class="callout-tag">What the research on sound and sleep actually shows</span>
-                    <p class="research-headline">Not a sleeping pill. A dimmer switch.</p>
-                    <p><strong>Music helps people feel they slept better — the stopwatch is less sure.</strong> A 2022 Cochrane review of 13 trials (1,007 adults with insomnia) found moderate-certainty evidence that listening to music improves self-rated sleep quality, and low-certainty evidence that it may ease self-reported trouble falling asleep. In the three studies that measured sleep objectively, it did not clearly shorten the time to fall asleep or lengthen sleep.<sup>1</sup> Earlier meta-analyses point the same way, with the benefit showing up on questionnaires rather than instruments.<sup>2</sup></p>
-                    <p><strong>Why people reach for it.</strong> In a survey of 651 people, 62% said they use music to fall asleep — to relax, and to block out noise and their own thoughts. There was no single "sleep sound": what worked was personal.<sup>3</sup></p>
-                    <p><strong>Steady noise is the weakest link.</strong> A systematic review of 38 studies rated the evidence that continuous noise improves sleep as very low quality, and warned it may also disturb sleep and hearing.<sup>4</sup> A 2022 review of 34 studies likewise found no strong evidence for white or pink noise.<sup>5</sup> That is why the noise here stays low, sits under 650 Hz, and switches itself off.</p>
-                    <p><strong>The impressive results come from the lab.</strong> When short sounds are timed to the brain's own slow waves during deep sleep — with an EEG reading them in real time — slow waves grow stronger and next-day recall improves, in young adults and in 13 adults aged 60–84.<sup>6, 7</sup> A track on a phone can't see your brainwaves, and this session doesn't pretend to.</p>
-                    <p><strong>Delta binaural beats: one tiny study.</strong> A 3 Hz binaural beat played during sleep lengthened deep sleep in 8 people.<sup>8</sup> A 2023 systematic review of 14 EEG studies found binaural beats entrain brainwaves inconsistently — five studies yes, eight no, one mixed.<sup>9</sup> Too thin to build a bedtime on, and it would need headphones.</p>
-                    <div class="research-note">Research findings, not medical claims. Nothing here treats or prevents any condition. <a href="#disclaimer">Read the full disclaimer.</a></div>
-                </div>
+                <blockquote class="closer reveal">
+                    <h3>So what can a sound do?</h3>
+                    <p>Deep sleep is the brain's own work, and it arrives on its own schedule. The most a sound can honestly do is get you to the start line a little calmer, keep the room from pulling you back, and then go quiet. That's the whole design of this session.</p>
+                </blockquote>
+            </div>
 
-                <!-- What happens in the brain -->
-                <h2 class="section-label reveal">What your brain does after you let go</h2>
-
-                <div class="stages reveal" aria-label="Stages of a night's sleep">
-                    <div class="stage">
-                        <div class="stage-tag">Drifting</div>
-                        <div class="stage-name">N1</div>
-                        <div class="stage-note">Light sleep. Easy to wake; the room still gets through.</div>
+            <!-- 6. Full night: 10-hour version on YouTube -->
+            <div class="d-wrap" id="full-night">
+                <div class="night reveal">
+                    <div class="night-text">
+                        <div class="d-eyebrow">The full night</div>
+                        <h2 class="d-h2">Need the whole night?</h2>
+                        <p>This session ends in silence after 30 minutes on purpose. If noise wakes you later in the night, the 10-hour version keeps a steady, smooth brown noise running until morning, on a dark screen.</p>
+                        <div class="yt-links">
+                            <a href="https://youtu.be/ta6u4jEJdp8" target="_blank" rel="noopener noreferrer">Open on YouTube</a>
+                            <a href="https://www.youtube.com/@shira_sarid?sub_confirmation=1" target="_blank" rel="noopener noreferrer">Subscribe for new sleep sessions</a>
+                        </div>
                     </div>
-                    <div class="stage">
-                        <div class="stage-tag">Settling</div>
-                        <div class="stage-name">N2</div>
-                        <div class="stage-note">Sleep spindles appear — short bursts that help shut out sound.</div>
-                    </div>
-                    <div class="stage deep">
-                        <div class="stage-tag">Delta</div>
-                        <div class="stage-name">N3</div>
-                        <div class="stage-note">Slow-wave sleep. Large, slow 0.5–4 Hz waves. Hardest to wake.</div>
-                    </div>
-                    <div class="stage">
-                        <div class="stage-tag">Dreaming</div>
-                        <div class="stage-name">REM</div>
-                        <div class="stage-note">Vivid dreams. The cycle repeats every 90 minutes or so.</div>
-                    </div>
-                </div>
-
-                <div class="info-grid reveal">
-                    <div class="info-block">
-                        <div class="info-q">Sorting the day</div>
-                        <div class="info-a">During slow-wave sleep the brain replays what it learned while awake. The slow oscillations act as a conductor, grouping faster rhythms — spindles and hippocampal ripples — so memories move into longer-term storage (<strong>Diekelmann &amp; Born, 2010</strong>).<sup>10</sup></div>
-                    </div>
-                    <div class="info-block">
-                        <div class="info-q">Rinsing the brain</div>
-                        <div class="info-a">In mice, sleep widened the space between brain cells by about 60% and sped up the clearance of waste, including β-amyloid (<strong>Xie et al., 2013</strong>).<sup>11</sup> In sleeping humans, each slow wave was followed by a pulse of cerebrospinal fluid through the brain (<strong>Fultz et al., 2019</strong>).<sup>12</sup> That human study shows the rhythm, not the cleaning itself — but the two pictures fit.</div>
-                    </div>
-                    <div class="info-block info-block-wide">
-                        <div class="info-q">So what can a sound do?</div>
-                        <div class="info-a">Deep sleep is the brain's own work, and it arrives on its own schedule. The most a sound can honestly do is get you to the start line a little calmer, keep the room from pulling you back, and then go quiet. That's the whole design of this session.</div>
-                    </div>
-                </div>
-
-                <!-- How to use -->
-                <div class="info-block reveal" style="border:1px solid var(--border);">
-                    <div class="info-q">How to use it</div>
-                    <div class="info-a">
-                        <strong id="step1">1. Phone on the bedside table, volume low</strong> — just above the sound of the room. No headphones.<br>
-                        <strong id="step2">2. Lights out, press play, screen down.</strong> The audio keeps playing with the screen locked on most phones.<br>
-                        <strong id="step3">3. Breathe with the swell while you're awake.</strong> When you drift, stop following it. At 30 minutes it reaches silence — there is nothing to switch off.
-                    </div>
-                </div>
-
-                <!-- Full night: 10-hour version on YouTube -->
-                <div class="info-block yt-night reveal" id="full-night" style="border:1px solid var(--border);">
-                    <div class="info-q">Need the whole night?</div>
-                    <div class="info-a">This session ends in silence after 30 minutes on purpose. If noise wakes you later in the night, the 10-hour version keeps a steady, smooth brown noise running until morning, on a dark screen.</div>
                     <button type="button" class="yt-facade" id="ytNight" data-yt="ta6u4jEJdp8"
                         aria-label="Play Brown Noise for Sleep, 10 hours, dark screen (YouTube)">
                         <picture>
@@ -644,68 +936,137 @@
                         </picture>
                         <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 5v14l11-7-11-7z"/></svg></span>
                     </button>
-                    <div class="yt-links">
-                        <a href="https://youtu.be/ta6u4jEJdp8" target="_blank" rel="noopener noreferrer">Open on YouTube</a> ·
-                        <a href="https://www.youtube.com/@shira_sarid?sub_confirmation=1" target="_blank" rel="noopener noreferrer">Subscribe for new sleep sessions</a>
-                    </div>
                 </div>
-                <script>
-                    (function () {
-                        var b = document.getElementById('ytNight');
-                        if (!b) return;
-                        b.addEventListener('click', function () {
-                            var f = document.createElement('iframe');
-                            f.className = 'yt-frame';
-                            f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.yt + '?autoplay=1&rel=0';
-                            f.title = 'Brown Noise for Sleep, 10 hours, dark screen';
-                            f.allow = 'autoplay; encrypted-media; picture-in-picture';
-                            f.allowFullscreen = true;
-                            b.replaceWith(f);
-                            if (window.gtag) gtag('event', 'youtube_embed_play', { video_id: b.dataset.yt, page: 'sleep' });
-                        });
-                    })();
-                </script>
-
-                <!-- Full disclaimer -->
-                <div class="disclaimer reveal" id="disclaimer">
-                    <span class="callout-tag">The full disclaimer</span>
-                    <p>ECHO.11 is a self-care tool, not a medical device, and nothing here is medical advice. This session is not a diagnosis, a treatment, or a substitute for care from a doctor or sleep specialist. If you regularly struggle to fall or stay asleep for weeks at a time, talk to a doctor: the first-line treatment for chronic insomnia is a structured therapy called CBT-I, not a sound. Loud snoring, gasping at night or heavy daytime sleepiness are also worth a doctor's visit.</p>
-                    <p>Response varies from person to person, and some people notice nothing at all. That is a normal outcome, not a failure on your part.</p>
-                    <p>Keep the volume low and the phone at arm's length rather than under the pillow. Don't use it while driving. If the sound keeps you awake instead, turn it off — silence is a perfectly good way to fall asleep.</p>
-                    <p>The research described on this page reports what studies have observed in general — not what will happen to you, and no efficacy figures are claimed for this specific recording.</p>
-                    <p>This is not a crisis service. If you are in danger or thinking about harming yourself, contact your local emergency number or a crisis line right away.</p>
-                </div>
-
-                <!-- Sources -->
-                <div class="callout reveal" id="sources">
-                    <span class="callout-tag">Sources</span>
-                    <ol class="refs">
-                        <li>Jespersen KV, Pando-Naude V, Koenig J, Jennum P, Vuust P. Listening to music for insomnia in adults. <em>Cochrane Database of Systematic Reviews</em> 2022, CD010459. <a href="https://doi.org/10.1002/14651858.CD010459.pub3" target="_blank" rel="noopener noreferrer">doi.org/10.1002/14651858.CD010459.pub3</a></li>
-                        <li>Feng F, Zhang Y, Hou J, et al. Can music improve sleep quality in adults with primary insomnia? A systematic review and network meta-analysis. <em>International Journal of Nursing Studies</em> 2018;77:189–196. <a href="https://doi.org/10.1016/j.ijnurstu.2017.10.011" target="_blank" rel="noopener noreferrer">doi.org/10.1016/j.ijnurstu.2017.10.011</a></li>
-                        <li>Trahan T, Durrant SJ, Müllensiefen D, Williamson VJ. The music that helps people sleep and the reasons they believe it works. <em>PLOS ONE</em> 2018;13(11):e0206531. <a href="https://doi.org/10.1371/journal.pone.0206531" target="_blank" rel="noopener noreferrer">doi.org/10.1371/journal.pone.0206531</a></li>
-                        <li>Riedy SM, Smith MG, Rocha S, Basner M. Noise as a sleep aid: a systematic review. <em>Sleep Medicine Reviews</em> 2021;55:101385. <a href="https://doi.org/10.1016/j.smrv.2020.101385" target="_blank" rel="noopener noreferrer">doi.org/10.1016/j.smrv.2020.101385</a></li>
-                        <li>Capezuti E, et al. Systematic review: auditory stimulation and sleep. <em>Journal of Clinical Sleep Medicine</em> 2022;18(6):1697–1709. <a href="https://pubmed.ncbi.nlm.nih.gov/34964434/" target="_blank" rel="noopener noreferrer">pubmed.ncbi.nlm.nih.gov/34964434</a></li>
-                        <li>Ngo HV, Martinetz T, Born J, Mölle M. Auditory closed-loop stimulation of the sleep slow oscillation enhances memory. <em>Neuron</em> 2013;78(3):545–553. <a href="https://doi.org/10.1016/j.neuron.2013.03.006" target="_blank" rel="noopener noreferrer">doi.org/10.1016/j.neuron.2013.03.006</a></li>
-                        <li>Papalambros NA, Santostasi G, Malkani RG, et al. Acoustic enhancement of sleep slow oscillations and concomitant memory improvement in older adults. <em>Frontiers in Human Neuroscience</em> 2017;11:109. <a href="https://doi.org/10.3389/fnhum.2017.00109" target="_blank" rel="noopener noreferrer">doi.org/10.3389/fnhum.2017.00109</a></li>
-                        <li>Jirakittayakorn N, Wongsawat Y. A novel insight of effects of a 3-Hz binaural beat on sleep stages during sleep. <em>Frontiers in Human Neuroscience</em> 2018;12:387. <a href="https://doi.org/10.3389/fnhum.2018.00387" target="_blank" rel="noopener noreferrer">doi.org/10.3389/fnhum.2018.00387</a></li>
-                        <li>Ingendoh RM, Posny ES, Heine A. Binaural beats to entrain the brain? A systematic review of the effects of binaural beat stimulation on brain oscillatory activity, and the implications for psychological research and intervention. <em>PLOS ONE</em> 2023;18(5):e0286023. <a href="https://doi.org/10.1371/journal.pone.0286023" target="_blank" rel="noopener noreferrer">doi.org/10.1371/journal.pone.0286023</a></li>
-                        <li>Diekelmann S, Born J. The memory function of sleep. <em>Nature Reviews Neuroscience</em> 2010;11:114–126. <a href="https://doi.org/10.1038/nrn2762" target="_blank" rel="noopener noreferrer">doi.org/10.1038/nrn2762</a></li>
-                        <li>Xie L, Kang H, Xu Q, et al. Sleep drives metabolite clearance from the adult brain. <em>Science</em> 2013;342(6156):373–377. <a href="https://doi.org/10.1126/science.1241224" target="_blank" rel="noopener noreferrer">doi.org/10.1126/science.1241224</a></li>
-                        <li>Fultz NE, Bonmassar G, Setsompop K, et al. Coupled electrophysiological, hemodynamic, and cerebrospinal fluid oscillations in human sleep. <em>Science</em> 2019;366(6465):628–631. <a href="https://doi.org/10.1126/science.aax5440" target="_blank" rel="noopener noreferrer">doi.org/10.1126/science.aax5440</a></li>
-                    </ol>
-                    <p style="margin-top:1rem;font-size:0.82rem;">Also cited above: Lehrer PM, Gevirtz R. Heart rate variability biofeedback: how and why does it work? <em>Frontiers in Psychology</em> 2014;5:756 (<a href="https://doi.org/10.3389/fpsyg.2014.00756" target="_blank" rel="noopener noreferrer">doi</a>) · Tsai HJ, Kuo TBJ, Lee GS, Yang CCH. Efficacy of paced breathing for insomnia. <em>Psychophysiology</em> 2015;52(3):388–396 (<a href="https://doi.org/10.1111/psyp.12333" target="_blank" rel="noopener noreferrer">doi</a>) · Mukhopadhyay C, et al. A comparative analysis of bacterial growth with earphone use. <em>Online Journal of Health and Allied Sciences</em> 2008;7(2):4 (<a href="https://www.ojhas.org/issue26/2008-2-4.htm" target="_blank" rel="noopener noreferrer">link</a>).</p>
-                </div>
-
-                <!-- Quiet continuation -->
-                <div class="next-step reveal">
-                    <span class="next-step-tag">If you want to go deeper</span>
-                    <p>If your mind is racing too fast to lie down, start with <a href="frequency.html">the free 10Hz reset</a> — eleven minutes, eyes closed, headphones on — then switch to this one for bed. Read more about <a href="bands/delta.html">delta waves and what the research shows</a>, or see <a href="frequencies.html">all the free sessions</a>.</p>
-                    <p>Need longer than 30 minutes? <a href="#full-night">Play the 10-hour brown noise</a> above, or try <a href="https://youtu.be/kKrQmCu1isc" target="_blank" rel="noopener noreferrer">Slow Tide</a>, a 60-minute version on YouTube.</p>
-                    <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Follow @shira.sarid →</a>
-                </div>
-
             </div>
+
+            <!-- 7. The fine print: disclaimer + sources, folded -->
+            <div class="d-wrap d-narrow fine">
+                <div class="fine-box reveal" id="disclaimer">
+                    <div class="d-eyebrow">Safety</div>
+                    <p class="fine-lead">ECHO.11 is a self-care tool, not a medical device, and nothing here is medical advice. This is not a crisis service: if you are in danger or thinking about harming yourself, contact your local emergency number or a crisis line right away.</p>
+                    <details class="fold" id="disclaimer-more">
+                        <summary>Read the full disclaimer</summary>
+                        <div class="fold-body">
+                            <p>This session is not a diagnosis, a treatment, or a substitute for care from a doctor or sleep specialist. If you regularly struggle to fall or stay asleep for weeks at a time, talk to a doctor: the first-line treatment for chronic insomnia is a structured therapy called CBT-I, not a sound. Loud snoring, gasping at night or heavy daytime sleepiness are also worth a doctor's visit.</p>
+                            <p>Response varies from person to person, and some people notice nothing at all. That is a normal outcome, not a failure on your part.</p>
+                            <p>Keep the volume low and the phone at arm's length rather than under the pillow. Don't use it while driving. If the sound keeps you awake instead, turn it off — silence is a perfectly good way to fall asleep.</p>
+                            <p>The research described on this page reports what studies have observed in general — not what will happen to you, and no efficacy figures are claimed for this specific recording.</p>
+                        </div>
+                    </details>
+                </div>
+
+                <details class="fold fold-sources reveal" id="sources">
+                    <summary>Sources <span class="fold-count">15 studies and reviews</span></summary>
+                    <div class="fold-body">
+                        <ol class="refs">
+                            <li id="ref-1">Jespersen KV, Pando-Naude V, Koenig J, Jennum P, Vuust P. Listening to music for insomnia in adults. <em>Cochrane Database of Systematic Reviews</em> 2022, CD010459. <a href="https://doi.org/10.1002/14651858.CD010459.pub3" target="_blank" rel="noopener noreferrer">doi.org/10.1002/14651858.CD010459.pub3</a></li>
+                            <li id="ref-2">Feng F, Zhang Y, Hou J, et al. Can music improve sleep quality in adults with primary insomnia? A systematic review and network meta-analysis. <em>International Journal of Nursing Studies</em> 2018;77:189–196. <a href="https://doi.org/10.1016/j.ijnurstu.2017.10.011" target="_blank" rel="noopener noreferrer">doi.org/10.1016/j.ijnurstu.2017.10.011</a></li>
+                            <li id="ref-3">Trahan T, Durrant SJ, Müllensiefen D, Williamson VJ. The music that helps people sleep and the reasons they believe it works. <em>PLOS ONE</em> 2018;13(11):e0206531. <a href="https://doi.org/10.1371/journal.pone.0206531" target="_blank" rel="noopener noreferrer">doi.org/10.1371/journal.pone.0206531</a></li>
+                            <li id="ref-4">Riedy SM, Smith MG, Rocha S, Basner M. Noise as a sleep aid: a systematic review. <em>Sleep Medicine Reviews</em> 2021;55:101385. <a href="https://doi.org/10.1016/j.smrv.2020.101385" target="_blank" rel="noopener noreferrer">doi.org/10.1016/j.smrv.2020.101385</a></li>
+                            <li id="ref-5">Capezuti E, et al. Systematic review: auditory stimulation and sleep. <em>Journal of Clinical Sleep Medicine</em> 2022;18(6):1697–1709. <a href="https://pubmed.ncbi.nlm.nih.gov/34964434/" target="_blank" rel="noopener noreferrer">pubmed.ncbi.nlm.nih.gov/34964434</a></li>
+                            <li id="ref-6">Ngo HV, Martinetz T, Born J, Mölle M. Auditory closed-loop stimulation of the sleep slow oscillation enhances memory. <em>Neuron</em> 2013;78(3):545–553. <a href="https://doi.org/10.1016/j.neuron.2013.03.006" target="_blank" rel="noopener noreferrer">doi.org/10.1016/j.neuron.2013.03.006</a></li>
+                            <li id="ref-7">Papalambros NA, Santostasi G, Malkani RG, et al. Acoustic enhancement of sleep slow oscillations and concomitant memory improvement in older adults. <em>Frontiers in Human Neuroscience</em> 2017;11:109. <a href="https://doi.org/10.3389/fnhum.2017.00109" target="_blank" rel="noopener noreferrer">doi.org/10.3389/fnhum.2017.00109</a></li>
+                            <li id="ref-8">Jirakittayakorn N, Wongsawat Y. A novel insight of effects of a 3-Hz binaural beat on sleep stages during sleep. <em>Frontiers in Human Neuroscience</em> 2018;12:387. <a href="https://doi.org/10.3389/fnhum.2018.00387" target="_blank" rel="noopener noreferrer">doi.org/10.3389/fnhum.2018.00387</a></li>
+                            <li id="ref-9">Ingendoh RM, Posny ES, Heine A. Binaural beats to entrain the brain? A systematic review of the effects of binaural beat stimulation on brain oscillatory activity, and the implications for psychological research and intervention. <em>PLOS ONE</em> 2023;18(5):e0286023. <a href="https://doi.org/10.1371/journal.pone.0286023" target="_blank" rel="noopener noreferrer">doi.org/10.1371/journal.pone.0286023</a></li>
+                            <li id="ref-10">Diekelmann S, Born J. The memory function of sleep. <em>Nature Reviews Neuroscience</em> 2010;11:114–126. <a href="https://doi.org/10.1038/nrn2762" target="_blank" rel="noopener noreferrer">doi.org/10.1038/nrn2762</a></li>
+                            <li id="ref-11">Xie L, Kang H, Xu Q, et al. Sleep drives metabolite clearance from the adult brain. <em>Science</em> 2013;342(6156):373–377. <a href="https://doi.org/10.1126/science.1241224" target="_blank" rel="noopener noreferrer">doi.org/10.1126/science.1241224</a></li>
+                            <li id="ref-12">Fultz NE, Bonmassar G, Setsompop K, et al. Coupled electrophysiological, hemodynamic, and cerebrospinal fluid oscillations in human sleep. <em>Science</em> 2019;366(6465):628–631. <a href="https://doi.org/10.1126/science.aax5440" target="_blank" rel="noopener noreferrer">doi.org/10.1126/science.aax5440</a></li>
+                        </ol>
+                        <p class="refs-also">Also cited above: Lehrer PM, Gevirtz R. Heart rate variability biofeedback: how and why does it work? <em>Frontiers in Psychology</em> 2014;5:756 (<a href="https://doi.org/10.3389/fpsyg.2014.00756" target="_blank" rel="noopener noreferrer">doi</a>) · Tsai HJ, Kuo TBJ, Lee GS, Yang CCH. Efficacy of paced breathing for insomnia. <em>Psychophysiology</em> 2015;52(3):388–396 (<a href="https://doi.org/10.1111/psyp.12333" target="_blank" rel="noopener noreferrer">doi</a>) · Mukhopadhyay C, et al. A comparative analysis of bacterial growth with earphone use. <em>Online Journal of Health and Allied Sciences</em> 2008;7(2):4 (<a href="https://www.ojhas.org/issue26/2008-2-4.htm" target="_blank" rel="noopener noreferrer">link</a>).</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- 8. Where to next -->
+            <div class="d-wrap" id="next">
+                <div class="d-eyebrow">If you want to go deeper</div>
+                <div class="next-grid reveal">
+                    <a class="next-card" href="frequency.html">
+                        <span class="nc-tag">Too wired to lie down?</span>
+                        <span class="nc-title">The free 10 Hz reset</span>
+                        <span class="nc-note">Eleven minutes, eyes closed, headphones on — then switch to this one for bed.</span>
+                    </a>
+                    <a class="next-card" href="bands/delta.html">
+                        <span class="nc-tag">Read</span>
+                        <span class="nc-title">Delta waves and what the research shows</span>
+                        <span class="nc-note">What the deepest stage of sleep is, and what sound can and can't do there.</span>
+                    </a>
+                    <a class="next-card" href="frequencies.html">
+                        <span class="nc-tag">Browse</span>
+                        <span class="nc-title">All the free sessions</span>
+                        <span class="nc-note">Calm, focus and sleep — free, in the browser, no signup.</span>
+                    </a>
+                </div>
+                <p class="next-more">Need longer than 30 minutes? <a href="#full-night">Play the 10-hour brown noise</a> above, or try <a href="https://youtu.be/kKrQmCu1isc" target="_blank" rel="noopener noreferrer">Slow Tide</a>, a 60-minute version on YouTube. · <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Follow @shira.sarid →</a></p>
+            </div>
+
         </section>
+
+        <!-- Floating play: appears once the player has scrolled away -->
+        <button type="button" class="float-play" id="floatPlay" hidden aria-label="Play the sleep session">
+            <span class="fp-dot" aria-hidden="true"></span>
+            <span class="fp-label" id="floatLabel">Play the 30-minute descent</span>
+        </button>
+
+        <script>
+            (function () {
+                /* YouTube: load the player only when asked */
+                var b = document.getElementById('ytNight');
+                if (b) b.addEventListener('click', function () {
+                    var f = document.createElement('iframe');
+                    f.className = 'yt-frame';
+                    f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.yt + '?autoplay=1&rel=0';
+                    f.title = 'Brown Noise for Sleep, 10 hours, dark screen';
+                    f.allow = 'autoplay; encrypted-media; picture-in-picture';
+                    f.allowFullscreen = true;
+                    b.replaceWith(f);
+                    if (window.gtag) gtag('event', 'youtube_embed_play', { video_id: b.dataset.yt, page: 'sleep' });
+                });
+
+                /* Citations and #anchors open the folded box they point into */
+                function openFor(hash) {
+                    var t = hash && document.getElementById(hash.slice(1));
+                    if (!t) return;
+                    var d = t.closest('details') || (t.querySelector && t.querySelector('details'));
+                    if (t.tagName === 'DETAILS') d = t;
+                    if (d && !d.open) d.open = true;
+                    if (t.id && t.id.indexOf('ref-') === 0) {
+                        t.classList.remove('ref-hit'); void t.offsetWidth; t.classList.add('ref-hit');
+                    }
+                }
+                document.addEventListener('click', function (e) {
+                    var a = e.target.closest('a[href^="#"]');
+                    if (a) openFor(a.getAttribute('href'));
+                });
+                openFor(location.hash);
+
+                /* Floating play button: mirrors the main player */
+                var fp = document.getElementById('floatPlay'),
+                    lbl = document.getElementById('floatLabel'),
+                    main = document.getElementById('playBtn'),
+                    timer = document.getElementById('timerDisplay'),
+                    hero = document.querySelector('.timer-wrap');
+                if (!fp || !main || !hero || !('IntersectionObserver' in window)) return;
+                function playing() { return document.body.classList.contains('session-active'); }
+                function sync() {
+                    var on = playing();
+                    fp.classList.toggle('is-on', on);
+                    lbl.textContent = on ? 'Pause · ' + (timer ? timer.textContent : '') : 'Play the 30-minute descent';
+                    fp.setAttribute('aria-label', on ? 'Pause the sleep session' : 'Play the sleep session');
+                    var cookie = document.getElementById('cookieConsent');
+                    var h = cookie && getComputedStyle(cookie).display !== 'none' ? cookie.getBoundingClientRect().height : 0;
+                    fp.style.setProperty('--lift', h + 'px');
+                }
+                new IntersectionObserver(function (es) {
+                    var away = !es[0].isIntersecting;
+                    fp.hidden = false;
+                    fp.classList.toggle('show', away);
+                    sync();
+                }).observe(hero);
+                fp.addEventListener('click', function () { main.click(); setTimeout(sync, 60); });
+                setInterval(function () { if (fp.classList.contains('show')) sync(); }, 1000);
+            })();
+        </script>
     </main>
 
     <!-- Footer -->
