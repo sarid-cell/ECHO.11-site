@@ -550,7 +550,10 @@
         .bl-hz { font-family: var(--mono); font-size: 1.35rem; font-weight: 600; color: var(--text); }
         .bl-mid .bl-hz { color: var(--ink-accent); font-size: 1.8rem; }
         .bl-note { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.45; }
-        .d-plate-tall { aspect-ratio: 16 / 9; }
+        /* Whole images, never cropped: sized to the frame, not cut to it */
+        .d-plate-tall { aspect-ratio: auto; max-width: 34rem; overflow: visible; }
+        .d-plate-tall img { height: auto; object-fit: contain; }
+        .footer-full img { max-width: min(26rem, 100%); aspect-ratio: 896 / 1344; object-fit: contain; }
         .finding p + p { margin-top: 0.9rem; }
         @media (max-width: 860px) {
             .beat-labels { grid-template-columns: 1fr 1.3fr 1fr; gap: 0.5rem; }
@@ -990,8 +993,8 @@
     </main>
 
     <!-- Footer -->
-    <div class="footer-banner footer-band">
-        <img src="assets/images/book-silence-band.webp" alt="Astronaut helmet, eyes closed" loading="lazy" decoding="async" width="896" height="384">
+    <div class="footer-banner footer-band footer-full">
+        <img src="assets/images/book-silence.webp" alt="Astronaut helmet, eyes closed" loading="lazy" decoding="async" width="896" height="1344">
     </div>
     <footer>
         <div class="footer-inner">
