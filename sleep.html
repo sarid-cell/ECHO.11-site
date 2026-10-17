@@ -166,6 +166,36 @@
         }
         .refs li a { font-size: inherit; color: var(--text-secondary); word-break: break-word; }
         .refs li a:hover { color: var(--text); }
+
+        /* Full-night version on YouTube (click-to-load, no YouTube request until play) */
+        .yt-night .info-q { margin-bottom: 0.4rem; }
+        .yt-facade {
+            position: relative; display: block; width: 100%; aspect-ratio: 16 / 9;
+            margin-top: 1.1rem; padding: 0; border: 1px solid var(--border);
+            background: #070608 center / cover no-repeat; cursor: pointer; overflow: hidden;
+        }
+        .yt-facade::after {
+            content: ""; position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%);
+        }
+        .yt-play {
+            position: absolute; left: 50%; top: 50%; z-index: 1;
+            width: 68px; height: 68px; margin: -34px 0 0 -34px; border-radius: 50%;
+            background: rgba(255,255,255,0.92); display: grid; place-items: center;
+            transition: transform .2s ease;
+        }
+        .yt-play svg { width: 26px; height: 26px; margin-left: 4px; fill: #111; }
+        .yt-facade:hover .yt-play, .yt-facade:focus-visible .yt-play { transform: scale(1.06); }
+        .yt-label {
+            position: absolute; left: 1rem; bottom: 0.8rem; z-index: 1;
+            font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em;
+            text-transform: uppercase; color: #fff;
+        }
+        @media (max-width: 560px) { .yt-label { display: none; } }
+        .yt-frame { display: block; width: 100%; aspect-ratio: 16 / 9; margin-top: 1.1rem; border: 0; }
+        .yt-links { margin-top: 0.9rem; font-size: 0.85rem; }
+        .yt-links a { color: var(--text-secondary); }
+        .yt-links a:hover { color: var(--text); }
     </style>
 
     <script type="application/ld+json">
@@ -601,6 +631,38 @@
                     </div>
                 </div>
 
+                <!-- Full night: 10-hour version on YouTube -->
+                <div class="info-block yt-night reveal" id="full-night" style="border:1px solid var(--border);">
+                    <div class="info-q">Need the whole night?</div>
+                    <div class="info-a">This session ends in silence after 30 minutes on purpose. If noise wakes you later in the night, the 10-hour version keeps a steady, smooth brown noise running until morning, on a dark screen.</div>
+                    <button type="button" class="yt-facade" id="ytNight" data-yt="ta6u4jEJdp8"
+                        style="background-image:url('https://i.ytimg.com/vi/ta6u4jEJdp8/hqdefault.jpg')"
+                        aria-label="Play Brown Noise for Sleep, 10 hours, dark screen (YouTube)">
+                        <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 5v14l11-7-11-7z"/></svg></span>
+                        <span class="yt-label">Brown Noise for Sleep · 10 hours · YouTube</span>
+                    </button>
+                    <div class="yt-links">
+                        <a href="https://youtu.be/ta6u4jEJdp8" target="_blank" rel="noopener noreferrer">Open on YouTube</a> ·
+                        <a href="https://www.youtube.com/@shira_sarid?sub_confirmation=1" target="_blank" rel="noopener noreferrer">Subscribe for new sleep sessions</a>
+                    </div>
+                </div>
+                <script>
+                    (function () {
+                        var b = document.getElementById('ytNight');
+                        if (!b) return;
+                        b.addEventListener('click', function () {
+                            var f = document.createElement('iframe');
+                            f.className = 'yt-frame';
+                            f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.yt + '?autoplay=1&rel=0';
+                            f.title = 'Brown Noise for Sleep, 10 hours, dark screen';
+                            f.allow = 'autoplay; encrypted-media; picture-in-picture';
+                            f.allowFullscreen = true;
+                            b.replaceWith(f);
+                            if (window.gtag) gtag('event', 'youtube_embed_play', { video_id: b.dataset.yt, page: 'sleep' });
+                        });
+                    })();
+                </script>
+
                 <!-- Full disclaimer -->
                 <div class="disclaimer reveal" id="disclaimer">
                     <span class="callout-tag">The full disclaimer</span>
@@ -635,7 +697,7 @@
                 <div class="next-step reveal">
                     <span class="next-step-tag">If you want to go deeper</span>
                     <p>If your mind is racing too fast to lie down, start with <a href="frequency.html">the free 10Hz reset</a> — eleven minutes, eyes closed, headphones on — then switch to this one for bed. Read more about <a href="bands/delta.html">delta waves and what the research shows</a>, or see <a href="frequencies.html">all the free sessions</a>.</p>
-                    <p>Need longer than 30 minutes? <a href="https://youtu.be/kKrQmCu1isc" target="_blank" rel="noopener noreferrer">Slow Tide</a> is a 60-minute brown-noise version on YouTube.</p>
+                    <p>Need longer than 30 minutes? <a href="#full-night">Play the 10-hour brown noise</a> above, or try <a href="https://youtu.be/kKrQmCu1isc" target="_blank" rel="noopener noreferrer">Slow Tide</a>, a 60-minute version on YouTube.</p>
                     <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Follow @shira.sarid →</a>
                 </div>
 
