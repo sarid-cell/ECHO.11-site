@@ -249,6 +249,320 @@
     ]
 }
     </script>
+    <style>
+        /* ═══ The Descent — lower page layout ═══
+           The page gets quietly darker as you read down, the way the
+           session itself moves toward silence. Everything else stays still. */
+        .descent {
+            --ink-accent: #0a6f80;            /* accent for text on light */
+            --deep-1: #f2f4f5; --deep-2: #e7ebee;
+            --card: #ffffff;
+            background: linear-gradient(180deg, var(--bg) 0%, var(--deep-1) 45%, var(--deep-2) 100%);
+            padding: 0 1.25rem 4rem;
+        }
+        html[data-theme="dark"] .descent {
+            --ink-accent: #6fe3f6;
+            --deep-1: #0b0d10; --deep-2: #060709;
+            --card: #13161a;
+        }
+        .descent .d-wrap { max-width: 60rem; margin: 0 auto; padding-top: clamp(4rem, 9vw, 7rem); scroll-margin-top: 4.5rem; }
+        .descent .d-narrow { max-width: 44rem; }
+        .d-eyebrow {
+            font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.2em;
+            text-transform: uppercase; color: var(--text-light); margin-bottom: 1rem;
+        }
+        .d-h2 {
+            font-family: var(--sans); font-weight: 300; color: var(--text);
+            font-size: clamp(1.75rem, 4.2vw, 2.7rem); line-height: 1.12; letter-spacing: -0.02em;
+            margin: 0 0 1.25rem; text-wrap: balance;
+        }
+        .d-lede { font-size: 1.05rem; line-height: 1.75; color: var(--text-secondary); font-weight: 300; max-width: 36rem; margin: 0; }
+        .descent strong { color: var(--text); font-weight: 500; }
+        .descent a:not([class]) { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 3px; }
+
+        /* On this page */
+        .page-jump {
+            max-width: 60rem; margin: 0 auto; padding: 2rem 0 0;
+            display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none;
+            -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+                    mask-image: linear-gradient(90deg, #000 85%, transparent);
+        }
+        .page-jump::-webkit-scrollbar { display: none; }
+        .page-jump a {
+            flex: none; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em;
+            color: var(--text-secondary); text-decoration: none; white-space: nowrap;
+            border: 1px solid var(--border); border-radius: 999px; padding: 0.5rem 0.9rem;
+            transition: border-color .25s ease, color .25s ease;
+        }
+        .page-jump a:hover { border-color: var(--text-secondary); color: var(--text); }
+
+        /* In short */
+        .descent .d-short { padding-top: 2.5rem; }
+        .short-box { border: 1px solid var(--border); background: var(--card); padding: 1.6rem 1.75rem 1.4rem; border-left: 2px solid var(--accent); }
+        .short-list { list-style: none; margin: 0; padding: 0; }
+        .short-list li { display: grid; grid-template-columns: 11rem 1fr; gap: 1.25rem; padding: 0.85rem 0; border-top: 1px solid var(--border); }
+        .short-list li:first-child { border-top: 0; padding-top: 0.2rem; }
+        .short-list b { font-family: var(--mono); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); padding-top: 0.2rem; }
+        .short-list span { font-size: 0.98rem; line-height: 1.7; color: var(--text-secondary); font-weight: 300; }
+        .short-meta { margin-top: 1rem; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.06em; color: var(--text-light); }
+        .short-meta a { color: var(--text-secondary); }
+
+        /* 1 · The score: the 30 minutes on one line */
+        .score { margin: 2.75rem 0 0; position: relative; }
+        .score-svg { display: block; width: 100%; height: clamp(90px, 14vw, 140px); overflow: visible; }
+        .score-grid { stroke: var(--border); stroke-width: 1; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
+        .score-noise { fill: var(--accent); opacity: 0.16; }
+        .score-tone { fill: none; stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+        .score.reveal .score-tone { clip-path: inset(0 100% 0 0); }
+        .score.reveal.visible .score-tone { animation: score-draw 3.2s cubic-bezier(.45,.05,.25,1) .2s forwards; }
+        @keyframes score-draw { to { clip-path: inset(0 0 0 0); } }
+        .score-marks { list-style: none; margin: 0.9rem 0 0; padding: 0; position: relative; height: 3.4rem; border-top: 1px solid var(--border); }
+        .score-marks li { position: absolute; left: var(--x); top: 0; width: 8.5rem; padding-top: 0.7rem; transform: translateX(-50%); text-align: center; }
+        .score-marks li:first-child { transform: none; text-align: left; }
+        .score-marks li:last-child { transform: translateX(-100%); text-align: right; }
+        .score-marks li::before { content: ''; position: absolute; top: -4px; left: 50%; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 50%; background: var(--text-light); }
+        .score-marks li:first-child::before { left: 0; margin-left: 0; background: var(--accent); }
+        .score-marks li:last-child::before { left: auto; right: 0; margin-left: 0; background: transparent; border: 1px solid var(--text-light); }
+        .score-marks b { display: block; font-family: var(--mono); font-weight: 500; font-size: 0.78rem; color: var(--text); }
+        .score-marks span { display: block; font-size: 0.78rem; color: var(--text-light); line-height: 1.35; margin-top: 0.15rem; }
+        .layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 2.5rem 0 0; }
+        .layer dt { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--text); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem; }
+        .layer dd { margin: 0; font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary); font-weight: 300; }
+        .sw { display: inline-block; width: 22px; height: 10px; flex: none; }
+        .sw-noise { background: var(--accent); opacity: 0.25; border-radius: 2px; }
+        .sw-tone { height: 2px; background: var(--accent); }
+        .sw-end { height: 1px; background: var(--text-light); }
+
+        /* 2 · Steps — a real sequence, so it is numbered */
+        .steps { list-style: none; margin: 2.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .step { background: var(--card); padding: 1.75rem 1.6rem 1.9rem; }
+        .step-n { display: block; font-family: var(--sans); font-weight: 200; font-size: 3rem; line-height: 1; color: var(--ink-accent); margin-bottom: 1.1rem; }
+        .step strong { display: block; font-size: 1.02rem; line-height: 1.4; margin-bottom: 0.5rem; scroll-margin-top: 6rem; }
+        .step p { margin: 0; font-size: 0.92rem; line-height: 1.7; color: var(--text-secondary); font-weight: 300; }
+
+        /* 3 · Questions — folded, one open */
+        .qa-list { border-top: 1px solid var(--border); margin-top: 1.5rem; }
+        .qa { border-bottom: 1px solid var(--border); }
+        .qa summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.35rem 0; }
+        .qa summary::-webkit-details-marker { display: none; }
+        .qa summary h3 { margin: 0; font-family: var(--sans); font-weight: 400; font-size: 1.15rem; line-height: 1.35; color: var(--text); }
+        .qa summary::after {
+            content: ''; flex: none; width: 13px; height: 13px;
+            background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat,
+                        linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat;
+            color: var(--text-secondary); transition: transform .35s ease;
+        }
+        .qa[open] summary::after { transform: rotate(45deg); }
+        .qa summary:hover h3 { color: var(--ink-accent); }
+        .qa-a { padding: 0 2.5rem 1.6rem 0; font-size: 1rem; line-height: 1.8; color: var(--text-secondary); font-weight: 300; }
+        .qa[open] .qa-a { animation: qa-in .45s ease; }
+        @keyframes qa-in { from { opacity: 0; transform: translateY(-6px); } }
+        .qa .feel-tags { margin-top: 0.9rem; }
+
+        .d-plate { max-width: 60rem; margin: clamp(4rem, 9vw, 7rem) auto 0; aspect-ratio: 21 / 9; overflow: hidden; }
+        .d-plate picture, .d-plate img { display: block; width: 100%; height: 100%; }
+        .d-plate img { object-fit: cover; object-position: 50% 38%; filter: grayscale(100%); }
+        html[data-theme="dark"] .d-plate img { filter: grayscale(100%) brightness(0.7); }
+
+        /* 4 · Research — each finding carries its evidence weight */
+        .d-quote { font-size: clamp(2rem, 5.2vw, 3.3rem); }
+        .d-quote em { font-style: normal; color: var(--ink-accent); }
+        .findings { list-style: none; margin: 2.5rem 0 0; padding: 0; }
+        .finding { padding: 1.9rem 0; border-top: 1px solid var(--border); }
+        .finding h3 { font-family: var(--sans); font-weight: 500; font-size: 1.12rem; line-height: 1.4; color: var(--text); margin: 0.85rem 0 0.6rem; }
+        .finding p { margin: 0; font-size: 0.98rem; line-height: 1.8; color: var(--text-secondary); font-weight: 300; }
+        .ev {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--text-secondary); border: 1px solid var(--border); border-radius: 999px; padding: 0.3rem 0.75rem 0.3rem 0.6rem;
+        }
+        .ev::before { content: ''; width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--text-light); }
+        .ev-strong::before { background: var(--accent); border-color: var(--accent); }
+        .ev-weak::before { background: transparent; }
+        .cite {
+            font-family: var(--mono); font-size: 0.62rem; vertical-align: super; line-height: 0;
+            color: var(--ink-accent); text-decoration: none; padding: 0 0.12em; margin-left: 0.05em;
+        }
+        .cite + .cite::before { content: ','; color: var(--text-light); margin-right: 0.1em; }
+        .cite:hover { text-decoration: underline; }
+        .d-note { margin: 1.5rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--text-light); line-height: 1.6; }
+
+        /* 5 · Hypnogram: the stages step down, then REM climbs back up */
+        .hypno { list-style: none; margin: 2.5rem 0 0; padding: 0 0 4.5rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; position: relative; }
+        .hs { position: relative; transform: translateY(calc(var(--d) * 2.25rem)); padding: 1.1rem 1.1rem 1.25rem; border-top: 2px solid var(--text-light); background: var(--card); }
+        .hs-deep { border-top-color: var(--accent); background: linear-gradient(180deg, var(--accent-dim), var(--card) 70%); }
+        .hs-tag { display: block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-light); }
+        .hs-name { display: block; font-family: var(--mono); font-size: 1.35rem; font-weight: 600; color: var(--text); margin: 0.3rem 0 0.35rem; }
+        .hs-note { display: block; font-size: 0.84rem; color: var(--text-secondary); line-height: 1.55; }
+        .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-top: 1rem; }
+        .pair-card h3 { font-family: var(--sans); font-weight: 500; font-size: 1.12rem; color: var(--text); margin: 0 0 0.6rem; }
+        .pair-card p { margin: 0; font-size: 0.96rem; line-height: 1.8; color: var(--text-secondary); font-weight: 300; }
+        .closer { margin: 3.5rem 0 0; padding: 0 0 0 1.5rem; border-left: 2px solid var(--accent); max-width: 44rem; }
+        .closer h3 { font-family: var(--mono); font-weight: 400; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-light); margin: 0 0 0.9rem; }
+        .closer p { margin: 0; font-family: var(--sans); font-weight: 300; font-size: clamp(1.2rem, 2.4vw, 1.5rem); line-height: 1.55; color: var(--text); }
+
+        /* 6 · The full night */
+        .night { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
+        .night-text p { margin: 0; font-size: 1rem; line-height: 1.8; color: var(--text-secondary); font-weight: 300; }
+        .night .d-h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); }
+        .night .yt-facade { margin-top: 0; border-radius: 6px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.45); }
+        .night .yt-frame { margin-top: 0; border-radius: 6px; }
+        .night .yt-links { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: 0.6rem 1.25rem; font-size: 0.88rem; }
+        .night .yt-links a { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 4px; }
+
+        /* 7 · Fine print, folded */
+        .fine-box { padding: 1.75rem; background: var(--card); border: 1px solid var(--border); scroll-margin-top: 5rem; }
+        .fine-lead { margin: 0; font-size: 0.95rem; line-height: 1.75; color: var(--text-secondary); }
+        .fold summary {
+            list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: 0.75rem;
+            font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; color: var(--text);
+            padding: 1.1rem 0 0;
+        }
+        .fold summary::-webkit-details-marker { display: none; }
+        .fold summary::before { content: '+'; font-size: 0.95rem; color: var(--ink-accent); width: 0.8rem; transition: transform .3s ease; }
+        .fold[open] summary::before { content: '–'; }
+        .fold-body { padding-top: 1rem; animation: qa-in .45s ease; }
+        .fold-body p { margin: 0 0 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--text-secondary); font-weight: 300; }
+        .fold-sources { margin-top: 1rem; padding: 0 1.75rem 1.5rem; border: 1px solid var(--border); scroll-margin-top: 5rem; }
+        .fold-sources > summary { padding-top: 1.5rem; }
+        .fold-count { color: var(--text-light); font-size: 0.68rem; letter-spacing: 0.06em; }
+        .descent .refs { padding-left: 1.4rem; }
+        .descent .refs li { scroll-margin-top: 6rem; transition: background-color 1.2s ease; }
+        .descent .refs li.ref-hit { animation: ref-hit 2.4s ease; }
+        @keyframes ref-hit { 0%, 40% { background: var(--accent-dim); } 100% { background: transparent; } }
+        .refs-also { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.7; margin: 0.5rem 0 0; }
+
+        /* 8 · Next */
+        .next-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .next-card {
+            display: flex; flex-direction: column; gap: 0.45rem; padding: 1.5rem; text-decoration: none;
+            background: var(--card); border: 1px solid var(--border);
+            transition: border-color .3s ease, transform .3s ease;
+        }
+        .next-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+        .nc-tag { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-light); }
+        .nc-title { font-size: 1.08rem; color: var(--text); line-height: 1.35; }
+        .nc-title::after { content: ' →'; color: var(--ink-accent); }
+        .nc-note { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; font-weight: 300; }
+        .next-more { margin: 1.5rem 0 0; font-size: 0.9rem; line-height: 1.8; color: var(--text-secondary); }
+
+        /* Closing image: a calm band instead of a full-height portrait */
+        .footer-band { background: #e7ebee; padding: 0 1.25rem clamp(3rem, 6vw, 5rem); }
+        html[data-theme="dark"] .footer-band { background: #060709; }
+        .footer-band img { max-width: 60rem; margin: 0 auto; height: auto; aspect-ratio: 896 / 384; object-fit: cover; }
+        html[data-theme="dark"] .footer-band img { filter: grayscale(100%) brightness(0.75); }
+
+        /* Floating play — mirrors the main player once it has scrolled away */
+        .float-play {
+            position: fixed; left: 50%; bottom: calc(max(1rem, env(safe-area-inset-bottom)) + var(--lift, 0px)); z-index: 900;
+            transform: translate(-50%, 160%); opacity: 0;
+            display: inline-flex; align-items: center; gap: 0.7rem;
+            padding: 0.8rem 1.25rem 0.8rem 1rem; border-radius: 999px; cursor: pointer;
+            font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em;
+            white-space: nowrap; color: #eafdff; background: rgba(14,16,19,0.88); border: 1px solid rgba(45,212,240,0.35);
+            -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+            box-shadow: 0 12px 30px -12px rgba(0,0,0,.5);
+            transition: transform .5s cubic-bezier(.2,.8,.2,1), opacity .4s ease;
+        }
+        .float-play.show { transform: translate(-50%, 0); opacity: 1; }
+        .fp-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 0 rgba(45,212,240,.5); }
+        .float-play.is-on .fp-dot { animation: fp-breathe 10s ease-in-out infinite; }
+        @keyframes fp-breathe { 0%, 100% { box-shadow: 0 0 0 0 rgba(45,212,240,.45); } 50% { box-shadow: 0 0 0 7px rgba(45,212,240,0); } }
+
+        .descent :focus-visible, .float-play:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+        @media (max-width: 860px) {
+            .layers, .steps, .next-grid { grid-template-columns: 1fr; }
+            .layers { gap: 1.25rem; }
+            .pair { grid-template-columns: 1fr; gap: 1.75rem; }
+            .night { grid-template-columns: 1fr; }
+            .night .yt-facade { order: -1; }
+            .hypno { grid-template-columns: 1fr; gap: 0.5rem; padding-bottom: 0; }
+            .hs { transform: none; margin-left: calc(var(--d) * 1.5rem); }
+            .score-marks li { width: 4rem; }
+            .score-marks span { display: none; }
+            .score-marks { height: 2.2rem; }
+            .short-list li { grid-template-columns: 1fr; gap: 0.3rem; }
+            .d-plate { aspect-ratio: 16 / 10; }
+            .fold-sources, .fine-box { padding-left: 1.2rem; padding-right: 1.2rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .score.reveal .score-tone { clip-path: none; animation: none !important; }
+            .qa[open] .qa-a, .fold-body { animation: none; }
+            .float-play { transition: opacity .2s ease; }
+            .float-play.is-on .fp-dot { animation: none; }
+        }
+
+        /* ═══ 10 Hz page: hero under the player ═══
+           One status line, one panel, one row of links — instead of a
+           tower of eight stacked lines. */
+        .player-card::before {
+            content: ''; position: absolute; z-index: -1;
+            top: 0; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: min(100%, 52rem);
+            background: radial-gradient(ellipse 60% 55% at 50% 42%, rgba(250,250,250,0.72), rgba(250,250,250,0) 72%);
+        }
+        html[data-theme="dark"] .player-card::before {
+            background: radial-gradient(ellipse 60% 55% at 50% 42%, rgba(14,16,19,0.7), rgba(14,16,19,0) 72%);
+        }
+        .hero .freq-eyebrow { color: #262626; }
+        html[data-theme="dark"] .hero .freq-eyebrow { color: rgba(255,255,255,0.88); }
+        .hero .state-text { color: var(--text); margin: 0.4rem 0 1.4rem; }
+        .fq-panel {
+            width: min(100%, 30rem); margin: 0 auto 1.6rem; padding: 1.25rem 1.4rem 1.1rem;
+            background: rgba(250,250,250,0.72); border: 1px solid rgba(0,0,0,0.08); border-radius: 14px;
+            transition: opacity 1.8s ease;
+        }
+        @media (min-width: 861px) { .fq-panel { -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); } }
+        html[data-theme="dark"] .fq-panel { background: rgba(14,16,19,0.6); border-color: rgba(255,255,255,0.08); }
+        body.session-active .fq-panel { opacity: 0.15; }
+        .fq-lead { margin: 0 0 1rem; font-family: var(--sans); font-size: 1rem; line-height: 1.55; color: var(--text); font-weight: 300; }
+        .fq-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.6rem 1.1rem; }
+        .fq-controls .loop-toggle { margin: 0; border-radius: 999px; min-height: 40px; font-size: 0.64rem; }
+        .fq-controls .meta-row { margin: 0; gap: 1rem; }
+        .fq-safety {
+            display: flex; gap: 0.55rem; align-items: flex-start; text-align: left;
+            margin: 1rem 0 0; padding-top: 0.9rem; border-top: 1px solid rgba(0,0,0,0.08);
+            font-size: 0.78rem; line-height: 1.55; color: var(--text-secondary);
+        }
+        html[data-theme="dark"] .fq-safety { border-top-color: rgba(255,255,255,0.08); }
+        .fq-i {
+            flex: none; width: 16px; height: 16px; margin-top: 1px; border-radius: 50%;
+            border: 1px solid currentColor; font-family: var(--mono); font-size: 0.6rem;
+            display: inline-flex; align-items: center; justify-content: center; font-style: normal;
+        }
+        .fq-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.6rem; }
+        .fq-links a[lang="he"] { font-family: var(--sans); letter-spacing: 0; text-transform: none; font-size: 0.82rem; }
+
+        /* How it works: the beat figure */
+        .beat { margin: 2.75rem 0 0; }
+        .beat-svg { display: block; width: 100%; height: clamp(90px, 13vw, 140px); overflow: visible; }
+        .bt-side { fill: none; stroke: var(--text-light); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+        .bt-mid { fill: none; stroke: var(--accent); stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+        .bt-env { fill: none; stroke: var(--accent); stroke-width: 1; opacity: 0.45; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
+        .beat.reveal .beat-svg path { clip-path: inset(0 100% 0 0); }
+        .beat.reveal.visible .beat-svg path { animation: score-draw 2.6s cubic-bezier(.45,.05,.25,1) .2s forwards; }
+        .beat-labels { display: grid; grid-template-columns: 170fr 260fr 170fr; margin-top: 1.1rem; border-top: 1px solid var(--border); }
+        .bl { padding-top: 0.9rem; display: flex; flex-direction: column; gap: 0.2rem; }
+        .bl-mid { text-align: center; }
+        .bl:last-child { text-align: right; }
+        .bl-tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-light); }
+        .bl-hz { font-family: var(--mono); font-size: 1.35rem; font-weight: 600; color: var(--text); }
+        .bl-mid .bl-hz { color: var(--ink-accent); font-size: 1.8rem; }
+        .bl-note { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.45; }
+        .d-plate-tall { aspect-ratio: 16 / 9; }
+        .finding p + p { margin-top: 0.9rem; }
+        @media (max-width: 860px) {
+            .beat-labels { grid-template-columns: 1fr 1.3fr 1fr; gap: 0.5rem; }
+            .bl-note { display: none; }
+            .bl-hz { font-size: 1rem; } .bl-mid .bl-hz { font-size: 1.3rem; }
+            .fq-panel { padding: 1rem 1rem 0.9rem; }
+            .fq-lead { font-size: 0.92rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .beat.reveal .beat-svg path { clip-path: none; animation: none !important; }
+        }
+    </style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -388,37 +702,41 @@
 
                 <div class="state-text" id="stateText">Headphones on · Press play · Close your eyes</div>
 
-                <p class="tone-note">You'll hear a soft, steady tone. That's it — the 10Hz happens inside.</p>
-                <p class="tone-note" style="opacity:.72">Keep the volume low. Not while driving. If you have epilepsy, a pacemaker or a cochlear implant, ask your doctor first.</p>
-                <p class="tone-note" dir="rtl" lang="he" style="opacity:.72">אוזניות, פליי, עיניים עצומות. 11 דקות. זה הכול.</p>
+                <div class="fq-panel">
+                    <p class="fq-lead">You'll hear a soft, steady tone. That's it — the 10Hz happens inside.</p>
+
+                    <div class="fq-controls">
+                        <button class="loop-toggle" id="loopToggle" aria-pressed="false">
+                            <span class="loop-ind" aria-hidden="true"></span>
+                            Loop · repeat after 11 min
+                        </button>
+                        <div class="meta-row">
+                            <div class="sessions-row" hidden>
+                                <div class="sessions-dot"></div>
+                                <div class="sessions-text">
+                                    <span class="sessions-num" id="sessionsNum">—</span> sessions today
+                                </div>
+                            </div>
+                            <div class="phones-note">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M14.463 10.29a3.75 3.75 0 010 3.42M9.537 13.71a3.75 3.75 0 010-3.42M4.886 18.364a9 9 0 010-12.728"/>
+                                </svg>
+                                Headphones required
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="fq-safety"><span class="fq-i" aria-hidden="true">i</span>Keep the volume low. Not while driving. If you have epilepsy, a pacemaker or a cochlear implant, ask your doctor first.</p>
+                </div>
 
                 <div class="breath-guide" aria-hidden="true">
                     <span class="breath-in">Breathe in</span>
                     <span class="breath-out">Breathe out</span>
                 </div>
 
-                <button class="loop-toggle" id="loopToggle" aria-pressed="false">
-                    <span class="loop-ind" aria-hidden="true"></span>
-                    Loop · repeat after 11 min
-                </button>
-
-                <div class="meta-row">
-                    <div class="sessions-row" hidden>
-                        <div class="sessions-dot"></div>
-                        <div class="sessions-text">
-                            <span class="sessions-num" id="sessionsNum">—</span> sessions today
-                        </div>
-                    </div>
-                    <div class="phones-note">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M14.463 10.29a3.75 3.75 0 010 3.42M9.537 13.71a3.75 3.75 0 010-3.42M4.886 18.364a9 9 0 010-12.728"/>
-                        </svg>
-                        Headphones required
-                    </div>
-                </div>
-
-                <div class="player-crosslink">
+                <div class="player-crosslink fq-links">
                     <a href="40hz.html">Need focus instead? → 40 Hz · The Focus</a>
+                    <a href="he/teder-10hz.html" lang="he" dir="rtl" hreflang="he">אוזניות, פליי, עיניים עצומות. 11 דקות. זה הכול. ←</a>
                 </div>
 
                 <div class="scroll-cue">
@@ -429,51 +747,110 @@
         </section>
 
         <!-- ── SCIENCE ── -->
-        <section class="science">
-            <div class="science-inner">
+        <section class="science descent">
 
-                <h2 class="section-label reveal">How it works</h2>
+            <nav class="page-jump" aria-label="On this page">
+                <a href="#how-it-works">How it works</a>
+                <a href="#how-to-use">How to use it</a>
+                <a href="#questions">Questions</a>
+                <a href="#research">The research</a>
+                <a href="#eleven-minutes">Why 11 minutes</a>
+                <a href="#disclaimer">Safety</a>
+            </nav>
 
-                <!-- Frequency diagram -->
-                <div class="freq-diagram reveal">
-                    <div class="ear">
-                        <div class="ear-tag">Left ear</div>
-                        <div class="ear-hz">200 Hz</div>
-                        <div class="ear-note">Carrier tone heard in isolation</div>
-                    </div>
-                    <div class="brain">
-                        <div class="brain-tag">Brain perceives</div>
-                        <div class="brain-hz">10 Hz</div>
-                        <div class="brain-wave">Alpha wave · difference tone</div>
-                    </div>
-                    <div class="ear right">
-                        <div class="ear-tag">Right ear</div>
-                        <div class="ear-hz">210 Hz</div>
-                        <div class="ear-note">Carrier tone heard in isolation</div>
-                    </div>
+            <!-- In short -->
+            <aside class="d-wrap d-short reveal" aria-label="In short">
+                <div class="short-box">
+                    <div class="d-eyebrow">In 20 seconds</div>
+                    <ul class="short-list">
+                        <li><b>What it is</b><span>A free 11-minute binaural session generated live in your browser: 200 Hz in the left ear, 210 Hz in the right. The 10 Hz beat is the difference your brain perceives. Stereo headphones, no signup.</span></li>
+                        <li><b>What the research says</b><span>The most consistent effect is on the nervous system — several small studies report lower self-rated anxiety. The effects are modest, and it is a self-care tool, not a treatment.</span></li>
+                        <li><b>Screen off?</b><span>The same 11 minutes is <a href="https://youtu.be/2d9BfW2142Q" target="_blank" rel="noopener noreferrer">on YouTube</a>.</span></li>
+                    </ul>
+                    <div class="short-meta">Updated October 2026 · <a href="#disclaimer">Safety notes</a></div>
                 </div>
+            </aside>
 
-                <!-- Info blocks -->
-                <div class="info-grid reveal">
-                    <div class="info-block">
-                        <div class="info-q">What is a binaural beat?</div>
-                        <div class="info-a">Two slightly different tones — one per ear. Your brain detects the difference and produces a <strong>third tone that doesn't physically exist</strong>. An auditory illusion with measurable neurological effects, first documented by physicist Heinrich Wilhelm Dove in 1839.</div>
+            <!-- 1. How it works: two tones, one beat -->
+            <div class="d-wrap" id="how-it-works">
+                <div class="d-eyebrow">How it works</div>
+                <h2 class="d-h2">Two tones in, one beat your brain makes</h2>
+                <p class="d-lede">Each ear gets its own steady tone. Neither ear hears 10 Hz — the beat only exists once your brain puts the two together.</p>
+
+                <figure class="beat reveal" aria-label="Diagram: a 200 Hz tone in the left ear and a 210 Hz tone in the right ear; the brain perceives their 10 Hz difference as a slow beat">
+                    <svg class="beat-svg" viewBox="0 0 600 140" preserveAspectRatio="none" aria-hidden="true">
+                        <path class="bt-side" d="M0,70.0 L2,57.6 L5,49.5 L8,48.6 L10,55.2 L12,67.0 L15,79.8 L18,89.2 L20,91.9 L22,86.9 L25,76.0 L28,63.0 L30,52.4 L32,48.0 L35,51.3 L38,61.1 L40,74.0 L42,85.6 L45,91.6 L48,90.1 L50,81.6 L52,69.0 L55,56.7 L58,49.1 L60,48.8 L62,55.9 L65,68.0 L68,80.7 L70,89.7 L72,91.8 L75,86.3 L78,75.0 L80,62.1 L82,51.9 L85,48.0 L88,51.9 L90,62.1 L92,75.0 L95,86.3 L98,91.8 L100,89.7 L102,80.7 L105,68.0 L108,55.9 L110,48.8 L112,49.1 L115,56.7 L118,69.0 L120,81.6 L122,90.1 L125,91.6 L128,85.6 L130,74.0 L132,61.1 L135,51.3 L138,48.0 L140,52.4 L142,63.0 L145,76.0 L148,86.9 L150,91.9 L152,89.2 L155,79.8 L158,67.0 L160,55.2 L162,48.6 L165,49.5 L168,57.6 L170,70.0"/>
+                        <path class="bt-env" d="M200,40 L205,40 L210,41 L215,43 L220,46 L225,49 L230,52 L235,56 L240,61 L245,65 L250,70 L255,65 L260,61 L265,56 L270,52 L275,49 L280,46 L285,43 L290,41 L295,40 L300,40 L305,40 L310,41 L315,43 L320,46 L325,49 L330,52 L335,56 L340,61 L345,65 L350,70 L355,65 L360,61 L365,56 L370,52 L375,49 L380,46 L385,43 L390,41 L395,40 L400,40 M200,100 L205,100 L210,99 L215,97 L220,94 L225,91 L230,88 L235,84 L240,79 L245,75 L250,70 L255,75 L260,79 L265,84 L270,88 L275,91 L280,94 L285,97 L290,99 L295,100 L300,100 L305,100 L310,99 L315,97 L320,94 L325,91 L330,88 L335,84 L340,79 L345,75 L350,70 L355,75 L360,79 L365,84 L370,88 L375,91 L380,94 L385,97 L390,99 L395,100 L400,100"/>
+                        <path class="bt-mid" d="M200,70.0 L202,47.5 L203,40.4 L204,53.3 L206,77.3 L208,96.0 L209,96.8 L210,79.6 L212,56.6 L214,43.3 L215,48.4 L216,67.5 L218,87.3 L220,94.5 L221,85.1 L222,66.4 L224,51.5 L226,50.0 L227,61.6 L228,77.4 L230,86.8 L232,84.2 L233,72.9 L234,61.4 L236,57.3 L238,61.9 L239,70.6 L240,77.0 L242,77.3 L244,73.1 L245,68.5 L246,67.0 L248,68.3 L250,69.9 L251,69.5 L252,67.7 L254,67.1 L256,69.8 L257,74.8 L258,77.9 L260,75.4 L262,67.7 L263,59.6 L264,57.6 L266,64.7 L268,77.1 L269,86.3 L270,84.9 L272,72.4 L274,56.6 L275,48.8 L276,55.3 L278,72.9 L280,89.8 L281,94.0 L282,81.6 L284,60.3 L286,44.7 L287,45.9 L288,63.9 L290,86.8 L292,98.8 L293,91.3 L294,69.1 L296,47.1 L298,40.5 L299,53.9 L300,78.4 L302,97.1 L304,97.4 L305,79.2 L306,55.0 L308,41.5 L310,47.3 L311,68.2 L312,89.6 L314,97.1 L316,86.2 L317,65.2 L318,48.4 L320,46.9 L322,60.7 L323,79.6 L324,90.7 L326,87.3 L328,73.0 L329,58.3 L330,52.8 L332,59.0 L334,71.4 L335,81.0 L336,82.0 L338,75.3 L340,66.7 L341,62.2 L342,63.8 L344,68.6 L346,72.4 L347,72.8 L348,71.1 L350,70.0 L352,71.1 L353,72.8 L354,72.4 L356,68.6 L358,63.8 L359,62.2 L360,66.7 L362,75.3 L364,82.0 L365,81.0 L366,71.4 L368,59.0 L370,52.8 L371,58.3 L372,73.0 L374,87.3 L376,90.7 L377,79.6 L378,60.7 L380,46.9 L382,48.4 L383,65.2 L384,86.2 L386,97.1 L388,89.6 L389,68.2 L390,47.3 L392,41.5 L394,55.0 L395,79.2 L396,97.4 L398,97.1 L400,78.4"/>
+                        <path class="bt-side" d="M430,70.0 L432,57.0 L435,49.0 L438,49.2 L440,57.4 L442,70.5 L445,83.4 L448,91.1 L450,90.7 L452,82.2 L455,69.0 L458,56.2 L460,48.7 L462,49.5 L465,58.2 L468,71.5 L470,84.2 L472,91.4 L475,90.3 L478,81.3 L480,68.0 L482,55.4 L485,48.5 L488,49.9 L490,59.1 L492,72.5 L495,85.0 L498,91.6 L500,89.9 L502,80.4 L505,67.0 L508,54.7 L510,48.3 L512,50.4 L515,60.0 L518,73.5 L520,85.7 L522,91.8 L525,89.4 L528,79.5 L530,66.0 L532,53.9 L535,48.2 L538,50.8 L540,60.9 L542,74.5 L545,86.4 L548,91.9 L550,88.9 L552,78.6 L555,65.0 L558,53.3 L560,48.1 L562,51.3 L565,61.9 L568,75.5 L570,87.1 L572,92.0 L575,88.4 L578,77.7 L580,64.0 L582,52.6 L585,48.0 L588,51.9 L590,62.8 L592,76.5 L595,87.7 L598,92.0 L600,87.8"/>
+                    </svg>
+                    <div class="beat-labels">
+                        <div class="bl">
+                            <span class="bl-tag">Left ear</span>
+                            <span class="bl-hz">200 Hz</span>
+                            <span class="bl-note">Carrier tone heard in isolation</span>
+                        </div>
+                        <div class="bl bl-mid">
+                            <span class="bl-tag">Brain perceives</span>
+                            <span class="bl-hz">10 Hz</span>
+                            <span class="bl-note">Alpha wave · difference tone</span>
+                        </div>
+                        <div class="bl">
+                            <span class="bl-tag">Right ear</span>
+                            <span class="bl-hz">210 Hz</span>
+                            <span class="bl-note">Carrier tone heard in isolation</span>
+                        </div>
                     </div>
-                    <div class="info-block">
-                        <div class="info-q">Why 10 Hz?</div>
-                        <div class="info-a" id="why-10hz">10Hz sits inside the <strong>Alpha band (8–13Hz)</strong> — the brain's natural state of relaxed alertness. Alpha is associated with reduced anxiety, creative clarity, and the quiet between stimulus and reaction. Present, not reactive.</div>
-                    </div>
-                    <div class="info-block">
-                        <div class="info-q">What happens in the brain?</div>
-                        <div class="info-a">The brain synchronizes to the frequency it perceives — a process called <strong>neural entrainment</strong>. As you listen, your dominant brainwave frequency shifts toward 10Hz. Cortical noise decreases. Attention sharpens without effort.</div>
-                    </div>
-                    <div class="info-block">
-                        <div class="info-q" id="anxiety-note">Can it help with anxiety?</div>
-                        <div class="info-a">Alpha-band entrainment is associated with <strong>reduced anxiety and a calmer nervous system</strong> — the quiet between stimulus and reaction. ECHO.11 was born from exactly that need: a free tool for acute anxious moments, insomnia, and racing thoughts, available 24/7. It is a self-care practice, not a medical treatment — if anxiety is disrupting your life, please also talk to a professional.</div>
-                    </div>
-                    <div class="info-block info-block-wide">
-                        <div class="info-q">What should you feel?</div>
-                        <div class="info-a">Individual response varies. Most commonly reported:
+                </figure>
+            </div>
+
+            <!-- 2. How to use (mirrors the HowTo steps) -->
+            <div class="d-wrap" id="how-to-use">
+                <div class="d-eyebrow">How to use it</div>
+                <h2 class="d-h2">Three steps, eleven minutes</h2>
+                <ol class="steps reveal">
+                    <li class="step">
+                        <span class="step-n" aria-hidden="true">1</span>
+                        <strong id="step1">Put on stereo headphones</strong>
+                        <p>Each ear has to hear a different tone. Speakers blend the two channels together, so the beat never forms.</p>
+                    </li>
+                    <li class="step">
+                        <span class="step-n" aria-hidden="true">2</span>
+                        <strong id="step2">Press play</strong>
+                        <p>The tone is generated live in your browser. Nothing to download, nothing to sign up for.</p>
+                    </li>
+                    <li class="step">
+                        <span class="step-n" aria-hidden="true">3</span>
+                        <strong id="step3">Stay with it for 11 minutes</strong>
+                        <p>That is the window in which the synchronization settles. You can stop at any point.</p>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- 3. Questions -->
+            <div class="d-wrap d-narrow" id="questions">
+                <div class="d-eyebrow">Questions people ask</div>
+                <h2 class="d-h2">Before you press play</h2>
+                <div class="qa-list reveal">
+                    <details class="qa" open>
+                        <summary><h3>What is a binaural beat?</h3></summary>
+                        <div class="qa-a">Two slightly different tones — one per ear. Your brain detects the difference and produces a <strong>third tone that doesn't physically exist</strong>. An auditory illusion with measurable neurological effects, first documented by physicist Heinrich Wilhelm Dove in 1839.</div>
+                    </details>
+                    <details class="qa" id="why-10hz-q" open>
+                        <summary><h3>Why 10 Hz?</h3></summary>
+                        <div class="qa-a" id="why-10hz">10Hz sits inside the <strong>Alpha band (8–13Hz)</strong> — the brain's natural state of relaxed alertness. Alpha is associated with reduced anxiety, creative clarity, and the quiet between stimulus and reaction. Present, not reactive.</div>
+                    </details>
+                    <details class="qa">
+                        <summary><h3>What happens in the brain?</h3></summary>
+                        <div class="qa-a">The brain synchronizes to the frequency it perceives — a process called <strong>neural entrainment</strong>. As you listen, your dominant brainwave frequency shifts toward 10Hz. Cortical noise decreases. Attention sharpens without effort.</div>
+                    </details>
+                    <details class="qa">
+                        <summary><h3 id="anxiety-note">Can it help with anxiety?</h3></summary>
+                        <div class="qa-a">Alpha-band entrainment is associated with <strong>reduced anxiety and a calmer nervous system</strong> — the quiet between stimulus and reaction. ECHO.11 was born from exactly that need: a free tool for acute anxious moments, insomnia, and racing thoughts, available 24/7. It is a self-care practice, not a medical treatment — if anxiety is disrupting your life, please also talk to a professional.</div>
+                    </details>
+                    <details class="qa">
+                        <summary><h3>What should I feel?</h3></summary>
+                        <div class="qa-a">Individual response varies. Most commonly reported:
                             <div class="feel-tags">
                                 <span class="feel-tag">Mental clarity</span>
                                 <span class="feel-tag">Reduced mind-chatter</span>
@@ -482,64 +859,139 @@
                                 <span class="feel-tag">Present-moment awareness</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="info-block info-block-img">
-                        <picture>
-                            <source srcset="assets/images/10hz.webp" type="image/webp">
-                            <img src="assets/images/10hz.jpg" alt="Astronaut portrait, eyes closed — the 10Hz alpha session" loading="lazy" width="914" height="896">
-                        </picture>
-                    </div>
+                    </details>
                 </div>
-
-                <!-- CIA / Monroe callout -->
-                <div class="callout reveal">
-                    <span class="callout-tag">Research Inspiration · Declassified 1983, Released 2003</span>
-                    <p>In 1983, the US Army commissioned a classified analysis of The Monroe Institute's research into binaural frequencies and altered consciousness. The document — <strong>Analysis and Assessment of Gateway Process</strong> — was declassified and released by the CIA in 2003.<br><br>
-                    It describes binaural beats as a way to shift brainwave activity and quiet cortical noise. This experience is inspired by that document — read it as a piece of history and a starting point for curiosity, not as evidence. The peer-reviewed research below is the part to weigh.<br><br>
-                    Not affiliated with or endorsed by any government body.</p>
-                    <a href="https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf" target="_blank" rel="noopener noreferrer">View the declassified CIA document →</a>
-                </div>
-
-                <!-- What the research actually shows -->
-                <div class="callout reveal">
-                    <span class="callout-tag">What the research actually shows</span>
-                    <p class="research-headline">Not a cure. A dimmer switch.</p>
-                    <p>Across binaural-beat research, the clearest, most consistent effect isn't cognitive — it's the nervous system. Several studies report lower self-rated anxiety, and some report lower pain ratings — effects that show up more consistently than any effect on memory or focus. The studies are small and the effects are modest. It doesn't numb sensation or heal tissue. It turns down the volume on your body's alarm system — the same pathway a slow exhale works through, just held there longer and more consistently than a breath alone can manage.</p>
-                    <div class="research-note">Research findings, not medical claims. If you're managing chronic pain or an anxiety condition, this is a complement to care — not a replacement. <a href="#disclaimer">Read the full disclaimer.</a></div>
-                </div>
-
-                <!-- 11 min note -->
-                <div class="info-block reveal" style="border:1px solid var(--border);">
-                    <div class="info-q">The 11-minute threshold</div>
-                    <div class="info-a">Research on neural entrainment suggests that <strong>7–15 minutes</strong> is the window in which brainwave synchronization stabilizes. We chose 11 minutes because it sits inside that window with room to settle — long enough to stop checking the clock, short enough to actually do. It is a design choice, not a clinical threshold.</div>
-                </div>
-
-                <!-- Full disclaimer -->
-                <div class="disclaimer reveal" id="disclaimer">
-                    <span class="callout-tag">The full disclaimer</span>
-                    <p>ECHO.11 is a self-care tool, not a medical device, and nothing here is medical advice. The 10Hz session is not a diagnosis, a treatment, or a substitute for care from a doctor, therapist, or psychiatrist. If anxiety, pain, or sleeplessness is disrupting your life, please talk to someone qualified — this can sit alongside that work, but it does not replace it.</p>
-                    <p>Response varies from person to person, and some people notice nothing at all. That is a normal outcome, not a failure on your part.</p>
-                    <p>A few practical limits. Do not listen while driving or operating anything that needs your attention — the session is built for stillness with your eyes closed. If you have epilepsy or a seizure disorder, or you are fitted with a pacemaker or a cochlear implant, check with your doctor before using audio entrainment of any kind. Keep the volume low; the effect comes from the frequency, not the loudness. If a session leaves you dizzy, disoriented, or more agitated than when you started, stop and take the headphones off.</p>
-                    <p>The research described on this page is drawn from published work on binaural beats and neural entrainment. It reports what studies have observed in general — not what will happen to you, and no efficacy figures are claimed for this specific recording.</p>
-                    <p>This is not a crisis service. If you are in danger or thinking about harming yourself, contact your local emergency number or a crisis line right away.</p>
-                </div>
-
-                <!-- Quiet continuation -->
-                <div class="next-step reveal">
-                    <span class="next-step-tag">If you want to go deeper</span>
-                    <p>New sessions and short notes on how your brain rewires land on Instagram first. One a day, no fluff.</p>
-                    <p>Want it on your phone with the screen off? The same 11 minutes is <a href="https://youtu.be/2d9BfW2142Q" target="_blank" rel="noopener noreferrer">on YouTube</a>.</p>
-                    <p>When the problem is starting rather than settling, <a href="40hz.html">the 40Hz focus session</a> works the other way around — the same eleven minutes, eyes open. Both sit together with <a href="frequencies.html">all the free binaural sessions</a>.</p>
-                    <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Follow @shira.sarid →</a>
-                </div>
-
             </div>
+
+            <figure class="d-plate d-plate-tall reveal">
+                <picture>
+                    <source srcset="assets/images/10hz.webp" type="image/webp">
+                    <img src="assets/images/10hz.jpg" alt="Astronaut portrait, eyes closed — the 10Hz alpha session" loading="lazy" decoding="async" width="914" height="896">
+                </picture>
+            </figure>
+
+            <!-- 4. Research -->
+            <div class="d-wrap d-narrow" id="research">
+                <div class="d-eyebrow">What the research actually shows</div>
+                <h2 class="d-h2 d-quote">Not a cure.<br><em>A dimmer switch.</em></h2>
+                <ul class="findings reveal">
+                    <li class="finding">
+                        <span class="ev ev-strong">Small studies · modest effects</span>
+                        <h3>The clearest effect is the nervous system, not memory or focus.</h3>
+                        <p>Across binaural-beat research, the clearest, most consistent effect isn't cognitive — it's the nervous system. Several studies report lower self-rated anxiety, and some report lower pain ratings — effects that show up more consistently than any effect on memory or focus. The studies are small and the effects are modest. It doesn't numb sensation or heal tissue. It turns down the volume on your body's alarm system — the same pathway a slow exhale works through, just held there longer and more consistently than a breath alone can manage.</p>
+                    </li>
+                    <li class="finding">
+                        <span class="ev ev-weak">History · not evidence</span>
+                        <h3>Research inspiration · Declassified 1983, released 2003</h3>
+                        <p>In 1983, the US Army commissioned a classified analysis of The Monroe Institute's research into binaural frequencies and altered consciousness. The document — <strong>Analysis and Assessment of Gateway Process</strong> — was declassified and released by the CIA in 2003.</p>
+                        <p>It describes binaural beats as a way to shift brainwave activity and quiet cortical noise. This experience is inspired by that document — read it as a piece of history and a starting point for curiosity, not as evidence. The peer-reviewed research above is the part to weigh.</p>
+                        <p>Not affiliated with or endorsed by any government body. <a href="https://www.cia.gov/readingroom/docs/CIA-RDP96-00788R001700210016-5.pdf" target="_blank" rel="noopener noreferrer">View the declassified CIA document →</a></p>
+                    </li>
+                </ul>
+                <p class="d-note">Research findings, not medical claims. If you're managing chronic pain or an anxiety condition, this is a complement to care — not a replacement. <a href="#disclaimer">Read the full disclaimer.</a></p>
+            </div>
+
+            <!-- 5. The 11-minute threshold -->
+            <div class="d-wrap d-narrow" id="eleven-minutes">
+                <blockquote class="closer reveal">
+                    <h3>The 11-minute threshold</h3>
+                    <p>Research on neural entrainment suggests that <strong>7–15 minutes</strong> is the window in which brainwave synchronization stabilizes. We chose 11 minutes because it sits inside that window with room to settle — long enough to stop checking the clock, short enough to actually do. It is a design choice, not a clinical threshold.</p>
+                </blockquote>
+            </div>
+
+            <!-- 6. Safety, folded -->
+            <div class="d-wrap d-narrow fine">
+                <div class="fine-box reveal" id="disclaimer">
+                    <div class="d-eyebrow">Safety</div>
+                    <p class="fine-lead">ECHO.11 is a self-care tool, not a medical device, and nothing here is medical advice. Do not listen while driving. If you have epilepsy or a seizure disorder, or you are fitted with a pacemaker or a cochlear implant, check with your doctor before using audio entrainment of any kind. This is not a crisis service: if you are in danger or thinking about harming yourself, contact your local emergency number or a crisis line right away.</p>
+                    <details class="fold" id="disclaimer-more">
+                        <summary>Read the full disclaimer</summary>
+                        <div class="fold-body">
+                            <p>The 10Hz session is not a diagnosis, a treatment, or a substitute for care from a doctor, therapist, or psychiatrist. If anxiety, pain, or sleeplessness is disrupting your life, please talk to someone qualified — this can sit alongside that work, but it does not replace it.</p>
+                            <p>Response varies from person to person, and some people notice nothing at all. That is a normal outcome, not a failure on your part.</p>
+                            <p>A few practical limits. Do not listen while driving or operating anything that needs your attention — the session is built for stillness with your eyes closed. Keep the volume low; the effect comes from the frequency, not the loudness. If a session leaves you dizzy, disoriented, or more agitated than when you started, stop and take the headphones off.</p>
+                            <p>The research described on this page is drawn from published work on binaural beats and neural entrainment. It reports what studies have observed in general — not what will happen to you, and no efficacy figures are claimed for this specific recording.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- 7. Where to next -->
+            <div class="d-wrap" id="next">
+                <div class="d-eyebrow">If you want to go deeper</div>
+                <div class="next-grid reveal">
+                    <a class="next-card" href="https://youtu.be/2d9BfW2142Q" target="_blank" rel="noopener noreferrer">
+                        <span class="nc-tag">Screen off</span>
+                        <span class="nc-title">The same 11 minutes on YouTube</span>
+                        <span class="nc-note">Want it on your phone with the screen off? Same session, same tones.</span>
+                    </a>
+                    <a class="next-card" href="40hz.html">
+                        <span class="nc-tag">Eyes open</span>
+                        <span class="nc-title">The 40Hz focus session</span>
+                        <span class="nc-note">When the problem is starting rather than settling — the same eleven minutes, eyes open.</span>
+                    </a>
+                    <a class="next-card" href="frequencies.html">
+                        <span class="nc-tag">Browse</span>
+                        <span class="nc-title">All the free binaural sessions</span>
+                        <span class="nc-note">Calm, focus and sleep — free, in the browser, no signup.</span>
+                    </a>
+                </div>
+                <p class="next-more">New sessions and short notes on how your brain rewires land on Instagram first. One a day, no fluff. · <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Follow @shira.sarid →</a></p>
+            </div>
+
         </section>
+
+        <!-- Floating play: appears once the player has scrolled away -->
+        <button type="button" class="float-play" id="floatPlay" hidden aria-label="Play the 10Hz session">
+            <span class="fp-dot" aria-hidden="true"></span>
+            <span class="fp-label" id="floatLabel">Play the 11-minute reset</span>
+        </button>
+
+        <script>
+            (function () {
+                function openFor(hash) {
+                    var t = hash && document.getElementById(hash.slice(1));
+                    if (!t) return;
+                    var d = t.tagName === 'DETAILS' ? t : t.closest('details');
+                    if (d && !d.open) d.open = true;
+                }
+                document.addEventListener('click', function (e) {
+                    var a = e.target.closest('a[href^="#"]');
+                    if (a) openFor(a.getAttribute('href'));
+                });
+                openFor(location.hash);
+
+                var fp = document.getElementById('floatPlay'),
+                    lbl = document.getElementById('floatLabel'),
+                    main = document.getElementById('playBtn'),
+                    timer = document.getElementById('timerDisplay'),
+                    hero = document.querySelector('.timer-wrap');
+                if (!fp || !main || !hero || !('IntersectionObserver' in window)) return;
+                var idle = 'Play the 11-minute reset';
+                function playing() { return document.body.classList.contains('session-active'); }
+                function sync() {
+                    var on = playing();
+                    fp.classList.toggle('is-on', on);
+                    lbl.textContent = on ? 'Pause · ' + (timer ? timer.textContent : '') : idle;
+                    fp.setAttribute('aria-label', on ? 'Pause the 10Hz session' : 'Play the 10Hz session');
+                    var cookie = document.getElementById('cookieConsent');
+                    var h = cookie && getComputedStyle(cookie).display !== 'none' ? cookie.getBoundingClientRect().height : 0;
+                    fp.style.setProperty('--lift', h + 'px');
+                }
+                new IntersectionObserver(function (es) {
+                    fp.hidden = false;
+                    fp.classList.toggle('show', !es[0].isIntersecting);
+                    sync();
+                }).observe(hero);
+                fp.addEventListener('click', function () { main.click(); setTimeout(sync, 60); });
+                setInterval(function () { if (fp.classList.contains('show')) sync(); }, 1000);
+            })();
+        </script>
     </main>
 
     <!-- Footer -->
-    <div class="footer-banner">
-        <img src="assets/images/book-silence.jpg" alt="Astronaut helmet, eyes closed" loading="lazy">
+    <div class="footer-banner footer-band">
+        <img src="assets/images/book-silence-band.webp" alt="Astronaut helmet, eyes closed" loading="lazy" decoding="async" width="896" height="384">
     </div>
     <footer>
         <div class="footer-inner">
