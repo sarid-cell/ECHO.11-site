@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { analytics_storage: localStorage.getItem('echo11_consent') === 'granted' ? 'granted' : 'denied' });
+      gtag('js', new Date());
+      gtag('config', 'G-TP9YRD6TN8');
+
+      // Load the actual gtag.js library off the critical rendering path:
+      // on first interaction, or after a short idle delay, whichever is first.
+      // dataLayer.push already queues consent/js/config above, so nothing is lost.
+      (function () {
+        var loaded = false;
+        function loadGtag() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-TP9YRD6TN8';
+          document.head.appendChild(s);
+        }
+        ['scroll', 'click', 'keydown', 'touchstart', 'mousemove'].forEach(function (ev) {
+          window.addEventListener(ev, loadGtag, { once: true, passive: true });
+        });
+        window.addEventListener('load', function () { setTimeout(loadGtag, 3000); });
+      })();
+    </script>
+    <!-- Quiet Mode bootstrap: resolve theme before first paint (no FOUC).
+         Stored choice -> night hours (20:00-07:00) -> system preference. -->
+    <script>
+    (function(){try{var t=localStorage.getItem('echo11_theme');if(t!=='dark'&&t!=='light'){var h=new Date().getHours();t=(h>=20||h<7)||matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/images/favicon-192.png" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/assets/images/favicon-180.png">
+    <title>Shira Sarid (@shira.sarid) · Brain, Perception &amp; AI</title>
+    <meta name="description" content="Shira Sarid writes short, research-backed notes on how the brain rewires: neuroplasticity, perception, memory and AI. Follow her on Instagram @shira.sarid.">
+    <meta name="author" content="Shira Sarid">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://echo11.app/shira-sarid.html" />
+    <link rel="me" href="https://www.instagram.com/shira.sarid/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Shira Sarid (@shira.sarid) · Brain, Perception &amp; AI">
+    <meta property="og:description" content="How your brain rewires, in plain language. Follow on Instagram @shira.sarid.">
+    <meta property="og:type" content="profile">
+    <meta property="profile:first_name" content="Shira">
+    <meta property="profile:last_name" content="Sarid">
+    <meta property="profile:username" content="shira.sarid">
+    <meta property="og:url" content="https://echo11.app/shira-sarid.html">
+    <meta property="og:image" content="https://echo11.app/assets/images/hero.png">
+    <meta property="og:site_name" content="ECHO.11">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Shira Sarid (@shira.sarid) · Brain, Perception &amp; AI">
+    <meta name="twitter:description" content="How your brain rewires, in plain language. Follow on Instagram @shira.sarid.">
+    <meta name="twitter:image" content="https://echo11.app/assets/images/hero.png">
+
+    <!-- Structured Data: profile page for the person Shira Sarid -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "ProfilePage",
+            "@id": "https://echo11.app/shira-sarid.html#webpage",
+            "url": "https://echo11.app/shira-sarid.html",
+            "name": "Shira Sarid (@shira.sarid) · Brain, Perception & AI",
+            "description": "Shira Sarid writes short, research-backed notes on how the brain rewires: neuroplasticity, perception, memory and AI. Follow her on Instagram @shira.sarid.",
+            "isPartOf": { "@id": "https://echo11.app/#website" },
+            "mainEntity": { "@id": "https://echo11.app/#shira-sarid" },
+            "dateModified": "2026-10-18",
+            "inLanguage": "en"
+        },
+        {
+            "@type": "Person",
+            "@id": "https://echo11.app/#shira-sarid",
+            "name": "Shira Sarid",
+            "alternateName": ["shira.sarid", "שירה שריד"],
+            "url": "https://echo11.app/shira-sarid.html",
+            "image": "https://echo11.app/assets/images/hero.png",
+            "description": "Writes short, research-backed notes on how the brain rewires: neuroplasticity, perception, memory and AI. Creator of ECHO.11, free sound sessions for calm, focus and sleep. Based in Israel.",
+            "homeLocation": { "@type": "Country", "name": "Israel" },
+            "knowsAbout": ["Neuroplasticity", "Perception", "Memory", "Biohacking", "Brainwaves", "Binaural beats", "Generative AI", "Consumer Psychology"],
+            "sameAs": [
+                "https://www.instagram.com/shira.sarid/",
+                "https://www.youtube.com/@shira_sarid",
+                "https://shirasarid.substack.com/",
+                "https://www.pinterest.com/shirasaridAI/",
+                "https://www.linkedin.com/in/shirasarid",
+                "https://github.com/sarid-cell"
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://echo11.app/#website",
+            "name": "ECHO.11",
+            "url": "https://echo11.app/",
+            "author": { "@id": "https://echo11.app/#shira-sarid" }
+        }
+    ]
+}
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/outfit-variable-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/ibm-plex-mono-400-latin.woff2" crossorigin>
+    <link rel="stylesheet" href="assets/css/fonts.css">
+    
+    <link rel="stylesheet" href="assets/css/view-transitions.css">
+    <link rel="stylesheet" href="assets/css/quiet-mode.css">
+    <link rel="stylesheet" href="assets/css/micro-interactions.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="assets/css/micro-interactions.css"></noscript>
+    <style>
+        :root {
+            --bg: #fafafa;
+            --text: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-light: #666666;
+            --white: #fff;
+            --border: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor Dot */
+        .cursor-dot {
+            width: 20px;
+            height: 20px;
+            background: rgba(100, 100, 100, 0.6);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-dot.hover {
+            width: 35px;
+            height: 35px;
+            background: rgba(80, 80, 80, 0.5);
+        }
+
+        a, button, input, textarea, select {
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+            .cursor-dot {
+                display: none;
+            }
+        }
+
+        /* Accessibility Widget */
+        .a11y-widget {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 9998;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .a11y-toggle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--text);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .a11y-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .a11y-toggle svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .a11y-menu {
+            position: absolute;
+            bottom: 60px;
+            left: 0;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            min-width: 220px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            display: none;
+        }
+
+        .a11y-menu.active {
+            display: block;
+        }
+
+        .a11y-menu .a11y-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+
+        .a11y-btn {
+            width: 100%;
+            padding: 0.6rem 0.75rem;
+            margin-bottom: 0.4rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text);
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.2s;
+        }
+
+        .a11y-btn:hover,
+        .a11y-btn.active {
+            background: var(--text);
+            color: var(--white);
+        }
+
+        .a11y-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .a11y-reset button {
+            width: 100%;
+            padding: 0.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-decoration: underline;
+            margin-top: 0.5rem;
+        }
+
+        body.a11y-large-text { font-size: 22px !important; }
+        body.a11y-high-contrast { --bg: #000 !important; --text: #fff !important; --text-secondary: #fff !important; --white: #000 !important; --border: #fff !important; }
+        body.a11y-high-contrast .a11y-toggle { background: #fff; color: #000; }
+        body.a11y-high-contrast .a11y-menu { background: #000; border-color: #fff; }
+        body.a11y-high-contrast .a11y-btn { background: #000; border-color: #fff; color: #fff; }
+        body.a11y-grayscale { filter: grayscale(100%); }
+        body.a11y-highlight-links a { background: yellow !important; color: #000 !important; padding: 2px 4px; }
+
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            background: var(--text);
+            color: var(--white);
+            padding: 12px 20px;
+            z-index: 9999;
+            transition: top 0.3s;
+            text-decoration: none;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Logo */
+        .logo {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 1.2rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .clock {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            width: 26px;
+            height: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .hamburger:focus {
+            outline: 2px solid var(--text);
+            outline-offset: 4px;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 1.5px;
+            background: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Side Menu */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 350px;
+            height: 100vh;
+            background: var(--bg);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0s linear .4s;
+            visibility: hidden;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.15);
+        }
+
+        .side-menu.active {
+            right: 0;
+            visibility: visible;
+            transition-delay: 0s;
+        }
+
+        .side-menu nav {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .side-menu a {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text);
+            text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .side-menu a:hover {
+            opacity: 0.6;
+            transform: translateX(10px);
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* App teaser (coming soon) in side menu */
+        .menu-app {
+            margin-top: 0.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .menu-app-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #0284c7;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+        .menu-app-badge {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #0369a1;
+            background: #e0f4fa;
+            border: 1px solid #7dd3fc;
+            border-radius: 999px;
+            padding: 0.25em 0.8em;
+            white-space: nowrap;
+        }
+        .menu-app-desc {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--text-light);
+        }
+        body.a11y-high-contrast .menu-app-title { color: var(--text) !important; }
+        body.a11y-high-contrast .menu-app-badge {
+            color: var(--text) !important;
+            background: var(--bg) !important;
+            border-color: var(--text) !important;
+        }
+        body.a11y-high-contrast .menu-app-desc { color: var(--text) !important; }
+        html[data-theme="dark"] .menu-app-title { color: #2dd4f0; }
+        html[data-theme="dark"] .menu-app-badge {
+            color: #7ce4f5;
+            background: rgba(45, 212, 240, 0.12);
+            border-color: rgba(45, 212, 240, 0.4);
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 80px;
+        }
+
+        /* About Header */
+        .about-hero {
+            padding: 5rem 2.5rem 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .about-hero-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            display: block;
+            margin-bottom: 1.2rem;
+        }
+
+        .about-hero h1 {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 300;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            max-width: 850px;
+        }
+
+        /* Section Styles */
+        .about-section {
+            padding: 3rem 2.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            font-weight: 300;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.3;
+        }
+
+        .about-section p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .about-section strong {
+            font-weight: 500;
+        }
+
+        /* Full Width Images */
+        .full-width-image {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+            overflow: hidden;
+        }
+
+        .full-width-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%);
+        }
+
+        /* Centered Image (Luna size) */
+        .centered-image {
+            width: 100%;
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2.5rem;
+        }
+
+        .centered-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Golden Section - same size as Luna */
+        .golden-section {
+            background: #0a0a0a;
+            padding: 4rem 2.5rem;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .golden-section img {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Explore Section */
+        .explore-section {
+            padding: 4rem 2.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .explore-intro {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .explore-list {
+            list-style: none;
+            margin-bottom: 3rem;
+        }
+
+        .explore-list li {
+            padding: 1rem 0;
+            font-size: 1.1rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: 300;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .explore-list li:first-child {
+            border-top: 1px solid var(--border);
+        }
+
+        .explore-list li::before {
+            content: '•';
+            color: var(--text-light);
+        }
+
+        .explore-list strong {
+            font-weight: 500;
+        }
+
+        .explore-closing {
+            font-size: 1.15rem;
+            font-weight: 500;
+        }
+
+        /* Story bridge → frequency & book */
+        .story-bridge {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2.5rem 3rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .story-bridge-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            display: block;
+            margin-bottom: 1.2rem;
+        }
+
+        .story-bridge p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            font-weight: 300;
+            max-width: 38rem;
+            margin: 0 auto 2rem;
+        }
+
+        .bridge-primary {
+            display: inline-block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--text);
+            padding: 1rem 2.2rem;
+            text-decoration: none;
+            transition: opacity 0.25s;
+        }
+
+        .bridge-primary:hover {
+            opacity: 0.85;
+        }
+
+        .bridge-note,
+        .bridge-secondary {
+            display: block;
+            margin-top: 1.4rem;
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+
+        .bridge-note a,
+        .bridge-secondary a {
+            color: var(--text);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: opacity 0.2s;
+        }
+
+        .bridge-note a:hover,
+        .bridge-secondary a:hover {
+            opacity: 0.6;
+        }
+
+        .story-bridge p.bridge-substack {
+            margin: 2.5rem auto 0;
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--text-light);
+        }
+
+        .bridge-substack a {
+            color: var(--text-secondary);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .bridge-substack a:hover {
+            color: var(--text);
+        }
+
+        @media (max-width: 768px) {
+            .story-bridge {
+                padding: 3rem 1.5rem 2.5rem;
+            }
+        }
+
+        /* Final Image - Future Astro Man */
+        .final-image {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-top: 4rem;
+            overflow: hidden;
+        }
+
+        .final-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%);
+        }
+
+        /* Simple Footer */
+        .simple-footer {
+            padding: 4rem 2.5rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .back-link {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.2s;
+        }
+
+        .back-link:hover {
+            opacity: 0.6;
+        }
+
+        .back-link::before {
+            content: '←';
+        }
+
+        .footer-legal {
+            max-width: 800px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-legal a {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.2s;
+        }
+
+        .footer-legal a:hover {
+            color: var(--text);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+
+            .header-inner {
+                padding: 1rem 1.5rem;
+            }
+
+            .about-hero,
+            .about-section,
+            .explore-section {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .centered-image {
+                padding: 0 1.5rem;
+            }
+
+            .side-menu {
+                width: 100%;
+                right: -100%;
+            }
+
+            .simple-footer {
+                padding: 3rem 1.5rem;
+            }
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        a:focus,
+        button:focus {
+            outline: 2px solid var(--text);
+            outline-offset: 3px;
+        }
+    
+        .ig-cta{display:inline-flex;align-items:center;gap:.6rem;margin-top:1.5rem;padding:1rem 1.6rem;border:1px solid currentColor;border-radius:999px;font-weight:500;text-decoration:none;color:inherit;transition:background .2s,color .2s}
+        .ig-cta:hover,.ig-cta:focus-visible{background:var(--text, #111);color:var(--bg, #fafafa)}
+        .ig-handle{font-family:'IBM Plex Mono',monospace;font-size:.9rem;opacity:.7}
+        .note-list{list-style:none;padding:0;margin:1.5rem 0 0}
+        .note-list li{padding:1.1rem 0;border-top:1px solid rgba(128,128,128,.25)}
+        .note-list li:last-child{border-bottom:1px solid rgba(128,128,128,.25)}
+        .note-list a{color:inherit;text-decoration:none;display:block}
+        .note-list a:hover .note-title,.note-list a:focus-visible .note-title{text-decoration:underline}
+        .note-title{font-weight:500;display:block}
+        .note-meta{font-family:'IBM Plex Mono',monospace;font-size:.78rem;opacity:.6;letter-spacing:.04em;text-transform:uppercase}
+        .elsewhere{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;margin-top:1rem}
+        .elsewhere a{color:inherit}
+        .about-hero-eyebrow a{color:inherit}
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header>
+        <div class="header-inner">
+            <a href="/" class="logo">ECHO.11</a>
+            
+            <div class="header-right">
+                <div class="clock" id="clock">00:00:00</div>
+                <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
+        <nav>
+            <ul class="menu-list">
+            <li>
+                <a href="frequencies.html" class="menu-link">The Sessions</a>
+                <ul class="menu-sublist">
+                    <li><a href="frequency.html" class="menu-sublink">10 Hz &middot; Calm</a></li>
+                    <li><a href="40hz.html" class="menu-sublink">40 Hz &middot; Focus</a></li>
+                    <li><a href="sleep.html" class="menu-sublink">Delta &middot; Sleep</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="book.html" class="menu-link">The Book</a>
+            </li>
+            <li>
+                <a href="index.html#insights" class="menu-link">Field Notes</a>
+            </li>
+            <li>
+                <a href="index.html#vision" class="menu-link">The Vision</a>
+            </li>
+            <li>
+                <a href="about.html" class="menu-link">About Echo.11</a>
+            </li>
+            </ul>
+            <a class="menu-app" href="https://echo11.space" target="_blank" rel="noopener">
+                <span class="menu-app-title">The App
+                    <span class="menu-app-badge">Beta</span>
+                </span>
+                <span class="menu-app-desc">Both sessions, in your pocket.</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main id="main-content">
+        <div class="about-hero reveal">
+            <span class="about-hero-eyebrow">Brain · Perception · AI &nbsp;·&nbsp; <a href="https://www.instagram.com/shira.sarid/" target="_blank" rel="me noopener">@shira.sarid</a></span>
+            <h1>Shira Sarid</h1>
+        </div>
+
+        <section class="about-section reveal">
+            <h2 class="section-title">How your brain rewires, in twenty seconds a day</h2>
+            <p><strong>I'm Shira Sarid. I write short, research-backed notes on neuroplasticity, perception and memory, and on what AI is teaching us about our own heads.</strong></p>
+            <p>I'm not a neuroscientist. I read the studies, mostly from the last three years, and turn one finding at a time into something you can feel in under a minute: a Reel, a short story about a character called Alex, or a single tool worth saving.</p>
+            <p>I live in Israel, think in Hebrew, and publish in English. ECHO.11, the free sound sessions on this site, is where it started.</p>
+            <a class="ig-cta" href="https://www.instagram.com/shira.sarid/" target="_blank" rel="me noopener">Follow on Instagram <span class="ig-handle">@shira.sarid</span></a>
+        </section>
+
+        <section class="about-section reveal">
+            <h2 class="section-title">Recent notes on Instagram</h2>
+            <ul class="note-list">
+                <li><a href="https://www.instagram.com/reel/DeZrHxRopf8/" target="_blank" rel="noopener"><span class="note-meta">Perception · Reel</span><span class="note-title">Your eyes are not the first to know: the brain guesses before it sees</span></a></li>
+                <li><a href="https://www.instagram.com/reel/Dej3CWXICAJ/" target="_blank" rel="noopener"><span class="note-meta">Nervous system · Reel</span><span class="note-title">Your exhale is a brake pedal: the cyclic-sigh study from Stanford</span></a></li>
+                <li><a href="https://www.instagram.com/p/Deghyg7iPrn/" target="_blank" rel="noopener"><span class="note-meta">Habits · Carousel</span><span class="note-title">21 days to build a habit is a myth. The real number is closer to 66</span></a></li>
+                <li><a href="https://www.instagram.com/reel/DefL2kaIjEY/" target="_blank" rel="noopener"><span class="note-meta">Memory · Reel</span><span class="note-title">You stopped practicing an hour ago. Your brain didn't</span></a></li>
+                <li><a href="https://www.instagram.com/reel/Demk_FWhv7D/" target="_blank" rel="noopener"><span class="note-meta">Fear · Alex series</span><span class="note-title">Every time she pressed close, her brain called it a win</span></a></li>
+            </ul>
+        </section>
+
+        <section class="story-bridge reveal">
+            <span class="story-bridge-tag">Listen while you read</span>
+            <p>The sessions behind ECHO.11 are free, no signup: 11 minutes, headphones on.</p>
+            <a href="frequency.html" class="bridge-primary">Try the 10 Hz calm session</a>
+            <p class="bridge-note">Or <a href="40hz.html">40 Hz for focus</a> and <a href="sleep.html">delta for sleep</a>.</p>
+        </section>
+
+        <section class="about-section reveal">
+            <h2 class="section-title">Elsewhere</h2>
+            <div class="elsewhere">
+                <a href="https://www.instagram.com/shira.sarid/" target="_blank" rel="me noopener">Instagram</a>
+                <a href="https://www.youtube.com/@shira_sarid" target="_blank" rel="me noopener">YouTube</a>
+                <a href="https://shirasarid.substack.com/" target="_blank" rel="me noopener">Substack</a>
+                <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="me noopener">Pinterest</a>
+                <a href="https://www.linkedin.com/in/shirasarid" target="_blank" rel="me noopener">LinkedIn</a>
+                <a href="about.html">The story behind ECHO.11</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Simple Footer -->
+    <footer class="simple-footer">
+        <a href="/" class="back-link">Back to ECHO.11</a>
+        <div class="footer-legal">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="accessibility.html">Accessibility</a>
+        </div>
+    </footer>
+
+    <!-- Accessibility Widget -->
+    <div class="a11y-widget">
+        <button class="a11y-toggle" id="a11yToggle" aria-label="Accessibility options" title="Accessibility">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5c-1.5 0-2.5 1-2.5 2.5s1 2.5 2.5 2.5 2.5-1 2.5-2.5-1-2.5-2.5-2.5zM12 12c-3 0-5.5 1.5-6 4h12c-.5-2.5-3-4-6-4zM4.5 16.5h15" />
+            </svg>
+        </button>
+        <div class="a11y-menu" id="a11yMenu">
+            <p class="a11y-title">Accessibility</p>
+            <button class="a11y-btn" data-mode="a11y-large-text">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                Larger Text
+            </button>
+            <button class="a11y-btn" data-mode="a11y-high-contrast">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                High Contrast
+            </button>
+            <button class="a11y-btn" data-mode="a11y-grayscale">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z" /></svg>
+                Grayscale
+            </button>
+            <button class="a11y-btn" data-mode="a11y-highlight-links">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg>
+                Highlight Links
+            </button>
+            <div class="a11y-reset"><button id="a11yReset">Reset All</button></div>
+        </div>
+    </div>
+
+    <script>
+        // Clock
+        function updateClock() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Menu
+        const hamburger = document.getElementById('hamburger');
+        const sideMenu = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        function toggleMenu() {
+            const isOpen = sideMenu.classList.contains('active');
+            hamburger.classList.toggle('active');
+            sideMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', !isOpen);
+            sideMenu.setAttribute('aria-hidden', isOpen);
+            if (isOpen) { sideMenu.setAttribute('inert', ''); } else { sideMenu.removeAttribute('inert'); }
+            document.body.style.overflow = isOpen ? '' : 'hidden';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (sideMenu.classList.contains('active')) toggleMenu();
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sideMenu.classList.contains('active')) toggleMenu();
+        });
+
+        // Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => observer.observe(el));
+
+        window.addEventListener('load', () => {
+            revealElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight) el.classList.add('visible');
+            });
+        });
+
+        // Fallback so off-screen sections aren't left at opacity:0 for crawlers/non-scrolling renders
+        setTimeout(() => revealElements.forEach(el => el.classList.add('visible')), 2500);
+
+        // Custom Cursor Dot
+        const cursorDot = document.querySelector('.cursor-dot');
+        
+        if (cursorDot && window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top = e.clientY + 'px';
+            });
+
+            const interactiveElements = document.querySelectorAll('a, button');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursorDot.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursorDot.classList.remove('hover'));
+            });
+        }
+
+        // Accessibility Widget
+        const a11yToggle = document.getElementById('a11yToggle');
+        const a11yMenu = document.getElementById('a11yMenu');
+        const a11yBtns = document.querySelectorAll('.a11y-btn');
+        const a11yReset = document.getElementById('a11yReset');
+
+        const savedA11y = JSON.parse(localStorage.getItem('a11y') || '{}');
+        Object.keys(savedA11y).forEach(mode => {
+            if (savedA11y[mode]) document.body.classList.add(mode);
+        });
+
+        a11yBtns.forEach(btn => {
+            if (document.body.classList.contains(btn.dataset.mode)) btn.classList.add('active');
+        });
+
+        a11yToggle.addEventListener('click', () => a11yMenu.classList.toggle('active'));
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.a11y-widget')) a11yMenu.classList.remove('active');
+        });
+
+        a11yBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const mode = btn.dataset.mode;
+                document.body.classList.toggle(mode);
+                btn.classList.toggle('active');
+                const current = JSON.parse(localStorage.getItem('a11y') || '{}');
+                current[mode] = document.body.classList.contains(mode);
+                localStorage.setItem('a11y', JSON.stringify(current));
+            });
+        });
+
+        a11yReset.addEventListener('click', () => {
+            a11yBtns.forEach(btn => {
+                document.body.classList.remove(btn.dataset.mode);
+                btn.classList.remove('active');
+            });
+            localStorage.removeItem('a11y');
+        });
+    </script>
+
+    <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
+        <span>We use Google Analytics to understand site usage. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Read the privacy policy</a></span>
+        <div style="display:flex;gap:8px;">
+            <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;">Accept</button>
+            <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:4px;cursor:pointer;">Decline</button>
+        </div>
+    </div>
+    <script>
+        (function(){
+            var consent = localStorage.getItem('echo11_consent');
+            var banner = document.getElementById('cookieConsent');
+            if (consent === 'granted' || consent === 'denied') { banner.style.display = 'none'; return; }
+            document.getElementById('cookieAccept').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'granted');
+                if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+                banner.style.display = 'none';
+            });
+            document.getElementById('cookieDecline').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'denied');
+                banner.style.display = 'none';
+            });
+        })();
+    </script>
+    <script src="assets/js/site-header.js" defer></script>
+    <script src="assets/js/quiet-mode.js" defer></script>
+    <script src="assets/js/micro-interactions.js" defer></script>
+    <script src="assets/js/echo-ripple.js" defer></script>
+    <!-- Vercel Web Analytics — cookieless pageview beacon, served same-origin -->
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
