@@ -1,0 +1,42 @@
+/* ECHO.11 — YouTube facade (single source of truth)
+   A <button class="yt-facade" data-yt="ID"> with a lazy thumbnail and a
+   play disc. Nothing is requested from YouTube until the visitor clicks;
+   assets/js/yt-facade.js then swaps in a youtube-nocookie iframe.
+   .yt-links is the matching row of plain text links under or beside it. */
+
+.yt-facade {
+    position: relative; display: block; width: 100%; aspect-ratio: 16 / 9;
+    margin-top: 1.1rem; padding: 0; border: 1px solid var(--border);
+    background: #070608 center / cover no-repeat; cursor: pointer; overflow: hidden;
+}
+.yt-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.yt-facade::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%);
+}
+.yt-play {
+    position: absolute; left: 50%; top: 50%; z-index: 1;
+    width: 68px; height: 68px; margin: -34px 0 0 -34px; border-radius: 50%;
+    background: rgba(255,255,255,0.92); display: grid; place-items: center;
+    transition: transform .2s ease;
+}
+.yt-play svg { width: 26px; height: 26px; margin-left: 4px; fill: #111; }
+.yt-facade:hover .yt-play, .yt-facade:focus-visible .yt-play { transform: scale(1.06); }
+.yt-facade:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.yt-frame { display: block; width: 100%; aspect-ratio: 16 / 9; margin-top: 1.1rem; border: 0; }
+
+.yt-links { margin-top: 0.9rem; font-size: 0.85rem; }
+.yt-links a { color: var(--text-secondary); }
+.yt-links a:hover { color: var(--text); }
+
+/* A labelled row of links ("Not sleepy yet?", "Longer versions…") */
+.yt-links--row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.25rem; line-height: 1.6; }
+.yt-links-label {
+    flex-basis: 100%; font-family: var(--mono); font-size: 0.68rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-secondary);
+}
+.yt-links--row a { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+    .yt-play { transition: none; }
+}

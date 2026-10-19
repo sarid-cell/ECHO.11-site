@@ -66,6 +66,8 @@
     <link rel="stylesheet" href="/assets/css/session.css">
     <link rel="stylesheet" href="/assets/css/essay.css">
     <link rel="stylesheet" href="/assets/css/band.css">
+    <link rel="stylesheet" href="/assets/css/yt-facade.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/assets/css/yt-facade.css"></noscript>
 
     <script type="application/ld+json">
 {
@@ -112,7 +114,7 @@
             "image": "https://echo11.app/assets/images/10hz.png",
             "inLanguage": "en",
             "datePublished": "2026-09-14",
-            "dateModified": "2026-10-16",
+            "dateModified": "2026-10-20",
             "author": {
                 "@id": "https://echo11.app/#shira-sarid"
             },
@@ -202,6 +204,28 @@
                     "item": "https://echo11.app/bands/alpha.html"
                 }
             ]
+        },
+        {
+            "@type": "VideoObject",
+            "@id": "https://echo11.app/bands/alpha.html#video",
+            "name": "10Hz Binaural Beats for Calm | 11-Minute Alpha Reset (Headphones)",
+            "description": "An 11-minute 10 Hz alpha binaural session (200 Hz left, 210 Hz right) for when your mind won't settle. Stereo headphones required.",
+            "thumbnailUrl": [
+                "https://i.ytimg.com/vi/2d9BfW2142Q/maxresdefault.jpg",
+                "https://i.ytimg.com/vi/2d9BfW2142Q/hqdefault.jpg"
+            ],
+            "uploadDate": "2026-10-04T08:11:20Z",
+            "duration": "PT11M1S",
+            "embedUrl": "https://www.youtube-nocookie.com/embed/2d9BfW2142Q",
+            "contentUrl": "https://www.youtube.com/watch?v=2d9BfW2142Q",
+            "author": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "inLanguage": "en",
+            "isAccessibleForFree": true
         }
     ]
 }
@@ -326,6 +350,15 @@
                     <span class="band-listen-label">Listen &mdash; 10 Hz &middot; The 11-Minute Reset</span>
                     <span class="band-listen-line">Eleven minutes at 10 Hz, in the middle of the alpha band. Eyes closed, stereo headphones.</span>
                 </a>
+                <p>Prefer YouTube? The same 11-minute 10 Hz reset, as a video.</p>
+                <button type="button" class="yt-facade" data-yt="2d9BfW2142Q"
+                    aria-label="Play 10 Hz Binaural Beats for Calm, 11-minute Alpha Reset, headphones (YouTube)">
+                    <picture>
+                        <source type="image/webp" srcset="https://i.ytimg.com/vi_webp/2d9BfW2142Q/maxresdefault.webp">
+                        <img class="yt-thumb" src="https://i.ytimg.com/vi/2d9BfW2142Q/maxresdefault.jpg" alt="" loading="lazy" decoding="async" width="1280" height="720">
+                    </picture>
+                    <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 5v14l11-7-11-7z"/></svg></span>
+                </button>
 
                 <h2>Alpha vs. the other brainwave bands</h2>
                 <table class="band-table">
@@ -469,6 +502,8 @@
             });
         }
     </script>
+    <!-- YouTube facade: below the fold, so load its script after the page, off the LCP path -->
+    <script>addEventListener('load', function () { var s = document.createElement('script'); s.src = '/assets/js/yt-facade.js'; document.body.appendChild(s); });</script>
     <script src="/assets/js/site-header.js" defer></script>
     <script src="/assets/js/quiet-mode.js" defer></script>
     <script src="/assets/js/micro-interactions.js" defer></script>

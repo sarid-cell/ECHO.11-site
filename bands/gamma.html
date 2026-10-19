@@ -66,6 +66,8 @@
     <link rel="stylesheet" href="/assets/css/session.css">
     <link rel="stylesheet" href="/assets/css/essay.css">
     <link rel="stylesheet" href="/assets/css/band.css">
+    <link rel="stylesheet" href="/assets/css/yt-facade.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/assets/css/yt-facade.css"></noscript>
 
     <script type="application/ld+json">
 {
@@ -112,7 +114,7 @@
             "image": "https://echo11.app/assets/images/astro-eyes-open.png",
             "inLanguage": "en",
             "datePublished": "2026-09-14",
-            "dateModified": "2026-10-16",
+            "dateModified": "2026-10-20",
             "author": {
                 "@id": "https://echo11.app/#shira-sarid"
             },
@@ -205,6 +207,28 @@
                     "item": "https://echo11.app/bands/gamma.html"
                 }
             ]
+        },
+        {
+            "@type": "VideoObject",
+            "@id": "https://echo11.app/bands/gamma.html#video",
+            "name": "Deep Focus — 40Hz Gamma Binaural Beats for Studying (2 Hours)",
+            "description": "2 hours of 40 Hz gamma binaural beats (200/240 Hz) over a soft brown-noise bed, for studying and deep work. No music, no voice.",
+            "thumbnailUrl": [
+                "https://i.ytimg.com/vi/1Q91omkK7Io/maxresdefault.jpg",
+                "https://i.ytimg.com/vi/1Q91omkK7Io/hqdefault.jpg"
+            ],
+            "uploadDate": "2026-10-19T07:17:18Z",
+            "duration": "PT2H2S",
+            "embedUrl": "https://www.youtube-nocookie.com/embed/1Q91omkK7Io",
+            "contentUrl": "https://www.youtube.com/watch?v=1Q91omkK7Io",
+            "author": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "inLanguage": "en",
+            "isAccessibleForFree": true
         }
     ]
 }
@@ -327,6 +351,15 @@
                     <span class="band-listen-label">Listen &mdash; 40 Hz &middot; The 11-Minute Focus</span>
                     <span class="band-listen-line">Eleven minutes at 40 Hz, low in the gamma band. Eyes open, loopable, stereo headphones.</span>
                 </a>
+                <p>Working for longer? Deep Focus is a 2-hour 40 Hz version on YouTube.</p>
+                <button type="button" class="yt-facade" data-yt="1Q91omkK7Io"
+                    aria-label="Play Deep Focus, 40 Hz gamma binaural beats for studying, 2 hours (YouTube)">
+                    <picture>
+                        <source type="image/webp" srcset="https://i.ytimg.com/vi_webp/1Q91omkK7Io/maxresdefault.webp">
+                        <img class="yt-thumb" src="https://i.ytimg.com/vi/1Q91omkK7Io/maxresdefault.jpg" alt="" loading="lazy" decoding="async" width="1280" height="720">
+                    </picture>
+                    <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 5v14l11-7-11-7z"/></svg></span>
+                </button>
 
                 <h2>Gamma vs. the other brainwave bands</h2>
                 <table class="band-table">
@@ -472,6 +505,8 @@
             });
         }
     </script>
+    <!-- YouTube facade: below the fold, so load its script after the page, off the LCP path -->
+    <script>addEventListener('load', function () { var s = document.createElement('script'); s.src = '/assets/js/yt-facade.js'; document.body.appendChild(s); });</script>
     <script src="/assets/js/site-header.js" defer></script>
     <script src="/assets/js/quiet-mode.js" defer></script>
     <script src="/assets/js/micro-interactions.js" defer></script>
