@@ -32,11 +32,16 @@
 /* A labelled row of links ("Not sleepy yet?", "Longer versions…") */
 .yt-links--row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.25rem; line-height: 1.6; }
 .yt-links-label {
-    flex-basis: 100%; font-family: var(--mono); font-size: 0.68rem;
+    flex-basis: 100%; font-family: var(--mono, 'IBM Plex Mono', monospace); font-size: 0.68rem;
     letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-secondary);
 }
-.yt-links--row a { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 4px; }
+.yt-links--row a { color: var(--text); text-decoration-color: var(--accent, currentColor); text-underline-offset: 4px; }
 
 @media (prefers-reduced-motion: reduce) {
     .yt-play { transition: none; }
 }
+
+/* "Want it longer?" block on a session page: a short lede, the facade, a link row */
+.yt-long { margin-bottom: 4.5rem; }
+.yt-long-lede { margin: 0 0 1.1rem; max-width: 40rem; font-size: 0.98rem; line-height: 1.8; color: var(--text-secondary); font-weight: 300; }
+.yt-long .yt-facade { margin-top: 0; }
