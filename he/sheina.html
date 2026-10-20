@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="supports-dark">
+<head>
+    <meta charset="UTF-8">
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { analytics_storage: localStorage.getItem('echo11_consent') === 'granted' ? 'granted' : 'denied' });
+      gtag('js', new Date());
+      gtag('config', 'G-TP9YRD6TN8');
+      (function () {
+        var loaded = false;
+        function loadGtag() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-TP9YRD6TN8';
+          document.head.appendChild(s);
+        }
+        ['scroll', 'click', 'keydown', 'touchstart', 'mousemove'].forEach(function (ev) {
+          window.addEventListener(ev, loadGtag, { once: true, passive: true });
+        });
+        window.addEventListener('load', function () { setTimeout(loadGtag, 3000); });
+      })();
+    </script>
+    <!-- Quiet Mode bootstrap: resolve theme before first paint (no FOUC). -->
+    <script>
+    (function(){try{var t=localStorage.getItem('echo11_theme');if(t!=='dark'&&t!=='light'){var h=new Date().getHours();t=(h>=20||h<7)||matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0e1013" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/images/favicon-192.png" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/assets/images/favicon-180.png">
+    <title>צלילים לשינה — רעש חום להירדם, 30 דקות בלי אוזניות | ECHO.11</title>
+    <meta name="description" content="סשן שינה חינמי של 30 דקות: רעש חום רך וצליל נמוך שעולים ושוקטים בקצב של שש נשימות בדקה, ונגמרים בשקט מעצמם. לרמקול ליד המיטה, בלי אוזניות ובלי הרשמה.">
+    <meta name="keywords" content="צלילים לשינה, רעש חום לשינה, רעש חום, צלילים להירדם, מוזיקה להירדם, רעש לבן לשינה, איך להירדם מהר, גלי דלתא">
+    <meta name="author" content="Shira Sarid">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://echo11.app/he/sheina.html" />
+
+    <!-- Reciprocal hreflang: this page, its English twin, and the default -->
+    <link rel="alternate" hreflang="he" href="https://echo11.app/he/sheina.html" />
+    <link rel="alternate" hreflang="en" href="https://echo11.app/sleep.html" />
+    <link rel="alternate" hreflang="x-default" href="https://echo11.app/sleep.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="צלילים לשינה — רעש חום להירדם, 30 דקות בלי אוזניות | ECHO.11">
+    <meta property="og:description" content="30 דקות של רעש חום רך שנגמרות בשקט מעצמן. לרמקול ליד המיטה, חינם, ישר בדפדפן.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://echo11.app/he/sheina.html">
+    <meta property="og:site_name" content="ECHO.11">
+    <meta property="og:locale" content="he_IL">
+    <meta property="og:image" content="https://echo11.app/assets/images/sleep-og.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="צלילים לשינה — רעש חום להירדם, 30 דקות בלי אוזניות | ECHO.11">
+    <meta name="twitter:description" content="30 דקות של רעש חום רך שנגמרות בשקט מעצמן. לרמקול ליד המיטה, חינם, ישר בדפדפן.">
+    <meta name="twitter:image" content="https://echo11.app/assets/images/sleep-og.jpg">
+
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/outfit-variable-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/fonts.css">
+    <link rel="stylesheet" href="/assets/css/view-transitions.css">
+    <link rel="stylesheet" href="/assets/css/quiet-mode.css">
+    <link rel="stylesheet" href="/assets/css/micro-interactions.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/assets/css/micro-interactions.css"></noscript>
+    <link rel="stylesheet" href="/assets/css/session.css">
+    <link rel="stylesheet" href="/assets/css/yt-facade.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/assets/css/yt-facade.css"></noscript>
+    <link rel="stylesheet" href="/assets/css/rtl.css">
+    <style>
+        .hero-plate picture { display: block; width: 100%; height: 100%; }
+        .hero-plate img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; filter: grayscale(100%); }
+        .player-card::before {
+            content: ''; position: absolute; z-index: -1;
+            top: 0; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: min(100%, 52rem);
+            background: linear-gradient(to right,
+                rgba(250,250,250,0) 0%, rgba(250,250,250,0.55) 14%,
+                rgba(250,250,250,0.55) 86%, rgba(250,250,250,0) 100%);
+        }
+        html[data-theme="dark"] .player-card::before {
+            background: linear-gradient(to right,
+                rgba(14,16,19,0) 0%, rgba(14,16,19,0.55) 14%,
+                rgba(14,16,19,0.55) 86%, rgba(14,16,19,0) 100%);
+        }
+        html[data-theme="dark"] .hero-plate img { filter: grayscale(100%) brightness(0.5); }
+        .hero .freq-eyebrow, .hero .freq-subtitle, .hero .timer-time { color: #262626; }
+        .hero .state-text, .hero .tone-note { color: #3f3f3f; }
+        html[data-theme="dark"] .hero .freq-eyebrow,
+        html[data-theme="dark"] .hero .freq-subtitle,
+        html[data-theme="dark"] .hero .timer-time { color: rgba(255,255,255,0.92); }
+        html[data-theme="dark"] .hero .state-text,
+        html[data-theme="dark"] .hero .tone-note { color: rgba(255,255,255,0.82); }
+
+        /* How to use: three numbered steps */
+        .he-steps { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .he-steps li { background: var(--card, var(--bg)); padding: 1.5rem 1.4rem 1.6rem; text-align: right; }
+        .he-steps .step-n { display: block; font-family: var(--mono); font-size: 1.6rem; line-height: 1; margin-bottom: 0.9rem; color: var(--text-secondary); }
+        .he-steps strong { display: block; font-size: 1rem; line-height: 1.45; margin-bottom: 0.45rem; scroll-margin-top: 6rem; }
+        .he-steps p { margin: 0; font-size: 0.92rem; line-height: 1.7; color: var(--text-secondary); font-weight: 300; }
+        .breathe-first { margin-bottom: 4rem; }
+        .full-night { margin: 4rem 0; }
+        .full-night p { margin: 0 0 0.5rem; font-size: 1rem; line-height: 1.8; color: var(--text-secondary); font-weight: 300; text-align: right; }
+        .refs-he { margin: 1.25rem 0 0; padding: 0 1.25rem 0 0; font-size: 0.8rem; line-height: 1.7; color: var(--text-secondary); direction: ltr; text-align: left; }
+        .refs-he a { display: inline; margin: 0; font-size: inherit; color: inherit; word-break: break-word; }
+        .callout p + p { margin-top: 0.9rem; }
+        .info-a a { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 4px; }
+        .full-night .yt-facade, .full-night .yt-frame { max-width: 46rem; }
+        .refs-he { margin-top: 1.6rem; padding-top: 1.2rem; border-top: 1px solid var(--border); }
+        @media (max-width: 768px) { .he-steps { grid-template-columns: 1fr; } }
+    </style>
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Person",
+            "@id": "https://echo11.app/#shira-sarid",
+            "name": "Shira Sarid",
+            "url": "https://echo11.app/",
+            "email": "shirasarid@gmail.com"
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://echo11.app/#website",
+            "name": "ECHO.11",
+            "url": "https://echo11.app/",
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "https://echo11.app/he/sheina.html#webpage",
+            "url": "https://echo11.app/he/sheina.html",
+            "name": "צלילים לשינה — רעש חום להירדם, 30 דקות בלי אוזניות | ECHO.11",
+            "description": "סשן שינה חינמי של 30 דקות: רעש חום רך וצליל נמוך שעולים ושוקטים בקצב של שש נשימות בדקה, ונגמרים בשקט מעצמם. לרמקול ליד המיטה, בלי אוזניות ובלי הרשמה.",
+            "inLanguage": "he",
+            "isPartOf": {
+                "@id": "https://echo11.app/#website"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "author": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "datePublished": "2026-10-20",
+            "dateModified": "2026-10-20",
+            "mainEntity": {
+                "@id": "https://echo11.app/he/sheina.html#audio"
+            },
+            "speakable": {
+                "@type": "SpeakableSpecification",
+                "cssSelector": [
+                    "#not-binaural-he"
+                ]
+            }
+        },
+        {
+            "@type": "AudioObject",
+            "@id": "https://echo11.app/he/sheina.html#audio",
+            "name": "דלתא — 30 דקות עד שקט",
+            "description": "סשן שינה של 30 דקות: רעש חום מסונן וצליל רך (110, 165 ו-220 הרץ) שעולים ושוקטים במחזור של 10 שניות, שש נשימות בדקה. הצליל נסוג אחרי 14 דקות והכול דועך לשקט עד הדקה ה-30. מונו — שתי האוזניים שומעות אותו צליל, כך שזה לא ביט בינאורלי ואפשר להשמיע ברמקול.",
+            "contentUrl": "https://echo11.app/assets/audio/sleep-30.m4a",
+            "encodingFormat": "audio/mp4",
+            "duration": "PT30M",
+            "inLanguage": "he",
+            "isAccessibleForFree": true,
+            "creator": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "url": "https://echo11.app/he/sheina.html",
+            "thumbnailUrl": "https://echo11.app/assets/images/sleep-og.jpg"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://echo11.app/he/sheina.html#faq",
+            "inLanguage": "he",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "האם צריך אוזניות?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "לא. שתי האוזניים שומעות בדיוק אותו צליל, כך שזה לא ביט בינאורלי. הסשן בנוי לרמקול של הטלפון על השידה, בעוצמה נמוכה."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "מה ההבדל בין רעש חום לרעש לבן?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "ברעש לבן האנרגיה מתפזרת שווה על כל התדרים, ולכן הוא נשמע חד ושורק. ברעש חום רוב האנרגיה בתדרים הנמוכים, והוא נשמע עמוק ורך יותר, כמו גשם כבד או ים רחוק."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "האם צלילים באמת עוזרים להירדם?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "מוזיקה משפרת את איכות השינה כפי שאנשים מדרגים אותה בעצמם (סקירת Cochrane מ-2022, 13 ניסויים). הראיות לכך שרעש קבוע לבדו משפר שינה חלשות מאוד. לכן הרעש כאן נשאר נמוך ונכבה מעצמו אחרי 30 דקות."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "למה קוראים לזה דלתא?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "דלתא (0.5–4 הרץ) הוא הקצב של המוח עצמו בשלב העמוק ביותר של השינה. השם מסמן לאן הולכים, לא תדר שמושמע באוזן."
+                    }
+                }
+            ]
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://echo11.app/he/sheina.html#breadcrumbs",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "ECHO.11",
+                    "item": "https://echo11.app/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "הסשנים",
+                    "item": "https://echo11.app/frequencies.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "צלילים לשינה"
+                }
+            ]
+        },
+        {
+            "@type": "VideoObject",
+            "@id": "https://echo11.app/he/sheina.html#video",
+            "name": "Brown Noise for Sleep, 10 Hours, Dark Screen",
+            "description": "10 hours of smooth, deep brown noise with a dark screen, so nothing lights up your room.",
+            "thumbnailUrl": [
+                "https://i.ytimg.com/vi/ta6u4jEJdp8/maxresdefault.jpg",
+                "https://i.ytimg.com/vi/ta6u4jEJdp8/hqdefault.jpg"
+            ],
+            "uploadDate": "2026-10-17T07:30:34Z",
+            "duration": "PT10H1S",
+            "embedUrl": "https://www.youtube-nocookie.com/embed/ta6u4jEJdp8",
+            "contentUrl": "https://www.youtube.com/watch?v=ta6u4jEJdp8",
+            "author": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "isAccessibleForFree": true
+        }
+    ]
+}
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">דילוג לתוכן הראשי</a>
+    <div class="cursor-dot"></div>
+
+    <header>
+        <div class="header-inner">
+            <a href="/" class="logo">ECHO.11</a>
+            <div class="header-right">
+                <button class="hamburger" id="hamburger" aria-label="פתיחת התפריט" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
+        <nav>
+            <ul class="menu-list">
+                <li><a href="/he/teder-10hz.html" class="menu-link">10 הרץ · הרגעה</a></li>
+                <li><a href="/he/teder-40hz.html" class="menu-link">40 הרץ · ריכוז</a></li>
+                <li><a href="/he/sheina.html" class="menu-link current">שינה · דלתא</a></li>
+                <li><a href="/frequencies.html" class="menu-link">The Sessions (English)</a></li>
+                <li><a href="/book.html" class="menu-link">The Book</a></li>
+                <li><a href="/about.html" class="menu-link">About Echo.11</a></li>
+            </ul>
+            <div class="menu-app">
+                <span class="menu-app-title">האפליקציה
+                    <span class="menu-app-badge">בקרוב</span>
+                </span>
+                <span class="menu-app-desc">שני הסשנים, בכיס שלך.</span>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- סיום הסשן — מוצג כשנגמרות 30 הדקות -->
+    <div class="modal-overlay" id="completeModal" role="dialog" aria-modal="true" aria-labelledby="completeTitle">
+        <div class="modal-card">
+            <div class="modal-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
+                </svg>
+            </div>
+            <div class="modal-title" id="completeTitle">עד השקט</div>
+            <div class="modal-text">שלושים דקות, והחדר שקט עכשיו. אם את עדיין ערה, זה בסדר — הפכי את המסך ותני לשקט לעשות את השאר.</div>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-primary" id="completeClose">סגירה</button>
+            </div>
+            <div class="modal-meta" id="completeMeta"></div>
+        </div>
+    </div>
+
+    <main id="main-content">
+        <!-- ── נגן ── -->
+        <section class="hero">
+            <div class="hero-video hero-plate">
+                <picture>
+                    <source srcset="/assets/images/astro-sleep-480.webp 480w, /assets/images/astro-sleep-960.webp 960w, /assets/images/astro.webp 1456w" sizes="100vw" type="image/webp">
+                    <img src="/assets/images/astro.png" alt="דיוקן תקריב של אסטרונאוטית בעיניים עצומות, במנוחה" width="1456" height="816" fetchpriority="high">
+                </picture>
+            </div>
+            <div class="hero-overlay"></div>
+
+            <div class="player-card">
+                <div class="freq-eyebrow">שינה · דלתא · בלי אוזניות</div>
+                <h1 class="freq-h1">
+                    <span class="freq-title">Delta</span>
+                    <span class="freq-subtitle">צלילים לשינה · 30 דקות עד שקט</span>
+                </h1>
+
+                <div class="timer-wrap">
+                    <div class="breath-halo" aria-hidden="true"></div>
+                    <canvas class="wave-canvas" id="waveCanvas" aria-hidden="true"></canvas>
+                    <svg class="timer-svg" width="200" height="200" viewBox="0 0 200 200">
+                        <circle class="ring-bg" cx="100" cy="100" r="90"/>
+                        <circle class="ring-prog" cx="100" cy="100" r="90" id="timerRing"/>
+                    </svg>
+                    <div class="timer-inner">
+                        <button class="play-btn" id="playBtn" aria-label="הפעלת סשן השינה">
+                            <svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#playBtnIconGradient)"><defs><linearGradient id="playBtnIconGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#eafdff"/><stop offset="100%" stop-color="currentColor"/></linearGradient></defs><path d="M6.5 5v14l11-7-11-7z"/></svg>
+                            <svg id="iconPause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#playBtnIconGradient)" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        </button>
+                        <div class="timer-time" id="timerDisplay" aria-live="polite">30:00</div>
+                    </div>
+                </div>
+
+                <div class="state-text" id="stateText">רמקול, עוצמה נמוכה · מכבים את האור · לוחצים נגן</div>
+
+                <p class="tone-note">רעש חום רך וצליל נמוך שעולים ושוקטים כמו נשימה איטית — ואז נעלמים לשקט מעצמם.</p>
+
+                <div class="breath-guide" aria-hidden="true">
+                    <span class="breath-in">שאיפה</span>
+                    <span class="breath-out">נשיפה</span>
+                </div>
+
+                <div class="meta-row">
+                    <div class="sessions-row" hidden>
+                        <div class="sessions-dot"></div>
+                        <div class="sessions-text">
+                            <span class="sessions-num" id="sessionsNum">—</span> סשנים היום
+                        </div>
+                    </div>
+                    <div class="phones-note">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"/>
+                        </svg>
+                        בלי אוזניות
+                    </div>
+                </div>
+
+                <div class="player-crosslink">
+                    <a href="/he/teder-10hz.html">עדיין דרוכה מכדי לשכב? ← 10 הרץ להרגעה</a>
+                </div>
+
+                <div class="scroll-cue">
+                    <span>גללי להסבר</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── הסבר ── -->
+        <section class="science">
+            <div class="science-inner">
+
+                <h2 class="section-label reveal">איך זה עובד</h2>
+
+                <div class="info-grid reveal">
+                    <div class="info-block">
+                        <h3 class="info-q">מה תשמעי</h3>
+                        <div class="info-a">שלוש שכבות שנעות לכיוון אחד — שקט. <strong>רעש חום</strong> נמוך ורך, כמו גלים רחוקים, שמכסה את הרעשים הקטנים של החדר. מעליו צליל רך (<span class="ltr">110, 165, 220 Hz</span>) שעולה ושוקט כל עשר שניות — שש פעמים בדקה, משהו לנשום איתו. מהדקה ה-14 הצליל נסוג, מהדקה ה-22 הכול דועך, ובדקה ה-30 יש שקט. אין מה לכבות.</div>
+                    </div>
+                    <div class="info-block">
+                        <h3 class="info-q">האם זה ביט בינאורלי?</h3>
+                        <div class="info-a" id="not-binaural-he"><strong>לא.</strong> שתי האוזניים שומעות בדיוק אותו צליל. ביט בינאורלי נוצר רק כשכל אוזן מקבלת צליל אחר, כלומר רק עם אוזניות — ואוזניות במיטה זזות ולוחצות בכל פעם שמתהפכים. הסשן הזה בנוי לרמקול של הטלפון על השידה.</div>
+                    </div>
+                    <div class="info-block">
+                        <h3 class="info-q">רעש חום או רעש לבן?</h3>
+                        <div class="info-a">ברעש לבן האנרגיה מתפזרת שווה על כל התדרים, ולכן הוא נשמע חד ו"שורק". ברעש חום רוב האנרגיה בתדרים הנמוכים, והוא נשמע <strong>עמוק ורך יותר</strong>, כמו גשם כבד או ים רחוק. הרעש כאן מסונן עוד יותר, מתחת ל-<span class="ltr">650 Hz</span>. <a href="https://youtube.com/shorts/MasPgGS9g3A" target="_blank" rel="noopener">לשמוע את ההבדל ביוטיוב</a>.</div>
+                    </div>
+                    <div class="info-block">
+                        <h3 class="info-q">למה שש נשימות בדקה</h3>
+                        <div class="info-a">זה הקצב שבו משתמשים באימון ביופידבק של שונות קצב הלב, שבו התנודות בקצב הלב הן הגדולות ביותר (<strong>Lehrer &amp; Gevirtz, 2014</strong>). במחקר קטן אחד, 20 דקות של נשימה בקצב הזה לפני השינה קיצרו את זמן ההירדמות אצל 14 אנשים עם נדודי שינה (<strong>Tsai et al., 2015</strong>). מבטיח, לא מוכח — ואין חובה לעקוב. הגל שם אם רוצים משהו לנשום איתו.</div>
+                    </div>
+                    <div class="info-block">
+                        <h3 class="info-q">למה קוראים לזה דלתא</h3>
+                        <div class="info-a">דלתא (<span class="ltr">0.5–4 Hz</span>) הוא הקצב של המוח עצמו בשלב העמוק ביותר של השינה. השם מסמן לאן הולכים — לא תדר שמושמע לך באוזן. <a href="/bands/delta.html">מה הם גלי דלתא</a> (באנגלית).</div>
+                    </div>
+                    <div class="info-block">
+                        <h3 class="info-q">מה אמורים להרגיש</h3>
+                        <div class="info-a">התגובה אישית ומשתנה. מה שמדווח הכי הרבה:
+                            <div class="feel-tags">
+                                <span class="feel-tag">כבדות</span>
+                                <span class="feel-tag">נשימה שמאטה</span>
+                                <span class="feel-tag">מחשבות שמרפות</span>
+                                <span class="feel-tag">לא לשמוע את הסוף</span>
+                                <span class="feel-tag">כלום (וזה נורמלי)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="section-label reveal" id="how-to-use">איך משתמשים</h2>
+                <ol class="he-steps reveal">
+                    <li>
+                        <span class="step-n" aria-hidden="true">1</span>
+                        <strong id="step1">טלפון על השידה, עוצמה נמוכה</strong>
+                        <p>רק מעט מעל הרעש של החדר. בלי אוזניות.</p>
+                    </li>
+                    <li>
+                        <span class="step-n" aria-hidden="true">2</span>
+                        <strong id="step2">מכבים את האור, לוחצים נגן, הופכים את המסך</strong>
+                        <p>ברוב הטלפונים הצליל ממשיך גם כשהמסך נעול.</p>
+                    </li>
+                    <li>
+                        <span class="step-n" aria-hidden="true">3</span>
+                        <strong id="step3">נושמים עם הגל כל עוד את ערה</strong>
+                        <p>כשאת נסחפת, מפסיקים לעקוב. אחרי 30 דקות מגיע שקט — אין מה לכבות.</p>
+                    </li>
+                </ol>
+                <div class="yt-links yt-links--row breathe-first">
+                    <span class="yt-links-label">עוד לא עייפה? קודם לנשום · סרטונים קצרים ביוטיוב</span>
+                    <a href="https://youtube.com/shorts/aAknU4BU-TM" target="_blank" rel="noopener">נשימת 4-7-8, ‏21 שניות</a>
+                    <a href="https://youtube.com/shorts/dMsC4CVTBho" target="_blank" rel="noopener">הלב דוהר? נשיפה ארוכה, 32 שניות</a>
+                    <a href="https://youtube.com/shorts/MasPgGS9g3A" target="_blank" rel="noopener">רעש לבן מול רעש חום</a>
+                </div>
+
+                <div class="callout reveal" id="research">
+                    <span class="callout-tag">מה המחקר על צלילים ושינה באמת אומר</span>
+                    <p class="research-headline">לא כדור שינה. מתג עמעום.</p>
+                    <p><strong>מוזיקה עוזרת להרגיש שישנת טוב יותר.</strong> סקירת Cochrane מ-2022 של 13 ניסויים (1,007 מבוגרים עם נדודי שינה) מצאה שהאזנה למוזיקה משפרת את איכות השינה כפי שאנשים מדרגים אותה בעצמם. במדידות אובייקטיביות היא לא קיצרה בבירור את זמן ההירדמות.</p>
+                    <p><strong>רעש קבוע הוא החוליה החלשה.</strong> סקירה שיטתית של 38 מחקרים דירגה את הראיות לכך שרעש רציף משפר שינה כאיכות נמוכה מאוד, והזהירה שהוא עלול גם להפריע. לכן הרעש כאן נשאר נמוך ונכבה מעצמו.</p>
+                    <p><strong>ביטים בינאורליים בתדר דלתא: מחקר אחד קטן.</strong> ביט של <span class="ltr">3 Hz</span> שהושמע בזמן שינה האריך את השינה העמוקה אצל 8 אנשים. דק מדי כדי לבנות עליו שינה — וזה היה דורש אוזניות.</p>
+                    <ol class="refs-he">
+                        <li>Jespersen KV et al. Listening to music for insomnia in adults. Cochrane 2022. <a href="https://doi.org/10.1002/14651858.CD010459.pub3" target="_blank" rel="noopener noreferrer">doi.org/10.1002/14651858.CD010459.pub3</a></li>
+                        <li>Riedy SM et al. Noise as a sleep aid: a systematic review. Sleep Med Rev 2021. <a href="https://doi.org/10.1016/j.smrv.2020.101385" target="_blank" rel="noopener noreferrer">doi.org/10.1016/j.smrv.2020.101385</a></li>
+                        <li>Jirakittayakorn N, Wongsawat Y. A 3-Hz binaural beat during sleep. Front Hum Neurosci 2018. <a href="https://doi.org/10.3389/fnhum.2018.00387" target="_blank" rel="noopener noreferrer">doi.org/10.3389/fnhum.2018.00387</a></li>
+                        <li>Lehrer PM, Gevirtz R. Heart rate variability biofeedback. Front Psychol 2014. <a href="https://doi.org/10.3389/fpsyg.2014.00756" target="_blank" rel="noopener noreferrer">doi.org/10.3389/fpsyg.2014.00756</a></li>
+                        <li>Tsai HJ et al. Efficacy of paced breathing for insomnia. Psychophysiology 2015. <a href="https://doi.org/10.1111/psyp.12333" target="_blank" rel="noopener noreferrer">doi.org/10.1111/psyp.12333</a></li>
+                    </ol>
+                </div>
+
+                <!-- כל הלילה: הגרסה של 10 שעות ביוטיוב -->
+                <div class="full-night reveal" id="full-night">
+                    <h2 class="section-label">כל הלילה</h2>
+                    <p>הסשן הזה נגמר בשקט אחרי 30 דקות בכוונה. אם רעשים מעירים אותך מאוחר יותר בלילה, הגרסה של 10 שעות ממשיכה עם רעש חום חלק ויציב עד הבוקר, על מסך כהה.</p>
+                    <button type="button" class="yt-facade" data-yt="ta6u4jEJdp8"
+                        aria-label="הפעלת רעש חום לשינה, 10 שעות, מסך כהה (YouTube)">
+                        <picture>
+                            <source type="image/webp" srcset="https://i.ytimg.com/vi_webp/ta6u4jEJdp8/maxresdefault.webp">
+                            <img class="yt-thumb" src="https://i.ytimg.com/vi/ta6u4jEJdp8/maxresdefault.jpg" alt="" loading="lazy" decoding="async" width="1280" height="720">
+                        </picture>
+                        <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 5v14l11-7-11-7z"/></svg></span>
+                    </button>
+                    <div class="yt-links yt-links--row">
+                        <a href="https://youtu.be/ta6u4jEJdp8" target="_blank" rel="noopener noreferrer">פתיחה ביוטיוב</a>
+                        <a href="https://www.youtube.com/@shira_sarid?sub_confirmation=1" target="_blank" rel="noopener noreferrer">הרשמה לערוץ לסשנים חדשים</a>
+                    </div>
+                </div>
+
+                <div class="disclaimer reveal" id="disclaimer">
+                    <span class="callout-tag">הבהרה מלאה</span>
+                    <p>ECHO.11 הוא כלי לטיפוח עצמי, לא מכשיר רפואי, ואין כאן ייעוץ רפואי. זה לא שירות חירום: אם את בסכנה או חושבת לפגוע בעצמך, פני מיד למספר החירום המקומי או לקו סיוע.</p>
+                    <p>הסשן הזה אינו אבחנה, אינו טיפול, ואינו תחליף לליווי של רופא או מומחה שינה. אם קשה לך להירדם או להישאר ישנה במשך שבועות, דברי עם רופא: הטיפול הראשון שמומלץ לנדודי שינה כרוניים הוא טיפול מובנה שנקרא CBT-I, לא צליל. נחירות חזקות, השתנקות בלילה או ישנוניות כבדה במשך היום הן גם סיבה לבדיקה.</p>
+                    <p>התגובה שונה מאדם לאדם, ויש אנשים שלא מרגישים דבר. זו תוצאה נורמלית, לא כישלון שלך.</p>
+                    <p>שמרי על עוצמה נמוכה, והניחי את הטלפון במרחק יד ולא מתחת לכרית. אין להשתמש בזמן נהיגה. אם הצליל דווקא משאיר אותך ערה, כבי אותו — שקט הוא דרך טובה לגמרי להירדם.</p>
+                    <p>המחקר המתואר בעמוד הזה מתאר מה נצפה במחקרים באופן כללי — לא מה יקרה לך, ואין כאן טענה למספרי יעילות של ההקלטה הספציפית הזאת.</p>
+                </div>
+
+                <div class="next-step reveal">
+                    <span class="next-step-tag">להמשיך מכאן</span>
+                    <p>עדיין דרוכה מכדי לשכב? <a href="/he/teder-10hz.html">11 דקות של 10 הרץ להרגעה</a>, עם אוזניות ועיניים עצומות — ואז לעבור לסשן הזה למיטה.</p>
+                    <p>הסשן הזה <a href="/sleep.html" lang="en" hreflang="en">באנגלית</a>, עם המחקר המלא ורשימת המקורות.</p>
+                    <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">לעקוב אחרי ‎@shira.sarid ←</a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">ECHO.11</div>
+            <div class="footer-contact">
+                <p class="footer-h">נשמור על קשר בתוך הרעש</p>
+                <a href="mailto:shirasarid@gmail.com">shirasarid@gmail.com</a>
+            </div>
+            <div class="footer-col">
+                <p class="footer-h">ערוצים</p>
+                <a href="https://linkedin.com/in/shirasarid" target="_blank" rel="noopener noreferrer">Linkedin</a>
+                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.pinterest.com/shirasaridAI/" target="_blank" rel="noopener noreferrer">Pinterest</a>
+                <a href="https://www.youtube.com/@shira_sarid" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://podcasts.apple.com/us/podcast/ctrl-human-is-a-podcast-created-by-shira-sarid/id1812866120" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
+            </div>
+            <div class="footer-col">
+                <p class="footer-h">עוד בעמוד</p>
+                <a href="/he/teder-10hz.html">תדר 10 הרץ להרגעה</a>
+                <a href="/he/teder-40hz.html">תדר 40 הרץ לריכוז</a>
+                <a href="/sleep.html">The 30-Minute Descent (English)</a>
+                <a href="#disclaimer">ההבהרה המלאה</a>
+            </div>
+        </div>
+        <div class="footer-legal">
+            <p>© 2026 ECHO.11 by Shira Sarid. All rights reserved.</p>
+            <div class="footer-legal-links">
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/accessibility.html">Accessibility</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="הסכמה לעוגיות">
+        <span>אנחנו משתמשים ב-Google Analytics כדי להבין איך משתמשים באתר. <a href="/privacy.html" style="color:#fff;text-decoration:underline;">קראי את מדיניות הפרטיות</a></span>
+        <div style="display:flex;gap:8px;">
+            <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;">אישור</button>
+            <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:4px;cursor:pointer;">לא תודה</button>
+        </div>
+    </div>
+    <script>
+        (function(){
+            var consent = localStorage.getItem('echo11_consent');
+            var banner = document.getElementById('cookieConsent');
+            if (consent === 'granted' || consent === 'denied') { banner.style.display = 'none'; return; }
+            document.getElementById('cookieAccept').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'granted');
+                if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+                banner.style.display = 'none';
+            });
+            document.getElementById('cookieDecline').addEventListener('click', function(){
+                localStorage.setItem('echo11_consent', 'denied');
+                banner.style.display = 'none';
+            });
+        })();
+    </script>
+
+    <!-- The same engine and recording as sleep.html; only the copy is translated. -->
+    <script>
+        window.ECHO_SESSION = {
+            id: "sleep-he",
+            label: "דלתא — 30 דקות עד שקט",
+            band: "Delta · Sleep",
+            beatHz: null,
+            durationMin: 30,
+            loop: false,
+            ogImage: "/assets/images/sleep-og.jpg",
+            audioSrc: "/assets/audio/sleep-30.m4a",
+            headphones: false,
+            progressMinutes: [1, 5, 10, 20, 29],
+            strings: {
+                play:   "הפעלת סשן השינה",
+                pause:  "השהיית סשן השינה",
+                active: "נושמים עם הגל · ואז משחררים",
+                paused: "מושהה — לוחצים נגן כדי להמשיך",
+                complete: "הסשן הסתיים.",
+                cycles: function (n) { return n + " מחזורים רצופים"; },
+                sessionsToday: function (n) { return n + " סשנים היום"; }
+            }
+        };
+    </script>
+    <script src="/assets/js/session.js" defer></script>
+    <!-- YouTube facade: below the fold, so load its script after the page, off the LCP path -->
+    <script>addEventListener('load', function () { var s = document.createElement('script'); s.src = '/assets/js/yt-facade.js'; document.body.appendChild(s); });</script>
+    <script src="/assets/js/site-header.js" defer></script>
+    <script src="/assets/js/quiet-mode.js" defer></script>
+    <script src="/assets/js/micro-interactions.js" defer></script>
+    <script src="/assets/js/echo-ripple.js" defer></script>
+    <script src="/assets/js/a11y-widget.js" defer></script>
+    <!-- Vercel Web Analytics — cookieless pageview beacon, served same-origin -->
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

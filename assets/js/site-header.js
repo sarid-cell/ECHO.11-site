@@ -16,7 +16,7 @@
     { href: '/frequencies.html',    label: 'The Sessions', children: [
         { href: '/frequency.html',  label: '10 Hz · Calm',  he: '/he/teder-10hz.html' },
         { href: '/40hz.html',       label: '40 Hz · Focus', he: '/he/teder-40hz.html' },
-        { href: '/sleep.html',      label: 'Delta · Sleep' }
+        { href: '/sleep.html',      label: 'Delta · Sleep', he: '/he/sheina.html' }
       ] },
     { href: '/book.html',           label: 'The Book' },
     { href: '/index.html#insights', label: 'Field Notes' },
@@ -25,12 +25,12 @@
   ];
 
   /* The Hebrew session pages run the same drawer, in Hebrew. They have
-     no Hebrew hub or essays yet, so the two sessions lead and the rest
+     no Hebrew hub or essays yet, so the three sessions lead and the rest
      of the menu points back at the English site. */
   var NAV_HE = [
     { href: '/he/teder-10hz.html', label: '10 הרץ · הרגעה' },
     { href: '/he/teder-40hz.html', label: '40 הרץ · ריכוז' },
-    { href: '/sleep.html',         label: 'שינה · Delta (English)' },
+    { href: '/he/sheina.html',    label: 'שינה · דלתא' },
     { href: '/frequencies.html',   label: 'The Sessions (English)' },
     { href: '/book.html',          label: 'The Book' },
     { href: '/about.html',         label: 'About Echo.11' }
@@ -60,7 +60,9 @@
     '/frequency':        { href: '/he/teder-10hz.html', label: 'עברית',   lang: 'he' },
     '/40hz':             { href: '/he/teder-40hz.html', label: 'עברית',   lang: 'he' },
     '/he/teder-10hz':    { href: '/frequency.html',     label: 'English', lang: 'en' },
-    '/he/teder-40hz':    { href: '/40hz.html',          label: 'English', lang: 'en' }
+    '/he/teder-40hz':    { href: '/40hz.html',          label: 'English', lang: 'en' },
+    '/sleep':            { href: '/he/sheina.html',     label: 'עברית',   lang: 'he' },
+    '/he/sheina':        { href: '/sleep.html',         label: 'English', lang: 'en' }
   };
 
   var header    = document.querySelector('header');
