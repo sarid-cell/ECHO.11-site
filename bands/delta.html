@@ -66,6 +66,8 @@
     <link rel="stylesheet" href="/assets/css/session.css">
     <link rel="stylesheet" href="/assets/css/essay.css">
     <link rel="stylesheet" href="/assets/css/band.css">
+    <link rel="stylesheet" href="/assets/css/yt-facade.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/assets/css/yt-facade.css"></noscript>
 
     <script type="application/ld+json">
 {
@@ -104,7 +106,7 @@
             "image": "https://echo11.app/assets/images/astro.png",
             "inLanguage": "en",
             "datePublished": "2026-09-14",
-            "dateModified": "2026-10-16",
+            "dateModified": "2026-10-20",
             "author": { "@id": "https://echo11.app/#shira-sarid" },
             "publisher": { "@id": "https://echo11.app/#shira-sarid" },
             "mainEntityOfPage": { "@id": "https://echo11.app/bands/delta.html#webpage" },
@@ -160,6 +162,28 @@
                 { "@type": "ListItem", "position": 2, "name": "The Bands", "item": "https://echo11.app/bands/" },
                 { "@type": "ListItem", "position": 3, "name": "Delta waves", "item": "https://echo11.app/bands/delta.html" }
             ]
+        },
+        {
+            "@type": "VideoObject",
+            "@id": "https://echo11.app/bands/delta.html#video",
+            "name": "Brown Noise for Sleep | 60-Minute Slow Tide (No Headphones Needed)",
+            "description": "60 minutes of soft brown noise that rises and falls like a slow tide, with a low warm tone underneath. No binaural beats, no headphones needed.",
+            "thumbnailUrl": [
+                "https://i.ytimg.com/vi/kKrQmCu1isc/maxresdefault.jpg",
+                "https://i.ytimg.com/vi/kKrQmCu1isc/hqdefault.jpg"
+            ],
+            "uploadDate": "2026-10-04T20:44:30Z",
+            "duration": "PT1H3S",
+            "embedUrl": "https://www.youtube-nocookie.com/embed/kKrQmCu1isc",
+            "contentUrl": "https://www.youtube.com/watch?v=kKrQmCu1isc",
+            "author": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "inLanguage": "en",
+            "isAccessibleForFree": true
         }
     ]
 }
@@ -291,7 +315,15 @@
                     <span class="band-listen-label">Listen &mdash; Sleep &middot; The 30-Minute Descent</span>
                     <span class="band-listen-line">The Sleep session is named for the delta stage, but it is not a delta-frequency track: brown noise and a low tone paced at six breaths a minute.</span>
                 </a>
-                <p>Need longer than 30 minutes? <a href="https://youtu.be/kKrQmCu1isc" target="_blank" rel="noopener noreferrer">Slow Tide</a> is a 60-minute brown-noise version on YouTube.</p>
+                <p>Need longer than 30 minutes? Slow Tide is a 60-minute brown-noise version on YouTube.</p>
+                <button type="button" class="yt-facade" data-yt="kKrQmCu1isc"
+                    aria-label="Play Brown Noise for Sleep, 60-minute Slow Tide, no headphones needed (YouTube)">
+                    <picture>
+                        <source type="image/webp" srcset="https://i.ytimg.com/vi_webp/kKrQmCu1isc/maxresdefault.webp">
+                        <img class="yt-thumb" src="https://i.ytimg.com/vi/kKrQmCu1isc/maxresdefault.jpg" alt="" loading="lazy" decoding="async" width="1280" height="720">
+                    </picture>
+                    <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 5v14l11-7-11-7z"/></svg></span>
+                </button>
 
                 <h2>Delta vs. the other brainwave bands</h2>
                 <table class="band-table">
@@ -438,6 +470,8 @@
             });
         }
     </script>
+    <!-- YouTube facade: below the fold, so load its script after the page, off the LCP path -->
+    <script>addEventListener('load', function () { var s = document.createElement('script'); s.src = '/assets/js/yt-facade.js'; document.body.appendChild(s); });</script>
     <script src="/assets/js/site-header.js" defer></script>
     <script src="/assets/js/quiet-mode.js" defer></script>
     <script src="/assets/js/micro-interactions.js" defer></script>

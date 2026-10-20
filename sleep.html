@@ -74,6 +74,8 @@
     <link rel="stylesheet" href="assets/css/micro-interactions.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="assets/css/micro-interactions.css"></noscript>
     <link rel="stylesheet" href="assets/css/session.css">
+    <link rel="stylesheet" href="assets/css/yt-facade.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="assets/css/yt-facade.css"></noscript>
     <style>
         /* No live waveform here: the audio is a pre-rendered file, and a
            noise-driven ring would flicker — the opposite of the point. */
@@ -137,31 +139,6 @@
         }
         .refs li a { font-size: inherit; color: var(--text-secondary); word-break: break-word; }
         .refs li a:hover { color: var(--text); }
-
-        /* Full-night version on YouTube (click-to-load, no YouTube request until play) */
-        .yt-night .info-q { margin-bottom: 0.4rem; }
-        .yt-facade {
-            position: relative; display: block; width: 100%; aspect-ratio: 16 / 9;
-            margin-top: 1.1rem; padding: 0; border: 1px solid var(--border);
-            background: #070608 center / cover no-repeat; cursor: pointer; overflow: hidden;
-        }
-        .yt-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-        .yt-facade::after {
-            content: ""; position: absolute; inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%);
-        }
-        .yt-play {
-            position: absolute; left: 50%; top: 50%; z-index: 1;
-            width: 68px; height: 68px; margin: -34px 0 0 -34px; border-radius: 50%;
-            background: rgba(255,255,255,0.92); display: grid; place-items: center;
-            transition: transform .2s ease;
-        }
-        .yt-play svg { width: 26px; height: 26px; margin-left: 4px; fill: #111; }
-        .yt-facade:hover .yt-play, .yt-facade:focus-visible .yt-play { transform: scale(1.06); }
-        .yt-frame { display: block; width: 100%; aspect-ratio: 16 / 9; margin-top: 1.1rem; border: 0; }
-        .yt-links { margin-top: 0.9rem; font-size: 0.85rem; }
-        .yt-links a { color: var(--text-secondary); }
-        .yt-links a:hover { color: var(--text); }
 
         /* ═══ The Descent — lower page layout ═══
            The page gets quietly darker as you read down, the way the
@@ -247,6 +224,7 @@
         .sw-end { height: 1px; background: var(--text-light); }
 
         /* 2 · Steps — a real sequence, so it is numbered */
+        .breathe-first { margin-top: 1.6rem; }
         .steps { list-style: none; margin: 2.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
         .step { background: var(--card); padding: 1.75rem 1.6rem 1.9rem; }
         .step-n { display: block; font-family: var(--sans); font-weight: 200; font-size: 3rem; line-height: 1; color: var(--ink-accent); margin-bottom: 1.1rem; }
@@ -452,7 +430,7 @@
                 "@id": "https://echo11.app/#shira-sarid"
             },
             "datePublished": "2026-10-01",
-            "dateModified": "2026-10-01",
+            "dateModified": "2026-10-20",
             "inLanguage": "en",
             "speakable": {
                 "@type": "SpeakableSpecification",
@@ -573,6 +551,28 @@
                     "url": "https://echo11.app/sleep.html#step3"
                 }
             ]
+        },
+        {
+            "@type": "VideoObject",
+            "@id": "https://echo11.app/sleep.html#video",
+            "name": "Brown Noise for Sleep, 10 Hours, Dark Screen",
+            "description": "10 hours of smooth, deep brown noise with a dark screen, so nothing lights up your room.",
+            "thumbnailUrl": [
+                "https://i.ytimg.com/vi/ta6u4jEJdp8/maxresdefault.jpg",
+                "https://i.ytimg.com/vi/ta6u4jEJdp8/hqdefault.jpg"
+            ],
+            "uploadDate": "2026-10-17T07:30:34Z",
+            "duration": "PT10H1S",
+            "embedUrl": "https://www.youtube-nocookie.com/embed/ta6u4jEJdp8",
+            "contentUrl": "https://www.youtube.com/watch?v=ta6u4jEJdp8",
+            "author": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "inLanguage": "en",
+            "isAccessibleForFree": true
         }
     ]
 }
@@ -797,6 +797,12 @@
                         <p>When you drift, stop following it. At 30 minutes it reaches silence — there is nothing to switch off.</p>
                     </li>
                 </ol>
+                <div class="yt-links yt-links--row breathe-first">
+                    <span class="yt-links-label">Not sleepy yet? Breathe first</span>
+                    <a href="https://youtube.com/shorts/aAknU4BU-TM" target="_blank" rel="noopener">4-7-8 breathing, 21 sec</a>
+                    <a href="https://youtube.com/shorts/dMsC4CVTBho" target="_blank" rel="noopener">Heart racing? Longer exhale, 32 sec</a>
+                    <a href="https://youtube.com/shorts/MasPgGS9g3A" target="_blank" rel="noopener">White vs brown noise, hear the difference</a>
+                </div>
             </div>
 
             <!-- 3. Questions -->
@@ -1016,19 +1022,6 @@
 
         <script>
             (function () {
-                /* YouTube: load the player only when asked */
-                var b = document.getElementById('ytNight');
-                if (b) b.addEventListener('click', function () {
-                    var f = document.createElement('iframe');
-                    f.className = 'yt-frame';
-                    f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.yt + '?autoplay=1&rel=0';
-                    f.title = 'Brown Noise for Sleep, 10 hours, dark screen';
-                    f.allow = 'autoplay; encrypted-media; picture-in-picture';
-                    f.allowFullscreen = true;
-                    b.replaceWith(f);
-                    if (window.gtag) gtag('event', 'youtube_embed_play', { video_id: b.dataset.yt, page: 'sleep' });
-                });
-
                 /* Citations and #anchors open the folded box they point into */
                 function openFor(hash) {
                     var t = hash && document.getElementById(hash.slice(1));
@@ -1160,6 +1153,8 @@
             });
         })();
     </script>
+    <!-- YouTube facade: below the fold, so load its script after the page, off the LCP path -->
+    <script>addEventListener('load', function () { var s = document.createElement('script'); s.src = '/assets/js/yt-facade.js'; document.body.appendChild(s); });</script>
     <script src="assets/js/site-header.js" defer></script>
     <script src="assets/js/quiet-mode.js" defer></script>
     <script src="assets/js/micro-interactions.js" defer></script>
