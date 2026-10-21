@@ -129,13 +129,15 @@
             "inLanguage": "en"
         },
         {
-            "@type": "SoftwareApplication",
+            "@type": "WebApplication",
             "@id": "https://echo11.app/#app",
-            "name": "ECHO.11",
+            "name": "echo·11",
             "applicationCategory": "HealthApplication",
-            "operatingSystem": "iOS",
-            "description": "The ECHO.11 binaural sessions as an app — the 10Hz reset and the 40Hz focus session, in your pocket. In development.",
-            "url": "https://echo11.app/",
+            "operatingSystem": "Any — runs in the browser (iPhone, Android, desktop)",
+            "description": "The echo·11 web app: 22 binaural-beat and pure-tone frequencies for calm, focus and rest. Free during the open beta.",
+            "url": "https://echo11.space/",
+            "isAccessibleForFree": true,
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
             "inLanguage": "en",
             "author": {
                 "@id": "https://echo11.app/#shira-sarid"
@@ -590,7 +592,7 @@
             visibility: visible;
         }
 
-        /* App teaser (coming soon) in side menu */
+        /* App link (free open beta) in side menu */
         .menu-app {
             margin-top: 0.5rem;
             padding-top: 1.5rem;
@@ -1835,9 +1837,9 @@
             </ul>
             <a class="menu-app" href="https://echo11.space" target="_blank" rel="noopener">
                 <span class="menu-app-title">The App
-                    <span class="menu-app-badge">Beta</span>
+                    <span class="menu-app-badge">Free beta</span>
                 </span>
-                <span class="menu-app-desc">Both sessions, in your pocket.</span>
+                <span class="menu-app-desc">22 frequencies, open to everyone.</span>
             </a>
         </nav>
     </aside>
