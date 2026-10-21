@@ -24,7 +24,7 @@ ECHO.11 started during the 2025 war nights in Israel, when Shira used sound and 
 
 ## The App (free open beta)
 
-- [echo·11 app](https://echo11.space/): The full echo·11 web app: 22 binaural-beat and pure-tone frequencies for calm, focus and rest, with a listening history kept on your own device. Free during the open beta; runs in the browser, no download. Stereo headphones for binaural sessions.
+- [echo·11 app](https://www.echo11.space/): The full echo·11 web app: 22 binaural-beat and pure-tone frequencies for calm, focus and rest, with a listening history kept on your own device. Free during the open beta; runs in the browser, no download. Stereo headphones for binaural sessions.
 
 ## More
 
