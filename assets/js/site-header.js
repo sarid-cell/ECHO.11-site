@@ -36,22 +36,22 @@
     { href: '/about.html',         label: 'About Echo.11' }
   ];
 
-  /* App link pinned under the links — the beta lives at echo11.space */
+  /* App link pinned under the links — the free open beta lives at echo11.space */
   var APP_TEASER =
     '<a class="menu-app" href="https://echo11.space" target="_blank" rel="noopener">' +
       '<span class="menu-app-title">The App ' +
-        '<span class="menu-app-badge">Beta</span>' +
+        '<span class="menu-app-badge">Free beta</span>' +
       '</span>' +
-      '<span class="menu-app-desc">Both sessions, in your pocket.</span>' +
+      '<span class="menu-app-desc">22 frequencies, open to everyone.</span>' +
     '</a>';
 
   var APP_TEASER_HE =
-    '<div class="menu-app">' +
+    '<a class="menu-app" href="https://echo11.space" target="_blank" rel="noopener">' +
       '<span class="menu-app-title">האפליקציה ' +
-        '<span class="menu-app-badge">בקרוב</span>' +
+        '<span class="menu-app-badge">בטא חינמית</span>' +
       '</span>' +
-      '<span class="menu-app-desc">שני הסשנים, בכיס שלך.</span>' +
-    '</div>';
+      '<span class="menu-app-desc">22 תדרים, פתוחה לכולם.</span>' +
+    '</a>';
 
   /* Language twins — the header toggle only appears on pages that
      have one, so there is never a dead link. Keys are paths without
