@@ -38,7 +38,7 @@
 
   /* App link pinned under the links — the free open beta lives at echo11.space */
   var APP_TEASER =
-    '<a class="menu-app" href="https://echo11.space" target="_blank" rel="noopener">' +
+    '<a class="menu-app" href="https://www.echo11.space/" target="_blank" rel="noopener">' +
       '<span class="menu-app-title">The App ' +
         '<span class="menu-app-badge">Free beta</span>' +
       '</span>' +
@@ -46,7 +46,7 @@
     '</a>';
 
   var APP_TEASER_HE =
-    '<a class="menu-app" href="https://echo11.space" target="_blank" rel="noopener">' +
+    '<a class="menu-app" href="https://www.echo11.space/" target="_blank" rel="noopener">' +
       '<span class="menu-app-title">האפליקציה ' +
         '<span class="menu-app-badge">בטא חינמית</span>' +
       '</span>' +
