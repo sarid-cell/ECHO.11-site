@@ -79,6 +79,8 @@
     <link rel="stylesheet" href="assets/css/micro-interactions.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="assets/css/micro-interactions.css"></noscript>
     <link rel="stylesheet" href="assets/css/session.css">
+    <link rel="stylesheet" href="assets/css/yt-facade.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="assets/css/yt-facade.css"></noscript>
 
     <script type="application/ld+json">
 {
@@ -644,7 +646,8 @@
             <div class="modal-title" id="completeTitle">Session complete</div>
             <div class="modal-text">11 minutes at 10Hz. Open your eyes slowly. However you feel right now — that's the data point. Come back tomorrow at the same hour; the effect builds with repetition.</div>
             <div class="modal-actions">
-                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-primary">Next session first → Instagram</a>
+                <a href="https://youtu.be/52V1dwB3ldU" target="_blank" rel="noopener" class="modal-btn modal-btn-primary" data-yt-out="10hz-complete">Stay in the calm → 1 hour on YouTube</a>
+                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-ghost">Next session first → Instagram</a>
                 <button class="modal-btn modal-btn-ghost" id="completeClose">Close</button>
             </div>
             <div class="modal-meta" id="completeMeta"></div>
@@ -773,6 +776,25 @@
                     <div class="short-meta">Updated October 2026 · <a href="#disclaimer">Safety notes</a></div>
                 </div>
             </aside>
+
+            <!-- Longer on YouTube: an hour of calm music for when 11 minutes isn't enough -->
+            <div class="d-wrap" id="longer">
+                <div class="d-eyebrow">Want it longer?</div>
+                <h2 class="d-h2">An hour of calm, on YouTube</h2>
+                <p class="d-lede">When eleven minutes isn't enough, an hour of slow 432 Hz music keeps the room quiet. No headphones needed, and in the YouTube app it keeps playing with the screen off.</p>
+                <button type="button" class="yt-facade" data-yt="52V1dwB3ldU"
+                    aria-label="Play Calm Music, 432 Hz, 1 hour (YouTube)">
+                    <picture>
+                        <source type="image/webp" srcset="https://i.ytimg.com/vi_webp/52V1dwB3ldU/maxresdefault.webp">
+                        <img class="yt-thumb" src="https://i.ytimg.com/vi/52V1dwB3ldU/maxresdefault.jpg" alt="" loading="lazy" decoding="async" width="1280" height="720">
+                    </picture>
+                    <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 5v14l11-7-11-7z"/></svg></span>
+                </button>
+                <div class="yt-links yt-links--row">
+                    <a href="https://youtu.be/2d9BfW2142Q" target="_blank" rel="noopener" data-yt-out="10hz-longer">The same 11-minute 10 Hz session on YouTube</a>
+                    <a href="https://www.youtube.com/@shira_sarid?sub_confirmation=1" target="_blank" rel="noopener" data-yt-out="10hz-subscribe">Subscribe for new sessions</a>
+                </div>
+            </div>
 
             <!-- 1. How it works: two tones, one beat -->
             <div class="d-wrap" id="how-it-works">
@@ -1071,6 +1093,8 @@
             });
         })();
     </script>
+    <!-- YouTube facade: below the fold, so load its script after the page, off the LCP path -->
+    <script>addEventListener('load', function () { var s = document.createElement('script'); s.src = '/assets/js/yt-facade.js'; document.body.appendChild(s); });</script>
     <script src="assets/js/site-header.js" defer></script>
     <script src="assets/js/quiet-mode.js" defer></script>
     <script src="assets/js/micro-interactions.js" defer></script>

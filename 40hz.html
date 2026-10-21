@@ -79,6 +79,8 @@
     <link rel="stylesheet" href="assets/css/micro-interactions.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="assets/css/micro-interactions.css"></noscript>
     <link rel="stylesheet" href="assets/css/session.css">
+    <link rel="stylesheet" href="assets/css/yt-facade.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="assets/css/yt-facade.css"></noscript>
     <style>
         /* Photosensitivity guard: nothing on this page may pulse at or
            near 40Hz, and every remaining pulse stays >= 4s per cycle.
@@ -295,6 +297,28 @@
                     "url": "https://echo11.app/40hz.html#step3"
                 }
             ]
+        },
+        {
+            "@type": "VideoObject",
+            "@id": "https://echo11.app/40hz.html#video",
+            "name": "Deep Focus — 40Hz Gamma Binaural Beats for Studying (2 Hours)",
+            "description": "2 hours of 40 Hz gamma binaural beats (200/240 Hz) over a soft brown-noise bed, for studying and deep work. No music, no voice.",
+            "thumbnailUrl": [
+                "https://i.ytimg.com/vi/1Q91omkK7Io/maxresdefault.jpg",
+                "https://i.ytimg.com/vi/1Q91omkK7Io/hqdefault.jpg"
+            ],
+            "uploadDate": "2026-10-19T07:17:18Z",
+            "duration": "PT2H2S",
+            "embedUrl": "https://www.youtube-nocookie.com/embed/1Q91omkK7Io",
+            "contentUrl": "https://www.youtube.com/watch?v=1Q91omkK7Io",
+            "author": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "publisher": {
+                "@id": "https://echo11.app/#shira-sarid"
+            },
+            "inLanguage": "en",
+            "isAccessibleForFree": true
         }
     ]
 }
@@ -376,7 +400,8 @@
             <div class="modal-title" id="completeTitle">Session complete</div>
             <div class="modal-text">11 minutes at 40Hz. Notice where your attention sits right now — that's the data point. Come back whenever the work needs it.</div>
             <div class="modal-actions">
-                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-primary">Next session first → Instagram</a>
+                <a href="https://youtu.be/1Q91omkK7Io" target="_blank" rel="noopener" class="modal-btn modal-btn-primary" data-yt-out="40hz-complete">Keep focusing → 2 hours on YouTube</a>
+                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-ghost">Next session first → Instagram</a>
                 <button class="modal-btn modal-btn-ghost" id="completeClose">Close</button>
             </div>
             <div class="modal-meta" id="completeMeta"></div>
@@ -461,6 +486,25 @@
         <!-- ── SCIENCE ── -->
         <section class="science">
             <div class="science-inner">
+
+                <!-- Longer on YouTube: the 2-hour version, for a real stretch of work -->
+                <div class="yt-long reveal" id="longer">
+                    <h2 class="section-label">Working longer?</h2>
+                    <p class="yt-long-lede">This session runs 11 minutes, or loops. For a long stretch of studying or deep work, the 2-hour version keeps going on YouTube — and in the YouTube app it keeps playing with the screen off.</p>
+                    <button type="button" class="yt-facade" data-yt="1Q91omkK7Io"
+                        aria-label="Play Deep Focus, 40 Hz gamma binaural beats for studying, 2 hours (YouTube)">
+                        <picture>
+                            <source type="image/webp" srcset="https://i.ytimg.com/vi_webp/1Q91omkK7Io/maxresdefault.webp">
+                            <img class="yt-thumb" src="https://i.ytimg.com/vi/1Q91omkK7Io/maxresdefault.jpg" alt="" loading="lazy" decoding="async" width="1280" height="720">
+                        </picture>
+                        <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 5v14l11-7-11-7z"/></svg></span>
+                    </button>
+                    <div class="yt-links yt-links--row">
+                        <a href="https://youtu.be/3X2KuIPQjnc" target="_blank" rel="noopener" data-yt-out="40hz-longer">Brown Noise + Pomodoro 50/10, 3 hours</a>
+                        <a href="https://youtu.be/1Q91omkK7Io" target="_blank" rel="noopener" data-yt-out="40hz-longer">Open Deep Focus on YouTube</a>
+                        <a href="https://www.youtube.com/@shira_sarid?sub_confirmation=1" target="_blank" rel="noopener" data-yt-out="40hz-subscribe">Subscribe for new sessions</a>
+                    </div>
+                </div>
 
                 <h2 class="section-label reveal">How it works</h2>
 
@@ -645,6 +689,8 @@
             });
         })();
     </script>
+    <!-- YouTube facade: below the fold, so load its script after the page, off the LCP path -->
+    <script>addEventListener('load', function () { var s = document.createElement('script'); s.src = '/assets/js/yt-facade.js'; document.body.appendChild(s); });</script>
     <script src="assets/js/site-header.js" defer></script>
     <script src="assets/js/quiet-mode.js" defer></script>
     <script src="assets/js/micro-interactions.js" defer></script>

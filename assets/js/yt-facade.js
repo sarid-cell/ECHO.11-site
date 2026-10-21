@@ -2,7 +2,8 @@
    Every <button class="yt-facade" data-yt="ID"> becomes a youtube-nocookie
    player only when clicked (a native <button>, so Enter and Space work too).
    The iframe title comes from the button's aria-label ("Play … (YouTube)").
-   If a video has no maxresdefault thumbnail, fall back to hqdefault. */
+   If a video has no maxresdefault thumbnail, fall back to hqdefault.
+   Links with data-yt-out report a youtube_outbound event when clicked. */
 (function () {
   'use strict';
 
@@ -25,6 +26,12 @@
     b.replaceWith(f);
     if (window.gtag) gtag('event', 'youtube_embed_play', { video_id: b.dataset.yt, page: location.pathname });
   }
+
+  /* Links marked data-yt-out="<placement>" go to YouTube; report which spot sent the visitor */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-yt-out]');
+    if (a && window.gtag) gtag('event', 'youtube_outbound', { placement: a.dataset.ytOut, link_url: a.href, page: location.pathname });
+  });
 
   document.querySelectorAll('.yt-facade[data-yt]').forEach(function (b) {
     var img = b.querySelector('.yt-thumb');

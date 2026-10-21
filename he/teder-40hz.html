@@ -327,7 +327,8 @@
             <div class="modal-title" id="completeTitle">הסשן הסתיים</div>
             <div class="modal-text">11 דקות בתדר 40 הרץ. אם המשימה זזה — זו נקודת המידע. חזרי לבלוק הבא.</div>
             <div class="modal-actions">
-                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-primary">הסשן הבא — קודם באינסטגרם</a>
+                <a href="https://youtu.be/1Q91omkK7Io" target="_blank" rel="noopener" class="modal-btn modal-btn-primary" data-yt-out="40hz-he-complete">להמשיך להתרכז ← שעתיים ביוטיוב</a>
+                <a href="https://instagram.com/shira.sarid" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-ghost">הסשן הבא — קודם באינסטגרם</a>
                 <button class="modal-btn modal-btn-ghost" id="completeClose">סגירה</button>
             </div>
             <div class="modal-meta" id="completeMeta"></div>
@@ -578,6 +579,8 @@
         };
     </script>
     <script src="/assets/js/session.js" defer></script>
+    <!-- YouTube facade: below the fold, so load its script after the page, off the LCP path -->
+    <script>addEventListener('load', function () { var s = document.createElement('script'); s.src = '/assets/js/yt-facade.js'; document.body.appendChild(s); });</script>
     <script src="/assets/js/site-header.js" defer></script>
     <script src="/assets/js/quiet-mode.js" defer></script>
     <script src="/assets/js/micro-interactions.js" defer></script>
