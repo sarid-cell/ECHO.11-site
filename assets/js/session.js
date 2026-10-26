@@ -560,8 +560,6 @@ document.addEventListener('keydown', e => {
 });
 
 // ── SESSIONS COUNTER ──
-const SUPABASE_URL      = 'https://nomtmlidkuhkllniaytu.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vbXRtbGlka3Voa2xsbmlheXR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1ODUzMzIsImV4cCI6MjA5NjE2MTMzMn0.LO7mdpCI_8dmDFdnvQA7fQoSts_yqksKgnLUt6O11_U';
 const TODAY = new Date().toISOString().split('T')[0];
 
 function localCount() {
@@ -575,15 +573,9 @@ function localIncrement() {
     return d[TODAY];
 }
 
-async function getCount() {
-    try {
-        const r = await fetch(`${SUPABASE_URL}/rest/v1/frequency_sessions?date=eq.${TODAY}&select=count`,
-            { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` }});
-        const d = await r.json();
-        if (d && d[0]) return d[0].count;
-    } catch(e){}
-    return localCount();
-}
+// counter retired: the Supabase project behind it no longer exists, so the
+// sessions row stays hidden (renderCount(0) keeps it hidden)
+async function getCount() { return 0; }
 
 // zero (or a failed fetch) reads as "nobody is here" — the row starts
 // hidden in the markup and only appears once a real count exists,
@@ -598,19 +590,7 @@ function renderCount(n) {
     }
 }
 
-async function increment() {
-    renderCount(localIncrement());
-    try {
-        const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_session_count`, {
-            method: 'POST',
-            headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-                'Content-Type': 'application/json' },
-            body: JSON.stringify({ p_date: TODAY })
-        });
-        const serverCount = await r.json();
-        if (typeof serverCount === 'number') renderCount(serverCount);
-    } catch(e){}
-}
+async function increment() { /* counter retired: the Supabase project no longer exists */ }
 
 getCount().then(renderCount);
 })();

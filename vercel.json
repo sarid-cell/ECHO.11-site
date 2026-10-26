@@ -15,6 +15,21 @@
       "source": "/frequency-40hz.html",
       "destination": "/40hz.html",
       "permanent": true
+    },
+    {
+      "source": "/:page(about|book|sleep|frequency|40hz|frequencies|privacy|accessibility|shira-sarid)",
+      "destination": "/:page.html",
+      "permanent": true
+    },
+    {
+      "source": "/he/:page(sheina|teder-10hz|teder-40hz)",
+      "destination": "/he/:page.html",
+      "permanent": true
+    },
+    {
+      "source": "/bands/:page(alpha|beta|delta|theta|gamma)",
+      "destination": "/bands/:page.html",
+      "permanent": true
     }
   ],
   "headers": [
@@ -23,7 +38,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://nomtmlidkuhkllniaytu.supabase.co; frame-src https://www.paypal.com https://www.youtube-nocookie.com; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://www.paypal.com"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; frame-src https://www.paypal.com https://www.youtube-nocookie.com; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://www.paypal.com"
         },
         {
           "key": "X-Content-Type-Options",
