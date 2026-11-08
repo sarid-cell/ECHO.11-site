@@ -116,3 +116,6 @@ html[data-theme="dark"] .quiet-toggle .icon-moon { display: none; }
     .quiet-toggle { transition: none; }
     .quiet-toggle:hover { transform: none; }
 }
+
+/* Footer column headings: bold, so they read as headings above the links */
+footer .footer-inner .footer-h { font-weight: 600; }
