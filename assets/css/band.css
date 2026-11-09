@@ -686,3 +686,4 @@ html[data-theme="dark"] .band-stage { background: rgba(255,255,255,0.03); }
     .band-stages--three .band-stage { flex: 0 0 78%; scroll-snap-align: start; }
 }
 .band-rhythm-hz { white-space: nowrap; }
+.essay-body p + .band-facts { margin-top: 1.4rem; }

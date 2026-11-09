@@ -283,7 +283,8 @@
     h.classList.add('rv-words'); io.observe(h);
   });
 
-  var groups = '.band-glance tr, .band-facts li, .band-stage, .band-verdict-cell';
+  /* Swipe-row cards are skipped: they sit off to the side, not below the fold */
+  var groups = '.band-glance tr, .band-facts li, .band-stages:not(.band-stages--three) > .band-stage, .band-verdict-cell';
   body.querySelectorAll(groups).forEach(function (el) {
     if (!below(el)) return;
     var sibs = Array.prototype.indexOf.call(el.parentElement.children, el);
