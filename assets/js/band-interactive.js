@@ -32,7 +32,10 @@
     var dot = rhythm.querySelector('.r-dot');
     var pauseBtn = rhythm.querySelector('.band-pause');
     var chips = rhythm.querySelectorAll('.band-chip[data-hz]');
-    var W = 600, MID = 65, AMP = 48, PX_PER_S = 300, DOT_X = 36;
+    /* data-window: seconds drawn across the box; data-slow: how many times slower it plays */
+    var WIN = parseFloat(rhythm.dataset.window || '2'), SLOW = parseFloat(rhythm.dataset.slow || '1');
+    var GAMMA = rhythm.dataset.band === 'gamma';
+    var W = 600, MID = 65, AMP = GAMMA ? 34 : 48, PX_PER_S = W / WIN, DOT_X = 36;
     var hz = parseFloat(range.value), phase = 0, last = 0, raf = 0;
     var visible = false, paused = reduce, touched = false;
 
@@ -45,7 +48,16 @@
       dot.setAttribute('cy', y(DOT_X).toFixed(1));
     }
 
+    function wordsGamma(f) {
+      var note;
+      if (f <= 30) note = 'The bottom edge of gamma. A little slower and it is beta.';
+      else if (f === 40) note = 'The rate most experiments use.';
+      else if (f < 100) note = 'Mid gamma. On a scalp EEG, jaw and eye muscles make signal in this range too.';
+      else note = 'The upper edge most often given for gamma.';
+      return '<strong>' + f + ' Hz:</strong> ' + f + ' waves a second. ' + note;
+    }
     function words(f) {
+      if (GAMMA) return wordsGamma(f);
       var rate = f < 1 ? 'One wave every ' + (1 / f) + ' seconds.' :
                  f === 1 ? 'One wave a second.' : f + ' waves a second.';
       var note;
@@ -68,7 +80,7 @@
 
     function frame(t) {
       if (!last) last = t;
-      phase += 2 * Math.PI * hz * ((t - last) / 1000);
+      phase += 2 * Math.PI * hz * ((t - last) / 1000) / SLOW;
       phase %= 2 * Math.PI;
       last = t;
       draw();
