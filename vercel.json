@@ -17,7 +17,7 @@
       "permanent": true
     },
     {
-      "source": "/:page(about|book|sleep|frequency|40hz|frequencies|privacy|accessibility|shira-sarid)",
+      "source": "/:page(about|book|sleep|frequency|40hz|frequencies|privacy|accessibility|shira-sarid|rem-sleep)",
       "destination": "/:page.html",
       "permanent": true
     },

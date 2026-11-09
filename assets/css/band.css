@@ -660,3 +660,28 @@ html[data-theme="dark"] .band-stage { background: rgba(255,255,255,0.03); }
 @media (prefers-reduced-motion: reduce) {
     .rv, .rv-words .w { opacity: 1; transform: none; transition: none; }
 }
+
+/* ── REM page variants ── */
+.band-page--editorial .essay-body .band-stage-name::before { content: none; }
+.band-stages--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 860px) { .band-stages--three { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .band-stages--three { grid-template-columns: 1fr; } }
+/* On the REM map the accent marks REM, and deep sleep goes grey */
+.band-night--rem .n-deep { fill: var(--text); opacity: .12; }
+.band-night--rem .n-rem { fill: var(--accent); opacity: .7; }
+.band-night--rem .band-legend .l-deep { background: var(--accent); opacity: .8; }
+.band-night--rem .band-legend .l-rem { background: var(--text); opacity: .2; }
+/* Wider number column, so "60–90 min" fits beside its line */
+.band-facts li { grid-template-columns: 7.8rem 1fr; }
+@media (max-width: 640px) { .band-facts li { grid-template-columns: 6.6rem 1fr; gap: 0.8rem; } }
+/* Lists styled as cards sit flush with the text column */
+.essay-body .band-facts, .essay-body .band-stages { padding-left: 0; margin-left: 0; list-style: none; }
+.essay-body .band-facts li, .essay-body .band-stages li { margin-left: 0; }
+/* On a phone the six body cards become a swipe row */
+@media (max-width: 520px) {
+    .band-stages--three {
+        display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 0.8rem;
+        margin-right: -1.5rem; padding-right: 1.5rem; padding-bottom: 0.4rem;
+    }
+    .band-stages--three .band-stage { flex: 0 0 78%; scroll-snap-align: start; }
+}

@@ -17,6 +17,7 @@ ECHO.11 started during the 2025 war nights in Israel, when Shira used sound and 
 
 - [The five brainwave bands](https://echo11.app/bands/): What each EEG band is, what research associates with it, and what it is not.
 - [Delta, 0.5–4 Hz](https://echo11.app/bands/delta.html): The signature of deep sleep.
+- [REM sleep](https://echo11.app/rem-sleep.html): The dreaming stage: when it happens, how many times a night, what the body does, and where gamma waves fit.
 - [Theta, 4–8 Hz](https://echo11.app/bands/theta.html): Between sleep and waking.
 - [Alpha, 8–13 Hz](https://echo11.app/bands/alpha.html): Relaxed wakefulness; the band behind the 10 Hz session.
 - [Beta, 13–30 Hz](https://echo11.app/bands/beta.html): Ordinary alert wakefulness. More of it is not better.
