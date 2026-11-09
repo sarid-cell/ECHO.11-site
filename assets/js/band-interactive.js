@@ -215,3 +215,71 @@
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(mark); } }, { passive: true });
   mark();
 })();
+
+/* ── 6. Folds and reveals ── */
+(function () {
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* A source link or a #hash that points inside a closed fold opens it first */
+  function openFor(id) {
+    var el = id && document.getElementById(id);
+    if (!el) return;
+    var d = el.closest('details');
+    while (d) { d.open = true; d = d.parentElement && d.parentElement.closest('details'); }
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a) openFor(a.hash.slice(1));
+  });
+  if (location.hash) openFor(location.hash.slice(1));
+  addEventListener('hashchange', function () { openFor(location.hash.slice(1)); });
+  document.querySelectorAll('details.band-more').forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (d.open && window.gtag) gtag('event', 'band_fold_open', { label: d.querySelector('.band-more-label').textContent, page: location.pathname });
+    });
+  });
+
+  /* Reveal: only things still below the fold, so nothing on screen ever blinks */
+  if (reduce || !('IntersectionObserver' in window)) return;
+  var body = document.querySelector('.band-page--editorial .essay-body');
+  if (!body) return;
+  var fold = window.innerHeight;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' });
+
+  function below(el) { return el.getBoundingClientRect().top > fold; }
+
+  body.querySelectorAll(':scope > h2').forEach(function (h) {
+    if (!below(h)) return;
+    var i = 0;
+    /* One wrapper, so the words stay one grid item beside the number */
+    var wrap = document.createElement('span'); wrap.className = 'h-text';
+    while (h.firstChild) wrap.appendChild(h.firstChild);
+    h.appendChild(wrap);
+    Array.prototype.slice.call(wrap.childNodes).forEach(function (n) {
+      if (n.nodeType !== 3) return;
+      var frag = document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach(function (part) {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+        var s = document.createElement('span'); s.className = 'w'; s.style.setProperty('--i', i++); s.textContent = part; frag.appendChild(s);
+      });
+      n.replaceWith(frag);
+    });
+    h.classList.add('rv-words'); io.observe(h);
+  });
+
+  var groups = '.band-glance tr, .band-facts li, .band-stage, .band-verdict-cell';
+  body.querySelectorAll(groups).forEach(function (el) {
+    if (!below(el)) return;
+    var sibs = Array.prototype.indexOf.call(el.parentElement.children, el);
+    el.style.setProperty('--d', (sibs % 4) * 90 + 'ms');
+    el.classList.add('rv'); io.observe(el);
+  });
+  body.querySelectorAll(':scope > p, :scope > figure, :scope > h3, :scope > details, :scope > .band-scroll, :scope > a.band-listen, :scope > .band-shelf, :scope > .band-faq').forEach(function (el) {
+    if (!below(el)) return;
+    el.classList.add('rv'); io.observe(el);
+  });
+})();
