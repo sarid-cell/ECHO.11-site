@@ -42,7 +42,7 @@
     <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="/assets/images/favicon-192.png" type="image/png" sizes="192x192">
     <link rel="apple-touch-icon" href="/assets/images/favicon-180.png">
-    <title>ECHO.11 — Free Binaural Beat Sessions for Calm, Focus and Sleep</title>
+    <title>ECHO.11 — Free Binaural Beats for Calm, Focus &amp; Sleep</title>
     <meta name="description" content="Free sound sessions generated live in your browser: 10Hz alpha for calm, 40Hz gamma for focus, and a 30-minute wind-down for sleep. No signup, no download.">
     <meta name="author" content="Shira Sarid">
     <meta name="keywords" content="binaural beats, 10hz frequency, calm technology, consumer psychology, generative AI, human resilience, sound frequencies, digital strategy, marketing psychology">
@@ -51,7 +51,7 @@
     <link rel="canonical" href="https://echo11.app/" />
     
     <!-- Open Graph -->
-    <meta property="og:title" content="ECHO.11 — Free Binaural Beat Sessions for Calm, Focus and Sleep">
+    <meta property="og:title" content="ECHO.11 — Free Binaural Beats for Calm, Focus &amp; Sleep">
     <meta property="og:description" content="Free sound sessions generated live in your browser: 10Hz alpha for calm, 40Hz gamma for focus, and a 30-minute wind-down for sleep. No signup, no download.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://echo11.app/">
@@ -63,7 +63,7 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ECHO.11 — Free Binaural Beat Sessions for Calm, Focus and Sleep">
+    <meta name="twitter:title" content="ECHO.11 — Free Binaural Beats for Calm, Focus &amp; Sleep">
     <meta name="twitter:description" content="Free sound sessions generated live in your browser: 10Hz alpha for calm, 40Hz gamma for focus, and a 30-minute wind-down for sleep. No signup, no download.">
     <meta name="twitter:image" content="https://echo11.app/assets/images/hero.png">
 
@@ -1210,9 +1210,9 @@
             color: var(--text-light); margin-bottom: 1rem;
         }
         .home-session-hz {
-            display: block; font-family: 'IBM Plex Mono', monospace;
-            font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 600;
-            line-height: 1.1; margin-bottom: 0.7rem;
+            display: block; font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.8rem, 3.6vw, 2.5rem); font-weight: 250;
+            letter-spacing: -0.025em; line-height: 1.08; margin-bottom: 0.7rem;
         }
         .home-session-use {
             font-size: 0.95rem; color: var(--text-secondary);
@@ -1468,6 +1468,25 @@
             /* five cards in a 2-column grid leave a hole; gamma takes the row */
             .band-card:last-child { grid-column: 1 / -1; }
         }
+
+
+        /* Guides grid: six cards, each with a slow live trace */
+        .bands-title { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 250; letter-spacing: -0.025em; line-height: 1.12; margin: 0 0 0.8rem; color: var(--text); }
+        .guides-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .guide-card { position: relative; display: flex; flex-direction: column; gap: 0.35rem; padding: 1.6rem 1.4rem 1.5rem; background: var(--bg); color: var(--text); text-decoration: none; transition: background .25s ease; }
+        .guide-card:hover, .guide-card:focus-visible { background: var(--white); }
+        .guide-n { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.16em; color: var(--text-light); }
+        .guide-wave { display: block; width: 100%; height: 44px; margin: 0.6rem 0 0.8rem; overflow: hidden; }
+        .guide-wave path { fill: none; stroke: var(--text); stroke-width: 1.3; opacity: .55; vector-effect: non-scaling-stroke; animation: guide-drift var(--dur) linear infinite; }
+        .guide-card:hover .guide-wave path { opacity: .95; stroke: var(--accent, #2dd4f0); }
+        @keyframes guide-drift { to { transform: translateX(-600px); } }
+        .guide-name { font-size: 1.45rem; font-weight: 300; letter-spacing: -0.015em; line-height: 1.15; }
+        .guide-hz { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); }
+        .guide-line { font-size: 0.95rem; font-weight: 300; line-height: 1.6; color: var(--text-secondary); margin-top: 0.3rem; }
+        .guide-more { margin-top: auto; padding-top: 0.9rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text); }
+        @media (max-width: 900px) { .guides-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 520px) { .guides-grid { grid-template-columns: 1fr; } .guide-wave { height: 36px; } }
+        @media (prefers-reduced-motion: reduce) { .guide-wave path { animation: none; } }
 
         .article-card {
             display: flex;
@@ -1862,13 +1881,13 @@
                         <span>Headphones on for 10 Hz and 40 Hz</span>
                     </p>
                 </div>
-                <a href="#sessions" class="hero-cue">Decoding the algorithm of human resilience &darr;</a>
+                <a href="#sessions" class="hero-cue">Sessions, guides and the science &darr;</a>
             </div>
         </section>
 
         <!-- What ECHO.11 is — moved out of the hero, unchanged -->
         <section class="hero-summary-section" aria-label="About ECHO.11">
-            <p class="hero-summary reveal">ECHO.11 is two things in one place. Two free frequency sessions — 10Hz for the moments a nervous system will not settle, 40Hz for the hours that need one clear task — and a body of writing on where consumer psychology and generative AI actually meet. Both come from the same question: what makes a mind resilient when the noise does not stop.</p>
+            <p class="hero-summary reveal">ECHO.11 is two things in one place. Three free sound sessions — 10 Hz for the moments a nervous system will not settle, 40 Hz for one clear task, and a 30-minute wind-down for lights out — and plain-language guides to what the research on brainwaves and sleep actually shows, and what it does not. Both come from the same question: what makes a mind resilient when the noise does not stop.</p>
         </section>
 
 
@@ -2007,33 +2026,57 @@
              no images, so the row stays quiet next to the session cards. -->
         <section class="bands" id="bands">
             <div class="bands-inner">
-                <h2 class="section-label reveal">The Bands</h2>
-                <p class="bands-line reveal">Five frequency bands, what the research says about each, and what it does not.</p>
-                <div class="bands-row reveal">
-                    <a class="band-card" href="/bands/delta.html">
-                        <span class="band-name">Delta waves</span>
-                        <span class="band-hz">0.5&ndash;4 Hz</span>
-                        <span class="band-state">Sleep</span>
+                <h2 class="section-label reveal">The Science</h2>
+                <p class="bands-title reveal">Brainwaves and sleep, explained honestly.</p>
+                <p class="bands-line reveal">Six short guides: what each rhythm is, what the research shows, and what it does not.</p>
+                <div class="guides-grid reveal">
+                    <a class="guide-card" href="/bands/delta.html">
+                        <span class="guide-n">01</span>
+                        <svg class="guide-wave" viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path style="--dur:7s" d="M0,30.0 L6,27.7 L12,25.5 L18,23.4 L24,21.3 L30,19.4 L36,17.7 L42,16.1 L48,14.8 L54,13.7 L60,12.9 L66,12.3 L72,12.0 L78,12.0 L84,12.3 L90,12.9 L96,13.7 L102,14.8 L108,16.1 L114,17.7 L120,19.4 L126,21.3 L132,23.4 L138,25.5 L144,27.7 L150,30.0 L156,32.3 L162,34.5 L168,36.6 L174,38.7 L180,40.6 L186,42.3 L192,43.9 L198,45.2 L204,46.3 L210,47.1 L216,47.7 L222,48.0 L228,48.0 L234,47.7 L240,47.1 L246,46.3 L252,45.2 L258,43.9 L264,42.3 L270,40.6 L276,38.7 L282,36.6 L288,34.5 L294,32.3 L300,30.0 L306,27.7 L312,25.5 L318,23.4 L324,21.3 L330,19.4 L336,17.7 L342,16.1 L348,14.8 L354,13.7 L360,12.9 L366,12.3 L372,12.0 L378,12.0 L384,12.3 L390,12.9 L396,13.7 L402,14.8 L408,16.1 L414,17.7 L420,19.4 L426,21.3 L432,23.4 L438,25.5 L444,27.7 L450,30.0 L456,32.3 L462,34.5 L468,36.6 L474,38.7 L480,40.6 L486,42.3 L492,43.9 L498,45.2 L504,46.3 L510,47.1 L516,47.7 L522,48.0 L528,48.0 L534,47.7 L540,47.1 L546,46.3 L552,45.2 L558,43.9 L564,42.3 L570,40.6 L576,38.7 L582,36.6 L588,34.5 L594,32.3 L600,30.0 L606,27.7 L612,25.5 L618,23.4 L624,21.3 L630,19.4 L636,17.7 L642,16.1 L648,14.8 L654,13.7 L660,12.9 L666,12.3 L672,12.0 L678,12.0 L684,12.3 L690,12.9 L696,13.7 L702,14.8 L708,16.1 L714,17.7 L720,19.4 L726,21.3 L732,23.4 L738,25.5 L744,27.7 L750,30.0 L756,32.3 L762,34.5 L768,36.6 L774,38.7 L780,40.6 L786,42.3 L792,43.9 L798,45.2 L804,46.3 L810,47.1 L816,47.7 L822,48.0 L828,48.0 L834,47.7 L840,47.1 L846,46.3 L852,45.2 L858,43.9 L864,42.3 L870,40.6 L876,38.7 L882,36.6 L888,34.5 L894,32.3 L900,30.0 L906,27.7 L912,25.5 L918,23.4 L924,21.3 L930,19.4 L936,17.7 L942,16.1 L948,14.8 L954,13.7 L960,12.9 L966,12.3 L972,12.0 L978,12.0 L984,12.3 L990,12.9 L996,13.7 L1002,14.8 L1008,16.1 L1014,17.7 L1020,19.4 L1026,21.3 L1032,23.4 L1038,25.5 L1044,27.7 L1050,30.0 L1056,32.3 L1062,34.5 L1068,36.6 L1074,38.7 L1080,40.6 L1086,42.3 L1092,43.9 L1098,45.2 L1104,46.3 L1110,47.1 L1116,47.7 L1122,48.0 L1128,48.0 L1134,47.7 L1140,47.1 L1146,46.3 L1152,45.2 L1158,43.9 L1164,42.3 L1170,40.6 L1176,38.7 L1182,36.6 L1188,34.5 L1194,32.3 L1200,30.0"/></svg>
+                        <span class="guide-name">Delta</span>
+                        <span class="guide-hz">0.5&ndash;4 Hz &middot; Deep sleep</span>
+                        <span class="guide-line">The slowest band, and what defines deep sleep.</span>
+                        <span class="guide-more">Read the guide &rarr;</span>
                     </a>
-                    <a class="band-card" href="/bands/theta.html">
-                        <span class="band-name">Theta</span>
-                        <span class="band-hz">4&ndash;8 Hz</span>
-                        <span class="band-state">Drift</span>
+                    <a class="guide-card" href="/bands/theta.html">
+                        <span class="guide-n">02</span>
+                        <svg class="guide-wave" viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path style="--dur:6s" d="M0,30.0 L6,26.5 L12,23.3 L18,20.4 L24,18.2 L30,16.7 L36,16.0 L42,16.2 L48,17.3 L54,19.2 L60,21.8 L66,24.8 L72,28.2 L78,31.8 L84,35.2 L90,38.2 L96,40.8 L102,42.7 L108,43.8 L114,44.0 L120,43.3 L126,41.8 L132,39.6 L138,36.7 L144,33.5 L150,30.0 L156,26.5 L162,23.3 L168,20.4 L174,18.2 L180,16.7 L186,16.0 L192,16.2 L198,17.3 L204,19.2 L210,21.8 L216,24.8 L222,28.2 L228,31.8 L234,35.2 L240,38.2 L246,40.8 L252,42.7 L258,43.8 L264,44.0 L270,43.3 L276,41.8 L282,39.6 L288,36.7 L294,33.5 L300,30.0 L306,26.5 L312,23.3 L318,20.4 L324,18.2 L330,16.7 L336,16.0 L342,16.2 L348,17.3 L354,19.2 L360,21.8 L366,24.8 L372,28.2 L378,31.8 L384,35.2 L390,38.2 L396,40.8 L402,42.7 L408,43.8 L414,44.0 L420,43.3 L426,41.8 L432,39.6 L438,36.7 L444,33.5 L450,30.0 L456,26.5 L462,23.3 L468,20.4 L474,18.2 L480,16.7 L486,16.0 L492,16.2 L498,17.3 L504,19.2 L510,21.8 L516,24.8 L522,28.2 L528,31.8 L534,35.2 L540,38.2 L546,40.8 L552,42.7 L558,43.8 L564,44.0 L570,43.3 L576,41.8 L582,39.6 L588,36.7 L594,33.5 L600,30.0 L606,26.5 L612,23.3 L618,20.4 L624,18.2 L630,16.7 L636,16.0 L642,16.2 L648,17.3 L654,19.2 L660,21.8 L666,24.8 L672,28.2 L678,31.8 L684,35.2 L690,38.2 L696,40.8 L702,42.7 L708,43.8 L714,44.0 L720,43.3 L726,41.8 L732,39.6 L738,36.7 L744,33.5 L750,30.0 L756,26.5 L762,23.3 L768,20.4 L774,18.2 L780,16.7 L786,16.0 L792,16.2 L798,17.3 L804,19.2 L810,21.8 L816,24.8 L822,28.2 L828,31.8 L834,35.2 L840,38.2 L846,40.8 L852,42.7 L858,43.8 L864,44.0 L870,43.3 L876,41.8 L882,39.6 L888,36.7 L894,33.5 L900,30.0 L906,26.5 L912,23.3 L918,20.4 L924,18.2 L930,16.7 L936,16.0 L942,16.2 L948,17.3 L954,19.2 L960,21.8 L966,24.8 L972,28.2 L978,31.8 L984,35.2 L990,38.2 L996,40.8 L1002,42.7 L1008,43.8 L1014,44.0 L1020,43.3 L1026,41.8 L1032,39.6 L1038,36.7 L1044,33.5 L1050,30.0 L1056,26.5 L1062,23.3 L1068,20.4 L1074,18.2 L1080,16.7 L1086,16.0 L1092,16.2 L1098,17.3 L1104,19.2 L1110,21.8 L1116,24.8 L1122,28.2 L1128,31.8 L1134,35.2 L1140,38.2 L1146,40.8 L1152,42.7 L1158,43.8 L1164,44.0 L1170,43.3 L1176,41.8 L1182,39.6 L1188,36.7 L1194,33.5 L1200,30.0"/></svg>
+                        <span class="guide-name">Theta</span>
+                        <span class="guide-hz">4&ndash;8 Hz &middot; Drifting off</span>
+                        <span class="guide-line">The edge of sleep, and also hard thinking.</span>
+                        <span class="guide-more">Read the guide &rarr;</span>
                     </a>
-                    <a class="band-card" href="/bands/alpha.html">
-                        <span class="band-name">Alpha</span>
-                        <span class="band-hz">8&ndash;13 Hz</span>
-                        <span class="band-state">Calm</span>
+                    <a class="guide-card" href="/bands/alpha.html">
+                        <span class="guide-n">03</span>
+                        <svg class="guide-wave" viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path style="--dur:5s" d="M0,30.0 L6,25.3 L12,21.5 L18,19.3 L24,19.2 L30,21.1 L36,24.7 L42,29.3 L48,34.0 L54,38.0 L60,40.5 L66,40.9 L72,39.3 L78,35.9 L84,31.4 L90,26.6 L96,22.5 L102,19.8 L108,19.0 L114,20.4 L120,23.5 L126,27.9 L132,32.7 L138,37.0 L144,40.0 L150,41.0 L156,40.0 L162,37.0 L168,32.7 L174,27.9 L180,23.5 L186,20.4 L192,19.0 L198,19.8 L204,22.5 L210,26.6 L216,31.4 L222,35.9 L228,39.3 L234,40.9 L240,40.5 L246,38.0 L252,34.0 L258,29.3 L264,24.7 L270,21.1 L276,19.2 L282,19.3 L288,21.5 L294,25.3 L300,30.0 L306,34.7 L312,38.5 L318,40.7 L324,40.8 L330,38.9 L336,35.3 L342,30.7 L348,26.0 L354,22.0 L360,19.5 L366,19.1 L372,20.7 L378,24.1 L384,28.6 L390,33.4 L396,37.5 L402,40.2 L408,41.0 L414,39.6 L420,36.5 L426,32.1 L432,27.3 L438,23.0 L444,20.0 L450,19.0 L456,20.0 L462,23.0 L468,27.3 L474,32.1 L480,36.5 L486,39.6 L492,41.0 L498,40.2 L504,37.5 L510,33.4 L516,28.6 L522,24.1 L528,20.7 L534,19.1 L540,19.5 L546,22.0 L552,26.0 L558,30.7 L564,35.3 L570,38.9 L576,40.8 L582,40.7 L588,38.5 L594,34.7 L600,30.0 L606,25.3 L612,21.5 L618,19.3 L624,19.2 L630,21.1 L636,24.7 L642,29.3 L648,34.0 L654,38.0 L660,40.5 L666,40.9 L672,39.3 L678,35.9 L684,31.4 L690,26.6 L696,22.5 L702,19.8 L708,19.0 L714,20.4 L720,23.5 L726,27.9 L732,32.7 L738,37.0 L744,40.0 L750,41.0 L756,40.0 L762,37.0 L768,32.7 L774,27.9 L780,23.5 L786,20.4 L792,19.0 L798,19.8 L804,22.5 L810,26.6 L816,31.4 L822,35.9 L828,39.3 L834,40.9 L840,40.5 L846,38.0 L852,34.0 L858,29.3 L864,24.7 L870,21.1 L876,19.2 L882,19.3 L888,21.5 L894,25.3 L900,30.0 L906,34.7 L912,38.5 L918,40.7 L924,40.8 L930,38.9 L936,35.3 L942,30.7 L948,26.0 L954,22.0 L960,19.5 L966,19.1 L972,20.7 L978,24.1 L984,28.6 L990,33.4 L996,37.5 L1002,40.2 L1008,41.0 L1014,39.6 L1020,36.5 L1026,32.1 L1032,27.3 L1038,23.0 L1044,20.0 L1050,19.0 L1056,20.0 L1062,23.0 L1068,27.3 L1074,32.1 L1080,36.5 L1086,39.6 L1092,41.0 L1098,40.2 L1104,37.5 L1110,33.4 L1116,28.6 L1122,24.1 L1128,20.7 L1134,19.1 L1140,19.5 L1146,22.0 L1152,26.0 L1158,30.7 L1164,35.3 L1170,38.9 L1176,40.8 L1182,40.7 L1188,38.5 L1194,34.7 L1200,30.0"/></svg>
+                        <span class="guide-name">Alpha</span>
+                        <span class="guide-hz">8&ndash;13 Hz &middot; Calm</span>
+                        <span class="guide-line">The relaxed, eyes-closed rhythm.</span>
+                        <span class="guide-more">Read the guide &rarr;</span>
                     </a>
-                    <a class="band-card" href="/bands/beta.html">
-                        <span class="band-name">Beta</span>
-                        <span class="band-hz">13&ndash;30 Hz</span>
-                        <span class="band-state">Alert</span>
+                    <a class="guide-card" href="/bands/beta.html">
+                        <span class="guide-n">04</span>
+                        <svg class="guide-wave" viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path style="--dur:4s" d="M0,30.0 L6,24.5 L12,22.0 L18,23.8 L24,29.0 L30,34.7 L36,37.9 L42,36.8 L48,32.0 L54,26.1 L60,22.4 L66,22.8 L72,27.1 L78,32.9 L84,37.2 L90,37.6 L96,33.9 L102,28.0 L108,23.2 L114,22.1 L120,25.3 L126,31.0 L132,36.2 L138,38.0 L144,35.5 L150,30.0 L156,24.5 L162,22.0 L168,23.8 L174,29.0 L180,34.7 L186,37.9 L192,36.8 L198,32.0 L204,26.1 L210,22.4 L216,22.8 L222,27.1 L228,32.9 L234,37.2 L240,37.6 L246,33.9 L252,28.0 L258,23.2 L264,22.1 L270,25.3 L276,31.0 L282,36.2 L288,38.0 L294,35.5 L300,30.0 L306,24.5 L312,22.0 L318,23.8 L324,29.0 L330,34.7 L336,37.9 L342,36.8 L348,32.0 L354,26.1 L360,22.4 L366,22.8 L372,27.1 L378,32.9 L384,37.2 L390,37.6 L396,33.9 L402,28.0 L408,23.2 L414,22.1 L420,25.3 L426,31.0 L432,36.2 L438,38.0 L444,35.5 L450,30.0 L456,24.5 L462,22.0 L468,23.8 L474,29.0 L480,34.7 L486,37.9 L492,36.8 L498,32.0 L504,26.1 L510,22.4 L516,22.8 L522,27.1 L528,32.9 L534,37.2 L540,37.6 L546,33.9 L552,28.0 L558,23.2 L564,22.1 L570,25.3 L576,31.0 L582,36.2 L588,38.0 L594,35.5 L600,30.0 L606,24.5 L612,22.0 L618,23.8 L624,29.0 L630,34.7 L636,37.9 L642,36.8 L648,32.0 L654,26.1 L660,22.4 L666,22.8 L672,27.1 L678,32.9 L684,37.2 L690,37.6 L696,33.9 L702,28.0 L708,23.2 L714,22.1 L720,25.3 L726,31.0 L732,36.2 L738,38.0 L744,35.5 L750,30.0 L756,24.5 L762,22.0 L768,23.8 L774,29.0 L780,34.7 L786,37.9 L792,36.8 L798,32.0 L804,26.1 L810,22.4 L816,22.8 L822,27.1 L828,32.9 L834,37.2 L840,37.6 L846,33.9 L852,28.0 L858,23.2 L864,22.1 L870,25.3 L876,31.0 L882,36.2 L888,38.0 L894,35.5 L900,30.0 L906,24.5 L912,22.0 L918,23.8 L924,29.0 L930,34.7 L936,37.9 L942,36.8 L948,32.0 L954,26.1 L960,22.4 L966,22.8 L972,27.1 L978,32.9 L984,37.2 L990,37.6 L996,33.9 L1002,28.0 L1008,23.2 L1014,22.1 L1020,25.3 L1026,31.0 L1032,36.2 L1038,38.0 L1044,35.5 L1050,30.0 L1056,24.5 L1062,22.0 L1068,23.8 L1074,29.0 L1080,34.7 L1086,37.9 L1092,36.8 L1098,32.0 L1104,26.1 L1110,22.4 L1116,22.8 L1122,27.1 L1128,32.9 L1134,37.2 L1140,37.6 L1146,33.9 L1152,28.0 L1158,23.2 L1164,22.1 L1170,25.3 L1176,31.0 L1182,36.2 L1188,38.0 L1194,35.5 L1200,30.0"/></svg>
+                        <span class="guide-name">Beta</span>
+                        <span class="guide-hz">13&ndash;30 Hz &middot; Alert</span>
+                        <span class="guide-line">Busy, everyday waking thought.</span>
+                        <span class="guide-more">Read the guide &rarr;</span>
                     </a>
-                    <a class="band-card" href="/bands/gamma.html">
-                        <span class="band-name">Gamma</span>
-                        <span class="band-hz">30&ndash;100 Hz</span>
-                        <span class="band-state">Focus</span>
+                    <a class="guide-card" href="/bands/gamma.html">
+                        <span class="guide-n">05</span>
+                        <svg class="guide-wave" viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path style="--dur:3s" d="M0,30.0 L6,25.2 L12,27.1 L18,32.9 L24,34.8 L30,30.0 L36,25.2 L42,27.1 L48,32.9 L54,34.8 L60,30.0 L66,25.2 L72,27.1 L78,32.9 L84,34.8 L90,30.0 L96,25.2 L102,27.1 L108,32.9 L114,34.8 L120,30.0 L126,25.2 L132,27.1 L138,32.9 L144,34.8 L150,30.0 L156,25.2 L162,27.1 L168,32.9 L174,34.8 L180,30.0 L186,25.2 L192,27.1 L198,32.9 L204,34.8 L210,30.0 L216,25.2 L222,27.1 L228,32.9 L234,34.8 L240,30.0 L246,25.2 L252,27.1 L258,32.9 L264,34.8 L270,30.0 L276,25.2 L282,27.1 L288,32.9 L294,34.8 L300,30.0 L306,25.2 L312,27.1 L318,32.9 L324,34.8 L330,30.0 L336,25.2 L342,27.1 L348,32.9 L354,34.8 L360,30.0 L366,25.2 L372,27.1 L378,32.9 L384,34.8 L390,30.0 L396,25.2 L402,27.1 L408,32.9 L414,34.8 L420,30.0 L426,25.2 L432,27.1 L438,32.9 L444,34.8 L450,30.0 L456,25.2 L462,27.1 L468,32.9 L474,34.8 L480,30.0 L486,25.2 L492,27.1 L498,32.9 L504,34.8 L510,30.0 L516,25.2 L522,27.1 L528,32.9 L534,34.8 L540,30.0 L546,25.2 L552,27.1 L558,32.9 L564,34.8 L570,30.0 L576,25.2 L582,27.1 L588,32.9 L594,34.8 L600,30.0 L606,25.2 L612,27.1 L618,32.9 L624,34.8 L630,30.0 L636,25.2 L642,27.1 L648,32.9 L654,34.8 L660,30.0 L666,25.2 L672,27.1 L678,32.9 L684,34.8 L690,30.0 L696,25.2 L702,27.1 L708,32.9 L714,34.8 L720,30.0 L726,25.2 L732,27.1 L738,32.9 L744,34.8 L750,30.0 L756,25.2 L762,27.1 L768,32.9 L774,34.8 L780,30.0 L786,25.2 L792,27.1 L798,32.9 L804,34.8 L810,30.0 L816,25.2 L822,27.1 L828,32.9 L834,34.8 L840,30.0 L846,25.2 L852,27.1 L858,32.9 L864,34.8 L870,30.0 L876,25.2 L882,27.1 L888,32.9 L894,34.8 L900,30.0 L906,25.2 L912,27.1 L918,32.9 L924,34.8 L930,30.0 L936,25.2 L942,27.1 L948,32.9 L954,34.8 L960,30.0 L966,25.2 L972,27.1 L978,32.9 L984,34.8 L990,30.0 L996,25.2 L1002,27.1 L1008,32.9 L1014,34.8 L1020,30.0 L1026,25.2 L1032,27.1 L1038,32.9 L1044,34.8 L1050,30.0 L1056,25.2 L1062,27.1 L1068,32.9 L1074,34.8 L1080,30.0 L1086,25.2 L1092,27.1 L1098,32.9 L1104,34.8 L1110,30.0 L1116,25.2 L1122,27.1 L1128,32.9 L1134,34.8 L1140,30.0 L1146,25.2 L1152,27.1 L1158,32.9 L1164,34.8 L1170,30.0 L1176,25.2 L1182,27.1 L1188,32.9 L1194,34.8 L1200,30.0"/></svg>
+                        <span class="guide-name">Gamma</span>
+                        <span class="guide-hz">30&ndash;100 Hz &middot; Focus</span>
+                        <span class="guide-line">The fastest band, and 40 Hz research.</span>
+                        <span class="guide-more">Read the guide &rarr;</span>
+                    </a>
+                    <a class="guide-card" href="/rem-sleep.html">
+                        <span class="guide-n">06</span>
+                        <svg class="guide-wave" viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path style="--dur:5s" d="M0,30.0 L6,24.9 L12,24.6 L18,29.2 L24,34.6 L30,35.7 L36,31.5 L42,25.9 L48,24.1 L54,27.8 L60,33.5 L66,36.0 L72,32.9 L78,27.1 L84,24.0 L90,26.5 L96,32.2 L102,35.9 L108,34.1 L114,28.5 L120,24.3 L126,25.4 L132,30.8 L138,35.4 L144,35.1 L150,30.0 L156,24.9 L162,24.6 L168,29.2 L174,34.6 L180,35.7 L186,31.5 L192,25.9 L198,24.1 L204,27.8 L210,33.5 L216,36.0 L222,32.9 L228,27.1 L234,24.0 L240,26.5 L246,32.2 L252,35.9 L258,34.1 L264,28.5 L270,24.3 L276,25.4 L282,30.8 L288,35.4 L294,35.1 L300,30.0 L306,24.9 L312,24.6 L318,29.2 L324,34.6 L330,35.7 L336,31.5 L342,25.9 L348,24.1 L354,27.8 L360,33.5 L366,36.0 L372,32.9 L378,27.1 L384,24.0 L390,26.5 L396,32.2 L402,35.9 L408,34.1 L414,28.5 L420,24.3 L426,25.4 L432,30.8 L438,35.4 L444,35.1 L450,30.0 L456,24.9 L462,24.6 L468,29.2 L474,34.6 L480,35.7 L486,31.5 L492,25.9 L498,24.1 L504,27.8 L510,33.5 L516,36.0 L522,32.9 L528,27.1 L534,24.0 L540,26.5 L546,32.2 L552,35.9 L558,34.1 L564,28.5 L570,24.3 L576,25.4 L582,30.8 L588,35.4 L594,35.1 L600,30.0 L606,24.9 L612,24.6 L618,29.2 L624,34.6 L630,35.7 L636,31.5 L642,25.9 L648,24.1 L654,27.8 L660,33.5 L666,36.0 L672,32.9 L678,27.1 L684,24.0 L690,26.5 L696,32.2 L702,35.9 L708,34.1 L714,28.5 L720,24.3 L726,25.4 L732,30.8 L738,35.4 L744,35.1 L750,30.0 L756,24.9 L762,24.6 L768,29.2 L774,34.6 L780,35.7 L786,31.5 L792,25.9 L798,24.1 L804,27.8 L810,33.5 L816,36.0 L822,32.9 L828,27.1 L834,24.0 L840,26.5 L846,32.2 L852,35.9 L858,34.1 L864,28.5 L870,24.3 L876,25.4 L882,30.8 L888,35.4 L894,35.1 L900,30.0 L906,24.9 L912,24.6 L918,29.2 L924,34.6 L930,35.7 L936,31.5 L942,25.9 L948,24.1 L954,27.8 L960,33.5 L966,36.0 L972,32.9 L978,27.1 L984,24.0 L990,26.5 L996,32.2 L1002,35.9 L1008,34.1 L1014,28.5 L1020,24.3 L1026,25.4 L1032,30.8 L1038,35.4 L1044,35.1 L1050,30.0 L1056,24.9 L1062,24.6 L1068,29.2 L1074,34.6 L1080,35.7 L1086,31.5 L1092,25.9 L1098,24.1 L1104,27.8 L1110,33.5 L1116,36.0 L1122,32.9 L1128,27.1 L1134,24.0 L1140,26.5 L1146,32.2 L1152,35.9 L1158,34.1 L1164,28.5 L1170,24.3 L1176,25.4 L1182,30.8 L1188,35.4 L1194,35.1 L1200,30.0"/></svg>
+                        <span class="guide-name">REM sleep</span>
+                        <span class="guide-hz">The dreaming stage &middot; Dreams</span>
+                        <span class="guide-line">When it happens, and what gamma does there.</span>
+                        <span class="guide-more">Read the guide &rarr;</span>
                     </a>
                 </div>
             </div>
@@ -2075,9 +2118,7 @@
     </main>
 
     <!-- Footer -->
-    <div class="footer-banner">
-        <picture><source srcset="assets/images/astro-eyes-closed.webp" type="image/webp"><img src="assets/images/astro-eyes-closed.png" alt="Astronaut helmet closeup" loading="lazy" width="1456" height="816"></picture>
-    </div>
+    <!-- footer banner removed: it repeated the vision section photo -->
 
     <footer>
         <div class="footer-inner">
