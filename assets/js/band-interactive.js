@@ -171,3 +171,47 @@
     update();
   }
 })();
+
+/* ── 5. Source previews and the table of contents ── */
+(function () {
+  'use strict';
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  /* Hover or focus a source number: show the reference it points to */
+  var tip = null;
+  function showTip(a) {
+    var li = document.getElementById(a.hash.slice(1));
+    if (!li) return;
+    if (!tip) { tip = document.createElement('div'); tip.className = 'band-ref-tip'; tip.setAttribute('role', 'tooltip'); document.body.appendChild(tip); }
+    var text = li.textContent.replace(/\s+/g, ' ').trim();
+    tip.textContent = text.length > 170 ? text.slice(0, 167) + '…' : text;
+    tip.hidden = false;
+    var r = a.getBoundingClientRect();
+    var left = Math.min(window.scrollX + r.left - 12, window.scrollX + document.documentElement.clientWidth - tip.offsetWidth - 16);
+    tip.style.left = Math.max(window.scrollX + 12, left) + 'px';
+    tip.style.top = (window.scrollY + r.bottom + 10) + 'px';
+  }
+  function hideTip() { if (tip) tip.hidden = true; }
+  document.querySelectorAll('.band-page--editorial .band-ref a').forEach(function (a) {
+    if (finePointer) { a.addEventListener('mouseenter', function () { showTip(a); }); a.addEventListener('mouseleave', hideTip); }
+    a.addEventListener('focus', function () { showTip(a); });
+    a.addEventListener('blur', hideTip);
+  });
+  addEventListener('scroll', hideTip, { passive: true });
+
+  /* Table of contents: mark the section being read */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.band-toc a'));
+  if (!links.length) return;
+  var heads = links.map(function (a) { return document.getElementById(a.hash.slice(1)); });
+  var ticking = false, current = -1;
+  function mark() {
+    ticking = false;
+    var line = window.innerHeight * 0.35, idx = 0;
+    for (var i = 0; i < heads.length; i++) { if (heads[i] && heads[i].getBoundingClientRect().top < line) idx = i; }
+    if (idx === current) return;
+    current = idx;
+    links.forEach(function (a, i) { a.classList.toggle('is-current', i === idx); if (i === idx) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+  }
+  addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(mark); } }, { passive: true });
+  mark();
+})();

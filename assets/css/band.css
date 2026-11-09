@@ -484,3 +484,129 @@ html[data-theme="dark"] .band-jump a { background: rgba(14,16,19,0.6); }
     .band-night-scroll svg { min-width: 560px; }
     .band-night-hint { display: block; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   Editorial band page (.band-page--editorial, first on delta.html)
+   Big numbered section headings, a larger lede under each one, the
+   glance table as cards, a pull line, quiet source numbers with a
+   hover preview, and a sticky table of contents on wide screens.
+   Uses only the fonts the site already loads (Outfit, Plex Mono).
+   ══════════════════════════════════════════════════════════════ */
+.band-page--editorial .band-hero h1 {
+    font-size: clamp(2.5rem, 6.4vw, 4.4rem); font-weight: 200; letter-spacing: -0.035em; line-height: 1.02;
+}
+.band-page--editorial .essay-body { counter-reset: bsec; }
+
+/* Section headings: a big thin number, then the heading itself */
+.band-page--editorial .essay-body h2 {
+    counter-increment: bsec;
+    display: grid; grid-template-columns: auto 1fr; column-gap: 1.1rem; align-items: start;
+    font-family: var(--sans); font-size: clamp(1.75rem, 3.4vw, 2.55rem);
+    font-weight: 250; letter-spacing: -0.025em; line-height: 1.12;
+    text-transform: none; color: var(--text);
+    margin-top: 6rem; margin-bottom: 1.6rem; padding-top: 2.4rem;
+    border-top: 1px solid var(--border);
+}
+.band-page--editorial .essay-body h2::before {
+    content: counter(bsec, decimal-leading-zero) / "";
+    font-family: var(--mono); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em;
+    color: var(--text); line-height: 1; padding: 0.55rem 0.6rem; margin-top: 0.35em;
+    border: 1px solid var(--accent); border-radius: 999px;
+}
+.band-page--editorial .essay-body h2.no-num { display: block; font-size: 1.3rem; }
+.band-page--editorial .essay-body h2.no-num::before { content: none; }
+.band-page--editorial .band-quick h2 { margin-top: 3.2rem; }
+
+/* The first paragraph under a heading reads as a lede */
+.band-page--editorial .essay-body h2 + p {
+    font-size: 1.2rem; line-height: 1.75; font-weight: 300; color: var(--text);
+}
+.band-page--editorial .essay-body h3 {
+    font-size: 1.3rem; font-weight: 400; letter-spacing: -0.01em; margin-top: 3rem;
+}
+.band-page--editorial .essay-body h3::before {
+    content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent); margin-right: 0.7rem; vertical-align: 0.18em;
+}
+.band-page--editorial .band-faq summary h3::before { content: none; }
+.band-page--editorial .band-faq summary h3 { font-size: 1.08rem; margin: 0; }
+
+/* Glance table as six cards */
+.band-glance, .band-glance tbody { display: block; }
+.band-glance tbody { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; }
+.band-glance tr {
+    display: flex; flex-direction: column; gap: 0.5rem;
+    border: 1px solid var(--border); border-radius: 14px; padding: 1.15rem 1.2rem 1.2rem;
+    background: rgba(255,255,255,0.55);
+}
+html[data-theme="dark"] .band-glance tr { background: rgba(255,255,255,0.03); }
+.band-glance th, .band-glance td { display: block; padding: 0; border: 0; }
+.band-glance th {
+    font-family: var(--mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--text);
+}
+.band-glance th::before {
+    content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); margin-right: 0.55rem; vertical-align: 0.12em;
+}
+.band-glance td { font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); }
+@media (max-width: 640px) { .band-glance tbody { grid-template-columns: 1fr; } }
+
+/* Pull line */
+.band-pull {
+    margin: 2.6rem 0 !important; padding: 0.4rem 0 0.4rem 1.4rem;
+    border-left: 2px solid var(--accent);
+    font-size: clamp(1.3rem, 2.4vw, 1.6rem) !important; line-height: 1.45 !important;
+    font-weight: 250 !important; letter-spacing: -0.015em; color: var(--text) !important;
+}
+
+/* Source numbers: small, quiet, still one tap from the reference */
+.band-page--editorial .band-ref { margin-left: 0.2em; }
+.band-page--editorial .band-ref a {
+    display: inline-block; min-width: 1.5em; padding: 0.1em 0.3em; border-radius: 999px;
+    font-family: var(--mono); font-size: 0.85em; line-height: 1.3; text-align: center;
+    color: var(--text-light); background: var(--accent-dim); text-decoration: none;
+}
+.band-page--editorial .band-ref a:hover, .band-page--editorial .band-ref a:focus-visible { color: var(--text); background: var(--accent); }
+.band-ref-tip {
+    position: absolute; z-index: 50; max-width: 22rem; padding: 0.75rem 0.9rem;
+    background: var(--text); color: var(--bg); border-radius: 10px;
+    font-size: 0.8rem; line-height: 1.5; font-weight: 300; pointer-events: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+}
+.band-ref-tip[hidden] { display: none; }
+
+/* Table of contents: hidden on narrow screens (the hero chips cover it) */
+.band-toc { display: none; }
+@media (min-width: 1280px) {
+    .band-page--editorial .essay-inner {
+        max-width: none; display: grid; column-gap: 3rem;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 68ch) minmax(0, 1fr);
+    }
+    .band-page--editorial .essay-inner > * { grid-column: 2; }
+    .band-page--editorial .essay-inner > .band-toc {
+        display: block; grid-column: 1; grid-row: 1 / span 3; justify-self: end; align-self: start;
+        position: sticky; top: 7rem; width: 100%; max-width: 13.5rem;
+    }
+}
+.band-toc-title {
+    font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-light); margin: 0 0 0.9rem;
+}
+.band-toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--border); }
+.band-toc a {
+    display: flex; gap: 0.7rem; align-items: baseline; padding: 0.38rem 0 0.38rem 0.9rem; margin-left: -1px;
+    border-left: 2px solid transparent; font-size: 0.85rem; line-height: 1.35;
+    color: var(--text-light); text-decoration: none; transition: color .2s ease, border-color .2s ease;
+}
+.band-toc-n { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; }
+.band-toc a:hover, .band-toc a:focus-visible { color: var(--text); }
+.band-toc a.is-current { color: var(--text); border-left-color: var(--accent); }
+
+@media (max-width: 640px) {
+    .band-page--editorial .essay-body h2 { margin-top: 4.5rem; column-gap: 0.8rem; }
+    .band-page--editorial .essay-body h2 + p { font-size: 1.1rem; }
+}
+/* body's overflow-x: hidden makes it a scroll box, which stops sticky.
+   clip hides the same overflow without creating one. */
+body:has(.band-page--editorial) { overflow-x: clip; }
