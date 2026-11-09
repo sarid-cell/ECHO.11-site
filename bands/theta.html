@@ -49,7 +49,7 @@
     <meta property="og:url" content="https://echo11.app/bands/theta.html">
     <meta property="og:site_name" content="ECHO.11">
     <meta property="og:image" content="https://echo11.app/assets/images/ghost-machine.png">
-    <meta property="article:modified_time" content="2026-10-16">
+    <meta property="article:modified_time" content="2026-11-09">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="What Are Theta Waves? EEG Theta Band, 4–8 Hz">
@@ -66,8 +66,11 @@
     <link rel="stylesheet" href="/assets/css/session.css">
     <link rel="stylesheet" href="/assets/css/essay.css">
     <link rel="stylesheet" href="/assets/css/band.css">
+    <link rel="stylesheet" href="/assets/css/yt-facade.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/assets/css/yt-facade.css"></noscript>
 
-    <script type="application/ld+json">{
+    <script type="application/ld+json">
+{
     "@context": "https://schema.org",
     "@graph": [
         {
@@ -111,7 +114,7 @@
             "image": "https://echo11.app/assets/images/astro-eyes-closed.png",
             "inLanguage": "en",
             "datePublished": "2026-09-14",
-            "dateModified": "2026-10-16",
+            "dateModified": "2026-11-09",
             "author": {
                 "@id": "https://echo11.app/#shira-sarid"
             },
@@ -128,7 +131,14 @@
             },
             "citation": [
                 "https://doi.org/10.1007/s00426-018-1066-8",
-                "https://doi.org/10.1371/journal.pone.0286023"
+                "https://doi.org/10.1371/journal.pone.0286023",
+                "https://www.ncbi.nlm.nih.gov/books/NBK539805/",
+                "https://www.ncbi.nlm.nih.gov/books/NBK526132/",
+                "https://doi.org/10.1046/j.1460-9568.2002.01975.x",
+                "https://doi.org/10.1007/s10548-014-0361-y",
+                "https://doi.org/10.1016/S0896-6273(02)00586-X",
+                "https://doi.org/10.1038/nrn.2016.21",
+                "https://doi.org/10.1038/s41539-016-0001-2"
             ]
         },
         {
@@ -158,6 +168,14 @@
                     "acceptedAnswer": {
                         "@type": "Answer",
                         "text": "In adults, theta shows up as alertness fades, through the transition into sleep and in light sleep (stages N1 and N2). It also rises over frontal areas during demanding mental tasks. Much of what is known about hippocampal theta comes from animal studies with electrodes inside the brain, which a scalp EEG cannot record."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Are theta waves good for learning?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Theta is linked with memory work, but that is not the same as theta making you learn better. Frontal theta rises as people hold more items in mind, and hippocampal theta is tied to memory in animal studies. Whether listening to a theta-rate sound helps learning has not been shown."
                     }
                 },
                 {
@@ -195,7 +213,8 @@
             ]
         }
     ]
-}</script>
+}
+</script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -247,7 +266,7 @@
     </aside>
 
     <main id="main-content">
-        <article class="band-page">
+        <article class="band-page band-page--editorial">
             <header class="band-hero">
                 <div class="band-hero-plate">
                     <picture>
@@ -259,7 +278,8 @@
                 <div class="band-hero-inner">
                     <div class="essay-eyebrow"><a href="/bands/">The Bands</a><span>Theta</span></div>
                     <h1>What Are Theta Waves?</h1>
-                    <p class="band-byline">By <a href="/about.html">Shira Sarid</a> &middot; Updated <time datetime="2026-10-16">October 16, 2026</time></p>
+                    <p class="band-answer"><strong>Theta waves are brain rhythms of about 4 to 8 cycles per second (4&ndash;8 Hz), sitting between delta and alpha.</strong> In adults they show up most clearly on an EEG during drowsiness and light sleep, as you drift off. They also rise over the front of the head during hard mental work, such as holding numbers in memory, a pattern called frontal midline theta.<sup class="band-ref"><a href="#ref-3" aria-label="Source 3">3</a></sup><sup class="band-ref"><a href="#ref-5" aria-label="Source 5">5</a></sup></p>
+                    <p class="band-byline">By <a href="/about.html">Shira Sarid</a> &middot; Updated <time datetime="2026-11-09">November 9, 2026</time></p>
                     <div class="band-spec">
                         <span>4&ndash;8 Hz</span>
                         <span>Drift</span>
@@ -270,39 +290,157 @@
                          aria-hidden="true" focusable="false">
                         <path d="M0,28 Q18.75,-4 37.5,28 Q56.25,60 75,28 Q93.75,-4 112.5,28 Q131.25,60 150,28 Q168.75,-4 187.5,28 Q206.25,60 225,28 Q243.75,-4 262.5,28 Q281.25,60 300,28 Q318.75,-4 337.5,28 Q356.25,60 375,28 Q393.75,-4 412.5,28 Q431.25,60 450,28 Q468.75,-4 487.5,28 Q506.25,60 525,28 Q543.75,-4 562.5,28 Q581.25,60 600,28"/>
                     </svg>
+                    <nav class="band-jump" aria-label="On this page">
+                        <a class="is-primary" href="#theta-60s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 5v14l11-7-11-7z"/></svg>Watch &middot; 60 sec</a>
+                        <a href="#theta-rhythm">Feel the rhythm</a>
+                        <a href="#theta-faces">Three faces of theta</a>
+                        <a href="#theta-sleep">Theta in sleep</a>
+                    </nav>
                 </div>
             </header>
             <div class="essay">
             <div class="essay-inner">
+                <nav class="band-toc" aria-label="On this page">
+                    <p class="band-toc-title">On this page</p>
+                    <ol>
+                        <li><a href="#theta-60s-title"><span class="band-toc-n">01</span>In 60 seconds</a></li>
+                        <li><a href="#theta-at-a-glance"><span class="band-toc-n">02</span>At a glance</a></li>
+                        <li><a href="#theta-what-the-band-is"><span class="band-toc-n">03</span>What the band is</a></li>
+                        <li><a href="#theta-faces"><span class="band-toc-n">04</span>Three faces</a></li>
+                        <li><a href="#theta-what-it-is-linked-to"><span class="band-toc-n">05</span>What it is linked to</a></li>
+                        <li><a href="#theta-sleep"><span class="band-toc-n">06</span>Theta in sleep</a></li>
+                        <li><a href="#theta-what-it-is-not"><span class="band-toc-n">07</span>What it is not</a></li>
+                        <li><a href="#theta-listeners-report"><span class="band-toc-n">08</span>Listeners report</a></li>
+                        <li><a href="#theta-listen"><span class="band-toc-n">09</span>Listen</a></li>
+                        <li><a href="#theta-vs-other-bands"><span class="band-toc-n">10</span>Vs other bands</a></li>
+                        <li><a href="#theta-faq"><span class="band-toc-n">11</span>FAQ</a></li>
+                    </ol>
+                </nav>
                 <div class="essay-body">
-                <p><strong>Theta waves are brain rhythms of about 4 to 8 cycles per second (4&ndash;8 Hz), sitting between delta and alpha.</strong> In adults they show up most clearly on an EEG during drowsiness and light sleep, as you drift off. They also appear over the front of the head during sustained mental work, such as holding numbers in memory, a pattern called frontal midline theta. Young children have much more theta in their waking EEG than adults.</p>
+                <p class="band-note">This page is educational and not medical advice. ECHO.11 sessions are not a treatment for any condition.</p>
 
-                <h2>Theta waves at a glance</h2>
-                <table class="band-table">
+                <section class="band-quick" id="theta-60s" aria-labelledby="theta-60s-title">
+                    <h2 id="theta-60s-title">Theta waves in 60 seconds</h2>
+                    <div class="band-quick-grid">
+                        <div class="band-short">
+                            <button type="button" class="yt-facade yt-facade--short" data-yt="PevZELgj8hA"
+                                aria-label="Play What are theta waves? Half asleep or deep focus (YouTube Short)">
+                                <img class="yt-thumb" src="https://i.ytimg.com/vi/PevZELgj8hA/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360">
+                                <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 5v14l11-7-11-7z"/></svg></span>
+                            </button>
+                            <span class="band-short-label">Short &middot; Theta</span>
+                        </div>
+                        <div>
+                            <ul class="band-facts">
+                                <li><span class="band-fact-num">4&ndash;8&nbsp;Hz</span><span class="band-fact-line">Between slow delta and calm alpha. Some textbooks stop at 7 Hz.<sup class="band-ref"><a href="#ref-3" aria-label="Source 3">3</a></sup></span></li>
+                                <li><span class="band-fact-num">Drifting</span><span class="band-fact-line">As you get drowsy, theta takes over from alpha. It marks the lightest stage of sleep, N1.<sup class="band-ref"><a href="#ref-3" aria-label="Source 3">3</a></sup><sup class="band-ref"><a href="#ref-4" aria-label="Source 4">4</a></sup></span></li>
+                                <li><span class="band-fact-num">Thinking</span><span class="band-fact-line">It also rises over the front of the head when you hold more in memory.<sup class="band-ref"><a href="#ref-5" aria-label="Source 5">5</a></sup></span></li>
+                                <li><span class="band-fact-num">REM</span><span class="band-fact-line">Deep inside the brain, the hippocampus runs on theta during REM sleep.<sup class="band-ref"><a href="#ref-8" aria-label="Source 8">8</a></sup><sup class="band-ref"><a href="#ref-9" aria-label="Source 9">9</a></sup></span></li>
+                            </ul>
+                            <p class="band-quick-links"><a href="https://youtube.com/shorts/PevZELgj8hA" target="_blank" rel="noopener noreferrer" data-yt-out="theta-quick">Watch on YouTube</a> <a href="https://www.youtube.com/@shira_sarid?sub_confirmation=1" target="_blank" rel="noopener noreferrer" data-yt-out="theta-quick-subscribe">Subscribe to ECHO.11</a></p>
+                        </div>
+                    </div>
+                </section>
+
+                <h2 id="theta-at-a-glance">Theta waves at a glance</h2>
+                <table class="band-table band-glance">
                     <tbody>
-                        <tr><th scope="row">Frequency</th><td>Roughly 4&ndash;8 Hz, between delta and alpha</td></tr>
-                        <tr><th scope="row">When it appears</th><td>Drowsiness, the drift just before sleep, some meditative states</td></tr>
-                        <tr><th scope="row">Also linked to</th><td>Sustained attention and working-memory load, over frontal midline sites</td></tr>
-                        <tr><th scope="row">Hippocampal theta</th><td>Recorded during some kinds of movement and learning; not the same measurement as scalp theta</td></tr>
+                        <tr><th scope="row">Frequency</th><td>Roughly 4&ndash;8 Hz, between delta and alpha. StatPearls uses 4&ndash;7 Hz.<sup class="band-ref"><a href="#ref-3" aria-label="Source 3">3</a></sup></td></tr>
+                        <tr><th scope="row">When it appears</th><td>Drowsiness and the early stages of sleep, N1 and N2<sup class="band-ref"><a href="#ref-3" aria-label="Source 3">3</a></sup></td></tr>
+                        <tr><th scope="row">Also linked to</th><td>Working-memory load, over frontal midline sites<sup class="band-ref"><a href="#ref-5" aria-label="Source 5">5</a></sup></td></tr>
+                        <tr><th scope="row">Hippocampal theta</th><td>Recorded during exploration and REM sleep, mostly in animals; not the same measurement as scalp theta<sup class="band-ref"><a href="#ref-8" aria-label="Source 8">8</a></sup></td></tr>
                         <tr><th scope="row">ECHO.11 session</th><td>None yet</td></tr>
                     </tbody>
                 </table>
 
-                <h2>What the band is</h2>
+                <h2 id="theta-what-the-band-is">What the band is</h2>
                 <p>Theta runs roughly <strong>4 to 8 Hz</strong>, between delta and alpha. In adults it shows up in drowsiness, in the drift just before sleep, and in some meditative states. It is also recorded from the hippocampus during certain kinds of movement and learning, though hippocampal theta and scalp theta are not the same measurement and should not be treated as interchangeable. Below theta sit the slower <a href="/bands/delta.html">delta waves</a> of deep sleep; above it sit the faster <a href="/bands/alpha.html">alpha waves</a>.</p>
 
-                <h2>What theta waves are linked to</h2>
-                <p>Theta activity recorded over frontal midline sites has been associated with sustained attention and with working-memory load, which is the opposite of the drowsiness association and shows the band does not map onto one mental state.</p>
-                <!-- CITATION NEEDED: the association between frontal midline theta and working-memory load -->
-                <p>Hippocampal theta has a long literature in rodent spatial navigation and memory encoding. Extending it to what a human hears through headphones is an inference, not a finding.</p>
-                <!-- CITATION NEEDED: the rodent hippocampal theta literature on spatial navigation and memory encoding -->
-                <p>In the meta-analysis by Garcia-Argibay, Santed and Reales (2019, <em>Psychological Research</em>)<sup class="band-ref"><a href="#ref-1">[1]</a></sup>, the effect binaural beats showed most consistently was on anxiety, with a much less consistent picture for memory and attention. That caution applies to theta as much as to any other band.</p>
+                <figure class="band-interactive" id="theta-rhythm" data-rhythm data-band="theta" data-window="1" data-slow="2">
+                    <div class="band-interactive-head">
+                        <span class="band-kicker">Try it &middot; Feel the rhythm</span>
+                        <output class="band-rhythm-hz" data-rhythm-hz for="rhythmRange">6 Hz</output>
+                    </div>
+                    <div class="band-rhythm-stage">
+                        <svg viewBox="0 0 600 130" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                            <line class="r-axis" x1="0" x2="600" y1="65" y2="65"/>
+                            <line class="r-tick" x1="300" x2="300" y1="8" y2="122"/>
+                            <path class="r-wave" d="M0,65 L600,65"/>
+                            <circle class="r-dot" cx="36" cy="65" r="6"/>
+                        </svg>
+                    </div>
+                    <div class="band-rhythm-scale" aria-hidden="true"><span>0 s</span><span>0.5 s</span><span>1 s</span></div>
+                    <div class="band-range-wrap">
+                        <label for="rhythmRange">Speed of the wave (4 to 8 Hz)</label>
+                        <input class="band-range" type="range" id="rhythmRange" min="4" max="8" step="1" value="6" aria-describedby="rhythmLine">
+                    </div>
+                    <div class="band-chips" role="group" aria-label="Jump to a speed">
+                        <button type="button" class="band-chip" data-hz="4" aria-pressed="false">4 Hz</button>
+                        <button type="button" class="band-chip" data-hz="6" aria-pressed="true">6 Hz</button>
+                        <button type="button" class="band-chip" data-hz="8" aria-pressed="false">8 Hz</button>
+                        <button type="button" class="band-pause" aria-pressed="false">Pause</button>
+                    </div>
+                    <p class="band-live" id="rhythmLine" data-rhythm-line aria-live="polite"><strong>6 Hz:</strong> 6 waves a second. The middle of theta.</p>
+                    <figcaption class="band-figcap">One second, drawn across the box and played twice as slow, so it is easy to watch. It is silent, and watching it does not change your brainwaves.</figcaption>
+                </figure>
 
-                <h2>What theta waves are not</h2>
+                <h2 id="theta-faces">The three faces of theta</h2>
+                <p>The same 4 to 8 Hz range shows up in very different situations. Where it is recorded changes what it means.</p>
+                <figure class="band-interactive" data-faces>
+                    <div class="band-interactive-head">
+                        <span class="band-kicker">Try it &middot; Pick a face</span>
+                    </div>
+                    <div class="band-chips" role="group" aria-label="Pick a situation">
+                        <button type="button" class="band-chip" data-face="drift" aria-pressed="true" aria-controls="face-drift">Drifting off</button>
+                        <button type="button" class="band-chip" data-face="focus" aria-pressed="false" aria-controls="face-focus">Thinking hard</button>
+                        <button type="button" class="band-chip" data-face="hippo" aria-pressed="false" aria-controls="face-hippo">Deep inside</button>
+                    </div>
+                    <div class="band-face" id="face-drift" data-face-panel="drift">
+                        <p class="band-face-title">Drifting off</p>
+                        <ul class="band-face-list">
+                            <li>Where: front and center of the head, spreading back as alpha fades.</li>
+                            <li>When: drowsiness and the first light stages of sleep, N1 and N2.</li>
+                            <li>What it means: you are leaving wakefulness. This is the most common place to see theta in an adult.<sup class="band-ref"><a href="#ref-3" aria-label="Source 3">3</a></sup><sup class="band-ref"><a href="#ref-4" aria-label="Source 4">4</a></sup></li>
+                        </ul>
+                    </div>
+                    <div class="band-face" id="face-focus" data-face-panel="focus" hidden>
+                        <p class="band-face-title">Thinking hard</p>
+                        <ul class="band-face-list">
+                            <li>Where: a spot over the front midline of the head.</li>
+                            <li>When: while you hold several things in mind at once. In one study it rose with each extra item to remember.</li>
+                            <li>What it means: effortful memory work. The effect is real but varies: one study found it missing in over 20% of people.<sup class="band-ref"><a href="#ref-5" aria-label="Source 5">5</a></sup><sup class="band-ref"><a href="#ref-6" aria-label="Source 6">6</a></sup></li>
+                        </ul>
+                    </div>
+                    <div class="band-face" id="face-hippo" data-face-panel="hippo" hidden>
+                        <p class="band-face-title">Deep inside</p>
+                        <ul class="band-face-list">
+                            <li>Where: the hippocampus, a memory structure that a scalp EEG cannot reach.</li>
+                            <li>When: in animals, during active exploration and in REM sleep.</li>
+                            <li>What it means: a timing signal for memory and navigation. Most of this comes from studies in rodents.<sup class="band-ref"><a href="#ref-7" aria-label="Source 7">7</a></sup><sup class="band-ref"><a href="#ref-8" aria-label="Source 8">8</a></sup><sup class="band-ref"><a href="#ref-9" aria-label="Source 9">9</a></sup></li>
+                        </ul>
+                    </div>
+                </figure>
+
+                <h2 id="theta-what-it-is-linked-to">What theta waves are linked to</h2>
+                <p>Theta activity recorded over frontal midline sites has been associated with sustained attention and with working-memory load, which is the opposite of the drowsiness association and shows the band does not map onto one mental state. In a 2002 study, frontal theta rose step by step as people held more digits in memory.<sup class="band-ref"><a href="#ref-5" aria-label="Source 5">5</a></sup> A later study found the effect varies a lot from person to person.<sup class="band-ref"><a href="#ref-6" aria-label="Source 6">6</a></sup></p>
+                <p>Hippocampal theta has a long literature in rodent spatial navigation and memory encoding.<sup class="band-ref"><a href="#ref-7" aria-label="Source 7">7</a></sup><sup class="band-ref"><a href="#ref-8" aria-label="Source 8">8</a></sup> A classic review calls theta the &ldquo;online&rdquo; state of the hippocampus.<sup class="band-ref"><a href="#ref-7" aria-label="Source 7">7</a></sup> Extending it to what a human hears through headphones is an inference, not a finding.</p>
+                <p>In the meta-analysis by Garcia-Argibay, Santed and Reales (2019, <em>Psychological Research</em>)<sup class="band-ref"><a href="#ref-1" aria-label="Source 1">1</a></sup>, the effect binaural beats showed most consistently was on anxiety, with a much less consistent picture for memory and attention. That caution applies to theta as much as to any other band.</p>
+                <div class="band-verdict" aria-label="The short version">
+                    <div class="band-verdict-cell"><span class="band-verdict-num">Drowsiness</span><span class="band-verdict-line">Solid: theta is a standard marker of drifting off.<sup class="band-ref"><a href="#ref-3" aria-label="Source 3">3</a></sup></span></div>
+                    <div class="band-verdict-cell"><span class="band-verdict-num">Memory load</span><span class="band-verdict-line">Real on average, but it varies a lot between people.<sup class="band-ref"><a href="#ref-5" aria-label="Source 5">5</a></sup><sup class="band-ref"><a href="#ref-6" aria-label="Source 6">6</a></sup></span></div>
+                    <div class="band-verdict-cell"><span class="band-verdict-num">Theta beats</span><span class="band-verdict-line">Mixed. Reviews do not show a reliable effect on memory or focus.<sup class="band-ref"><a href="#ref-1" aria-label="Source 1">1</a></sup><sup class="band-ref"><a href="#ref-2" aria-label="Source 2">2</a></sup></span></div>
+                </div>
+
+                <h2 id="theta-sleep">Theta in sleep</h2>
+                <p>Theta shows up twice in a night. First at the doorway: as you drift off, theta replaces the calm alpha rhythm and marks stage N1, the lightest sleep.<sup class="band-ref"><a href="#ref-3" aria-label="Source 3">3</a></sup><sup class="band-ref"><a href="#ref-4" aria-label="Source 4">4</a></sup> Then again in REM, the dreaming stage, where the hippocampus runs on theta while the rest of the cortex shows fast gamma.<sup class="band-ref"><a href="#ref-9" aria-label="Source 9">9</a></sup></p>
+                <p class="band-pull">Theta is the rhythm of the edges of sleep: the moment you let go, and the hours you dream.</p>
+                <p>See the whole night on the <a href="/bands/delta.html#delta-night">delta page</a>, or read <a href="/rem-sleep.html">what REM sleep is</a>.</p>
+
+                <h2 id="theta-what-it-is-not">What theta waves are not</h2>
                 <p>Theta is not a shortcut to a meditative state, and it is not a creativity switch. The band appears both when someone is drifting toward sleep and when someone is concentrating hard, which is a good reason to distrust any description that assigns it a single feeling.</p>
                 <p>It is also not evidence of anything mystical. Theta is a frequency range in a voltage recording. What it means depends entirely on where it was recorded, when, and in whom.</p>
 
-                <h2>What listeners report</h2>
+                <h2 id="theta-listeners-report">What listeners report</h2>
                 <p>Individual response varies, and some people notice nothing. Most commonly reported:</p>
                     <div class="feel-tags">
                         <span class="feel-tag">Drifting</span>
@@ -311,7 +449,7 @@
                         <span class="feel-tag">Time passing oddly</span>
                     </div>
 
-                <h2>Listen</h2>
+                <h2 id="theta-listen">Listen</h2>
                 <div class="band-none">
                     <span class="band-none-band">Theta &middot; 4&ndash;8 Hz</span>
                     <p class="band-none-line">No echo&middot;11 session yet.</p>
@@ -322,9 +460,15 @@
                     </div>
                 </div>
 
-                <p>Theta is the rhythm of drifting off. <a href="/sleep.html">Try a free sleep session</a> made for that part of the night.</p>
+                <a class="band-listen band-listen--play" id="theta-listen" href="/sleep.html" data-float-hide>
+                    <span class="band-listen-disc" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 5v14l11-7-11-7z"/></svg></span>
+                    <span>
+                        <span class="band-listen-label">Listen: Sleep, the 30-minute session</span>
+                        <span class="band-listen-line">Theta is the rhythm of drifting off. This brown-noise wind-down is made for that part of the night. Not a theta beat.</span>
+                    </span>
+                </a>
 <p>Long-form sessions are on YouTube too. <a href="https://www.youtube.com/@shira_sarid?sub_confirmation=1" target="_blank" rel="noopener noreferrer">Subscribe to ECHO.11 on YouTube</a>.</p>
-<h2>Theta vs. the other brainwave bands</h2>
+<h2 id="theta-vs-other-bands">Theta vs. the other brainwave bands</h2>
                 <table class="band-table">
                     <thead>
                         <tr><th scope="col">Band</th><th scope="col">Frequency</th><th scope="col">Typical state</th></tr>
@@ -338,20 +482,45 @@
                     </tbody>
                 </table>
 
-                <h2>Theta waves FAQ</h2>
-<h3>What are theta waves?</h3>
-<p>Theta waves are EEG rhythms of about 4 to 8 Hz. In adults they appear mostly during drowsiness and light sleep, and over the front of the head during focused mental work.</p>
-<h3>What is the theta band frequency range on an EEG?</h3>
-<p>Most EEG references give theta as 4 to 8 Hz, and some use 4 to 7 Hz. That means the boundary with alpha shifts slightly between textbooks and labs.</p>
-<h3>When do theta waves appear?</h3>
-<p>In adults, theta shows up as alertness fades, through the transition into sleep and in light sleep (stages N1 and N2). It also rises over frontal areas during demanding mental tasks. Much of what is known about hippocampal theta comes from animal studies with electrodes inside the brain, which a scalp EEG cannot record.</p>
-<h3>Does ECHO.11 have a theta session?</h3>
-<p>Not a theta-frequency one. The closest is the free sleep session, a 30-minute brown-noise wind-down for listening as you drift toward sleep, which is when theta usually appears.</p>
-<h2>References</h2>
+                <h2 id="theta-faq">Theta waves FAQ</h2>
+                <div class="band-faq">
+                    <details open>
+                        <summary><h3>What are theta waves?</h3></summary>
+                        <p>Theta waves are EEG rhythms of about 4 to 8 Hz. In adults they appear mostly during drowsiness and light sleep, and over the front of the head during focused mental work.</p>
+                    </details>
+                    <details>
+                        <summary><h3>What is the theta band frequency range on an EEG?</h3></summary>
+                        <p>Most EEG references give theta as 4 to 8 Hz, and some use 4 to 7 Hz. That means the boundary with alpha shifts slightly between textbooks and labs.</p>
+                    </details>
+                    <details>
+                        <summary><h3>When do theta waves appear?</h3></summary>
+                        <p>In adults, theta shows up as alertness fades, through the transition into sleep and in light sleep (stages N1 and N2). It also rises over frontal areas during demanding mental tasks. Much of what is known about hippocampal theta comes from animal studies with electrodes inside the brain, which a scalp EEG cannot record.</p>
+                    </details>
+                    <details>
+                        <summary><h3>Are theta waves good for learning?</h3></summary>
+                        <p>Theta is linked with memory work, but that is not the same as theta making you learn better. Frontal theta rises as people hold more items in mind, and hippocampal theta is tied to memory in animal studies. Whether listening to a theta-rate sound helps learning has not been shown.<sup class="band-ref"><a href="#ref-5" aria-label="Source 5">5</a></sup><sup class="band-ref"><a href="#ref-7" aria-label="Source 7">7</a></sup><sup class="band-ref"><a href="#ref-1" aria-label="Source 1">1</a></sup></p>
+                    </details>
+                    <details>
+                        <summary><h3>Does ECHO.11 have a theta session?</h3></summary>
+                        <p>Not a theta-frequency one. The closest is the free sleep session, a 30-minute brown-noise wind-down for listening as you drift toward sleep, which is when theta usually appears.</p>
+                    </details>
+                </div>
+
+                <h2 id="theta-references" class="no-num">References</h2>
+                <details class="band-more band-more--refs">
+                    <summary><span class="band-more-label">Show all 9 sources</span><span class="band-more-icon" aria-hidden="true"></span></summary>
                 <ol class="band-refs">
                     <li id="ref-1">Garcia-Argibay M, Santed MA, Reales JM. Efficacy of binaural auditory beats in cognition, anxiety, and pain perception: a meta-analysis. <em>Psychological Research</em>, 2019. <a href="https://doi.org/10.1007/s00426-018-1066-8" target="_blank" rel="noopener noreferrer">https://doi.org/10.1007/s00426-018-1066-8</a></li>
                     <li id="ref-2">Ingendoh RM, Posny ES, Heine A. Binaural beats to entrain the brain? A systematic review. <em>PLOS ONE</em>, 2023. <a href="https://doi.org/10.1371/journal.pone.0286023" target="_blank" rel="noopener noreferrer">https://doi.org/10.1371/journal.pone.0286023</a></li>
+                    <li id="ref-3">Nayak CS, Anilkumar AC. Normal EEG Waveforms. StatPearls, NCBI Bookshelf. Last update 3 Aug 2025. <a href="https://www.ncbi.nlm.nih.gov/books/NBK539805/" target="_blank" rel="noopener noreferrer">https://www.ncbi.nlm.nih.gov/books/NBK539805/</a></li>
+                    <li id="ref-4">Patel AK, Reddy V, Shumway KR, Araujo JF. Physiology, Sleep Stages. StatPearls, NCBI Bookshelf. Last update 26 Jan 2024. <a href="https://www.ncbi.nlm.nih.gov/books/NBK526132/" target="_blank" rel="noopener noreferrer">https://www.ncbi.nlm.nih.gov/books/NBK526132/</a></li>
+                    <li id="ref-5">Jensen O, Tesche CD. Frontal theta activity in humans increases with memory load in a working memory task. <em>European Journal of Neuroscience</em>, 2002;15(8):1395&ndash;1399. <a href="https://doi.org/10.1046/j.1460-9568.2002.01975.x" target="_blank" rel="noopener noreferrer">https://doi.org/10.1046/j.1460-9568.2002.01975.x</a></li>
+                    <li id="ref-6">Maurer U, Brem S, Liechti M, Maurizio S, Michels L, Brandeis D. Frontal midline theta reflects individual task performance in a working memory task. <em>Brain Topography</em>, 2015. <a href="https://doi.org/10.1007/s10548-014-0361-y" target="_blank" rel="noopener noreferrer">https://doi.org/10.1007/s10548-014-0361-y</a></li>
+                    <li id="ref-7">Buzs&aacute;ki G. Theta oscillations in the hippocampus. <em>Neuron</em>, 2002;33(3):325&ndash;340. <a href="https://doi.org/10.1016/S0896-6273(02)00586-X" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/S0896-6273(02)00586-X</a></li>
+                    <li id="ref-8">Colgin LL. Rhythms of the hippocampal network. <em>Nature Reviews Neuroscience</em>, 2016. <a href="https://doi.org/10.1038/nrn.2016.21" target="_blank" rel="noopener noreferrer">https://doi.org/10.1038/nrn.2016.21</a></li>
+                    <li id="ref-9">Headley DB, Par&eacute; D. Common oscillatory mechanisms across multiple memory systems. <em>npj Science of Learning</em>, 2017. <a href="https://doi.org/10.1038/s41539-016-0001-2" target="_blank" rel="noopener noreferrer">https://doi.org/10.1038/s41539-016-0001-2</a></li>
                 </ol>
+                </details>
                 </div>
 
                 <nav class="band-nav" aria-label="The five bands">
@@ -371,6 +540,11 @@
             </div>
         </article>
     </main>
+
+    <a class="band-float" href="/sleep.html" aria-hidden="true" tabindex="-1">
+        <span class="band-float-disc" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 5v14l11-7-11-7z"/></svg></span>
+        Listen &middot; Sleep, 30 min
+    </a>
 
     <footer>
         <div class="footer-inner">
@@ -468,6 +642,9 @@
     <script src="/assets/js/micro-interactions.js" defer></script>
     <script src="/assets/js/echo-ripple.js" defer></script>
     <script src="/assets/js/a11y-widget.js" defer></script>
+    <script src="/assets/js/band-interactive.js" defer></script>
+    <!-- YouTube facade: below the fold, so load its script after the page, off the LCP path -->
+    <script>addEventListener('load', function () { var s = document.createElement('script'); s.src = '/assets/js/yt-facade.js'; document.body.appendChild(s); });</script>
     <!-- Vercel Web Analytics — cookieless pageview beacon, served same-origin -->
     <script defer src="/_vercel/insights/script.js"></script>
 </body>

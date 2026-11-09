@@ -48,7 +48,7 @@ Add a `research/index.html` hub, plus Article schema with author = the Person en
 **Done when:** every page has a pair with valid hreflang, RTL is correct, and the sitemap is updated.
 
 ## Phase 3: Upgrading the band pages
-- [ ] **Start here:** 7 claims marked `CITATION NEEDED` in the code (alpha 2, beta 3, theta 2). Find a real peer-reviewed source for each one, or remove the claim
+- [ ] **Start here:** 7 claims marked `CITATION NEEDED` in the code (alpha 2, beta 3, theta 2). Theta: both resolved 9 Nov 2026 (Jensen & Tesche 2002; Buzsáki 2002). Find a real peer-reviewed source for each one, or remove the claim
 - [ ] Refresh sources and check that every source is real and current
 - [ ] One comparison chart of the bands (inline SVG, no heavy images)
 - [ ] Link from every band page to the matching evidence page

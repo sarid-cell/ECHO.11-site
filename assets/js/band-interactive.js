@@ -35,6 +35,7 @@
     /* data-window: seconds drawn across the box; data-slow: how many times slower it plays */
     var WIN = parseFloat(rhythm.dataset.window || '2'), SLOW = parseFloat(rhythm.dataset.slow || '1');
     var GAMMA = rhythm.dataset.band === 'gamma';
+    var THETA = rhythm.dataset.band === 'theta';
     var W = 600, MID = 65, AMP = GAMMA ? 34 : 48, PX_PER_S = W / WIN, DOT_X = 36;
     var hz = parseFloat(range.value), phase = 0, last = 0, raf = 0;
     var visible = false, paused = reduce, touched = false;
@@ -58,6 +59,12 @@
     }
     function words(f) {
       if (GAMMA) return wordsGamma(f);
+      if (THETA) {
+        var tn = f <= 4 ? 'The bottom edge of theta. A little slower and it is delta, the deep-sleep band.'
+               : f >= 8 ? 'The top edge of theta. A little faster and it is alpha, the calm, eyes-closed rhythm.'
+               : f === 6 ? 'The middle of theta.' : 'Inside theta, the drowsy in-between band.';
+        return '<strong>' + f + ' Hz:</strong> ' + f + ' waves a second. ' + tn;
+      }
       var rate = f < 1 ? 'One wave every ' + (1 / f) + ' seconds.' :
                  f === 1 ? 'One wave a second.' : f + ' waves a second.';
       var note;
@@ -294,5 +301,22 @@
   body.querySelectorAll(':scope > p, :scope > figure, :scope > h3, :scope > details, :scope > .band-scroll, :scope > a.band-listen, :scope > .band-shelf, :scope > .band-faq').forEach(function (el) {
     if (!below(el)) return;
     el.classList.add('rv'); io.observe(el);
+  });
+})();
+
+/* ── 7. Tabs: pick one panel of several (theta's three faces) ── */
+(function () {
+  'use strict';
+  document.querySelectorAll('[data-faces]').forEach(function (box) {
+    var chips = box.querySelectorAll('.band-chip[data-face]');
+    var panels = box.querySelectorAll('[data-face-panel]');
+    var touched = false;
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        chips.forEach(function (x) { x.setAttribute('aria-pressed', String(x === c)); });
+        panels.forEach(function (pn) { pn.hidden = pn.dataset.facePanel !== c.dataset.face; });
+        if (!touched && window.gtag) { touched = true; gtag('event', 'band_faces_interact', { face: c.dataset.face, page: location.pathname }); }
+      });
+    });
   });
 })();

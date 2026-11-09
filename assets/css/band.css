@@ -687,3 +687,9 @@ html[data-theme="dark"] .band-stage { background: rgba(255,255,255,0.03); }
 }
 .band-rhythm-hz { white-space: nowrap; }
 .essay-body p + .band-facts { margin-top: 1.4rem; }
+
+/* ── Tabs panel (theta's three faces) ── */
+.band-face { margin-top: 1.1rem; }
+.band-face-title { margin: 0 0 0.5rem; font-size: 1.35rem; font-weight: 300; letter-spacing: -0.015em; }
+.essay-body .band-face-list { list-style: none; padding: 0; margin: 0; }
+.essay-body .band-face-list li { padding: 0.55rem 0; border-top: 1px solid var(--border); font-size: 0.98rem; line-height: 1.65; color: var(--text-secondary); margin: 0; }
