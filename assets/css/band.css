@@ -733,3 +733,15 @@ html[data-theme="dark"] .band-eyes-pic img { filter: grayscale(100%) brightness(
 .band-chip.band-eyes[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); padding-inline: 1.1rem; }
 .band-chip.band-eyes:hover, .band-chip.band-eyes:focus-visible { background: var(--accent); border-color: var(--accent); color: #0e1013; }
 @media (prefers-reduced-motion: reduce) { .band-eyes-pic img { transition: none; } }
+
+/* ── Beta: press and hold to "move" (movement-related beta decrease and rebound) ── */
+.band-chip.band-move {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--text); color: var(--bg); border-color: var(--text);
+    padding-inline: 1.1rem;
+    touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+}
+.band-chip.band-move:hover, .band-chip.band-move:focus-visible,
+.band-chip.band-move[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #0e1013; }
+.band-move svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.is-moving .band-rhythm-stage .r-dot { fill: var(--text); }

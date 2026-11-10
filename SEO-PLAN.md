@@ -48,7 +48,7 @@ Add a `research/index.html` hub, plus Article schema with author = the Person en
 **Done when:** every page has a pair with valid hreflang, RTL is correct, and the sitemap is updated.
 
 ## Phase 3: Upgrading the band pages
-- [ ] **Start here:** 7 claims marked `CITATION NEEDED` in the code (alpha 2, beta 3, theta 2). Theta: both resolved 9 Nov 2026 (Jensen & Tesche 2002; Buzsáki 2002). Alpha: both resolved 10 Nov 2026 (Klimesch et al. 2007, Jensen & Mazaheri 2010 vs Pfurtscheller et al. 1996; Ingendoh et al. 2023, López-Caballero & Escera 2017). Beta 3 remaining. Find a real peer-reviewed source for each one, or remove the claim
+- [x] **Start here:** 7 claims marked `CITATION NEEDED` in the code (alpha 2, beta 3, theta 2). Theta: both resolved 9 Nov 2026 (Jensen & Tesche 2002; Buzsáki 2002). Alpha: both resolved 10 Nov 2026 (Klimesch et al. 2007, Jensen & Mazaheri 2010 vs Pfurtscheller et al. 1996; Ingendoh et al. 2023, López-Caballero & Escera 2017). Beta: all 3 resolved 10 Nov 2026 (Pfurtscheller & Lopes da Silva 1999, Kilavik et al. 2013; the "anxiety = high beta" claim replaced with Newson & Thiagarajan 2019, which does not support it; López-Caballero & Escera 2017, Basu & Banerjee 2023). All 7 done. Find a real peer-reviewed source for each one, or remove the claim
 - [ ] Refresh sources and check that every source is real and current
 - [ ] One comparison chart of the bands (inline SVG, no heavy images)
 - [ ] Link from every band page to the matching evidence page
