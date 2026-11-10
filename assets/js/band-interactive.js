@@ -36,11 +36,23 @@
     var WIN = parseFloat(rhythm.dataset.window || '2'), SLOW = parseFloat(rhythm.dataset.slow || '1');
     var GAMMA = rhythm.dataset.band === 'gamma';
     var THETA = rhythm.dataset.band === 'theta';
+    var ALPHA = rhythm.dataset.band === 'alpha';
     var W = 600, MID = 65, AMP = GAMMA ? 34 : 48, PX_PER_S = W / WIN, DOT_X = 36;
     var hz = parseFloat(range.value), phase = 0, last = 0, raf = 0;
     var visible = false, paused = reduce, touched = false;
+    /* Alpha only: eyes open blocks the rhythm. mix runs 0 (eyes closed) to 1 (eyes open). */
+    var eyesBtn = rhythm.querySelector('[data-eyes]'), eyesLine = rhythm.querySelector('[data-eyes-line]');
+    var mix = 0, mixTarget = 0;
 
-    function y(x) { return MID - AMP * Math.sin(2 * Math.PI * hz * (x / PX_PER_S) - phase); }
+    function y(x) {
+      var t = x / PX_PER_S, a = 2 * Math.PI * hz * t - phase;
+      if (!ALPHA || mix === 0) return MID - AMP * Math.sin(a);
+      /* Eyes open: a small, faster, irregular trace (beta-range ripples) */
+      var k = phase / hz, fast = 7 * Math.sin(2 * Math.PI * 19 * t - 19 * k + 1.3)
+              + 5 * Math.sin(2 * Math.PI * 26 * t - 26 * k + 0.4)
+              + 4 * Math.sin(2 * Math.PI * 33 * t - 33 * k + 2.1);
+      return MID - ((1 - mix * 0.85) * AMP * Math.sin(a) + mix * fast);
+    }
 
     function draw() {
       var d = 'M0,' + y(0).toFixed(1);
@@ -59,6 +71,12 @@
     }
     function words(f) {
       if (GAMMA) return wordsGamma(f);
+      if (ALPHA) {
+        var an = f <= 8 ? 'The bottom edge of alpha. A little slower and it is theta.'
+               : f >= 13 ? 'The top edge of alpha. A little faster and it is beta.'
+               : f === 10 ? 'The middle of alpha, close to where most adults peak.' : 'Inside alpha, the eyes-closed resting rhythm.';
+        return '<strong>' + f + ' Hz:</strong> ' + f + ' waves a second. ' + an;
+      }
       if (THETA) {
         var tn = f <= 4 ? 'The bottom edge of theta. A little slower and it is delta, the deep-sleep band.'
                : f >= 8 ? 'The top edge of theta. A little faster and it is alpha, the calm, eyes-closed rhythm.'
@@ -87,6 +105,10 @@
 
     function frame(t) {
       if (!last) last = t;
+      if (mix !== mixTarget) {
+        var step = (t - last) / 450;
+        mix = mixTarget > mix ? Math.min(mixTarget, mix + step) : Math.max(mixTarget, mix - step);
+      }
       phase += 2 * Math.PI * hz * ((t - last) / 1000) / SLOW;
       phase %= 2 * Math.PI;
       last = t;
@@ -107,6 +129,21 @@
         pauseBtn.textContent = paused ? 'Play' : 'Pause';
         pauseBtn.setAttribute('aria-pressed', String(paused));
         paused ? stop() : start();
+      });
+    }
+    if (eyesBtn) {
+      var eyesTouched = false;
+      eyesBtn.addEventListener('click', function () {
+        var open = eyesBtn.getAttribute('aria-pressed') !== 'true';
+        eyesBtn.setAttribute('aria-pressed', String(open));
+        eyesBtn.textContent = open ? 'Close your eyes' : 'Open your eyes';
+        rhythm.classList.toggle('is-eyes-open', open);
+        mixTarget = open ? 1 : 0;
+        if (paused || !raf) { mix = mixTarget; draw(); }
+        if (eyesLine) eyesLine.innerHTML = open
+          ? '<strong>Eyes open:</strong> the big, even wave breaks up into small, faster activity. Clinicians call this alpha blocking.'
+          : '<strong>Eyes closed:</strong> a large, regular wave over the back of the head. This is what Hans Berger saw in 1929.';
+        if (!eyesTouched) { eyesTouched = true; track('band_eyes_interact', { state: open ? 'open' : 'closed' }); }
       });
     }
     whenVisible(rhythm, function (v) { visible = v; v ? start() : stop(); });
