@@ -542,6 +542,15 @@ if (headphoneConfirm) headphoneConfirm.addEventListener('click', () => {
     closeModal(headphoneModal);
     beginSession();
 });
+// optional second way through the gate: no headphones, play anyway.
+// The modal already says the beat needs stereo; this just never blocks anyone.
+const headphoneSkip = document.getElementById('headphoneSkip');
+if (headphoneSkip) headphoneSkip.addEventListener('click', () => {
+    sessionStorage.setItem('echo11_headphone_ack', '1');
+    ev('gate_skipped', evDims());
+    closeModal(headphoneModal);
+    beginSession();
+});
 document.getElementById('completeClose').addEventListener('click', () => closeModal(completeModal));
 const modals = [headphoneModal, completeModal].filter(Boolean);
 modals.forEach(m => {
