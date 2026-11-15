@@ -1297,6 +1297,15 @@
         /* .pillars is gone: the three columns now sit inside .vision */
         .vision .pillars-grid { margin: 3.5rem 0 1rem; }
 
+        /* Substack subscribe: lazy iframe, loads only when scrolled near */
+        .subscribe { border-top: 1px solid var(--border); }
+        .subscribe-inner { max-width: 480px; margin: 0 auto; text-align: center; }
+        .subscribe-inner p { color: var(--text-secondary); margin: 0 0 1.5rem; line-height: 1.7; }
+        .subscribe-frame {
+            display: block; width: 100%; max-width: 480px; height: 320px;
+            margin: 0 auto; border: 0; background: transparent;
+        }
+
         .pillars-grid {
             display: grid;
             /* min() lets the track fall below 300px once the container is
@@ -2071,6 +2080,20 @@
                 </div>
             </div>
 
+        </section>
+
+        <!-- Substack subscribe: loading="lazy" keeps the iframe off the initial load -->
+        <section class="subscribe" id="subscribe" aria-labelledby="subscribe-title">
+            <div class="subscribe-inner reveal">
+                <h2 class="section-label" id="subscribe-title">Field Notes by email</h2>
+                <p>New essays on psychology, AI, and quieter digital spaces, straight to your inbox.</p>
+                <iframe class="subscribe-frame"
+                    src="https://shirasarid.substack.com/embed"
+                    title="Subscribe to Shira Sarid on Substack"
+                    loading="lazy"
+                    width="480" height="320"
+                    scrolling="no"></iframe>
+            </div>
         </section>
 
     </main>
