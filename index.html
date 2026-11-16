@@ -1376,10 +1376,11 @@
             grid-column: 1 / -1;
         }
 
+        /* Covers come from Substack automatically; most have their subject
+           in the upper half, so the wide featured crop leans up. */
         .article-card.featured .article-image img {
-            object-position: center 80%;
+            object-position: center 30%;
         }
-        .article-card.featured .article-image img.img-top { object-position: center 25%; }
 
         .article-badge {
             align-self: flex-start;
@@ -1753,7 +1754,7 @@
             outline-offset: 3px;
         }
 
-        @media (prefers-reduced-motion: reduce) {
+        @media (prefers-reduced-motion: reduce), print {
             .reveal,
             .reveal-lines .reveal-line {
                 opacity: 1;
@@ -1761,6 +1762,7 @@
             }
         }
     </style>
+    <noscript><style>.reveal, .reveal-lines .reveal-line { opacity: 1; transform: none; }</style></noscript>
 </head>
 <body>
     <!-- Custom Cursor -->
@@ -1966,6 +1968,7 @@
                 </div>
                 
                 <div class="articles-grid">
+                    <!-- FIELD-NOTES:START (auto-updated from Substack by tools/update_field_notes.py; edit tools/field-notes-overrides.json, not this block) -->
                     <article class="article-card featured reveal">
                         <div class="article-content">
                             <span class="article-badge">Latest</span>
@@ -1974,7 +1977,7 @@
                             <a href="https://shirasarid.substack.com/p/the-fear-of-being-transparent-how" target="_blank" rel="noopener noreferrer" class="read-more">Read: The fear of being transparent</a>
                         </div>
                         <div class="article-image">
-                            <picture><source srcset="assets/images/future-astro-man.webp" type="image/webp"><img class="img-top" src="assets/images/future-astro-man.png" alt="A translucent figure in a clear helmet and coat, in profile against a pale grey backdrop" loading="lazy" width="1456" height="816"></picture>
+                            <picture><source srcset="assets/images/future-astro-man.webp" type="image/webp"><img src="assets/images/future-astro-man.png" alt="A translucent figure in a clear helmet and coat, in profile against a pale grey backdrop" loading="lazy" width="1456" height="816"></picture>
                         </div>
                     </article>
 
@@ -1999,6 +2002,7 @@
                             <picture><source srcset="assets/images/ghost-machine.webp" type="image/webp"><img src="assets/images/ghost-machine.png" alt="Digital portrait with fragmented glass and data overlay" loading="lazy" width="928" height="1232"></picture>
                         </div>
                     </article>
+                    <!-- FIELD-NOTES:END -->
                 </div>
                 
                 <!-- More Articles CTA -->
@@ -2218,6 +2222,9 @@
 
         // Reveal
         const revealElements = document.querySelectorAll('.reveal, .reveal-lines');
+        // Very old browsers without IntersectionObserver: show everything
+        if (!('IntersectionObserver' in window)) revealElements.forEach(el => el.classList.add('instant', 'visible'));
+        else {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -2239,9 +2246,10 @@
                 if (rect.top < window.innerHeight) el.classList.add('instant', 'visible');
             });
         });
+        }
 
-        // Fallback so off-screen sections aren't left at opacity:0 for crawlers/non-scrolling renders
-        setTimeout(() => revealElements.forEach(el => el.classList.add('instant', 'visible')), 2500);
+        // No timed fallback: text below the fold appears only as the reader scrolls to it.
+        // (The text is in the HTML either way, so search engines still read all of it.)
 
         // Custom Cursor Dot
         const cursorDot = document.querySelector('.cursor-dot');
