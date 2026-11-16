@@ -1,0 +1,38 @@
+# Daily: pull the newest Substack posts into the homepage Field Notes.
+# Commits only when something changed; Vercel then deploys main as usual.
+name: Field Notes from Substack
+
+on:
+  schedule:
+    - cron: "23 4 * * *"   # every day, ~06:23-07:23 Israel time
+  workflow_dispatch: {}    # "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: field-notes
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "pillow==11.1.0"
+      - run: python3 tools/update_field_notes.py
+      - name: Commit if the homepage changed
+        run: |
+          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard assets/images/notes)" ]; then
+            echo "No new posts."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/images/notes
+          git commit -m "Field Notes: sync latest Substack posts"
+          git push

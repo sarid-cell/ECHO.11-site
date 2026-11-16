@@ -2,7 +2,7 @@
    Loaded on every page (single source of truth):
    1. Journey-ordered navigation (edit NAV below to change all pages at once)
    2. Glassmorphism surface
-   3. Smart hide-on-scroll (down = hide, up = reveal)
+   3. The bar stays fixed and visible while scrolling, in both directions
    Progressive enhancement over the static header markup in each page —
    with JS disabled the header simply stays fixed and fully functional. */
 (function () {
@@ -123,11 +123,8 @@
     'header {',
     '  background: var(--bg, #fafafa);',
     '  border-bottom: 1px solid rgba(26,26,26,0.07);',
-    '  transition: transform .45s cubic-bezier(.22,.61,.36,1),',
-    '              background-color .35s ease, border-color .35s ease, opacity 1.8s ease;',
-    '  will-change: transform;',
+    '  transition: background-color .35s ease, border-color .35s ease, opacity 1.8s ease;',
     '}',
-    'header.header-hidden { transform: translateY(-100%); }',
     'header.over-hero:not(.scrolled) {',
     '  background: transparent;',
     '  border-bottom-color: transparent;',
@@ -233,28 +230,5 @@
     heroObs.observe(hero);
   }
 
-  /* ── 4. Smart scroll: hide going down, reveal going up ── */
-  var TOP_ZONE = 90;  // never hide this close to the top
-  var DELTA    = 6;   // ignore micro-jitter (rubber-banding, trackpads)
-  var lastY = window.scrollY, ticking = false;
-
-  function onScroll() {
-    var y = window.scrollY;
-    var menuOpen = sideMenu && sideMenu.classList.contains('active');
-    if (menuOpen || y < TOP_ZONE) {
-      header.classList.remove('header-hidden');
-    } else if (y > lastY + DELTA) {
-      header.classList.add('header-hidden');
-    } else if (y < lastY - DELTA) {
-      header.classList.remove('header-hidden');
-    }
-    lastY = y;
-  }
-
-  window.addEventListener('scroll', function () {
-    if (!ticking) {
-      requestAnimationFrame(function () { onScroll(); ticking = false; });
-      ticking = true;
-    }
-  }, { passive: true });
+  /* ── 4. No hide-on-scroll: the menu stays in view as the reader scrolls down. ── */
 })();

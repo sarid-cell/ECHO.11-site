@@ -1,0 +1,31 @@
+{
+  "_readme": "Hand-picked image/alt/link text for specific Substack posts. 'match' is any part of the post title (case-insensitive). Posts not listed here get their Substack cover image automatically.",
+  "posts": [
+    {
+      "match": "An AI asked me what makes me uncomfortable",
+      "url": "https://substack.com/home/post/p-218151990",
+      "short": "An AI asked me",
+      "image": "assets/images/ai-asked-me.webp",
+      "alt": "A silver sofa and an ivory armchair on a pale rock under a deep teal sky with soft clouds",
+      "width": 966,
+      "height": 967,
+      "position": "center 80%"
+    },
+    {
+      "match": "The Ghost in the Machine",
+      "short": "The Ghost in the Machine",
+      "image": "assets/images/ghost-machine.webp",
+      "alt": "Digital portrait with fragmented glass and data overlay",
+      "width": 928,
+      "height": 1232
+    },
+    {
+      "match": "AI Gave Us Unlimited Tools",
+      "short": "AI Gave Us Unlimited Tools",
+      "image": "assets/images/unlimited-tools.webp",
+      "alt": "White figure with geometric neural network lines",
+      "width": 1536,
+      "height": 768
+    }
+  ]
+}
