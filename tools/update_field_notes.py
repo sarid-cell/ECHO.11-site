@@ -9,7 +9,7 @@ the file is left untouched, so no commit and no deploy happen.
 
 Local test:  python3 tools/update_field_notes.py --feed path/to/feed.xml
 """
-import argparse, html, io, json, os, re, sys, urllib.request
+import argparse, html, io, json, os, re, sys, time, urllib.error, urllib.request
 import xml.etree.ElementTree as ET
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,10 +26,20 @@ END = "<!-- FIELD-NOTES:END -->"
 UA = {"User-Agent": "echo11-field-notes/1.0 (+https://echo11.app)"}
 
 
+RETRY_WAITS = (15, 60)          # seconds between attempts (3 attempts in all)
+
+
 def fetch(url):
-    req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return r.read()
+    for wait in RETRY_WAITS + (None,):
+        try:
+            req = urllib.request.Request(url, headers=UA)
+            with urllib.request.urlopen(req, timeout=30) as r:
+                return r.read()
+        except (urllib.error.URLError, TimeoutError) as err:
+            if wait is None:
+                raise
+            print(f"Fetch failed ({err}); retrying in {wait}s: {url}")
+            time.sleep(wait)
 
 
 def parse_feed(xml_bytes):
@@ -124,7 +134,19 @@ def main():
     ap.add_argument("--feed", help="read the feed from a local file instead of Substack")
     args = ap.parse_args()
 
-    xml_bytes = open(args.feed, "rb").read() if args.feed else fetch(FEED_URL)
+    if args.feed:
+        xml_bytes = open(args.feed, "rb").read()
+    else:
+        try:
+            xml_bytes = fetch(FEED_URL)
+        except (urllib.error.URLError, TimeoutError) as err:
+            # Substack refused or could not be reached (it answered 403 to
+            # GitHub's servers on 17 Nov 2026). That is not a site problem:
+            # keep the current cards, flag it in the run summary, try again
+            # on the next run instead of failing (and emailing) every day.
+            print(f"::warning title=Substack feed unreachable::{err}. "
+                  "Homepage Field Notes left as they are; will retry on the next run.")
+            return
     posts = parse_feed(xml_bytes)
     if not posts:
         sys.exit("No posts found in the feed; leaving the homepage as it is.")
