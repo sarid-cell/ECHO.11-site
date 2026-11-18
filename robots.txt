@@ -5,11 +5,29 @@
 # it does not inherit rules from the wildcard group. So every rule that
 # should apply to a named crawler has to be repeated inside its own group.
 # That is why there are no separate Googlebot/Bingbot groups here: they
-# would silently lose the PDF rule below. AI and LLM crawlers are covered
-# by this same group — robots.txt grants access, and "*" already grants it
-# to all of them.
+# would silently lose the PDF rule below.
 
 User-agent: *
+Allow: /
+Disallow: /*.pdf$
+
+# AI search, assistant and training crawlers, named explicitly so the intent
+# is unambiguous. Functionally the same as "*" above; the PDF rule is
+# repeated because a named group does not inherit it. Several User-agent
+# lines sharing one rule set is valid (RFC 9309).
+# Note: Google AI Overviews use regular Googlebot; Google-Extended only
+# governs Gemini training and grounding.
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
 Allow: /
 Disallow: /*.pdf$
 
