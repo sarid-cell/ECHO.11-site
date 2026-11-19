@@ -43,7 +43,7 @@
     <link rel="icon" href="/assets/images/favicon-192.png" type="image/png" sizes="192x192">
     <link rel="apple-touch-icon" href="/assets/images/favicon-180.png">
     <title>Free 40Hz Binaural Beats for Focus: 11-Minute Session | ECHO.11</title>
-    <meta name="description" content="Free 40 Hz binaural beats in your browser: 200 Hz left, 240 Hz right, 11 minutes or on loop. What the research on focus really shows, with sources.">
+    <meta name="description" content="Listen to a free 11-minute 40 Hz binaural beat on ECHO.11 to start one focused task. Plus what research on 40 Hz and focus does and doesn't show, with sources.">
     <meta name="author" content="Shira Sarid">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://echo11.app/40hz.html" />
@@ -55,7 +55,7 @@
 
     <!-- Open Graph -->
     <meta property="og:title" content="Free 40Hz Binaural Beats for Focus: 11-Minute Session">
-    <meta property="og:description" content="Free 40 Hz binaural beats in your browser: 200 Hz left, 240 Hz right, 11 minutes or on loop. What the research on focus really shows, with sources.">
+    <meta property="og:description" content="Listen to a free 11-minute 40 Hz binaural beat on ECHO.11 to start one focused task. Plus what research on 40 Hz and focus does and doesn't show, with sources.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://echo11.app/40hz.html">
     <meta property="og:site_name" content="ECHO.11">
@@ -69,7 +69,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Free 40Hz Binaural Beats for Focus: 11-Minute Session">
-    <meta name="twitter:description" content="Free 40 Hz binaural beats in your browser: 200 Hz left, 240 Hz right, 11 minutes or on loop. What the research on focus really shows, with sources.">
+    <meta name="twitter:description" content="Listen to a free 11-minute 40 Hz binaural beat on ECHO.11 to start one focused task. Plus what research on 40 Hz and focus does and doesn't show, with sources.">
     <meta name="twitter:image" content="https://echo11.app/assets/images/40hz-og.jpg">
 
     <link rel="preload" as="image" type="image/webp" href="assets/images/astro-eyes-open-960.webp"
@@ -439,6 +439,14 @@
         /* 4 · Research — each finding carries its evidence weight */
         .d-quote { font-size: clamp(2rem, 5.2vw, 3.3rem); }
         .d-quote em { font-style: normal; color: var(--ink-accent); }
+        /* The research section's question heading: the plain-language H2
+           sits above the large quote line, which stays as the visual. */
+        .d-q {
+            font-family: var(--sans); font-weight: 500; color: var(--text);
+            font-size: clamp(1.15rem, 2.4vw, 1.4rem); line-height: 1.35;
+            letter-spacing: -0.01em; margin: 0 0 1rem;
+        }
+        .d-quote + .d-lede { margin-top: -0.25rem; }
         .findings { list-style: none; margin: 2.5rem 0 0; padding: 0; }
         .finding { padding: 1.9rem 0; border-top: 1px solid var(--border); }
         .finding h3 { font-family: var(--sans); font-weight: 500; font-size: 1.12rem; line-height: 1.4; color: var(--text); margin: 0.85rem 0 0.6rem; }
@@ -956,7 +964,9 @@
             <!-- 3. Research -->
             <div class="d-wrap d-narrow" id="research">
                 <div class="d-eyebrow">What the research actually shows</div>
-                <h2 class="d-h2 d-quote">Not a smart drug.<br><em>A metronome.</em></h2>
+                <h2 class="d-q">Do 40&nbsp;Hz binaural beats help focus?</h2>
+                <p class="d-h2 d-quote">Not a smart drug.<br><em>A metronome.</em></p>
+                <p class="d-lede"><strong>Short answer:</strong> possibly a little, for some people, while the beat plays. Small lab studies found sharper attention and fewer errors,<a class="cite" href="#ref-1" aria-label="Source 1">1</a><a class="cite" href="#ref-2" aria-label="Source 2">2</a> but it is unclear whether the brain actually locks on to 40&nbsp;Hz.<a class="cite" href="#ref-5" aria-label="Source 5">5</a></p>
                 <ul class="findings">
                     <li class="finding">
                         <span class="ev ev-strong">Small lab studies · promising</span>
