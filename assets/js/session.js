@@ -283,6 +283,10 @@ if (reducedMotionQ.addEventListener) {
 const TOTAL = cfg.durationMin * 60;
 const CIRC  = 2 * Math.PI * 90; // r=90
 let remaining = TOTAL, timerInt = null;
+// live sessions time themselves on the AudioContext clock, which only
+// advances while sound is actually rendered
+let segStart = 0, segPlayed = 0, segRemaining = TOTAL;
+function clockNow() { return audioCtx ? audioCtx.currentTime : performance.now() / 1000; }
 const ring = document.getElementById('timerRing');
 ring.style.strokeDasharray = CIRC;
 ring.style.strokeDashoffset = 0;
@@ -399,29 +403,30 @@ function endSession() {
 function beginSession() {
     startAudio();
     timerInt = setInterval(() => {
+        let el = 0;
         if (FILE_MODE) {
             // follow the file's clock: intervals are throttled while the
             // screen is off, and the countdown catches up on return
             playedSeconds = mediaSeconds();
             remaining = Math.max(0, TOTAL - playedSeconds);
         } else {
-            remaining--;
-            playedSeconds++;
+            // follow the audio clock, not the tick count: a throttled or
+            // frozen timer catches up instead of drifting from what was heard
+            el = Math.floor(clockNow() - segStart);
+            playedSeconds = segPlayed + el;
+            remaining = segRemaining - el;
         }
         reportProgress();
-        timerEl.textContent = fmt(remaining);
-        updateRing();
-        if (remaining <= 0) {
-            if (loopOn) {
-                // seamless restart: audio keeps running, only the
-                // countdown resets; the complete modal waits for Stop
-                completedCycles++; pendingComplete = true;
-                remaining = TOTAL;
-                timerEl.textContent = fmt(remaining); updateRing();
-            } else {
-                endSession();
-            }
+        if (remaining <= 0 && loopOn) {
+            // seamless restart: audio keeps running, only the
+            // countdown resets; the complete modal waits for Stop
+            do { completedCycles++; remaining += TOTAL; } while (remaining <= 0);
+            pendingComplete = true;
+            if (!FILE_MODE) segRemaining = remaining + el;
         }
+        timerEl.textContent = fmt(Math.max(0, remaining));
+        updateRing();
+        if (remaining <= 0) endSession();
     }, 1000);
     isPlaying = true;
     iconPlay.style.display = 'none'; iconPause.style.display = 'block';
@@ -438,6 +443,8 @@ function beginSession() {
         increment();
         ev('frequency_start', evDims());
     }
+    // where this stretch of listening starts on the audio clock
+    segStart = clockNow(); segPlayed = playedSeconds; segRemaining = remaining;
     if ('mediaSession' in navigator) {
         navigator.mediaSession.metadata = new MediaMetadata({
             title: cfg.label,
