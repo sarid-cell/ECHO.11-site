@@ -7,7 +7,10 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('consent', 'default', { analytics_storage: localStorage.getItem('echo11_consent') === 'granted' ? 'granted' : 'denied' });
       gtag('js', new Date());
-      gtag('config', 'G-TP9YRD6TN8');
+      // ?internal=1 marks this browser as the site owner's (GA4 'Internal traffic' filter); ?internal=0 undoes it
+      var echoInternal = false;
+      try { var iq = location.search.match(/[?&]internal=([01])/); if (iq) localStorage.setItem('echo11_internal', iq[1]); echoInternal = localStorage.getItem('echo11_internal') === '1'; } catch (e) {}
+      gtag('config', 'G-TP9YRD6TN8', echoInternal ? { traffic_type: 'internal' } : {});
 
       // Load the actual gtag.js library off the critical rendering path:
       // on first interaction, or after a short idle delay, whichever is first.
@@ -16,6 +19,8 @@
         var loaded = false;
         function loadGtag() {
           if (loaded) return;
+          // production only: Vercel previews and local copies send nothing to GA
+          if (!/(^|\.)echo11\.app$/.test(location.hostname)) return;
           loaded = true;
           var s = document.createElement('script');
           s.async = true;
@@ -786,14 +791,14 @@
                     </svg>
                     <div class="timer-inner">
                         <button class="play-btn" id="playBtn" aria-label="Play the 40 Hz session">
-                            <svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#playBtnIconGradient)"><defs><linearGradient id="playBtnIconGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#eafdff"/><stop offset="100%" stop-color="currentColor"/></linearGradient></defs><path d="M6.5 5v14l11-7-11-7z"/></svg>
+                            <svg class="icon-defs" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><defs><linearGradient id="playBtnIconGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#eafdff"/><stop offset="100%" stop-color="currentColor"/></linearGradient></defs></svg><svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#playBtnIconGradient)"><path d="M6.5 5v14l11-7-11-7z"/></svg>
                             <svg id="iconPause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#playBtnIconGradient)" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                         </button>
-                        <div class="timer-time" id="timerDisplay" aria-live="polite">11:00</div>
+                        <div class="timer-time" id="timerDisplay">11:00</div>
                     </div>
                 </div>
 
-                <div class="state-text" id="stateText">Headphones on · Press play · Start the one task</div>
+                <div class="state-text" id="stateText" role="status" aria-live="polite">Headphones on · Press play · Start the one task</div>
 
                 <div class="fq-panel">
                     <p class="fq-lead">You'll hear a soft, steady tone. That's it: the 40 Hz beat forms inside your head.</p>
@@ -1272,13 +1277,13 @@
             ogImage: "assets/images/40hz-og.jpg"
         };
     </script>
-    <script src="assets/js/session.js?v=20261111"></script>
+    <script src="assets/js/session.js?v=20261124"></script>
     
     <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
         <span>We use Google Analytics to understand site usage. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Read the privacy policy</a></span>
         <div style="display:flex;gap:8px;">
-            <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;">Accept</button>
-            <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:4px;cursor:pointer;">Decline</button>
+            <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;min-height:44px;border-radius:4px;cursor:pointer;">Accept</button>
+            <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;min-height:44px;border-radius:4px;cursor:pointer;">Decline</button>
         </div>
     </div>
     <script>
@@ -1288,7 +1293,13 @@
             if (consent === 'granted' || consent === 'denied') { banner.style.display = 'none'; return; }
             document.getElementById('cookieAccept').addEventListener('click', function(){
                 localStorage.setItem('echo11_consent', 'granted');
-                if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+                if (typeof gtag === 'function') {
+                    gtag('consent', 'update', { analytics_storage: 'granted' });
+                    // count this page again with cookies on, so the visit keeps its real
+                    // source (Instagram, Google...) instead of starting on the next page
+                    // with echo11.app as its referrer
+                    gtag('event', 'page_view');
+                }
                 banner.style.display = 'none';
             });
             document.getElementById('cookieDecline').addEventListener('click', function(){
