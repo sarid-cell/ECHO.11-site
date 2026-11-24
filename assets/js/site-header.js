@@ -38,7 +38,7 @@
 
   /* App link pinned under the links — the free open beta lives at echo11.space */
   var APP_TEASER =
-    '<a class="menu-app" href="https://www.echo11.space/" target="_blank" rel="noopener">' +
+    '<a class="menu-app" href="https://www.echo11.space/?utm_source=echo11.app&utm_medium=referral&utm_content=menu" target="_blank" rel="noopener">' +
       '<span class="menu-app-title">The App ' +
         '<span class="menu-app-badge">Free beta</span>' +
       '</span>' +
@@ -46,7 +46,7 @@
     '</a>';
 
   var APP_TEASER_HE =
-    '<a class="menu-app" href="https://www.echo11.space/" target="_blank" rel="noopener">' +
+    '<a class="menu-app" href="https://www.echo11.space/?utm_source=echo11.app&utm_medium=referral&utm_content=menu" target="_blank" rel="noopener">' +
       '<span class="menu-app-title">האפליקציה ' +
         '<span class="menu-app-badge">בטא חינמית</span>' +
       '</span>' +
@@ -230,4 +230,23 @@
   }
 
   /* ── 4. No hide-on-scroll: the menu stays in view as the reader scrolls down. ── */
+
+  /* ── 5. Where listeners go next: one event for every way off the site that
+     matters (the app beta, Instagram, YouTube, Substack), with where on the
+     page the link sat. YouTube links that report themselves (data-yt-out)
+     are skipped so they are not counted twice. ── */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || typeof gtag !== 'function' || a.hasAttribute('data-yt-out')) return;
+    var host = a.hostname.replace(/^www\./, '');
+    var dest = host === 'echo11.space' ? 'app'
+      : host === 'instagram.com' ? 'instagram'
+      : (host === 'youtube.com' || host === 'youtu.be') ? 'youtube'
+      : /(^|\.)substack\.com$/.test(host) ? 'substack' : '';
+    if (!dest) return;
+    var place = a.closest('#completeModal') ? 'session_complete'
+      : a.closest('.side-menu') ? 'menu'
+      : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'outbound_click', { destination: dest, placement: place, link_url: a.href, page: location.pathname });
+  }, true);
 })();
