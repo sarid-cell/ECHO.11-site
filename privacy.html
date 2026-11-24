@@ -578,7 +578,13 @@
             if (consent === 'granted' || consent === 'denied') { banner.style.display = 'none'; return; }
             document.getElementById('cookieAccept').addEventListener('click', function(){
                 localStorage.setItem('echo11_consent', 'granted');
-                if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+                if (typeof gtag === 'function') {
+                    gtag('consent', 'update', { analytics_storage: 'granted' });
+                    // count this page again with cookies on, so the visit keeps its real
+                    // source (Instagram, Google...) instead of starting on the next page
+                    // with echo11.app as its referrer
+                    gtag('event', 'page_view');
+                }
                 banner.style.display = 'none';
             });
             document.getElementById('cookieDecline').addEventListener('click', function(){
