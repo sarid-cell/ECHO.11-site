@@ -92,6 +92,20 @@ html[data-theme="dark"] .band-spec {
     border-top-color: rgba(233,233,231,0.28);
     border-bottom-color: rgba(233,233,231,0.28);
 }
+/* The session named in the strip is a link: the first way to listen sits
+   right under the answer, instead of three-quarters down the page.
+   The invisible ::after gives it a 44px touch area. */
+.band-spec a {
+    position: relative;
+    color: var(--text); text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+}
+.band-spec a:hover, .band-spec a:focus-visible { border-color: var(--text); }
+.band-spec a::after {
+    content: ""; position: absolute; left: 50%; top: 50%;
+    width: max(100%, 44px); height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+}
 
 /* ── Band signature ──
    One static line: 1.25 seconds of that band's rhythm, drawn at a
