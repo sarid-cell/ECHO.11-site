@@ -135,6 +135,10 @@ function getMedia() {
 function mediaSeconds() { return mediaEl ? Math.floor(mediaEl.currentTime) : 0; }
 
 function startAudio() {
+    // iOS Safari mutes Web Audio while the ring/silent switch is on;
+    // the 'playback' session plays through it, like a music app does.
+    // Feature-detected: older browsers simply skip it.
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
     if (FILE_MODE) {
         const el = getMedia();
         // line the breathing halo up with the swell in the file (10 s cycle)
