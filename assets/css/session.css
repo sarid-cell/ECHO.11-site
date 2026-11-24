@@ -799,7 +799,7 @@ footer { padding: 4rem 2.5rem; background: var(--bg); }
 
 .skip-link {
     position: absolute;
-    top: -50px;
+    top: -100px; /* fully off-screen: the link is ~55px tall */
     left: 0;
     background: var(--text);
     color: var(--white);

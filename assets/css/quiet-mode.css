@@ -119,3 +119,16 @@ html[data-theme="dark"] .quiet-toggle .icon-moon { display: none; }
 
 /* Footer column headings: bold, so they read as headings above the links */
 footer .footer-inner .footer-h { font-weight: 600; }
+
+/* Touch targets: give small controls at least 44×44px of tappable area
+   without changing how they look (an invisible hit area centred on each). */
+.hamburger, .quiet-toggle, .home-session-he, .band-card-more { position: relative; }
+.hamburger::after, .quiet-toggle::after, .home-session-he::after, .band-card-more::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+}

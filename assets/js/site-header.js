@@ -109,7 +109,6 @@
     langLink.hreflang = twin.lang;
     langLink.lang = twin.lang;
     if (twin.lang === 'he') langLink.dir = 'rtl';
-    langLink.setAttribute('aria-label', 'Switch language');
     langLink.textContent = twin.label;
     headerRight.insertBefore(langLink, hamburger && hamburger.parentNode === headerRight ? hamburger : null);
   }

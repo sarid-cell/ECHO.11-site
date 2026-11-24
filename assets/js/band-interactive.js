@@ -269,6 +269,19 @@
     document.querySelectorAll('[data-float-hide], footer').forEach(function (el) { bio.observe(el); });
     pill.addEventListener('click', function () { track('band_float_listen_click'); });
     update();
+
+    // Until the visitor answers the cookie banner, it sits on top of the
+    // pill's corner and hides it. Ride just above the banner instead.
+    var banner = document.getElementById('cookieConsent');
+    if (banner) {
+      var lift = function () {
+        var h = banner.style.display === 'none' ? 0 : banner.offsetHeight;
+        pill.style.bottom = h ? (h + 12) + 'px' : '';
+      };
+      new MutationObserver(lift).observe(banner, { attributes: true, attributeFilter: ['style'] });
+      window.addEventListener('resize', lift, { passive: true });
+      lift();
+    }
   }
 })();
 
