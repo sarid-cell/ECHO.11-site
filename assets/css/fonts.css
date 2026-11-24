@@ -1,3 +1,5 @@
+/* Inlined into every page by tools/inline_css.py: edit this file, then run
+   python3 tools/inline_css.py so the pages pick up the change. */
 /* ECHO.11 — self-hosted fonts (latin + latin-ext only; the site is
    English-language, so Google's cyrillic/vietnamese subsets are
    dropped entirely). Self-hosting removes two third-party origins

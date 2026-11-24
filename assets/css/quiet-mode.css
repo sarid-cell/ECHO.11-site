@@ -1,3 +1,5 @@
+/* Inlined into every page by tools/inline_css.py: edit this file, then run
+   python3 tools/inline_css.py so the pages pick up the change. */
 /* ECHO.11 — Quiet Mode (dark theme)
    data-theme on <html> is the single source of truth, resolved before
    first paint by the inline bootstrap script in each page's <head>:

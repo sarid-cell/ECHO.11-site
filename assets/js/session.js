@@ -50,6 +50,8 @@ var STRINGS = Object.assign({
     active:     'Session active',
     paused:     'Paused — press play to continue',
     complete:   'Session complete.',
+    loading:    'Loading the sound…',
+    error:      'The sound didn’t load. Check your connection and press play again.',
     cycles:     function (n) { return n + ' continuous cycles'; },
     sessionsToday: function (n) { return n + ' sessions today'; }
 }, cfg.strings || {});
@@ -114,7 +116,17 @@ window.addEventListener('load', () => {
 });
 
 // Fallback so off-screen sections aren't left at opacity:0 for crawlers/non-scrolling renders
-setTimeout(() => document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible')), 2500);
+// Off-screen sections switch on instantly (nobody is looking at them, and a
+// half-faded block reads as low contrast to crawlers and audit tools); one
+// already in view keeps its fade.
+setTimeout(() => document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < window.innerHeight) { el.classList.add('visible'); return; }
+    el.style.transition = 'none';
+    el.classList.add('visible');
+    void el.offsetWidth; // apply now, then hand the transition back
+    el.style.transition = '';
+}), 2500);
 
 // ── BINAURAL AUDIO ENGINE ──
 let audioCtx, oscL, oscR, gainL, gainR, analyser, isPlaying = false;
@@ -135,6 +147,14 @@ function getMedia() {
         mediaEl.addEventListener('pause', () => {
             if (isPlaying && !mediaEl.ended) pauseSession('interrupted');
         });
+        // the file streams on demand: say so while it buffers, and say
+        // plainly if it fails, instead of "active" over silence
+        mediaEl.addEventListener('waiting', () => { if (isPlaying) setState(STRINGS.loading); });
+        mediaEl.addEventListener('playing', () => { if (isPlaying) setState(STRINGS.active); });
+        mediaEl.addEventListener('error', () => {
+            if (isPlaying) pauseSession('error');
+            setState(STRINGS.error);
+        });
     }
     return mediaEl;
 }
@@ -147,6 +167,7 @@ function startAudio() {
     try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
     if (FILE_MODE) {
         const el = getMedia();
+        if (el.error) el.load(); // retry a file that failed to load earlier
         // line the breathing halo up with the swell in the file (10 s cycle)
         document.documentElement.style.setProperty('--breath-delay', -(el.currentTime % 10) + 's');
         const p = el.play();
@@ -283,6 +304,10 @@ if (reducedMotionQ.addEventListener) {
 const TOTAL = cfg.durationMin * 60;
 const CIRC  = 2 * Math.PI * 90; // r=90
 let remaining = TOTAL, timerInt = null;
+// live sessions time themselves on the AudioContext clock, which only
+// advances while sound is actually rendered
+let segStart = 0, segPlayed = 0, segRemaining = TOTAL;
+function clockNow() { return audioCtx ? audioCtx.currentTime : performance.now() / 1000; }
 const ring = document.getElementById('timerRing');
 ring.style.strokeDasharray = CIRC;
 ring.style.strokeDashoffset = 0;
@@ -336,7 +361,7 @@ function reportProgress() {
     });
 }
 // Reasons: 'pause' (deliberate), 'interrupted' (the system stopped the
-// audio), 'hidden' (tab or app switched away), 'pagehide' (navigating away
+// audio), 'error' (the audio file failed to load), 'hidden' (tab or app switched away), 'pagehide' (navigating away
 // or closing). Beacon transport so the
 // request survives the page going away.
 function reportStop(reason) {
@@ -399,29 +424,30 @@ function endSession() {
 function beginSession() {
     startAudio();
     timerInt = setInterval(() => {
+        let el = 0;
         if (FILE_MODE) {
             // follow the file's clock: intervals are throttled while the
             // screen is off, and the countdown catches up on return
             playedSeconds = mediaSeconds();
             remaining = Math.max(0, TOTAL - playedSeconds);
         } else {
-            remaining--;
-            playedSeconds++;
+            // follow the audio clock, not the tick count: a throttled or
+            // frozen timer catches up instead of drifting from what was heard
+            el = Math.floor(clockNow() - segStart);
+            playedSeconds = segPlayed + el;
+            remaining = segRemaining - el;
         }
         reportProgress();
-        timerEl.textContent = fmt(remaining);
-        updateRing();
-        if (remaining <= 0) {
-            if (loopOn) {
-                // seamless restart: audio keeps running, only the
-                // countdown resets; the complete modal waits for Stop
-                completedCycles++; pendingComplete = true;
-                remaining = TOTAL;
-                timerEl.textContent = fmt(remaining); updateRing();
-            } else {
-                endSession();
-            }
+        if (remaining <= 0 && loopOn) {
+            // seamless restart: audio keeps running, only the
+            // countdown resets; the complete modal waits for Stop
+            do { completedCycles++; remaining += TOTAL; } while (remaining <= 0);
+            pendingComplete = true;
+            if (!FILE_MODE) segRemaining = remaining + el;
         }
+        timerEl.textContent = fmt(Math.max(0, remaining));
+        updateRing();
+        if (remaining <= 0) endSession();
     }, 1000);
     isPlaying = true;
     iconPlay.style.display = 'none'; iconPause.style.display = 'block';
@@ -438,6 +464,8 @@ function beginSession() {
         increment();
         ev('frequency_start', evDims());
     }
+    // where this stretch of listening starts on the audio clock
+    segStart = clockNow(); segPlayed = playedSeconds; segRemaining = remaining;
     if ('mediaSession' in navigator) {
         navigator.mediaSession.metadata = new MediaMetadata({
             title: cfg.label,

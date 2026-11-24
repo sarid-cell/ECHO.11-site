@@ -92,6 +92,20 @@ html[data-theme="dark"] .band-spec {
     border-top-color: rgba(233,233,231,0.28);
     border-bottom-color: rgba(233,233,231,0.28);
 }
+/* The session named in the strip is a link: the first way to listen sits
+   right under the answer, instead of three-quarters down the page.
+   The invisible ::after gives it a 44px touch area. */
+.band-spec a {
+    position: relative;
+    color: var(--text); text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+}
+.band-spec a:hover, .band-spec a:focus-visible { border-color: var(--text); }
+.band-spec a::after {
+    content: ""; position: absolute; left: 50%; top: 50%;
+    width: max(100%, 44px); height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+}
 
 /* ── Band signature ──
    One static line: 1.25 seconds of that band's rhythm, drawn at a
@@ -568,6 +582,9 @@ html[data-theme="dark"] .band-glance tr { background: rgba(255,255,255,0.03); }
     color: var(--text-light); background: var(--accent-dim); text-decoration: none;
 }
 .band-page--editorial .band-ref a:hover, .band-page--editorial .band-ref a:focus-visible { color: var(--text); background: var(--accent); }
+/* dark mode: the muted grey on the dark accent tint was 4.1:1; this keeps the
+   quiet look and clears WCAG AA (5.3:1) */
+html[data-theme="dark"] .band-page--editorial .band-ref a { color: #a3a3a0; }
 .band-ref-tip {
     position: absolute; z-index: 50; max-width: 22rem; padding: 0.75rem 0.9rem;
     background: var(--text); color: var(--bg); border-radius: 10px;
