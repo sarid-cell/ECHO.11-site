@@ -32,8 +32,8 @@
     { href: '/he/teder-40hz.html', label: '40 הרץ · ריכוז' },
     { href: '/he/sheina.html',    label: 'שינה · דלתא' },
     { href: '/frequencies.html',   label: 'The Sessions (English)' },
-    { href: '/book.html',          label: 'The Book' },
-    { href: '/about.html',         label: 'About Echo.11' }
+    { href: '/book.html',          label: 'The Book (English)' },
+    { href: '/about.html',         label: 'About Echo.11 (English)' }
   ];
 
   /* App link pinned under the links — the free open beta lives at echo11.space */
