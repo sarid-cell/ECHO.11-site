@@ -9,7 +9,10 @@
   gtag('consent', 'default', { analytics_storage: localStorage.getItem('echo11_consent') === 'granted' ? 'granted' : 'denied' });
   gtag('js', new Date());
 
-  gtag('config', 'G-TP9YRD6TN8');
+  // ?internal=1 marks this browser as the site owner's (GA4 'Internal traffic' filter); ?internal=0 undoes it
+  var echoInternal = false;
+  try { var iq = location.search.match(/[?&]internal=([01])/); if (iq) localStorage.setItem('echo11_internal', iq[1]); echoInternal = localStorage.getItem('echo11_internal') === '1'; } catch (e) {}
+  gtag('config', 'G-TP9YRD6TN8', echoInternal ? { traffic_type: 'internal' } : {});
 
   // Load the actual gtag.js library off the critical rendering path:
   // on first interaction, or after a short idle delay, whichever is first.
@@ -18,6 +21,8 @@
     var loaded = false;
     function loadGtag() {
       if (loaded) return;
+      // production only: Vercel previews and local copies send nothing to GA
+      if (!/(^|\.)echo11\.app$/.test(location.hostname)) return;
       loaded = true;
       var s = document.createElement('script');
       s.async = true;
@@ -444,7 +449,7 @@
         /* Skip Link */
         .skip-link {
             position: absolute;
-            top: -50px;
+            top: -100px; /* fully off-screen: the link is ~55px tall */
             left: 0;
             background: var(--text);
             color: var(--white);
@@ -2038,34 +2043,34 @@
                     <article class="article-card featured reveal">
                         <div class="article-content">
                             <span class="article-badge">Latest</span>
-                            <h3>The fear of being transparent: how artificial intelligence is rewiring our brains</h3>
+                            <h3>The fear of being transparent: how artificial intelligence is rewiring our brains.</h3>
                             <p class="subtitle">The paradox of authenticity, and the moment when we censor our own voice just so that the machine will approve of us.</p>
                             <a href="https://shirasarid.substack.com/p/the-fear-of-being-transparent-how" target="_blank" rel="noopener noreferrer" class="read-more">Read: The fear of being transparent</a>
                         </div>
                         <div class="article-image">
-                            <picture><source srcset="assets/images/future-astro-man.webp" type="image/webp"><img src="assets/images/future-astro-man.png" alt="A translucent figure in a clear helmet and coat, in profile against a pale grey backdrop" loading="lazy" width="1456" height="816"></picture>
+                            <img src="assets/images/notes/the-fear-of-being-transparent-how.webp" alt="" loading="lazy" width="1200" height="800">
                         </div>
                     </article>
 
                     <article class="article-card reveal">
                         <div class="article-content">
                             <h3>An AI asked me what makes me uncomfortable about AI. I needed a minute.</h3>
-                            <p class="subtitle">Three questions from Anthropic's public interview, and the rule I didn't know I had.</p>
+                            <p class="subtitle">Three questions from Anthropic's public interview, and the rule I didn't know I had. Sep 30, 2026</p>
                             <a href="https://substack.com/home/post/p-218151990" target="_blank" rel="noopener noreferrer" class="read-more">Read: An AI asked me</a>
                         </div>
                         <div class="article-image">
-                            <picture><source srcset="assets/images/ai-asked-me.webp" type="image/webp"><img src="assets/images/ai-asked-me.jpg" alt="A silver sofa and an ivory armchair on a pale rock under a deep teal sky with soft clouds" loading="lazy" width="966" height="967"></picture>
+                            <img src="assets/images/ai-asked-me.webp" alt="A silver sofa and an ivory armchair on a pale rock under a deep teal sky with soft clouds" loading="lazy" width="966" height="967" style="object-position: center 80%">
                         </div>
                     </article>
 
                     <article class="article-card reverse reveal">
                         <div class="article-content">
-                            <h3>The Ghost in the Machine: Botox, AI, and the Augmented Authenticity Paradox</h3>
-                            <p class="subtitle">Why Using AI Feels Like Cheating—even When It Isn't</p>
-                            <a href="https://shirasarid.substack.com/p/the-ghost-in-the-machine-botox-ai" target="_blank" rel="noopener noreferrer" class="read-more">Read: The Ghost in the Machine</a>
+                            <h3>Who Controls the Story of Control? Dario Amodei, &quot;We Must Pace the Frontier,&quot; and the Week That Led to It</h3>
+                            <p class="subtitle">Twelve days, one resignation, one essay. What Anthropic's call to slow down Claude reveals about human behavior, not machine behavior.</p>
+                            <a href="https://shirasarid.substack.com/p/who-controls-the-story-of-control" target="_blank" rel="noopener noreferrer" class="read-more">Read: Who Controls the Story of Control</a>
                         </div>
                         <div class="article-image">
-                            <picture><source srcset="assets/images/ghost-machine.webp" type="image/webp"><img src="assets/images/ghost-machine.png" alt="Digital portrait with fragmented glass and data overlay" loading="lazy" width="928" height="1232"></picture>
+                            <img src="assets/images/notes/who-controls-the-story-of-control.webp" alt="" loading="lazy" width="1200" height="600">
                         </div>
                     </article>
                     <!-- FIELD-NOTES:END -->
@@ -2438,8 +2443,8 @@
     <div id="cookieConsent" style="position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;z-index:99999;font-family:sans-serif;font-size:14px;" role="dialog" aria-live="polite" aria-label="Cookie consent">
         <span>We use Google Analytics to understand site usage. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Read the privacy policy</a></span>
         <div style="display:flex;gap:8px;">
-            <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;">Accept</button>
-            <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;border-radius:4px;cursor:pointer;">Decline</button>
+            <button id="cookieAccept" style="background:#fff;color:#1a1a1a;border:none;padding:8px 16px;min-height:44px;border-radius:4px;cursor:pointer;">Accept</button>
+            <button id="cookieDecline" style="background:transparent;color:#fff;border:1px solid #fff;padding:8px 16px;min-height:44px;border-radius:4px;cursor:pointer;">Decline</button>
         </div>
     </div>
     <script>
@@ -2449,7 +2454,13 @@
             if (consent === 'granted' || consent === 'denied') { banner.style.display = 'none'; return; }
             document.getElementById('cookieAccept').addEventListener('click', function(){
                 localStorage.setItem('echo11_consent', 'granted');
-                if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+                if (typeof gtag === 'function') {
+                    gtag('consent', 'update', { analytics_storage: 'granted' });
+                    // count this page again with cookies on, so the visit keeps its real
+                    // source (Instagram, Google...) instead of starting on the next page
+                    // with echo11.app as its referrer
+                    gtag('event', 'page_view');
+                }
                 banner.style.display = 'none';
             });
             document.getElementById('cookieDecline').addEventListener('click', function(){
