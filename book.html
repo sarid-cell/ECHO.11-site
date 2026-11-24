@@ -483,7 +483,11 @@
         }
         .print-note p { font-size: 0.92rem; line-height: 1.75; color: var(--text-secondary); }
         .print-note strong { color: var(--text); font-weight: 500; }
-        .print-note a { color: var(--teal); font-weight: 400; text-decoration: none; }
+        /* a deeper teal for small link text: #4a9fa5 was 2.7:1 on the tint */
+        .print-note a { color: #2b6f75; font-weight: 400; text-decoration: none; }
+        /* night: the light tint stayed light while the text turned light (1.1:1) */
+        html[data-theme="dark"] .print-note { background: #17282b; }
+        html[data-theme="dark"] .print-note a { color: #7fd0d6; }
         .print-note a:hover { text-decoration: underline; }
 
         /* Social follow */
