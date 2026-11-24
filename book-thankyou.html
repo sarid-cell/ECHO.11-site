@@ -9,7 +9,10 @@
   gtag('consent', 'default', { analytics_storage: localStorage.getItem('echo11_consent') === 'granted' ? 'granted' : 'denied' });
   gtag('js', new Date());
 
-  gtag('config', 'G-TP9YRD6TN8');
+  // ?internal=1 marks this browser as the site owner's (GA4 'Internal traffic' filter); ?internal=0 undoes it
+  var echoInternal = false;
+  try { var iq = location.search.match(/[?&]internal=([01])/); if (iq) localStorage.setItem('echo11_internal', iq[1]); echoInternal = localStorage.getItem('echo11_internal') === '1'; } catch (e) {}
+  gtag('config', 'G-TP9YRD6TN8', echoInternal ? { traffic_type: 'internal' } : {});
 
   // Load the actual gtag.js library off the critical rendering path:
   // on first interaction, or after a short idle delay, whichever is first.
@@ -18,6 +21,8 @@
     var loaded = false;
     function loadGtag() {
       if (loaded) return;
+      // production only: Vercel previews and local copies send nothing to GA
+      if (!/(^|\.)echo11\.app$/.test(location.hostname)) return;
       loaded = true;
       var s = document.createElement('script');
       s.async = true;
