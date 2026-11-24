@@ -1,3 +1,5 @@
+/* Inlined into every page by tools/inline_css.py: edit this file, then run
+   python3 tools/inline_css.py so the pages pick up the change. */
 /* ECHO.11 — cross-document view transitions
    Linked in the <head> of every page (must be render-blocking CSS:
    the browser reads the @view-transition opt-in on the incoming page
