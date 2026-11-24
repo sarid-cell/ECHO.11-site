@@ -50,6 +50,8 @@ var STRINGS = Object.assign({
     active:     'Session active',
     paused:     'Paused — press play to continue',
     complete:   'Session complete.',
+    loading:    'Loading the sound…',
+    error:      'The sound didn’t load. Check your connection and press play again.',
     cycles:     function (n) { return n + ' continuous cycles'; },
     sessionsToday: function (n) { return n + ' sessions today'; }
 }, cfg.strings || {});
@@ -135,6 +137,14 @@ function getMedia() {
         mediaEl.addEventListener('pause', () => {
             if (isPlaying && !mediaEl.ended) pauseSession('interrupted');
         });
+        // the file streams on demand: say so while it buffers, and say
+        // plainly if it fails, instead of "active" over silence
+        mediaEl.addEventListener('waiting', () => { if (isPlaying) setState(STRINGS.loading); });
+        mediaEl.addEventListener('playing', () => { if (isPlaying) setState(STRINGS.active); });
+        mediaEl.addEventListener('error', () => {
+            if (isPlaying) pauseSession('error');
+            setState(STRINGS.error);
+        });
     }
     return mediaEl;
 }
@@ -147,6 +157,7 @@ function startAudio() {
     try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
     if (FILE_MODE) {
         const el = getMedia();
+        if (el.error) el.load(); // retry a file that failed to load earlier
         // line the breathing halo up with the swell in the file (10 s cycle)
         document.documentElement.style.setProperty('--breath-delay', -(el.currentTime % 10) + 's');
         const p = el.play();
@@ -340,7 +351,7 @@ function reportProgress() {
     });
 }
 // Reasons: 'pause' (deliberate), 'interrupted' (the system stopped the
-// audio), 'hidden' (tab or app switched away), 'pagehide' (navigating away
+// audio), 'error' (the audio file failed to load), 'hidden' (tab or app switched away), 'pagehide' (navigating away
 // or closing). Beacon transport so the
 // request survives the page going away.
 function reportStop(reason) {
