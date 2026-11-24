@@ -129,6 +129,12 @@ function getMedia() {
         mediaEl = new Audio(cfg.audioSrc);
         mediaEl.preload = 'none';
         mediaEl.addEventListener('ended', () => { if (isPlaying) endSession(); });
+        // the system paused the file (a call, headphones unplugged, another
+        // app took the audio): show it as paused instead of "active" in silence.
+        // A natural end also fires 'pause' first; 'ended' handles that one.
+        mediaEl.addEventListener('pause', () => {
+            if (isPlaying && !mediaEl.ended) pauseSession('interrupted');
+        });
     }
     return mediaEl;
 }
@@ -148,6 +154,16 @@ function startAudio() {
         return;
     }
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    // The browser can suspend the graph mid-session (iOS screen lock, a call,
+    // Bluetooth headphones dropping). Without this the timer kept counting in
+    // silence; now the session pauses and one tap on Play continues it.
+    const ctx = audioCtx;
+    let ctxRan = ctx.state === 'running';
+    ctx.onstatechange = () => {
+        if (ctx.state === 'running') { ctxRan = true; return; }
+        if (ctxRan && isPlaying && ctx === audioCtx && ctx.state !== 'closed') pauseSession('interrupted');
+    };
+    if (ctx.state === 'suspended' && ctx.resume) ctx.resume().catch(() => {});
     const merger = audioCtx.createChannelMerger(2);
     merger.connect(audioCtx.destination);
     const t0 = audioCtx.currentTime;
@@ -319,8 +335,9 @@ function reportProgress() {
         }
     });
 }
-// Reasons: 'pause' (deliberate), 'hidden' (tab or app switched away),
-// 'pagehide' (navigating away or closing). Beacon transport so the
+// Reasons: 'pause' (deliberate), 'interrupted' (the system stopped the
+// audio), 'hidden' (tab or app switched away), 'pagehide' (navigating away
+// or closing). Beacon transport so the
 // request survives the page going away.
 function reportStop(reason) {
     if (stopReported || playedSeconds === 0) return;
@@ -432,10 +449,10 @@ function beginSession() {
     }
 }
 
-function pauseSession() {
+function pauseSession(reason) {
     clearInterval(timerInt); stopAudio();
     isPlaying = false;
-    reportStop('pause');
+    reportStop(reason || 'pause');
     exitFocus();
     iconPlay.style.display = 'block'; iconPause.style.display = 'none';
     playBtn.classList.remove('playing'); timerWrap.classList.remove('playing');
