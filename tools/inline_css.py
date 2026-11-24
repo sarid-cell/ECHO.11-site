@@ -19,6 +19,11 @@ import re
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 NAMES = ["fonts.css", "view-transitions.css", "quiet-mode.css"]
 
+# Pages that keep plain <link>s because inlining measured slower there.
+# rem-sleep.html: Lighthouse mobile LCP 2.35 s with links vs 2.53 s inlined
+# (4 alternating runs each, Nov 2026); every other page measured got faster.
+EXCLUDE = {"rem-sleep.html"}
+
 
 def css_for(name):
     css = (ROOT / "assets" / "css" / name).read_text(encoding="utf-8")
@@ -36,7 +41,12 @@ def main():
             continue
         html = page.read_text(encoding="utf-8")
         new = html
+        rel = page.relative_to(ROOT).as_posix()
         for n, block in blocks.items():
+            if rel in EXCLUDE:  # undo any inlining, back to a plain link
+                new = re.sub(r'<style data-inline="' + re.escape(n) + r'">.*?</style>',
+                             lambda m: f'<link rel="stylesheet" href="/assets/css/{n}">', new, count=1, flags=re.S)
+                continue
             link = re.compile(r'<link rel="stylesheet" href="/?assets/css/' + re.escape(n) + r'">')
             inline = re.compile(r'<style data-inline="' + re.escape(n) + r'">.*?</style>', re.S)
             if inline.search(new):
