@@ -116,7 +116,17 @@ window.addEventListener('load', () => {
 });
 
 // Fallback so off-screen sections aren't left at opacity:0 for crawlers/non-scrolling renders
-setTimeout(() => document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible')), 2500);
+// Off-screen sections switch on instantly (nobody is looking at them, and a
+// half-faded block reads as low contrast to crawlers and audit tools); one
+// already in view keeps its fade.
+setTimeout(() => document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < window.innerHeight) { el.classList.add('visible'); return; }
+    el.style.transition = 'none';
+    el.classList.add('visible');
+    void el.offsetWidth; // apply now, then hand the transition back
+    el.style.transition = '';
+}), 2500);
 
 // ── BINAURAL AUDIO ENGINE ──
 let audioCtx, oscL, oscR, gainL, gainR, analyser, isPlaying = false;
