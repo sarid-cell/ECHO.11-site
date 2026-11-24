@@ -1,4 +1,5 @@
 # Repo-only files: keep them out of the deployed site
 *.md
 tools/
+audit/
 .vercelignore
