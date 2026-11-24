@@ -48,7 +48,7 @@
     <link rel="icon" href="/assets/images/favicon-192.png" type="image/png" sizes="192x192">
     <link rel="apple-touch-icon" href="/assets/images/favicon-180.png">
     <title>Free Sleep Sounds to Fall Asleep: 30-Minute Wind-Down | ECHO.11</title>
-    <meta name="description" content="Brown noise and a low tone that swell at six breaths a minute, then fade to silence after 30 minutes. Free, no signup, for a bedside speaker.">
+    <meta name="description" content="Play ECHO.11's free 30-minute sleep sound: brown noise and a low tone that slow to six breaths a minute, then fade to silence. For a speaker, no signup.">
     <meta name="keywords" content="sleep sounds, fall asleep, binaural beats for sleep, brown noise for sleep, music for insomnia, sleep music research, paced breathing sleep">
     <meta name="author" content="Shira Sarid">
     <meta name="robots" content="index, follow">
@@ -61,7 +61,7 @@
 
     <!-- Open Graph -->
     <meta property="og:title" content="Free Sleep Sounds — The 30-Minute Descent | ECHO.11">
-    <meta property="og:description" content="Brown noise and a low tone that swell at six breaths a minute, then fade to silence. Free, no headphones, no signup.">
+    <meta property="og:description" content="Play ECHO.11's free 30-minute sleep sound: brown noise and a low tone that slow to six breaths a minute, then fade to silence. For a speaker, no signup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://echo11.app/sleep.html">
     <meta property="og:site_name" content="ECHO.11">
@@ -72,7 +72,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Free Sleep Sounds — The 30-Minute Descent | ECHO.11">
-    <meta name="twitter:description" content="Brown noise and a low tone that swell at six breaths a minute, then fade to silence. Free, no headphones, no signup.">
+    <meta name="twitter:description" content="Play ECHO.11's free 30-minute sleep sound: brown noise and a low tone that slow to six breaths a minute, then fade to silence. For a speaker, no signup.">
     <meta name="twitter:image" content="https://echo11.app/assets/images/sleep-og.jpg">
 
     <link rel="preload" as="font" type="font/woff2" href="assets/fonts/outfit-variable-latin.woff2" crossorigin>
@@ -268,6 +268,14 @@
         /* 4 · Research — each finding carries its evidence weight */
         .d-quote { font-size: clamp(2rem, 5.2vw, 3.3rem); }
         .d-quote em { font-style: normal; color: var(--ink-accent); }
+        /* The research section's question heading: the plain-language H2
+           sits above the large quote line, which stays as the visual. */
+        .d-q {
+            font-family: var(--sans); font-weight: 500; color: var(--text);
+            font-size: clamp(1.15rem, 2.4vw, 1.4rem); line-height: 1.35;
+            letter-spacing: -0.01em; margin: 0 0 1rem;
+        }
+        .d-quote + .d-lede { margin-top: -0.25rem; }
         .findings { list-style: none; margin: 2.5rem 0 0; padding: 0; }
         .finding { padding: 1.9rem 0; border-top: 1px solid var(--border); }
         .finding h3 { font-family: var(--sans); font-weight: 500; font-size: 1.12rem; line-height: 1.4; color: var(--text); margin: 0.85rem 0 0.6rem; }
@@ -863,7 +871,9 @@
             <!-- 4. Research -->
             <div class="d-wrap d-narrow" id="research">
                 <div class="d-eyebrow">What the research on sound and sleep actually shows</div>
-                <h2 class="d-h2 d-quote">Not a sleeping pill.<br><em>A dimmer switch.</em></h2>
+                <h2 class="d-q">Do sleep sounds help you fall asleep?</h2>
+                <p class="d-h2 d-quote">Not a sleeping pill.<br><em>A dimmer switch.</em></p>
+                <p class="d-lede"><strong>Short answer:</strong> they can help you feel you slept better, but they are not a sleeping pill. A 2022 Cochrane review of 13 trials found that music improved self-rated sleep quality, while sleep measured objectively did not clearly change.<a class="cite" href="#ref-1">1</a></p>
 
                 <ul class="findings reveal">
                     <li class="finding">
